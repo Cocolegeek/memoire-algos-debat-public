@@ -4,6 +4,8 @@ Tu es dans le dépôt `memoire-algos-debat-public` (compte GitHub `Cocolegeek`).
 
 Règle de travail imposée par Corentin : avance par étapes, montre le résultat de chaque étape, ne lance pas de longue tâche complexe sans validation. Ne fais rien qui ne soit pas demandé ici.
 
+**En début de session, lis aussi `ETAT_AVANCEMENT.md` à la racine du dépôt : c'est le journal daté qui dit exactement où on s'est arrêté et quelle est la prochaine action.**
+
 ## 1. Objet
 
 Application web de restitution d'une enquête (questionnaire en ligne) sur la perception des algorithmes de recommandation et la polarisation du débat public en France. Mémoire de Master, Paris 1 Panthéon-Sorbonne, Corentin Nicolas.
@@ -12,9 +14,15 @@ Angle : un écart entre ce que la recherche établit sur les algorithmes et ce q
 
 ## 2. État actuel du dépôt (déjà fait, ne pas refaire)
 
-- `git init` fait, identité git réglée (Cocolegeek / corentin.nicolas03@gmail.com).
+- `git init` fait, identité git réglée (Cocolegeek / corentin.nicolas03@gmail.com). `gh` CLI installé et authentifié (compte Cocolegeek).
 - Remote `origin` = `https://github.com/Cocolegeek/memoire-algos-debat-public` (lié, privé pour l'instant).
-- Branche `main`. Premier commit poussé : `LICENSE` (MIT), `.gitignore`, `README.md`, `data/README.md`.
+- Branche `main`. Commits poussés jusqu'ici :
+  - `LICENSE` (MIT), `.gitignore`, `README.md`, `data/README.md`.
+  - `CLAUDE.md` (ce fichier).
+  - `data/reponses.csv` : CSV brut de l'enquête déposé, **265 réponses confirmées** (parsing CSV propre, pas `wc -l` à cause des champs multilignes), 31 colonnes — cohérent avec la section 8.
+  - Scaffold `web/` (étape 1 de la section 6) : Vite + React, **Tailwind v3.4.19** (volontairement pas v4, pour garder le format `tailwind.config.js` classique attendu en section 7), Recharts, Framer Motion. Tokens de couleur et les 3 polices posés dans `tailwind.config.js` / `src/index.css`. `vite.config.js` : `base: "/memoire-algos-debat-public/"`. `npm run dev` vérifié (page servie avec le bon préfixe d'URL).
+- **Étape 1 terminée, en attente de validation de Corentin avant d'enchaîner sur l'étape 2** (design system appliqué dans l'UI, pas seulement la config) puis l'étape 3 (dashboard à onglets).
+- Détail complet, décisions en attente et point de reprise exact : voir `ETAT_AVANCEMENT.md`.
 
 ## 3. Décisions verrouillées
 
