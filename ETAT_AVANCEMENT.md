@@ -54,12 +54,36 @@ Déploiement :
 
 État git à la reprise : la branche `claude/adoring-austin-0a6780` a été fusionnée dans `main`. `main` porte tout (étape 2 + CI). Travailler depuis `main` à jour à la prochaine session.
 
-### Prochaine étape exacte (reprendre ici, prochaine session)
+### Étapes 3 et 4 faites + nouvelle direction dataviz (2026-06-20, suite)
 
-1. Étape 3 (CLAUDE.md §6) : remplacer l'écart-mètre de démo par le vrai dashboard à onglets, piloté par un `web/public/results.json` **provisoire** (Vue d'ensemble + H1 + H2 + H3 selon §7), puis brancher l'app sur `fetch(import.meta.env.BASE_URL + "results.json")` au lieu des données en dur.
-2. Étape 4 : écrire `analysis/analyse.py` (+ requirements.txt), déposer/utiliser `data/reponses.csv`, générer le vrai `results.json`. Le workflow CI l'exécutera alors automatiquement (étape déjà conditionnée).
-3. Étape 5 : module Datalake (§9). Étape 6 déjà partiellement faite (CI + public + Pages) ; il restera juste à confirmer le bon fonctionnement après chaque évolution.
-4. Penser à reporter les deux URL (site + dépôt) dans le `Etat_d_avancement.md` du mémoire (§2.3.4) : voir la note en bas de ce fichier.
+**Étape 3 (dashboard à onglets)** : `App.jsx` branché sur `fetch(results.json)`, sections `Overview` / `Hypothesis1-3` / `Datalake` (placeholder) / `HypoHeader`, composants `ui.jsx` (BarRow, BigStat, StatTile, SegmentToggle, VerdictBadge, EcartMetre cliquable). Vérifié : navigation, écart-mètres cliquables, filtre politique H2, corrélations H1, grands chiffres H3. Déployé (PR #3).
+
+**Étape 4 (analyse.py)** : `analysis/analyse.py` en **bibliothèque standard pure** (pas pandas, déviation assumée au §8, plus robuste/instantané en CI). Génère :
+- `web/public/results.json` : vrais agrégats, `statut = "définitif"` (badge "provisoire" retiré).
+- `web/public/respondents.json` : 263 lignes anonymisées (indices hostilité/exposition, recodages politique/géo/âge/DSA) pour les visualisations multivariées.
+La CI exécute désormais analyse.py automatiquement. Déployé (PR #4), vérifié en ligne.
+
+**Décisions §4 tranchées par Corentin cette session** :
+- Mineurs exclus, **n = 263** (EXCLURE_MINEURS = True).
+- Bibliothèque dataviz avancée : **react-three-fiber (three.js)**, pas Plotly.
+- Première visualisation à construire : **nuage 3D coloré par bord politique**.
+
+**Vrais chiffres obtenus (à valider par Corentin)** :
+- H1 *Plutôt confirmée* : bulle Q9 r=0,03 (quasi nul) ; temps Q7 r=0,21 ; exposition Q11 r=0,18. Note : c'est le **temps** le plus corrélé, pas l'exposition comme le supposait le brief.
+- H2 *Confirmée* : individus 4,42 > structures 3,80. Hiérarchie : producteurs 4,53 > partageurs 4,31 > plateformes 4,01 > médias 3,98 > État 3,41. Contrastes (point d'attention, possiblement contre-intuitif) : la **gauche** blâme PLUS les médias (4,18 vs 3,67) et l'État (3,59 vs 3,16) que la droite.
+- H3 *Nuancée* : transparence 82 %, connaissance précise DSA 15 %. Demande selon DSA : connaît précisément 4,08 vs connaît mal/pas 4,21 (effet faible, 0,13, dans le sens attendu).
+
+**Points d'attention pour le mémoire** :
+- n = 263 ≠ 258 du mémoire rédigé : aligner le texte du mémoire sur 263 (ou expliquer un autre nettoyage prévu).
+- Verdicts = interprétation automatique marquée "à valider", à trancher par Corentin.
+- Contraste politique H2 à interpréter (gauche plus critique des médias/État).
+
+### Prochaine étape exacte (reprendre ici)
+
+1. **Nuage 3D** (react-three-fiber) : installer `three` + `@react-three/fiber` + `@react-three/drei`. Nouvel onglet ou section dataviz. Axes = hostilité × exposition × (temps ou bulle), un point par répondant depuis `respondents.json`, couleur selon `politique` (dégradé rouge vif → rouge → blanc → bleu → bleu vif, gris pour "ne se positionne pas"). Jitter sur les axes discrets (temps, bulle). Rotation, légende, survol. Charger la lib à la demande (lazy) pour ne pas alourdir le chargement initial.
+2. Ensuite (selon priorités Corentin) : croisements multivariés 2D, analyse de mots-clés des verbatims (fréquences à générer dans analyse.py), gradient géographique urbain↔rural.
+3. Onglet **Mémoire** (HTML façon wiki) : coquille à préparer quand Corentin fournira le contenu converti de son PDF.
+4. Étape 5 : module Datalake (§9). Penser à reporter les deux URL dans le `Etat_d_avancement.md` du mémoire (§2.3.4, voir note en bas).
 
 ### Revue d'architecture (2026-06-20)
 
