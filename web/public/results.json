@@ -1,0 +1,92 @@
+{
+  "meta": {
+    "n": 263,
+    "statut": "provisoire",
+    "genere_le": "2026-06-20",
+    "source": "Données de démonstration. Valeurs plausibles tant que analyse.py n'a pas généré les chiffres définitifs."
+  },
+  "echantillon": {
+    "resume": "Échantillon de convenance, non représentatif de la population française. Questionnaire diffusé en ligne, donc soumis à un biais d'auto-sélection. Les proportions ci-dessous décrivent les répondants, pas la population générale.",
+    "indicateurs": [
+      { "label": "18-34 ans", "pct": 68 },
+      { "label": "Femmes", "pct": 54 },
+      { "label": "Études supérieures", "pct": 76 },
+      { "label": "Usage quotidien des réseaux", "pct": 89 }
+    ],
+    "politique": [
+      { "label": "Gauche / très à gauche", "pct": 41 },
+      { "label": "Centre", "pct": 22 },
+      { "label": "Droite / très à droite", "pct": 18 },
+      { "label": "Ne se positionne pas", "pct": 19 }
+    ]
+  },
+  "h1": {
+    "code": "H1",
+    "titre": "Usage réel ou bulle imaginée ?",
+    "enonce": "L'intensité d'usage (temps passé, exposition aux contenus polémiques) prédit mieux l'hostilité que la perception de se savoir enfermé dans une bulle.",
+    "verdict": "Plutôt confirmée",
+    "ecart": {
+      "percu": { "label": "Perception de bulle", "valeur": 0.03, "sous": "Corrélation avec l'index d'hostilité" },
+      "reel": { "label": "Intensité d'usage", "valeur": 0.22, "sous": "Corrélation la plus forte (exposition)" },
+      "echelle": 0.3
+    },
+    "correlations": [
+      { "label": "Perception de bulle (Q9)", "r": 0.03, "pole": "percu" },
+      { "label": "Temps passé (Q7)", "r": 0.18, "pole": "reel" },
+      { "label": "Exposition aux contenus (Q11)", "r": 0.22, "pole": "reel" }
+    ],
+    "lecture": "Se sentir enfermé dans une bulle n'a quasiment aucun lien avec l'hostilité mesurée (corrélation proche de zéro). Ce sont le temps passé et surtout l'exposition aux contenus clivants qui accompagnent une hostilité plus forte."
+  },
+  "h2": {
+    "code": "H2",
+    "titre": "Qui le public tient-il pour responsable ?",
+    "enonce": "Le public attribue davantage une responsabilité individuelle (producteurs, partageurs) que structurelle (plateformes, État, médias), ce qui fragilise la légitimité perçue d'une régulation systémique.",
+    "verdict": "Confirmée",
+    "ecart": {
+      "percu": { "label": "Individus", "valeur": 3.85, "sous": "Moyenne producteurs et partageurs" },
+      "reel": { "label": "Structures", "valeur": 3.2, "sous": "Moyenne plateformes, État, médias" },
+      "echelle": 5
+    },
+    "hierarchie": [
+      { "acteur": "Utilisateurs producteurs", "note": 3.9, "type": "individu" },
+      { "acteur": "Utilisateurs partageurs", "note": 3.8, "type": "individu" },
+      { "acteur": "Plateformes", "note": 3.6, "type": "structure" },
+      { "acteur": "Médias traditionnels", "note": 3.1, "type": "structure" },
+      { "acteur": "État et pouvoirs publics", "note": 2.9, "type": "structure" }
+    ],
+    "contrastes_politiques": [
+      { "item": "Blâme des médias traditionnels", "gauche": 2.8, "droite": 3.7 },
+      { "item": "Responsabilité de l'État", "gauche": 3.1, "droite": 2.6 },
+      { "item": "Blâme des partageurs", "gauche": 3.9, "droite": 3.6 }
+    ],
+    "lecture": "Les répondants chargent d'abord les individus (ceux qui produisent et partagent les contenus) avant les structures qui organisent leur diffusion. Le blâme se déplace nettement selon le bord politique, surtout sur les médias et l'État."
+  },
+  "h3": {
+    "code": "H3",
+    "titre": "Réguler sans connaître ?",
+    "enonce": "La demande de régulation est massive mais déconnectée de la connaissance des dispositifs : une meilleure connaissance du DSA s'accompagne d'une volonté de régulation plus mesurée.",
+    "verdict": "Nuancée",
+    "ecart": {
+      "percu": { "label": "Demande de transparence", "valeur": 78, "unite": "%", "sous": "Part des répondants la jugeant nécessaire (Q18 ∈ {4,5})" },
+      "reel": { "label": "Connaissance précise du DSA", "valeur": 15, "unite": "%", "sous": "Part qui en connaît précisément le contenu (Q17)" },
+      "echelle": 100
+    },
+    "demande_selon_dsa": [
+      { "label": "Connaît précisément le DSA", "note": 3.8 },
+      { "label": "Connaît mal ou pas le DSA", "note": 4.4 }
+    ],
+    "lecture": "La transparence est réclamée presque unanimement, alors qu'une petite minorité connaît précisément le dispositif européen censé l'imposer. Ceux qui le connaissent le mieux en demandent un peu moins, signe d'une attente moins inconditionnelle une fois les dispositifs connus."
+  },
+  "verbatims": {
+    "q19": [
+      "On nous enferme dans ce qu'on aime déjà, c'est confortable et inquiétant à la fois.",
+      "Je crois que le problème vient surtout des gens, pas vraiment des plateformes.",
+      "Il faudrait savoir pourquoi tel contenu m'est montré plutôt qu'un autre."
+    ],
+    "q20": [
+      "Plus de transparence sur les algorithmes, et une vraie autorité pour contrôler.",
+      "Je ne connaissais pas le DSA avant ce questionnaire, et pourtant je veux qu'on régule.",
+      "Éduquer les gens autant que réguler les plateformes."
+    ]
+  }
+}
