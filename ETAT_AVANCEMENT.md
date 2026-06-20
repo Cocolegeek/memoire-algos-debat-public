@@ -33,7 +33,35 @@ Toujours sans réponse à ce stade. Tant que non tranchées, les défauts du bri
 2. **Mineurs** : 2 répondants de 13-17 ans. Défaut : exclure (`EXCLURE_MINEURS`), donne n = 263.
 3. **Formulation H1/H2/H3** : défaut déjà reporté tel quel depuis le PDF du mémoire dans CLAUDE.md §4.3 — pas de risque ici sauf si Corentin a une version plus récente du texte.
 
-### Revue d'architecture (2026-06-20, fin de session)
+### Étape 2 réalisée + mise en ligne anticipée (2026-06-20)
+
+Étape 2 du brief (design system dans l'UI) construite, puis **déploiement en ligne anticipé à la demande explicite de Corentin** (il voulait voir le rendu sans attendre les étapes 3-5).
+
+Fait :
+- `web/src/ui.jsx` : composants réutilisables (Eyebrow, Badge, Card, TabBar en pilule animée Framer Motion, EcartMetre corail/sarcelle à échelle paramétrable, gère l'unité %).
+- `web/src/App.jsx` : masthead (titre, n = 265, badge "Chiffres provisoires", lien "Code source"), barre d'onglets (Vue d'ensemble / H1 / H2 / H3 / Données), écart-mètre de **démonstration** (données factices étiquetées) piloté par l'onglet actif.
+- Scaffold Vite par défaut nettoyé : App.css, react.svg, vite.svg, hero.png, icons.svg supprimés ; index.html (titre, lang=fr) et web/README.md réécrits.
+- `.github/workflows/deploy.yml` créé. **Étape Python rendue conditionnelle** (`if [ -f analysis/analyse.py ]`) car analyse.py n'existe pas encore : l'app se construit sur ses données de démo. À l'étape 4, écrire analyse.py suffira, le workflow l'exécutera automatiquement.
+- `.claude/launch.json` ajouté (config preview locale, non versionné).
+
+Déploiement :
+- Dépôt passé **PUBLIC** (`gh repo edit --visibility public`). Décision verrouillée du brief, mais avancée plus tôt que prévu (le brief la plaçait après validation UI).
+- GitHub Pages activé, source = GitHub Actions (`build_type: workflow`).
+- PR #1 (claude/adoring-austin-0a6780 -> main) fusionné. Workflow "Déploiement" : **succès du premier coup**.
+- **Site EN LIGNE et vérifié (HTTP 200)** : https://cocolegeek.github.io/memoire-algos-debat-public/
+
+⚠️ Ce qui est en ligne est une **UI de démonstration avec des données factices**. Les vrais chiffres viendront de analyse.py (étape 4). Le badge "Chiffres provisoires" est affiché.
+
+État git à la reprise : la branche `claude/adoring-austin-0a6780` a été fusionnée dans `main`. `main` porte tout (étape 2 + CI). Travailler depuis `main` à jour à la prochaine session.
+
+### Prochaine étape exacte (reprendre ici, prochaine session)
+
+1. Étape 3 (CLAUDE.md §6) : remplacer l'écart-mètre de démo par le vrai dashboard à onglets, piloté par un `web/public/results.json` **provisoire** (Vue d'ensemble + H1 + H2 + H3 selon §7), puis brancher l'app sur `fetch(import.meta.env.BASE_URL + "results.json")` au lieu des données en dur.
+2. Étape 4 : écrire `analysis/analyse.py` (+ requirements.txt), déposer/utiliser `data/reponses.csv`, générer le vrai `results.json`. Le workflow CI l'exécutera alors automatiquement (étape déjà conditionnée).
+3. Étape 5 : module Datalake (§9). Étape 6 déjà partiellement faite (CI + public + Pages) ; il restera juste à confirmer le bon fonctionnement après chaque évolution.
+4. Penser à reporter les deux URL (site + dépôt) dans le `Etat_d_avancement.md` du mémoire (§2.3.4) : voir la note en bas de ce fichier.
+
+### Revue d'architecture (2026-06-20)
 
 Relecture complète de l'arborescence à la demande de Corentin. Verdict : tout ce qui a été posé (vite.config.js, tailwind.config.js, package.json, index.css, racine du dépôt) est propre et conforme au brief. Seul reste du scaffold par défaut Vite, à nettoyer **en même temps** que l'étape 2 (pas un problème en soi, juste pas encore fait) :
 
@@ -43,16 +71,12 @@ Relecture complète de l'arborescence à la demande de Corentin. Verdict : tout 
 - `web/public/icons.svg` : icônes de la démo (doc/social/GitHub/Discord/X/Bluesky) — à supprimer.
 - `web/README.md` : README générique `create-vite`, jamais réécrit — à réécrire ou supprimer.
 
-### Prochaine étape exacte (reprendre ici, prochaine session)
-
-1. Étape 2 (CLAUDE.md §7) : construire le design system dans l'UI réelle — masthead (titre, n, badge "chiffres provisoires", lien code source), barre d'onglets en pilule, carte de base (`panel`/`line`/ombre/coins arrondis), écart-mètre réutilisable (corail = perçu, sarcelle = réel). Nettoyer le scaffold par défaut (liste ci-dessus) au passage.
-2. Étape 3 : dashboard à onglets (Vue d'ensemble / H1 / H2 / H3) avec un `results.json` **provisoire** d'abord, pour voir l'UI tourner avant de brancher les vraies données.
-3. Ne pas attaquer `analysis/analyse.py` (étape 4) avant validation de l'UI par Corentin.
+(Ce nettoyage a été réalisé pendant l'étape 2, voir plus haut.)
 
 ### Repo et liens
 
-- Dépôt (privé pour l'instant) : https://github.com/Cocolegeek/memoire-algos-debat-public
-- Site en ligne : **pas encore déployé**. URL prévue une fois Pages activé : `https://cocolegeek.github.io/memoire-algos-debat-public/`
+- Dépôt (désormais **PUBLIC**) : https://github.com/Cocolegeek/memoire-algos-debat-public
+- Site **EN LIGNE** : https://cocolegeek.github.io/memoire-algos-debat-public/
 
 ### Document du mémoire (Etat_d_avancement.md, §2.3.4) — non traité
 
