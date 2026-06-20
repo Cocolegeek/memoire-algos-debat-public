@@ -33,9 +33,19 @@ Toujours sans réponse à ce stade. Tant que non tranchées, les défauts du bri
 2. **Mineurs** : 2 répondants de 13-17 ans. Défaut : exclure (`EXCLURE_MINEURS`), donne n = 263.
 3. **Formulation H1/H2/H3** : défaut déjà reporté tel quel depuis le PDF du mémoire dans CLAUDE.md §4.3 — pas de risque ici sauf si Corentin a une version plus récente du texte.
 
-### Prochaine étape exacte (reprendre ici)
+### Revue d'architecture (2026-06-20, fin de session)
 
-1. Étape 2 (CLAUDE.md §7) : construire le design system dans l'UI réelle — masthead (titre, n, badge "chiffres provisoires", lien code source), barre d'onglets en pilule, carte de base (`panel`/`line`/ombre/coins arrondis), écart-mètre réutilisable (corail = perçu, sarcelle = réel).
+Relecture complète de l'arborescence à la demande de Corentin. Verdict : tout ce qui a été posé (vite.config.js, tailwind.config.js, package.json, index.css, racine du dépôt) est propre et conforme au brief. Seul reste du scaffold par défaut Vite, à nettoyer **en même temps** que l'étape 2 (pas un problème en soi, juste pas encore fait) :
+
+- `web/src/App.jsx` : encore la démo Vite/React ("Get started", compteur, logos) — à réécrire entièrement.
+- `web/src/App.css` : CSS de cette démo — à supprimer.
+- `web/src/assets/react.svg`, `vite.svg`, `hero.png` : assets de démo — à supprimer.
+- `web/public/icons.svg` : icônes de la démo (doc/social/GitHub/Discord/X/Bluesky) — à supprimer.
+- `web/README.md` : README générique `create-vite`, jamais réécrit — à réécrire ou supprimer.
+
+### Prochaine étape exacte (reprendre ici, prochaine session)
+
+1. Étape 2 (CLAUDE.md §7) : construire le design system dans l'UI réelle — masthead (titre, n, badge "chiffres provisoires", lien code source), barre d'onglets en pilule, carte de base (`panel`/`line`/ombre/coins arrondis), écart-mètre réutilisable (corail = perçu, sarcelle = réel). Nettoyer le scaffold par défaut (liste ci-dessus) au passage.
 2. Étape 3 : dashboard à onglets (Vue d'ensemble / H1 / H2 / H3) avec un `results.json` **provisoire** d'abord, pour voir l'UI tourner avant de brancher les vraies données.
 3. Ne pas attaquer `analysis/analyse.py` (étape 4) avant validation de l'UI par Corentin.
 
