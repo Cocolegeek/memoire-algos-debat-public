@@ -1,5 +1,10 @@
-import { useState } from 'react'
-import { Badge, Card, EcartMetre, Eyebrow, TabBar } from './ui.jsx'
+import { useEffect, useState } from 'react'
+import { Badge, Eyebrow, TabBar } from './ui.jsx'
+import Overview from './sections/Overview.jsx'
+import Hypothesis1 from './sections/Hypothesis1.jsx'
+import Hypothesis2 from './sections/Hypothesis2.jsx'
+import Hypothesis3 from './sections/Hypothesis3.jsx'
+import Datalake from './sections/Datalake.jsx'
 
 const TABS = [
   { id: 'overview', label: 'Vue d’ensemble' },
@@ -9,36 +14,22 @@ const TABS = [
   { id: 'donnees', label: 'Données' },
 ]
 
-const DEMO = {
-  overview: {
-    titre: 'Aperçu de l’écart',
-    percu: { label: 'Perception du public', valeur: 0.62, sous: 'Donnée de démonstration' },
-    reel: { label: 'Réalité mesurée', valeur: 0.28, sous: 'Donnée de démonstration' },
-    echelle: 1,
-  },
-  h1: {
-    titre: 'Bulle perçue vs intensité d’usage',
-    percu: { label: 'Perception de bulle (Q9)', valeur: 0.03, sous: 'Corrélation avec l’index d’hostilité' },
-    reel: { label: 'Intensité d’usage', valeur: 0.18, sous: 'Corrélation avec l’index d’hostilité' },
-    echelle: 0.3,
-  },
-  h2: {
-    titre: 'Individus vs structures',
-    percu: { label: 'Responsabilité individuelle', valeur: 3.8, sous: 'Moyenne Q16 (producteurs, partageurs)' },
-    reel: { label: 'Responsabilité structurelle', valeur: 2.6, sous: 'Moyenne Q16 (plateformes, État, médias)' },
-    echelle: 5,
-  },
-  h3: {
-    titre: 'Demande de transparence vs connaissance du DSA',
-    percu: { label: 'Demande de transparence', valeur: 78, unite: '%', sous: 'Part de Q18 ∈ {4,5}' },
-    reel: { label: 'Connaissance précise du DSA', valeur: 15, unite: '%', sous: 'Part de Q17 = "précisément"' },
-    echelle: 100,
-  },
-}
+const REPO = 'https://github.com/Cocolegeek/memoire-algos-debat-public'
 
-function App() {
+export default function App() {
   const [active, setActive] = useState('overview')
-  const demo = DEMO[active] ?? DEMO.overview
+  const [data, setData] = useState(null)
+  const [erreur, setErreur] = useState(null)
+
+  useEffect(() => {
+    fetch(import.meta.env.BASE_URL + 'results.json')
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
+        return r.json()
+      })
+      .then(setData)
+      .catch((e) => setErreur(e.message))
+  }, [])
 
   return (
     <div className="min-h-screen bg-bg">
@@ -49,10 +40,12 @@ function App() {
             Algorithmes de recommandation et polarisation du débat public
           </h1>
           <div className="flex flex-wrap items-center gap-2">
-            <Badge>n = 265</Badge>
-            <Badge tone="avertissement">Chiffres provisoires</Badge>
+            {data && <Badge>n = {data.meta.n}</Badge>}
+            {data?.meta.statut !== 'définitif' && (
+              <Badge tone="avertissement">Chiffres provisoires</Badge>
+            )}
             <a
-              href="https://github.com/Cocolegeek/memoire-algos-debat-public"
+              href={REPO}
               target="_blank"
               rel="noreferrer"
               className="font-mono text-xs text-ink-soft underline decoration-line decoration-1 underline-offset-4 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
@@ -67,17 +60,44 @@ function App() {
         </div>
 
         <main>
-          <Card className="max-w-md">
-            <EcartMetre {...demo} />
-          </Card>
-          <p className="mt-4 font-body text-sm text-muted">
-            Aperçu du système de design (étape 2). Le tableau de bord complet par onglet
-            arrive à l’étape 3, avec les vraies données à l’étape 4.
-          </p>
+          {erreur && (
+            <p className="rounded-xl border border-percu-soft bg-percu-soft p-4 font-body text-sm text-percu">
+              Impossible de charger les données ({erreur}).
+            </p>
+          )}
+          {!data && !erreur && <p className="font-body text-sm text-muted">Chargement des données…</p>}
+          {data && (
+            <>
+              {active === 'overview' && <Overview data={data} onNavigate={setActive} />}
+              {active === 'h1' && <Hypothesis1 data={data.h1} />}
+              {active === 'h2' && <Hypothesis2 data={data.h2} />}
+              {active === 'h3' && <Hypothesis3 data={data.h3} />}
+              {active === 'donnees' && <Datalake />}
+            </>
+          )}
         </main>
+
+        {data?.verbatims && (
+          <footer className="mt-12 border-t border-line pt-8">
+            <Eyebrow>Ce qu'en disent les répondants</Eyebrow>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              {[...(data.verbatims.q19 ?? []), ...(data.verbatims.q20 ?? [])]
+                .slice(0, 4)
+                .map((v, i) => (
+                  <blockquote
+                    key={i}
+                    className="rounded-xl border border-line bg-panel p-4 font-body text-sm italic text-ink-soft"
+                  >
+                    « {v} »
+                  </blockquote>
+                ))}
+            </div>
+            <p className="mt-6 font-mono text-xs text-muted">
+              {data.meta.source}
+            </p>
+          </footer>
+        )}
       </div>
     </div>
   )
 }
-
-export default App
