@@ -1,23 +1,55 @@
 {
   "meta": {
     "n": 263,
-    "statut": "provisoire",
+    "statut": "définitif",
     "genere_le": "2026-06-20",
-    "source": "Données de démonstration. Valeurs plausibles tant que analyse.py n'a pas généré les chiffres définitifs."
+    "source": "Enquête en ligne, 263 répondants après exclusion des mineurs. Chiffres calculés par analysis/analyse.py. Les verdicts restent une interprétation à valider."
   },
   "echantillon": {
     "resume": "Échantillon de convenance, non représentatif de la population française. Questionnaire diffusé en ligne, donc soumis à un biais d'auto-sélection. Les proportions ci-dessous décrivent les répondants, pas la population générale.",
     "indicateurs": [
-      { "label": "18-34 ans", "pct": 68 },
-      { "label": "Femmes", "pct": 54 },
-      { "label": "Études supérieures", "pct": 76 },
-      { "label": "Usage quotidien des réseaux", "pct": 89 }
+      {
+        "label": "18-34 ans",
+        "pct": 68
+      },
+      {
+        "label": "Diplômés du supérieur",
+        "pct": 93
+      },
+      {
+        "label": "Plus de 2h par jour sur les réseaux",
+        "pct": 38
+      },
+      {
+        "label": "Vivent en Île-de-France",
+        "pct": 48
+      }
     ],
     "politique": [
-      { "label": "Gauche / très à gauche", "pct": 41 },
-      { "label": "Centre", "pct": 22 },
-      { "label": "Droite / très à droite", "pct": 18 },
-      { "label": "Ne se positionne pas", "pct": 19 }
+      {
+        "label": "Très à gauche",
+        "pct": 12
+      },
+      {
+        "label": "Plutôt à gauche",
+        "pct": 37
+      },
+      {
+        "label": "Plutôt au centre",
+        "pct": 15
+      },
+      {
+        "label": "Plutôt à droite",
+        "pct": 20
+      },
+      {
+        "label": "Très à droite",
+        "pct": 7
+      },
+      {
+        "label": "Ne se positionne pas",
+        "pct": 10
+      }
     ]
   },
   "h1": {
@@ -26,14 +58,34 @@
     "enonce": "L'intensité d'usage (temps passé, exposition aux contenus polémiques) prédit mieux l'hostilité que la perception de se savoir enfermé dans une bulle.",
     "verdict": "Plutôt confirmée",
     "ecart": {
-      "percu": { "label": "Perception de bulle", "valeur": 0.03, "sous": "Corrélation avec l'index d'hostilité" },
-      "reel": { "label": "Intensité d'usage", "valeur": 0.22, "sous": "Corrélation la plus forte (exposition)" },
+      "percu": {
+        "label": "Perception de bulle",
+        "valeur": 0.03,
+        "sous": "Corrélation avec l'index d'hostilité"
+      },
+      "reel": {
+        "label": "Intensité d'usage",
+        "valeur": 0.21,
+        "sous": "Corrélation la plus forte (temps passé)"
+      },
       "echelle": 0.3
     },
     "correlations": [
-      { "label": "Perception de bulle (Q9)", "r": 0.03, "pole": "percu" },
-      { "label": "Temps passé (Q7)", "r": 0.18, "pole": "reel" },
-      { "label": "Exposition aux contenus (Q11)", "r": 0.22, "pole": "reel" }
+      {
+        "label": "Perception de bulle (Q9)",
+        "r": 0.03,
+        "pole": "percu"
+      },
+      {
+        "label": "Temps passé (Q7)",
+        "r": 0.21,
+        "pole": "reel"
+      },
+      {
+        "label": "Exposition aux contenus (Q11)",
+        "r": 0.18,
+        "pole": "reel"
+      }
     ],
     "lecture": "Se sentir enfermé dans une bulle n'a quasiment aucun lien avec l'hostilité mesurée (corrélation proche de zéro). Ce sont le temps passé et surtout l'exposition aux contenus clivants qui accompagnent une hostilité plus forte."
   },
@@ -43,23 +95,63 @@
     "enonce": "Le public attribue davantage une responsabilité individuelle (producteurs, partageurs) que structurelle (plateformes, État, médias), ce qui fragilise la légitimité perçue d'une régulation systémique.",
     "verdict": "Confirmée",
     "ecart": {
-      "percu": { "label": "Individus", "valeur": 3.85, "sous": "Moyenne producteurs et partageurs" },
-      "reel": { "label": "Structures", "valeur": 3.2, "sous": "Moyenne plateformes, État, médias" },
+      "percu": {
+        "label": "Individus",
+        "valeur": 4.42,
+        "sous": "Moyenne producteurs et partageurs"
+      },
+      "reel": {
+        "label": "Structures",
+        "valeur": 3.8,
+        "sous": "Moyenne plateformes, État, médias"
+      },
       "echelle": 5
     },
     "hierarchie": [
-      { "acteur": "Utilisateurs producteurs", "note": 3.9, "type": "individu" },
-      { "acteur": "Utilisateurs partageurs", "note": 3.8, "type": "individu" },
-      { "acteur": "Plateformes", "note": 3.6, "type": "structure" },
-      { "acteur": "Médias traditionnels", "note": 3.1, "type": "structure" },
-      { "acteur": "État et pouvoirs publics", "note": 2.9, "type": "structure" }
+      {
+        "acteur": "Utilisateurs producteurs",
+        "note": 4.53,
+        "type": "individu"
+      },
+      {
+        "acteur": "Utilisateurs partageurs",
+        "note": 4.31,
+        "type": "individu"
+      },
+      {
+        "acteur": "Plateformes",
+        "note": 4.01,
+        "type": "structure"
+      },
+      {
+        "acteur": "Médias traditionnels",
+        "note": 3.98,
+        "type": "structure"
+      },
+      {
+        "acteur": "État et pouvoirs publics",
+        "note": 3.41,
+        "type": "structure"
+      }
     ],
     "contrastes_politiques": [
-      { "item": "Blâme des médias traditionnels", "gauche": 2.8, "droite": 3.7 },
-      { "item": "Responsabilité de l'État", "gauche": 3.1, "droite": 2.6 },
-      { "item": "Blâme des partageurs", "gauche": 3.9, "droite": 3.6 }
+      {
+        "item": "Blâme des médias traditionnels",
+        "gauche": 4.18,
+        "droite": 3.67
+      },
+      {
+        "item": "Responsabilité de l'État",
+        "gauche": 3.59,
+        "droite": 3.16
+      },
+      {
+        "item": "Blâme des partageurs",
+        "gauche": 4.26,
+        "droite": 4.41
+      }
     ],
-    "lecture": "Les répondants chargent d'abord les individus (ceux qui produisent et partagent les contenus) avant les structures qui organisent leur diffusion. Le blâme se déplace nettement selon le bord politique, surtout sur les médias et l'État."
+    "lecture": "Les répondants chargent d'abord les individus qui produisent et partagent les contenus, avant les structures qui organisent leur diffusion. Le blâme se déplace nettement selon le bord politique, surtout sur les médias et l'État."
   },
   "h3": {
     "code": "H3",
@@ -67,26 +159,48 @@
     "enonce": "La demande de régulation est massive mais déconnectée de la connaissance des dispositifs : une meilleure connaissance du DSA s'accompagne d'une volonté de régulation plus mesurée.",
     "verdict": "Nuancée",
     "ecart": {
-      "percu": { "label": "Demande de transparence", "valeur": 78, "unite": "%", "sous": "Part des répondants la jugeant nécessaire (Q18 ∈ {4,5})" },
-      "reel": { "label": "Connaissance précise du DSA", "valeur": 15, "unite": "%", "sous": "Part qui en connaît précisément le contenu (Q17)" },
+      "percu": {
+        "label": "Demande de transparence",
+        "valeur": 82,
+        "unite": "%",
+        "sous": "Part jugeant la transparence nécessaire (Q18 ∈ {4,5})"
+      },
+      "reel": {
+        "label": "Connaissance précise du DSA",
+        "valeur": 15,
+        "unite": "%",
+        "sous": "Part qui en connaît précisément le contenu (Q17)"
+      },
       "echelle": 100
     },
     "demande_selon_dsa": [
-      { "label": "Connaît précisément le DSA", "note": 3.8 },
-      { "label": "Connaît mal ou pas le DSA", "note": 4.4 }
+      {
+        "label": "Connaît précisément le DSA",
+        "note": 4.08
+      },
+      {
+        "label": "Connaît mal ou pas le DSA",
+        "note": 4.21
+      }
     ],
-    "lecture": "La transparence est réclamée presque unanimement, alors qu'une petite minorité connaît précisément le dispositif européen censé l'imposer. Ceux qui le connaissent le mieux en demandent un peu moins, signe d'une attente moins inconditionnelle une fois les dispositifs connus."
+    "lecture": "La transparence est réclamée très largement, alors qu'une petite minorité connaît précisément le dispositif européen censé l'imposer. Ceux qui le connaissent le mieux en demandent un peu moins, signe d'une attente moins inconditionnelle une fois les dispositifs connus."
   },
   "verbatims": {
     "q19": [
-      "On nous enferme dans ce qu'on aime déjà, c'est confortable et inquiétant à la fois.",
-      "Je crois que le problème vient surtout des gens, pas vraiment des plateformes.",
-      "Il faudrait savoir pourquoi tel contenu m'est montré plutôt qu'un autre."
+      "les reseaux sociaux et twitter",
+      "Principalement des problématiques qui trainent depuis des générations et des populations qui sont de plus en plus divisées d'un point de vu économique et social",
+      "Inégalités sociales et manipulations",
+      "Les gens ne prennent plus le temps de s'écouter et de respecter les opinions des uns et des autres. Chaque personne peut avoir un vécu différent et un avis différent",
+      "En grande partie à cause des inégalités sociales",
+      "Les difficultés économiques du pays La mise en avant des nouvelles négatives La non-action des parties en place qui implique la montée des extrêmes"
     ],
     "q20": [
-      "Plus de transparence sur les algorithmes, et une vraie autorité pour contrôler.",
-      "Je ne connaissais pas le DSA avant ce questionnaire, et pourtant je veux qu'on régule.",
-      "Éduquer les gens autant que réguler les plateformes."
+      "Transparence sur le fonctionnement, éducation dès le plus jeune âge aux risques et aux fonctionnements des réseaux sociaux, censure des publications et commentaires insultants / violents",
+      "Le débat en ligne ne sert à rien car souvent mené par des ignares en mal de notoriété!",
+      "Pas de solution miracle, les gens croient ce quils veulent croire et ce qui colle a leur vision (totalement construite) du monde, et ce peu importe le parti",
+      "Supprimer les contenus qui prônent le racisme, la xénophobie.",
+      "Créateur de contenu par de vrai journalistes s'adressant aux jeuenes",
+      "Compliqué, personnellement je suis très choquée quand je vois des contenus d’extrême droite, donc difficile de parler de liberté d’expression…"
     ]
   }
 }
