@@ -146,6 +146,110 @@
         }
       ]
     },
+    "robustesse": {
+      "groupes": [
+        {
+          "cle": "age_18_34",
+          "label": "18-34 ans",
+          "n": 178
+        },
+        {
+          "cle": "age_35plus",
+          "label": "35 ans et plus",
+          "n": 85
+        },
+        {
+          "cle": "gauche",
+          "label": "Bord gauche",
+          "n": 128
+        },
+        {
+          "cle": "droite",
+          "label": "Bord droite",
+          "n": 70
+        }
+      ],
+      "predicteurs": [
+        {
+          "cle": "temps",
+          "label": "Temps passé (Q7)",
+          "valeurs": {
+            "age_18_34": {
+              "r": 0.19,
+              "p": 0.009392922762056166,
+              "n": 178
+            },
+            "age_35plus": {
+              "r": 0.05,
+              "p": 0.653159253030474,
+              "n": 85
+            },
+            "gauche": {
+              "r": 0.19,
+              "p": 0.026921648984559177,
+              "n": 128
+            },
+            "droite": {
+              "r": 0.11,
+              "p": 0.37095115620819374,
+              "n": 70
+            }
+          }
+        },
+        {
+          "cle": "exposition",
+          "label": "Exposition aux contenus (Q11)",
+          "valeurs": {
+            "age_18_34": {
+              "r": 0.12,
+              "p": 0.10538140795215467,
+              "n": 178
+            },
+            "age_35plus": {
+              "r": 0.19,
+              "p": 0.07212501368360069,
+              "n": 85
+            },
+            "gauche": {
+              "r": 0.21,
+              "p": 0.016221040920244123,
+              "n": 128
+            },
+            "droite": {
+              "r": 0.16,
+              "p": 0.16961599760985946,
+              "n": 70
+            }
+          }
+        },
+        {
+          "cle": "bulle",
+          "label": "Perception de bulle (Q9)",
+          "valeurs": {
+            "age_18_34": {
+              "r": -0.02,
+              "p": 0.8128026286533954,
+              "n": 178
+            },
+            "age_35plus": {
+              "r": 0.15,
+              "p": 0.18099253964050854,
+              "n": 85
+            },
+            "gauche": {
+              "r": 0.07,
+              "p": 0.4194333761812099,
+              "n": 128
+            },
+            "droite": {
+              "r": 0.0,
+              "p": 0.9804470585628844,
+              "n": 70
+            }
+          }
+        }
+      ]
+    },
     "lecture": "Dans la régression multiple, le temps passé et l'exposition aux contenus clivants gardent un poids non négligeable, alors que la perception de bulle est proche de zéro et non significative. L'hostilité tient donc davantage à l'usage réel qu'au sentiment d'enfermement."
   },
   "h2a": {
