@@ -597,18 +597,77 @@ def bloc_h3(reps):
 
 
 # --------------------------------------------------------------------------
-# Verbatims
+# Verbatims : classement thématique par mots-clés (analyse sémantique légère,
+# vocation illustrative, pas un résultat statistique en soi). Chaque réponse
+# libre est rangée dans le premier thème dont un mot-clé est détecté.
 # --------------------------------------------------------------------------
-def echantillon_verbatims(reps, cle, n=6):
-    vus = []
-    for r in reps:
-        t = " ".join(r[cle].split())
+THEMES_Q19 = collections.OrderedDict(
+    [
+        ("algorithmes_reseaux", {
+            "label": "Algorithmes et réseaux sociaux",
+            "mots": ["algorithme", "reseau social", "reseaux sociaux", "plateforme", "recommandation",
+                     "tiktok", "instagram", "facebook", "twitter", "youtube", "bulle"],
+        }),
+        ("medias", {
+            "label": "Médias traditionnels",
+            "mots": ["media", "journalist", "presse", "television", "chaine d'info", "chaine info"],
+        }),
+        ("politique", {
+            "label": "Acteurs politiques",
+            "mots": ["politique", "parti", "elu", "gouvernement", "president", "classe politique"],
+        }),
+        ("individus", {
+            "label": "Comportement et éducation des individus",
+            "mots": ["individu", "utilisateur", "education", "esprit critique", "ignorance",
+                     "intoleran", "manque de respect", "manque d'ecoute", "ego"],
+        }),
+    ]
+)
+
+THEMES_Q20 = collections.OrderedDict(
+    [
+        ("regulation", {
+            "label": "Régulation, contrôle ou sanctions",
+            "mots": ["regul", "loi", "sanction", "obliger", "obligation", "encadr", "interdire",
+                     "censur", "etat", "dsa", "controle"],
+        }),
+        ("transparence_sources", {
+            "label": "Transparence et fiabilité des sources",
+            "mots": ["transparence", "source", "verif", "fact-check", "factcheck", "label"],
+        }),
+        ("education", {
+            "label": "Éducation et esprit critique",
+            "mots": ["education", "esprit critique", "sensibilis", "ecole", "former", "formation"],
+        }),
+    ]
+)
+
+
+def classer(texte, themes_def):
+    t = norm(texte)
+    for cle, info in themes_def.items():
+        if any(m in t for m in info["mots"]):
+            return cle
+    return "autre"
+
+
+def bloc_verbatim(reps, cle, question, themes_def, label_autre):
+    textes = [" ".join(r[cle].split()) for r in reps if r[cle].strip()]
+    total = len(textes)
+    classes = [(t, classer(t, themes_def)) for t in textes]
+    compteur = collections.Counter(c for _, c in classes)
+    themes = [
+        {"cle": tc, "label": info["label"], "pct": pct(compteur.get(tc, 0), total)}
+        for tc, info in themes_def.items()
+    ]
+    themes.append({"cle": "autre", "label": label_autre, "pct": pct(compteur.get("autre", 0), total)})
+    vus = set()
+    citations = []
+    for t, tc in classes:
         if 40 <= len(t) <= 220 and t not in vus:
-            vus.append(t)
-    if len(vus) <= n:
-        return vus
-    pas = len(vus) / n
-    return [vus[int(i * pas)] for i in range(n)]
+            vus.add(t)
+            citations.append({"texte": t, "theme": tc})
+    return {"question": question, "themes": themes, "citations": citations}
 
 
 # --------------------------------------------------------------------------
@@ -658,7 +717,16 @@ def main():
         "h2a": bloc_h2a(reps),
         "h2b": bloc_h2b(reps),
         "h3": bloc_h3(reps),
-        "verbatims": {"q19": echantillon_verbatims(reps, "q19"), "q20": echantillon_verbatims(reps, "q20")},
+        "verbatims": {
+            "q19": bloc_verbatim(
+                reps, "q19", "Cause principale perçue de la polarisation du débat public",
+                THEMES_Q19, "Autres causes citées",
+            ),
+            "q20": bloc_verbatim(
+                reps, "q20", "Mesure concrète proposée pour améliorer le débat public en ligne",
+                THEMES_Q20, "Autres mesures proposées",
+            ),
+        },
     }
     repondants = {
         "meta": {"n": n, "genere_le": date.today().isoformat()},

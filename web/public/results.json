@@ -95,7 +95,7 @@
         "label": "Perception de bulle (Q9)",
         "cle": "bulle",
         "r": 0.03,
-        "p": 0.6241678769513703,
+        "p": 0.6241678769513701,
         "pole": "percu"
       }
     ],
@@ -423,21 +423,668 @@
     "lecture": "La demande de régulation des algorithmes est massive et consensuelle : la transparence est jugée nécessaire par 82% des répondants, à travers tous les bords politiques, quoique plus mesurée à droite. Elle reste déconnectée de la connaissance des dispositifs existants : seuls 15% connaissent précisément le DSA. L'idée qu'une meilleure connaissance du DSA réduit la volonté de régulation va dans le sens attendu, mais n'est pas statistiquement significative (p = 0,499) : cette partie de l'hypothèse n'est pas confirmée par les données."
   },
   "verbatims": {
-    "q19": [
-      "Différents aspects : le manque d'encadrement, l'utilisation de certains cas polarisés comme outils de divertissement (chasses aux pédophiles), la possibilité d'insulter",
-      "Principalement des problématiques qui trainent depuis des générations et des populations qui sont de plus en plus divisées d'un point de vu économique et social",
-      "Je dirais simplement que c’est le manque d’acception des différents dû à l’éducation.",
-      "Les gens ne prennent plus le temps de s'écouter et de respecter les opinions des uns et des autres. Chaque personne peut avoir un vécu différent et un avis différent",
-      "Extrême gauche populiste et carriériste, stigmatisant par la violence verbale et physique l’opposition : « Si tu n’est pas avec moi, tu es contre moi »",
-      "Les personnes ne lisent rien de plus de trois lignes. Une idée, une opinion, une argumentation c’est plusieurs pages, des articles d’analyse, des livres."
-    ],
-    "q20": [
-      "Transparence sur le fonctionnement, éducation dès le plus jeune âge aux risques et aux fonctionnements des réseaux sociaux, censure des publications et commentaires insultants / violents",
-      "Le débat en ligne ne sert à rien car souvent mené par des ignares en mal de notoriété!",
-      "Pas de solution miracle, les gens croient ce quils veulent croire et ce qui colle a leur vision (totalement construite) du monde, et ce peu importe le parti",
-      "Supprimer les contenus qui prônent le racisme, la xénophobie.",
-      "Créateur de contenu par de vrai journalistes s'adressant aux jeuenes",
-      "éducation, Modération, sanctions, réglementation et limitation"
-    ]
+    "q19": {
+      "question": "Cause principale perçue de la polarisation du débat public",
+      "themes": [
+        {
+          "cle": "algorithmes_reseaux",
+          "label": "Algorithmes et réseaux sociaux",
+          "pct": 21
+        },
+        {
+          "cle": "medias",
+          "label": "Médias traditionnels",
+          "pct": 17
+        },
+        {
+          "cle": "politique",
+          "label": "Acteurs politiques",
+          "pct": 18
+        },
+        {
+          "cle": "individus",
+          "label": "Comportement et éducation des individus",
+          "pct": 11
+        },
+        {
+          "cle": "autre",
+          "label": "Autres causes citées",
+          "pct": 34
+        }
+      ],
+      "citations": [
+        {
+          "texte": "Différents aspects : le manque d'encadrement, l'utilisation de certains cas polarisés comme outils de divertissement (chasses aux pédophiles), la possibilité d'insulter",
+          "theme": "autre"
+        },
+        {
+          "texte": "La survulgarisation de l'info et le manque de nuance dans les sources d'informations les plus utilisées",
+          "theme": "autre"
+        },
+        {
+          "texte": "Aux médias TV, presses, aux réseau sociaux et leur algorithme mais également de la part de la classe politique sur les différents médias de diffusion.",
+          "theme": "algorithmes_reseaux"
+        },
+        {
+          "texte": "De plus en plus de violence de chaque côté et un manque de considération des partis en place depuis des années",
+          "theme": "politique"
+        },
+        {
+          "texte": "Selon moi, les réseaux sociaux jouent un rôle clé dans la polarisation du débat public, particulièrement en influençant les individus disposant d'un bagage social et économique moins important que les autres.",
+          "theme": "algorithmes_reseaux"
+        },
+        {
+          "texte": "Le manque d'information et de neutralité des médias (TV...)",
+          "theme": "medias"
+        },
+        {
+          "texte": "Aux médias qui ne parlent que de ça et pousse tout à son paroxisme",
+          "theme": "medias"
+        },
+        {
+          "texte": "Culture de l'instantané, économie de l'attention, nécessité d'exister dans un océan d'informations => plus de propros \"chocs\"",
+          "theme": "autre"
+        },
+        {
+          "texte": "L’école ne fait plus son travail. De plus en plus un manque de socle culturel commun.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Irresponsabilité des hommes politiques / ignorance et égoïsme du peuple",
+          "theme": "politique"
+        },
+        {
+          "texte": "C'est un prisme médiatique. Dans la \"vraie\" vie, la polarisation n'est pas si forte.",
+          "theme": "medias"
+        },
+        {
+          "texte": "L’étroitesse d’esprit et le manque d’humanité.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Non respect de l opinion des autres, intolerance",
+          "theme": "individus"
+        },
+        {
+          "texte": "Principalement des problématiques qui trainent depuis des générations et des populations qui sont de plus en plus divisées d'un point de vu économique et social",
+          "theme": "autre"
+        },
+        {
+          "texte": "L’accès simple des RS / Le sensationnel (vouloir du clic) / Le clivage politique de plus en plus axé sur des peurs",
+          "theme": "politique"
+        },
+        {
+          "texte": "à la désinformation et aux manques de recherches auprès de personnes compétentes",
+          "theme": "autre"
+        },
+        {
+          "texte": "Les medias depuis de nombreuses années : réseaux sociaux, journeaux et chaînes télé",
+          "theme": "algorithmes_reseaux"
+        },
+        {
+          "texte": "Au manque de formation sur des débats le font plutôt que sur des événements",
+          "theme": "autre"
+        },
+        {
+          "texte": "Les informations passent mal et trop vite, on n’a plus aucune source ni contexte",
+          "theme": "autre"
+        },
+        {
+          "texte": "Au manque d'empathie et de compréhension dû à l'individualisme de la société actuelle, ainsi qu'à la manipulation par l'état et les différents camps politiques des actualités et faits de société.",
+          "theme": "politique"
+        },
+        {
+          "texte": "Le manque de clarté entre l'info et l'intox ( l'esprit critique se perd)",
+          "theme": "individus"
+        },
+        {
+          "texte": "La moindre information est tournée de manière extrapolée pour diviser et choquer le monde",
+          "theme": "autre"
+        },
+        {
+          "texte": "L'incapacité à reconnaître que l'autre puisse penser différement et la mise au ban systématique de ceux qui ne rentrent pas dans le moule. La disparition de la nuance.",
+          "theme": "autre"
+        },
+        {
+          "texte": "à la prise de contrôle croissante des media par des industriels très marqués politiquement, qui en parallèle tente de discréditer les media publics.",
+          "theme": "medias"
+        },
+        {
+          "texte": "L'extrême droite - Les médias- La politique de Macron - Manipulation Médiatique pour discréditer la Gauche",
+          "theme": "medias"
+        },
+        {
+          "texte": "De la désinformation et des fake news. Que ce soit à droite ou à gauche, d'ailleurs.",
+          "theme": "autre"
+        },
+        {
+          "texte": "À une crise sociale et économique. Une politique hostile qui divise beaucoup le peuple. Un manque de transparence dans les informations.",
+          "theme": "politique"
+        },
+        {
+          "texte": "Je dirais simplement que c’est le manque d’acception des différents dû à l’éducation.",
+          "theme": "individus"
+        },
+        {
+          "texte": "A l'anonymat de chacun qui permet de la virulence sans avoir besoin d'écouter les arguments en face. Et le fait qu'à l'écrit les gens se comprennent moins que lors d'une discussion à l'oral",
+          "theme": "autre"
+        },
+        {
+          "texte": "Réseaux sociaux évidement + les politiques cherchent à convaincre plutôt qu’à avoir un programme sérieux donc attisent la haine et se rabaissent",
+          "theme": "algorithmes_reseaux"
+        },
+        {
+          "texte": "La mise en avant de deux extrêmes dans la paysage politique, avec une volonté du côté de l’extrême droite de trouver un ennemi afin de rallier des votants à leur cause.",
+          "theme": "politique"
+        },
+        {
+          "texte": "Volonté de choquer pour être mis en avant (favorisé par algo RS) ; sentiment d impuissance face aux diverses crises favorisant la radicalisation des positions politiques",
+          "theme": "politique"
+        },
+        {
+          "texte": "Les gens s’enferment dans leur propre avis avec les réseaux sociaux (implique qu’ils pensent que la majorité pense comme eux)",
+          "theme": "algorithmes_reseaux"
+        },
+        {
+          "texte": "À la banalisation de la haine et des campagnes de \"pollution\" politique partout, qui engendre des réactions de tous les côtés",
+          "theme": "politique"
+        },
+        {
+          "texte": "Au manque de dialogue et à un manque d’ouverture d’esprit des politiques. À un manque d’honnêteté intellectuelle.",
+          "theme": "politique"
+        },
+        {
+          "texte": "Disparition des débats contradictoires. L'accent porté sur la forme des interventions et de moins en moins sur le fond, les projets.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Augmentation de la liberté de paroles et des outils d’expression. Les minorités peuvent enfin commencer à s’exprimer.",
+          "theme": "autre"
+        },
+        {
+          "texte": "On ne sait plus penser, simplification des thèmes : il y a les gentils et les méchants",
+          "theme": "autre"
+        },
+        {
+          "texte": "Les personnalités politiques, les médias (principalement traditionnels ou mainstream)",
+          "theme": "medias"
+        },
+        {
+          "texte": "L'acquisitiion de la majorité des médias par peu de personnes très politisées et influentes",
+          "theme": "medias"
+        },
+        {
+          "texte": "Le manque de sociabilisation, de curiosité et de connaissance.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Les gens ne prennent plus le temps de s'écouter et de respecter les opinions des uns et des autres. Chaque personne peut avoir un vécu différent et un avis différent",
+          "theme": "autre"
+        },
+        {
+          "texte": "Au réseaux sociaux et à ce que les plateformes mettent en avant",
+          "theme": "algorithmes_reseaux"
+        },
+        {
+          "texte": "La peur de manquer des ressources et la méconnaissance des cultures différentes.",
+          "theme": "autre"
+        },
+        {
+          "texte": "L'intolérance et l'ingérence étrangère et l'action déloyale de millionnaires réactionnaires",
+          "theme": "individus"
+        },
+        {
+          "texte": "Au fait que les gens sont moins bien éduqués , qu' ils ont moins de morale qu' avant, qu' ils sont plus attachés à l'argent qu' à la morale.Aussi dû à des valeurs chrétiennes en baisse en général qu ' avant.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Opposition des extrêmes, melanchonisation de la France et dangerosité des LFIstes, opinions politiques crées par groupe (ethnique, religieux, sociale…) et non de vraies valeurs.",
+          "theme": "politique"
+        },
+        {
+          "texte": "Pas de propositions concrètes venant des partis dit « centristes » ou anciennement de « gouvernements » type PS ou LR. Donc on se tourne vers ceux qui ont un projet de société peu importe le bord politique.",
+          "theme": "politique"
+        },
+        {
+          "texte": "Contrôle des médias par bolloré ou autres extrémistes.",
+          "theme": "medias"
+        },
+        {
+          "texte": "Les ultrariches qui détourne l'attention avec des broutilles en dictant des règles de conduite aux médias qu'ils subventionnent afin de poursuivre leurs magouilles tranquillement.",
+          "theme": "medias"
+        },
+        {
+          "texte": "À cause du fait que les médias aient à produire du chiffre et donc du sensationalisme",
+          "theme": "medias"
+        },
+        {
+          "texte": "La désinformation et le relai de fake news qui servent à alimenter des idéologies extrémistes",
+          "theme": "autre"
+        },
+        {
+          "texte": "On ne sait plus s écouter, on se \"tolère\", mais la tolérance c'est juste accepter que l autre vive a côté de soi tant qu'il ne fait rien/dit rien de contraire à ce que je pense finalement...",
+          "theme": "autre"
+        },
+        {
+          "texte": "L appartenance de medias d info à des groupes parfois très orientés à l extrême droite comme bollore est un danger pour la liberté de la presse et de la diversité d opinion.",
+          "theme": "medias"
+        },
+        {
+          "texte": "À un refus de dialogue venant des extrêmes",
+          "theme": "autre"
+        },
+        {
+          "texte": "Extrême gauche populiste et carriériste, stigmatisant par la violence verbale et physique l’opposition : « Si tu n’est pas avec moi, tu es contre moi »",
+          "theme": "autre"
+        },
+        {
+          "texte": "En grande partie à cause des inégalités sociales",
+          "theme": "politique"
+        },
+        {
+          "texte": "Manque de respect et manque de bienveillance",
+          "theme": "individus"
+        },
+        {
+          "texte": "Contenu hors du contexte, contenu de mauvaise foi largement relayé, contenu faux, distance physique car chacun derrière l'écran",
+          "theme": "autre"
+        },
+        {
+          "texte": "Le besoin d’audience dans médias traditionnels, plus l’information est choquante plus l’audience augmente. C’est un cercle vicieux que les chaînes de télévision sont rentrés.",
+          "theme": "medias"
+        },
+        {
+          "texte": "Au manque de dialogue et d'écoute, au manque d'éducation et de respect de l'autre. On est de suite taxé d'extrémistes quand on pense différemment.",
+          "theme": "individus"
+        },
+        {
+          "texte": "Je dirais à la \"pollution\" et la récupération politique à tout ce qui touche, de près ou de loin, aux contenus sur les réseaux sociaux et tout ce qui en découle (commentaires principalement)",
+          "theme": "algorithmes_reseaux"
+        },
+        {
+          "texte": "La déception des politiques durant les 40 dernières années",
+          "theme": "politique"
+        },
+        {
+          "texte": "La crise politique actuelle qui est réelle, pas forcément les réseau",
+          "theme": "politique"
+        },
+        {
+          "texte": "La désinformation des réseaux sociaux et des médias, les facknews",
+          "theme": "algorithmes_reseaux"
+        },
+        {
+          "texte": "A la montée des extremes qui encouragent la désinformation pour faire grandir le populisme.",
+          "theme": "autre"
+        },
+        {
+          "texte": "La recherche du pouvoir qui mène à la diffusion de propagandes sans réelle information contradictoire",
+          "theme": "autre"
+        },
+        {
+          "texte": "Repli sur soi car beaucoup de peur et d'incertitude sur l'avenir",
+          "theme": "autre"
+        },
+        {
+          "texte": "Je ne pense pas qu'il y ait une polarisation si importante du débat lorsqu'on compare à d'autres périodes historiques en France. S'il y a, alors rôle des médias.",
+          "theme": "medias"
+        },
+        {
+          "texte": "Les personnes ne lisent rien de plus de trois lignes. Une idée, une opinion, une argumentation c’est plusieurs pages, des articles d’analyse, des livres.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Les difficultés économiques du pays La mise en avant des nouvelles négatives La non-action des parties en place qui implique la montée des extrêmes",
+          "theme": "politique"
+        },
+        {
+          "texte": "Context géopolitique tendue, les média sensationaliste, les bulle idéologique du au algorithme des réseaux sociaux",
+          "theme": "algorithmes_reseaux"
+        },
+        {
+          "texte": "Le débat est souvent la réaction à l’émotion du moment et non à une réflexion de fond. On veut avoir raison au lieu d’essayer de comprendre les arguments des autres",
+          "theme": "autre"
+        },
+        {
+          "texte": "Perte d’espoir envers la politique stagnante du pays, diminution du pouvoir d’achat, et envie que les choses changent enfin.",
+          "theme": "politique"
+        },
+        {
+          "texte": "Difficulté d'atteindre une objectivité d'idée. Certaines populations ne sont pas visibles.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Changement durable en cours des modèles et des fonctionnements sociaux",
+          "theme": "autre"
+        },
+        {
+          "texte": "A la situation géo-politique et économique",
+          "theme": "politique"
+        },
+        {
+          "texte": "Je pense qu'aujourd'hui, dans la vrai vie, les gens ne savent plus communiquer. Beaucoup de mes voisins ne vivent d'ailleurs plus la vraie vie et ne crois que ce qu'ils voient dans leur tv.",
+          "theme": "autre"
+        },
+        {
+          "texte": "L'absence de volonté à comprendre des opinions contraires aux nôtres",
+          "theme": "autre"
+        },
+        {
+          "texte": "La montée et l’écart entre les extrêmes, l’anonymat sur les réseaux sociaux",
+          "theme": "algorithmes_reseaux"
+        },
+        {
+          "texte": "Les vidéos détournées pour montrer uniquement ce que les médias veulent montrer, ce qui augmente la division au sein de la population et divise l’union",
+          "theme": "medias"
+        },
+        {
+          "texte": "Degradation des conditions de vie, de travail etc.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Au fonctionnement des réseaux sociaux qui polarisent le débat public et facilitent la diffusion d’informations suscitant des émotions violentes et des fake news.",
+          "theme": "algorithmes_reseaux"
+        }
+      ]
+    },
+    "q20": {
+      "question": "Mesure concrète proposée pour améliorer le débat public en ligne",
+      "themes": [
+        {
+          "cle": "regulation",
+          "label": "Régulation, contrôle ou sanctions",
+          "pct": 33
+        },
+        {
+          "cle": "transparence_sources",
+          "label": "Transparence et fiabilité des sources",
+          "pct": 14
+        },
+        {
+          "cle": "education",
+          "label": "Éducation et esprit critique",
+          "pct": 9
+        },
+        {
+          "cle": "autre",
+          "label": "Autres mesures proposées",
+          "pct": 45
+        }
+      ],
+      "citations": [
+        {
+          "texte": "Transparence sur le fonctionnement, éducation dès le plus jeune âge aux risques et aux fonctionnements des réseaux sociaux, censure des publications et commentaires insultants / violents",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Chaque media devrait sourcer ses infos précisément. Un encadrement des medias est egalement necessaire (trop de médias « indépendants »)",
+          "theme": "regulation"
+        },
+        {
+          "texte": "principalement plus d'encadrement, moins d'anonymisation notamment pour des cas de cyber harcèlement",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Contrôle des sources afin d'éviter les Fake news, cela va déjà participer grandement a l'amélioration des débats",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Aller contre la privatisation excessive des médias (Coucou Jean Charles Alloncle). Limiter la possession de plusieurs médias à un seul groupe financier / une personne",
+          "theme": "autre"
+        },
+        {
+          "texte": "Sanctions contre les fausses informations, désactivation des comptes produisant des commentaires haineux, lutte contre les trolls",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Meilleur encadrement des algorithmes des plateformes",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Obligation de se déclarer sous son vrai nom",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Laisser les gens dire ce qu'ils veulent. Ré-apprendre le second degré et la satire.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Ne pas faire des réseaux sociaux un endroit pour le débat public …",
+          "theme": "autre"
+        },
+        {
+          "texte": "Il faudrait une instance publique pour garantir le pluralisme et l indépendance de l information",
+          "theme": "education"
+        },
+        {
+          "texte": "Le débat en ligne ne sert à rien car souvent mené par des ignares en mal de notoriété!",
+          "theme": "autre"
+        },
+        {
+          "texte": "Organiser des débats mieux cadrés pour être apaisé et rester dans le domaine des idées et des faits et pas avec jugement sur les personnes",
+          "theme": "autre"
+        },
+        {
+          "texte": "Un fact checking des informations postées par les médias non orienté par l'état et basé sur des constats et des statistiques toujours mises en contexte.",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Arrêter de stigmatiser à outrance. Réintroduire la nuance et la possibilité du désaccord.",
+          "theme": "autre"
+        },
+        {
+          "texte": "aucune idée mais c'est une très bonne question.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Vérifier les comptes des gens pour que tout ce qu'ils disent le soit en leur nom Mais je ne suis pas forcément sur que ce soit une bonne mesure",
+          "theme": "transparence_sources"
+        },
+        {
+          "texte": "L’algorithme des réseaux sociaux fait que le contenu qu’on voit est seulement celui qui affirme nos idées et nos valeurs et dénigre l’avis opposé, donc faire en sorte d’avoir plus d’équilibre dans le contenu.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Régulation SÉRIEUSE ET MÉTICULEUSE du discours haineux et des menaces en ligne",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Contrôler la haine discrimination racisme propagande etc. Arrêter de conforter d’un côté ou de l’autre",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Les lois pour lutter contre ces dérives existent mais ne sont (à mon avis) pas assez appliquée (cas arcom vs cnews par ex)",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Créer un système pour supprimer et bannir immédiatement les utilisateurs qui partagent du contenu haineux à partir de certains mots bannis plutôt que de devoir signaler ce qui est souvent inefficace",
+          "theme": "autre"
+        },
+        {
+          "texte": "Pas de solution miracle, les gens croient ce quils veulent croire et ce qui colle a leur vision (totalement construite) du monde, et ce peu importe le parti",
+          "theme": "autre"
+        },
+        {
+          "texte": "Réapprendre au gens à s’écouter, à échanger et à se respecter.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Des droits de réponse obligatoires et systématiques",
+          "theme": "autre"
+        },
+        {
+          "texte": "Surtout pas d'intervention de l'état, c'est contre productif, on peut croire qu'ils veulent contrôler ce qu'on pense.",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Suppression des contenus extrémistes et discriminatoires, modification des algorithmes",
+          "theme": "autre"
+        },
+        {
+          "texte": "Une pluralité d'informations dans l'algorithme et de sources obligatoires",
+          "theme": "transparence_sources"
+        },
+        {
+          "texte": "L’apprentissage de l’art du débat (debating society). L’affichage d’un coefficient de négativité sur les posts, et un coefficient d’entre soit (x% des mes contacts ont vu ce post)",
+          "theme": "autre"
+        },
+        {
+          "texte": "Limiter la puissance des algorithmes qui propose uniquement des contenus qui pourrait nous correspondre",
+          "theme": "autre"
+        },
+        {
+          "texte": "Je n'ai pas de solution malheureusement !",
+          "theme": "autre"
+        },
+        {
+          "texte": "Réfléchir avant de parler. Travailler sur l'écoute, la politesse, un temps de parole identique pour chacun. et qu' il y ait une charte de bonne conduite obligatoire. bienveillance, pas d' emportement toléré.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Interdire les réseaux sociaux aux moins de 15 ans, sensibiliser sur les fakes news",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Fin de l’anonymat. Quand les gens doivent s’exposer, ils doivent prendre un risque…et comme beaucoup de bonimenteurs, le courage n’est pas une de leur qualité première.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Supprimer les contenus qui prônent le racisme, la xénophobie.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Interdire ces contenus, sévir en supprimant les comptes et interdisant l'accès aux plates-formes, associer cela à un jugement pénal avec amende.",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Des règles de communication bien définies pour laisser la place au débat sans qu’il y ait de perte de contrôle, et une régulation de la désinformation",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Suppression des réseaux pour les plus jeunes, por l apprentissage du débat en direct et dans le respect. Ça me semble impossible de réguler le débat public en ligne.",
+          "theme": "regulation"
+        },
+        {
+          "texte": "La contradiction et les débats apportent une ouverture d esprit et de la richesse a tout le monde.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Je ne sais pas, je n’y ai pas réfléchi. Mais indépendance des médias et interdiction de la possession d’un média par une personne ou un groupe d’actionnaires Régulation des réseaux sociaux sous un angle de santé publique",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Favoriser les média comme légende pour connaître la vie des français et le crayon pour les mettre en opposition de manière saine et constructive",
+          "theme": "autre"
+        },
+        {
+          "texte": "Un quota de mensonges (appuyé par du fact checking) pour tous les politiques. Trop de mensonges feraient perdre l’éligibilité. Vendre un monde qui n’existe pas a des électeurs crédules devrait être puni par la loi.",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Est-ce utopique, peut être, mais d’avoir une régulation du « temps de parole » des différents parties politiques, ce qui est « déjà » mis en place par l’Arcom pour les chaînes TV.",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Interdiction aux mineurs. Stop à l'anonymat dans les posts etc.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Le débat ne devrait pas avoir lieu en ligne à mon sens.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Créateur de contenu par de vrai journalistes s'adressant aux jeuenes",
+          "theme": "autre"
+        },
+        {
+          "texte": "Des outils d'information et de debunkage",
+          "theme": "education"
+        },
+        {
+          "texte": "Limitation de l'anonymat, lutte contre les bots/IA/faux comptes sur les réseaux/ éducation au traitement de l'information",
+          "theme": "education"
+        },
+        {
+          "texte": "C’est compliqué, je ne vois pas bien, quelque chose qui imposerait des vérifications avant toute publication, mais je ne sais même pas si c’est possible",
+          "theme": "transparence_sources"
+        },
+        {
+          "texte": "Sur les réseaux je ne sais pas mais pour la presse en ligne ce pourrait être de présenter les opinions différentes avec leurs avantages et leurs inconvénients et ensuite de proposer un débat",
+          "theme": "autre"
+        },
+        {
+          "texte": "Forcer les plateformes à respecter la loi. Imposer aux plateformes des contraintes légales concernant la modération (suppression des fausses informations et contenus haineux).",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Se retrouver dans un bar. Participer à la vie associative et quitter les écrans.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Regarder de près les algorithmes, et imposer une neutralité pour les sujets politiques. Interdire la possibilité de posséder plusieurs media/journaux (Bolloré, Arnault, Saadé etc.)",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Apprendre le débat dès l'enfance et encourager la liberté de pensée avec une formulation rationnelle et mesurée",
+          "theme": "autre"
+        },
+        {
+          "texte": "Aucune idée. Je pense qu’il faudrait que les réseaux sociaux aient moins de prévalence, parce qu’ils ne sont pas structurellement adaptés à débat public et politique nuancé.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Faire preuve de politesse en ne coupant pas la parole et en n’ avilissant pas l’autre. Bannir les insultes et les fakes News",
+          "theme": "autre"
+        },
+        {
+          "texte": "éducation, Modération, sanctions, réglementation et limitation",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Compliqué, personnellement je suis très choquée quand je vois des contenus d’extrême droite, donc difficile de parler de liberté d’expression…",
+          "theme": "autre"
+        },
+        {
+          "texte": "Ammrendre le monde numérique en tant que discipline des le cm1 jusqu’à la fin des études",
+          "theme": "autre"
+        },
+        {
+          "texte": "Proposer à tous différents points de vue : réduire les algorithmes.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Modification des modalités de présentation des contenus",
+          "theme": "autre"
+        },
+        {
+          "texte": "Aucune idée. Peut être une éducation générale de la population aux réseaux sociaux",
+          "theme": "education"
+        },
+        {
+          "texte": "Partager des informations sans forcer le trait politique de celle-ci serait déjà une belle avancée, notamment venant des médias traditionnels qui sont de plus en plus présents sur ces réseaux sociaux.",
+          "theme": "education"
+        },
+        {
+          "texte": "Bonne question, je ne saurais y répondre, la suppression de l’anonymat, les gens serait peut être moins extrême et violent dans leurs propos, mais ce n’est pas très réaliste.",
+          "theme": "autre"
+        },
+        {
+          "texte": "Plus de transparence, plus de régulation",
+          "theme": "regulation"
+        },
+        {
+          "texte": "Confirmer les identités des usagers, Limiter le temps d'usage. Arrêter de relayer des fakenews ou des messages agressifs, notamment dans les médias massifs (TV, journaux)",
+          "theme": "autre"
+        },
+        {
+          "texte": "Reconstituer des espaces de débats en dehors des réseaux sociaux",
+          "theme": "autre"
+        },
+        {
+          "texte": "permettre de limiter la bulle informationnelle avec des contenu de points de vue variés",
+          "theme": "education"
+        }
+      ]
+    }
   }
 }

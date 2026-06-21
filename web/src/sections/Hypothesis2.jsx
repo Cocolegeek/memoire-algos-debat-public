@@ -39,7 +39,7 @@ const INFO_CONTRASTES = {
 const INFO_NUAGE_2B = {
   titre: 'Le décalage et la demande de régulation',
   methodologie:
-    "Corrélation de Pearson entre le décalage de responsabilité individuelle moins structurelle (calculé par répondant, voir H2.a) et la demande de régulation (Q18). La droite corail résume la régression linéaire simple entre les deux variables. Un léger bruit aléatoire décolle les points superposés sans modifier le calcul.",
+    "Corrélation de Pearson entre le décalage de responsabilité individuelle moins structurelle (calculé par répondant, voir H2.a) et la demande de régulation (Q18). La droite orange résume la régression linéaire simple entre les deux variables. Un léger bruit aléatoire décolle les points superposés sans modifier le calcul.",
   donnees: 'Décalage dérivé de Q16a, Q16b, Q16c, Q16e ; demande = Q18 (1-5). n = 263.',
 }
 
@@ -67,7 +67,7 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
           <Card>
             <SectionTitle
               info={INFO_HIERARCHIE}
-              sub="Note moyenne de responsabilité (1 à 5). Individus en corail, structures (plateformes, État) en sarcelle, médias à part."
+              sub="Note moyenne de responsabilité (1 à 5). Individus en orange, structures (plateformes, État) en vert, médias à part."
             >
               Hiérarchie des responsables
             </SectionTitle>
@@ -84,9 +84,9 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
               ))}
             </div>
             <Caption>
-              Les utilisateurs qui produisent et partagent des contenus (corail) arrivent en tête,
-              devant les plateformes et l'État (sarcelle). Les médias traditionnels, qui ne relèvent
-              ni de la responsabilité individuelle ni de la responsabilité structurelle au sens de
+              Les utilisateurs qui produisent et partagent des contenus (en orange) arrivent en tête,
+              devant les plateformes et l'État (en vert). Les médias traditionnels, qui ne relèvent ni
+              de la responsabilité individuelle ni de la responsabilité structurelle au sens de
               l'hypothèse, sont indiqués à titre de comparaison.
             </Caption>
           </Card>
@@ -163,7 +163,7 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
       <section className="space-y-8 border-t border-line pt-10">
         <HypoHeader code={b.code} titre={b.titre} enonce={b.enonce} verdict={b.verdict} />
 
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="space-y-6">
           <Card>
             <SectionTitle
               info={INFO_NUAGE_2B}
@@ -179,12 +179,19 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
                 yLabel="Demande de régulation"
                 xDomain={[-4, 4]}
                 yDomain={[1, 5]}
+                xTicks={[-4, -2, 0, 2, 4]}
+                yTicks={[1, 2, 3, 4, 5]}
+                refX={0}
+                refXLabel="Égalité individus / structures"
+                height={300}
               />
             </div>
             <Caption>
               Une pente négative indiquerait que plus un répondant attribue une responsabilité
               individuelle (plutôt que structurelle), moins il demande de régulation systémique : c'est
-              ce que prédit l'hypothèse.
+              ce que prédit l'hypothèse. La ligne pointillée verticale marque le point d'équilibre où les
+              deux responsabilités sont jugées égales : à droite, l'individuelle domine ; à gauche, la
+              structurelle domine.
             </Caption>
           </Card>
 

@@ -5,6 +5,7 @@ import Hypothesis1 from './sections/Hypothesis1.jsx'
 import Hypothesis2 from './sections/Hypothesis2.jsx'
 import Hypothesis3 from './sections/Hypothesis3.jsx'
 import Datalake from './sections/Datalake.jsx'
+import Verbatims from './sections/Verbatims.jsx'
 
 const TABS = [
   { id: 'overview', label: 'Vue d’ensemble' },
@@ -83,26 +84,7 @@ export default function App() {
           )}
         </main>
 
-        {data?.verbatims && (
-          <footer className="mt-12 border-t border-line pt-8">
-            <Eyebrow>Ce qu'en disent les répondants</Eyebrow>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              {[...(data.verbatims.q19 ?? []), ...(data.verbatims.q20 ?? [])]
-                .slice(0, 4)
-                .map((v, i) => (
-                  <blockquote
-                    key={i}
-                    className="rounded-xl border border-line bg-panel p-4 font-body text-sm italic text-ink-soft"
-                  >
-                    « {v} »
-                  </blockquote>
-                ))}
-            </div>
-            <p className="mt-6 font-mono text-xs text-muted">
-              {data.meta.source}
-            </p>
-          </footer>
-        )}
+        {data && <Verbatims data={data} tab={active} />}
       </div>
     </div>
   )
