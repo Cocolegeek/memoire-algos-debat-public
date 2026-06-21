@@ -54,7 +54,7 @@ web/          app Vite/React
   public/results.json   (généré par analyse.py ; un provisoire est versionné)
   src/
     main.jsx, App.jsx, index.css, ui.jsx
-    sections/ Overview, Hypothesis1, Hypothesis2, Hypothesis3, HypoHeader, Datalake
+    sections/ Overview, Hypothesis1, Hypothesis2, Hypothesis3, HypoHeader, Verbatims
 .github/workflows/deploy.yml
 ```
 
@@ -64,7 +64,7 @@ web/          app Vite/React
 2. Poser le design system (tokens Tailwind + polices, section 7).
 3. Construire le dashboard à onglets : Vue d'ensemble + H1 + H2 + H3, piloté par un `results.json` provisoire d'abord (pour voir l'UI tourner).
 4. Écrire `analysis/analyse.py` (section 8), déposer le vrai CSV en `data/reponses.csv`, générer le vrai `results.json`.
-5. Ajouter le module Datalake (section 9).
+5. ~~Ajouter le module Datalake~~ : construit puis retiré, voir section 9.
 6. Ajouter la CI `deploy.yml` (section 10), passer le repo public, activer Pages.
 7. Pousser, vérifier le site en ligne.
 
@@ -136,19 +136,11 @@ Sortie : écrire `web/public/results.json` selon le schéma de la section 11. Me
 
 `requirements.txt` : `pandas>=2.0` et `numpy>=1.24`.
 
-## 9. Module Datalake (ajout demandé par Corentin)
+## 9. Module Datalake : construit puis retiré (décision de Corentin, 2026-06-21)
 
-But : un onglet « Données » où n'importe qui explore le CSV, fabrique ses propres visualisations et exporte ce qu'il veut. Contrainte forte : tout côté navigateur, zéro serveur, pour rester sur l'hébergement statique gratuit sans expiration.
+L'onglet « Données » (bac à sable d'exploration libre du CSV, PapaParse, choix de variables, export CSV/PNG) a été construit conformément à l'ancienne version de cette section, puis **retiré** : jugé sans intérêt par Corentin (« c'est nul »), cohérent avec le principe directeur de la section 13 (chaque écran doit éprouver une hypothèse, pas décorer). L'onglet et `web/src/sections/Datalake.jsx` ont été supprimés, ainsi que la dépendance `papaparse`.
 
-Fonctions minimales :
-
-- Charge le CSV anonymisé livré avec le site (`data/reponses.csv` copié dans `web/public/`), avec PapaParse.
-- L'utilisateur choisit une variable (n'importe quelle question) en X, une autre en Y ou un comptage, et un type de graphe (barres, points, histogramme).
-- Filtres par segment (âge, bord politique, etc.).
-- Exports : CSV filtré (téléchargement) et image du graphe (PNG).
-- Avertir que les données affichées sont anonymisées et publiques.
-
-Garder ce module simple et robuste. C'est un bac à sable, pas un outil de stats avancé. Le construire après que le dashboard et l'analyse marchent.
+À la place : une simple icône de téléchargement sur la page Vue d'ensemble, qui pointe directement vers `reponses.csv` (servi tel quel depuis `web/public/`, toujours synchronisé en CI). Quiconque veut explorer les données récupère le fichier brut et utilise son propre outil, pas de bac à sable maison à maintenir.
 
 ## 10. Déploiement (GitHub Pages)
 

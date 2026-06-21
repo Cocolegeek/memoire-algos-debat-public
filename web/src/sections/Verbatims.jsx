@@ -54,11 +54,13 @@ export default function Verbatims({ data, tab }) {
         <InfoButton {...INFO} />
       </div>
 
-      <div className="mt-4 space-y-2">
-        {bloc.themes.map((t) => (
-          <BarRow key={t.cle} label={t.label} valeur={t.pct} echelle={100} affiche={`${t.pct}%`} />
-        ))}
-      </div>
+      {tab !== 'overview' && (
+        <div className="mt-4 space-y-2">
+          {bloc.themes.map((t) => (
+            <BarRow key={t.cle} label={t.label} valeur={t.pct} echelle={100} affiche={`${t.pct}%`} />
+          ))}
+        </div>
+      )}
 
       <div className="mt-6 space-y-5">
         {groupes.map((g, i) => (
