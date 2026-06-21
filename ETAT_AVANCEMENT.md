@@ -4,6 +4,9 @@ Journal de session. Mis à jour à la fin de chaque session de travail. Sert de 
 
 ## Dernière session : 2026-06-20
 
+> **Clôture de session.** Étapes 1 à 4 faites et en ligne. Tout est commité et poussé sur `main` (rien en attente, sauf `.claude/settings.local.json` volontairement non versionné). Dépôt nettoyé (scaffold Vite retiré, favicon du projet, dossier assets vide supprimé). Tous les `.md` à jour.
+> **À la reprise, quand Corentin dira « on continue » :** attaquer le **nuage 3D** (react-three-fiber, voir « Prochaine étape exacte » plus bas et CLAUDE.md §13). Trois points restent côté Corentin : aligner le n du mémoire (258 -> 263), figer les verdicts, interpréter le contraste politique de H2.
+
 ### Fait
 
 - Repo créé et initialisé, identité git réglée (Cocolegeek / corentin.nicolas03@gmail.com).

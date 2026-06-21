@@ -21,14 +21,15 @@ Angle : un écart entre ce que la recherche établit sur les algorithmes et ce q
   - `CLAUDE.md` (ce fichier).
   - `data/reponses.csv` : CSV brut de l'enquête déposé, **265 réponses confirmées** (parsing CSV propre, pas `wc -l` à cause des champs multilignes), 31 colonnes — cohérent avec la section 8.
   - Scaffold `web/` (étape 1 de la section 6) : Vite + React, **Tailwind v3.4.19** (volontairement pas v4, pour garder le format `tailwind.config.js` classique attendu en section 7), Recharts, Framer Motion. Tokens de couleur et les 3 polices posés dans `tailwind.config.js` / `src/index.css`. `vite.config.js` : `base: "/memoire-algos-debat-public/"`. `npm run dev` vérifié (page servie avec le bon préfixe d'URL).
-- **Étape 1 terminée, en attente de validation de Corentin avant d'enchaîner sur l'étape 2** (design system appliqué dans l'UI, pas seulement la config) puis l'étape 3 (dashboard à onglets).
-- Détail complet, décisions en attente et point de reprise exact : voir `ETAT_AVANCEMENT.md`.
+- **Étapes 1 à 4 faites et déployées (au 2026-06-20).** Design system dans l'UI (étape 2), dashboard à onglets piloté par `results.json` (étape 3), `analysis/analyse.py` qui génère les vrais chiffres + `respondents.json` (étape 4). Repo public, CI GitHub Pages active, **site en ligne** : https://cocolegeek.github.io/memoire-algos-debat-public/
+- Direction en cours : visualisations multivariées riches (voir section 13). Prochaine action concrète à la reprise : le **nuage 3D** (three.js) coloré par bord politique.
+- Détail complet, vrais chiffres, décisions et point de reprise exact : voir `ETAT_AVANCEMENT.md` (journal daté, source de reprise).
 
 ## 3. Décisions verrouillées
 
 - Nom du dépôt : `memoire-algos-debat-public` (minuscules). Le `base` Vite doit valoir exactement `"/memoire-algos-debat-public/"`.
-- Stack front : Vite + React + Tailwind CSS + Recharts + Framer Motion. 100 % statique.
-- Stats : script Python `analysis/analyse.py` (pandas). Source de vérité unique des chiffres. Aucun chiffre saisi à la main dans le front.
+- Stack front : Vite + React + Tailwind CSS + Recharts + Framer Motion, plus **three.js / react-three-fiber** pour les visualisations 3D (décision du 2026-06-20). 100 % statique.
+- Stats : script Python `analysis/analyse.py`. Source de vérité unique des chiffres. Aucun chiffre saisi à la main dans le front. **Écrit en bibliothèque standard pure (pas pandas)** : déviation assumée au §8, plus robuste et instantané en CI. Génère `results.json` (agrégats) et `respondents.json` (jeu anonymisé par répondant pour les viz).
 - Hébergement : GitHub Pages, déploiement par GitHub Actions à chaque push.
 - Repo doit passer public avant déploiement Pages (cohérent avec l'open source).
 
@@ -36,8 +37,8 @@ Angle : un écart entre ce que la recherche établit sur les algorithmes et ce q
 
 Ne pas trancher seul. Si Corentin n'a pas répondu, applique le défaut indiqué et signale-le clairement dans la sortie.
 
-1. **n canonique.** CSV brut = 265 réponses. Le mémoire rédigé dit 258, l'état d'avancement disait 253. Il faut un seul n, cohérent entre le texte du mémoire et l'app. Défaut proposé : recalculer le vrai n après nettoyage (voir point 2) et mettre à jour le texte du mémoire en conséquence.
-2. **Mineurs.** 2 répondants ont 13-17 ans. Défaut proposé : les exclure (cohérent avec le consentement et la cible adulte), donc n = 263, puis réconcilier avec le 258 du mémoire. Variable `EXCLURE_MINEURS` dans analyse.py.
+1. **n canonique.** ✅ TRANCHÉ (2026-06-20) : **n = 263** (CSV brut 265 moins 2 mineurs). Reste à faire **par Corentin** : aligner le texte du mémoire rédigé (qui dit 258) sur 263.
+2. **Mineurs.** ✅ TRANCHÉ (2026-06-20) : **exclus** (`EXCLURE_MINEURS = True` dans analyse.py), donc n = 263.
 3. **Formulation des hypothèses.** Le mémoire rédigé (PDF) fait foi sur les énoncés. Reporter exactement :
    - H1 : « L'intensité d'usage (temps passé, exposition aux contenus polémiques) prédit mieux l'hostilité que la perception de se savoir enfermé dans une bulle. »
    - H2.a : le public attribue davantage une responsabilité individuelle (producteurs, partageurs) que structurelle (plateformes, État).
@@ -255,3 +256,21 @@ Le front utilise `ecart.echelle` comme maximum de l'écart-mètre (0,3 pour H1, 
 - Pas d'anglicismes inutiles, français soutenu mais naturel.
 - Dire « algorithmes », « systèmes de recommandation », « systèmes automatisés », pas de sémantique « IA » abusive.
 - Démarche open source assumée (licence MIT, données et code reproductibles).
+
+## 13. Direction dataviz avancée (décidée par Corentin le 2026-06-20)
+
+Le projet monte d'un cran : au-delà du dashboard, des visualisations plus riches et plus visuelles, fondées sur le jeu par répondant (`web/public/respondents.json`, généré par analyse.py).
+
+Décisions verrouillées :
+- Bibliothèque : **three.js / react-three-fiber** (rendu 3D sur-mesure), pas Plotly.
+- Couleurs par bord politique (convention française) : très à gauche = rouge vif, gauche = rouge, centre = blanc, droite = bleu, très à droite = bleu vif, ne se positionne pas = gris.
+
+À construire (ordre indicatif, valider à chaque palier) :
+1. **Nuage 3D** coloré par bord politique : un point par répondant, axes parmi hostilité, exposition, temps, perception de bulle (indices continus depuis `respondents.json`). Jitter sur les axes discrets. Rotation, légende, survol. Charger three.js à la demande (lazy) pour ne pas alourdir le chargement initial. **C'est la première viz à faire.**
+2. Croisements multivariés 2D (âge × variables, politique × blâme, urbain↔rural × demande de régulation), indicateurs concaténés.
+3. Analyse de mots-clés des verbatims Q19 (causes perçues) et Q20 (solutions), filtrable par bord politique. Générer les fréquences dans analyse.py (aucun chiffre à la main).
+4. Gradient géographique : la seule géo disponible est le **type de territoire** (Q4 : Paris/IDF, métropole, ville moyenne, petite ville, rural), PAS la région. Donc pas de carte choroplèthe régionale possible, mais un axe urbain↔rural.
+
+Onglet **Mémoire** (demandé) : intégrer le mémoire en HTML façon page wiki (table des matières latérale, images), à partir du PDF, **quand Corentin l'aura terminé**. Préparer la coquille le moment venu, le contenu viendra de lui.
+
+Points en attente côté Corentin (issus des vrais chiffres du 2026-06-20) : aligner le n du mémoire (258 -> 263) ; figer les verdicts H1/H2/H3 (affichés « à valider ») ; interpréter le contraste politique de H2 (la gauche blâme davantage médias et État).
