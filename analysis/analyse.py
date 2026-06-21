@@ -501,6 +501,15 @@ def bloc_h2b(reps):
         lecture += "Le sens va dans celui de l'hypothèse, mais l'effet n'atteint pas le seuil de significativité : prudence."
     else:
         lecture += "Le lien attendu (négatif) n'apparaît pas dans ces données : l'hypothèse n'est pas soutenue."
+    # Contrôle de robustesse : le lien tient-il aussi à l'intérieur de chaque
+    # camp politique, et pas seulement parce que bord politique, décalage et
+    # demande varient ensemble (même logique que la robustesse de H1).
+    correlation_par_bord = []
+    for cle, label in (("gauche", "Bord gauche"), ("droite", "Bord droite")):
+        sous = [r for r in reps if bord(r["politique"]) == cle]
+        rb, pb, nb = pearson([r["decalage"] for r in sous], [r["q18"] for r in sous])
+        correlation_par_bord.append({"cle": cle, "label": label, "r": r2v(rb), "p": pb, "n": nb})
+
     return {
         "code": "H2.b",
         "titre": "Le décalage affaiblit-il la légitimité de la régulation ?",
@@ -510,6 +519,7 @@ def bloc_h2b(reps):
         ),
         "verdict": verdict,
         "correlation": {"r": r2v(r), "p": p, "n": n, "pente": r2v(pente, 3), "ordonnee": r2v(ordonnee, 3), "xmin": xmin, "xmax": xmax},
+        "correlation_par_bord": correlation_par_bord,
         "mesure": "Légitimité perçue de la régulation systémique, approchée par la demande de transparence imposée à l'État (Q18).",
         "lecture": lecture,
     }
