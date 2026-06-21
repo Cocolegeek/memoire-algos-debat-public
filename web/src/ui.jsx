@@ -363,6 +363,49 @@ function TooltipNuage({ active, payload, xLabel, yLabel }) {
   )
 }
 
+// Table de robustesse : une corrélation par ligne (prédicteur), recalculée
+// dans chaque sous-groupe (colonne). predicteurs: [{label, valeurs: {cle: {r,p,n}}}]
+export function TableRobustesse({ groupes, predicteurs }) {
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full border-collapse font-mono text-xs">
+        <thead>
+          <tr>
+            <th className="border-b border-line py-2 pr-3 text-left font-medium text-muted">Prédicteur</th>
+            {groupes.map((g) => (
+              <th key={g.cle} className="border-b border-line px-2 py-2 text-right font-medium text-muted">
+                {g.label}
+                <div className="font-normal">n = {g.n}</div>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {predicteurs.map((p) => (
+            <tr key={p.cle}>
+              <td className="border-b border-line py-2 pr-3 text-left font-body text-ink-soft">{p.label}</td>
+              {groupes.map((g) => {
+                const v = p.valeurs[g.cle]
+                const ok = v.p != null && v.p < 0.05
+                return (
+                  <td
+                    key={g.cle}
+                    className={`border-b border-line px-2 py-2 text-right ${ok ? 'text-reel' : 'text-muted'}`}
+                  >
+                    {String(v.r).replace('.', ',')}
+                    {ok && <span aria-hidden="true">*</span>}
+                  </td>
+                )
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p className="mt-2 font-mono text-[11px] text-muted">* p &lt; 0,05</p>
+    </div>
+  )
+}
+
 // Nuage de points 2D avec droite de régression. points: [{x, y}].
 export function Nuage({ points, xLabel, yLabel, xDomain = [1, 5], yDomain = [1, 5], droite }) {
   const seg =
