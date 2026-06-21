@@ -2,11 +2,13 @@
 
 Journal de session. Mis à jour à la fin de chaque session de travail. Sert de point de reprise : lis ce fichier avant de demander « où on en est ».
 
-## Dernière session : 2026-06-21 (retrait du module Datalake)
+## Dernière session : 2026-06-21 (retrait du module Datalake + phrase de présentation)
 
 > **Clôture de session.** Corentin a jugé le module Datalake livré dans la session précédente sans intérêt (« c'est nul »). Retrait complet : onglet « Données » supprimé de `App.jsx`, `web/src/sections/Datalake.jsx` supprimé, dépendance `papaparse` désinstallée. À la place : une simple icône de téléchargement sur la page Vue d'ensemble (`Overview.jsx`), qui pointe directement vers `reponses.csv` (toujours servi depuis `web/public/`, toujours synchronisé en CI). `CLAUDE.md` §9 et l'arborescence cible (§5) mis à jour pour documenter ce retrait, sur le même principe que le nuage 3D retiré en juin.
 > **Deuxième correction demandée dans la même session** : le bloc de citations « Ce qu'en disent les répondants » sur la page Vue d'ensemble affichait aussi un mini graphique en barres des thèmes détectés (répartition des causes citées). Corentin a jugé ce graphique sans lien avec la page (pas d'hypothèse précise associée sur l'onglet Vue d'ensemble). Retiré uniquement pour cet onglet dans `Verbatims.jsx` (`tab !== 'overview'` autour du bloc de barres) : les citations textuelles restent, le graphique de répartition reste affiché sur H1/H2/H3 où il est rattaché à une hypothèse précise via le texte de lecture.
+> **Troisième ajout** : courte phrase de présentation ajoutée dans l'en-tête (`App.jsx`, sous le titre), pour planter la démarche en une phrase simple, sans jargon : l'écart entre ce que la recherche établit sur les algorithmes et ce que le public en perçoit, attribue et attend. Visible sur tous les onglets puisque l'en-tête est commun.
 > **Vérifications faites** : `npm run build` sans erreur, `npm run lint` toujours à 2 erreurs préexistantes (`ui.jsx`, hors périmètre), `reponses.csv` confirmé présent dans `dist/` pour que le lien de téléchargement fonctionne une fois déployé.
+> **PR #16 et #17 fusionnées dans `main`.**
 > **À la reprise** : plus aucune tâche concrète identifiée dans CLAUDE.md. Seul point bloquant restant : l'onglet Mémoire, qui attend le contenu converti du PDF de Corentin.
 
 ## Session précédente : 2026-06-21 (module Datalake, §9, construit puis retiré)
