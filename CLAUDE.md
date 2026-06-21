@@ -257,20 +257,24 @@ Le front utilise `ecart.echelle` comme maximum de l'écart-mètre (0,3 pour H1, 
 - Dire « algorithmes », « systèmes de recommandation », « systèmes automatisés », pas de sémantique « IA » abusive.
 - Démarche open source assumée (licence MIT, données et code reproductibles).
 
-## 13. Direction dataviz avancée (décidée par Corentin le 2026-06-20)
+## 13. Cap : tout au service des hypothèses (recadré par Corentin le 2026-06-21)
 
-Le projet monte d'un cran : au-delà du dashboard, des visualisations plus riches et plus visuelles, fondées sur le jeu par répondant (`web/public/respondents.json`, généré par analyse.py).
+Principe directeur : chaque écran doit éprouver une hypothèse, clairement et de façon académique. Les visualisations « jolies mais sans hypothèse » sont écartées. Le **nuage 3D a été construit puis retiré** pour cette raison (three.js désinstallé).
 
-Décisions verrouillées :
-- Bibliothèque : **three.js / react-three-fiber** (rendu 3D sur-mesure), pas Plotly.
-- Couleurs par bord politique (convention française) : très à gauche = rouge vif, gauche = rouge, centre = blanc, droite = bleu, très à droite = bleu vif, ne se positionne pas = gris.
+Énoncés exacts (mot pour mot, font foi) :
+- **H1** : « L'intensité d'usage, mesurée par le temps passé et l'exposition aux contenus polémiques, prédit mieux l'hostilité que la perception de se savoir enfermé dans une bulle. »
+- **H2.a** : « Face à la polarisation en ligne, le public attribue davantage une responsabilité individuelle (aux individus qui produisent et partagent les contenus), plutôt qu'une responsabilité structurelle (aux plateformes et à l'État). »
+- **H2.b** : « Le décalage entre la responsabilité individuelle et la responsabilité structurelle diminue la légitimité perçue de toute régulation systémique. »
+- **H3** : « La demande de régulation des algorithmes est massive et largement consensuelle, mais déconnectée de la connaissance des dispositifs existants. Une meilleure connaissance du DSA réduit la volonté de régulation. »
 
-À construire (ordre indicatif, valider à chaque palier) :
-1. **Nuage 3D** coloré par bord politique : un point par répondant, axes parmi hostilité, exposition, temps, perception de bulle (indices continus depuis `respondents.json`). Jitter sur les axes discrets. Rotation, légende, survol. Charger three.js à la demande (lazy) pour ne pas alourdir le chargement initial. **C'est la première viz à faire.**
-2. Croisements multivariés 2D (âge × variables, politique × blâme, urbain↔rural × demande de régulation), indicateurs concaténés.
-3. Analyse de mots-clés des verbatims Q19 (causes perçues) et Q20 (solutions), filtrable par bord politique. Générer les fréquences dans analyse.py (aucun chiffre à la main).
-4. Gradient géographique : la seule géo disponible est le **type de territoire** (Q4 : Paris/IDF, métropole, ville moyenne, petite ville, rural), PAS la région. Donc pas de carte choroplèthe régionale possible, mais un axe urbain↔rural.
+Décisions verrouillées (2026-06-21) :
+- Structurel (H2.a) = plateformes + État seulement (PAS les médias).
+- H2.b : « légitimité de la régulation systémique » mesurée par la demande de transparence imposée par l'État (Q18).
+- Appareil statistique **visible** dans l'app : régression, corrélations, p-values, n. Couleurs par bord politique : rouge à gauche, bleu à droite, blanc centre, gris « ne se positionne pas ».
+- Dataviz : **Recharts** (2D), pas de 3D.
 
-Onglet **Mémoire** (demandé) : intégrer le mémoire en HTML façon page wiki (table des matières latérale, images), à partir du PDF, **quand Corentin l'aura terminé**. Préparer la coquille le moment venu, le contenu viendra de lui.
+État : H1, H2.a, H2.b, H3 refondus et déployés avec leurs tests (voir ETAT_AVANCEMENT.md pour les chiffres). Résultats : H1, H2.a, H2.b confirmées ; H3 partiellement (la 2e partie « connaissance → demande » n'est pas significative, p=0,50).
 
-Points en attente côté Corentin (issus des vrais chiffres du 2026-06-20) : aligner le n du mémoire (258 -> 263) ; figer les verdicts H1/H2/H3 (affichés « à valider ») ; interpréter le contraste politique de H2 (la gauche blâme davantage médias et État).
+Pistes restantes (au service des hypothèses, à valider) : mots-clés des verbatims Q19/Q20 ; lecture urbain↔rural (Q4 = type de territoire, pas la région, donc pas de carte régionale). Onglet **Mémoire** (HTML façon wiki depuis le PDF) : coquille à préparer quand Corentin aura terminé son texte.
+
+Points en attente côté Corentin : aligner le n du mémoire (258 → 263) ; figer les verdicts ; interpréter les contrastes politiques de H2.a.

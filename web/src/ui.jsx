@@ -1,5 +1,16 @@
 import { useId } from 'react'
 import { motion } from 'framer-motion'
+import {
+  CartesianGrid,
+  Label,
+  ReferenceLine,
+  ResponsiveContainer,
+  Scatter,
+  ScatterChart,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts'
 
 const POLE = {
   percu: { fill: 'bg-percu', track: 'bg-percu-soft', text: 'text-percu' },
@@ -240,4 +251,60 @@ export function SegmentToggle({ options, value, onChange, label }) {
 
 export function VerdictBadge({ children }) {
   return <Badge tone="succes">Verdict provisoire : {children}</Badge>
+}
+
+export function fmtP(p) {
+  if (p == null) return 'p = n/d'
+  if (p < 0.001) return 'p < 0,001'
+  return 'p = ' + p.toFixed(3).replace('.', ',')
+}
+
+export function Signif({ p }) {
+  const ok = p != null && p < 0.05
+  return (
+    <span className={`font-mono text-xs ${ok ? 'text-reel' : 'text-muted'}`}>
+      {fmtP(p)} · {ok ? 'significatif' : 'non significatif'}
+    </span>
+  )
+}
+
+function TooltipNuage({ active, payload, xLabel, yLabel }) {
+  if (!active || !payload?.length) return null
+  const d = payload[0].payload
+  return (
+    <div className="rounded-lg border border-line bg-panel px-2 py-1 font-mono text-xs text-ink-soft shadow">
+      {xLabel} : {d.x} · {yLabel} : {d.y}
+    </div>
+  )
+}
+
+// Nuage de points 2D avec droite de régression. points: [{x, y}].
+export function Nuage({ points, xLabel, yLabel, xDomain = [1, 5], yDomain = [1, 5], droite }) {
+  const seg =
+    droite &&
+    [
+      { x: droite.xmin, y: droite.pente * droite.xmin + droite.ordonnee },
+      { x: droite.xmax, y: droite.pente * droite.xmax + droite.ordonnee },
+    ]
+  return (
+    <ResponsiveContainer width="100%" height={230}>
+      <ScatterChart margin={{ top: 8, right: 12, bottom: 26, left: 0 }}>
+        <CartesianGrid stroke="#D9DBE3" strokeDasharray="3 3" />
+        <XAxis
+          type="number"
+          dataKey="x"
+          domain={xDomain}
+          tick={{ fontSize: 11 }}
+          stroke="#6B6F80"
+          allowDecimals={false}
+        >
+          <Label value={xLabel} position="insideBottom" offset={-14} style={{ fontSize: 11, fill: '#6B6F80' }} />
+        </XAxis>
+        <YAxis type="number" dataKey="y" domain={yDomain} tick={{ fontSize: 11 }} stroke="#6B6F80" width={32} />
+        <Tooltip content={<TooltipNuage xLabel={xLabel} yLabel={yLabel} />} cursor={{ strokeDasharray: '3 3' }} />
+        <Scatter data={points} fill="#1F8A86" fillOpacity={0.45} />
+        {seg && <ReferenceLine segment={seg} stroke="#E06A3B" strokeWidth={2} ifOverflow="extendDomain" />}
+      </ScatterChart>
+    </ResponsiveContainer>
+  )
 }

@@ -1,11 +1,31 @@
-import { useState } from 'react'
-import { BarRow, Card, EcartMetre, Eyebrow, SectionTitle } from '../ui.jsx'
+import { useMemo } from 'react'
+import { BarRow, Card, EcartMetre, Eyebrow, Nuage, SectionTitle, Signif } from '../ui.jsx'
 import HypoHeader from './HypoHeader.jsx'
 
-export default function Hypothesis1({ data }) {
-  const [sel, setSel] = useState(null)
-  const { correlations, ecart, lecture } = data
-  const max = ecart.echelle
+function frac(i) {
+  const x = Math.sin(i * 12.9898) * 43758.5453
+  return x - Math.floor(x)
+}
+
+function pointsPour(respondents, cle, jitter) {
+  return respondents
+    .filter((r) => r[cle] != null && r.hostilite != null)
+    .map((r, i) => ({ x: jitter ? r[cle] + (frac(i) * 0.5 - 0.25) : r[cle], y: r.hostilite }))
+}
+
+export default function Hypothesis1({ data, respondents = [] }) {
+  const { correlations, ecart, regression, scatters, lecture } = data
+
+  const nuages = useMemo(
+    () =>
+      scatters.map((s) => ({
+        ...s,
+        points: pointsPour(respondents, s.cle, s.cle !== 'exposition'),
+        r: correlations.find((c) => c.cle === s.cle)?.r,
+        p: correlations.find((c) => c.cle === s.cle)?.p,
+      })),
+    [scatters, correlations, respondents]
+  )
 
   return (
     <div className="space-y-6">
@@ -13,7 +33,7 @@ export default function Hypothesis1({ data }) {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
-          <SectionTitle sub="Perception de bulle contre intensité d'usage, mesurées par leur lien avec l'hostilité.">
+          <SectionTitle sub="Synthèse : le lien avec l'hostilité est quasi nul pour la bulle, plus net pour l'usage.">
             L'écart-mètre
           </SectionTitle>
           <div className="mt-5">
@@ -22,29 +42,38 @@ export default function Hypothesis1({ data }) {
         </Card>
 
         <Card>
-          <SectionTitle sub="Corrélation de chaque facteur avec l'index d'hostilité. Échelle 0 à 0,3. Cliquez une barre.">
-            Ce qui prédit l'hostilité
+          <SectionTitle sub={`Régression multiple : hostilité expliquée par les trois facteurs ensemble. Poids standardisés (β), n = ${regression.n}, R² = ${String(regression.r2).replace('.', ',')}.`}>
+            Ce qui pèse vraiment
           </SectionTitle>
           <div className="mt-4 space-y-1">
-            {correlations.map((c) => (
-              <BarRow
-                key={c.label}
-                label={c.label}
-                valeur={c.r}
-                echelle={max}
-                pole={c.pole}
-                affiche={`r = ${c.r.toFixed(2)}`}
-                active={sel === c.label}
-                onClick={() => setSel(sel === c.label ? null : c.label)}
-              />
+            {regression.poids.map((w) => (
+              <div key={w.cle}>
+                <BarRow label={w.label} valeur={Math.abs(w.beta)} echelle={0.3} pole={w.pole} affiche={`β = ${String(w.beta).replace('.', ',')}`} />
+                <div className="px-3 pb-2">
+                  <Signif p={w.p} />
+                </div>
+              </div>
             ))}
           </div>
-          {sel && (
-            <p className="mt-3 rounded-lg bg-bg p-3 font-body text-xs text-ink-soft">
-              {describe(sel)}
-            </p>
-          )}
         </Card>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-3">
+        {nuages.map((s) => (
+          <Card key={s.cle}>
+            <Eyebrow>{s.label}</Eyebrow>
+            <p className="mt-1 mb-2 font-mono text-xs text-ink-soft">
+              r = {String(s.r).replace('.', ',')} · <Signif p={s.p} />
+            </p>
+            <Nuage
+              points={s.points}
+              droite={s}
+              xLabel={s.label.replace(/ \(.*\)/, '')}
+              yLabel="Hostilité"
+              xDomain={s.cle === 'exposition' ? [1, 5] : [0.5, 5.5]}
+            />
+          </Card>
+        ))}
       </div>
 
       <Card>
@@ -53,12 +82,4 @@ export default function Hypothesis1({ data }) {
       </Card>
     </div>
   )
-}
-
-function describe(label) {
-  if (label.includes('bulle'))
-    return "Corrélation quasi nulle : se sentir dans une bulle ne va pas de pair avec une hostilité plus forte."
-  if (label.includes('Temps'))
-    return "Plus le temps passé est élevé, plus l'hostilité tend à l'être, mais le lien reste modéré."
-  return "L'exposition aux contenus clivants montre le lien le plus fort des trois facteurs testés."
 }
