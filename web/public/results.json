@@ -2,8 +2,8 @@
   "meta": {
     "n": 263,
     "statut": "définitif",
-    "genere_le": "2026-06-20",
-    "source": "Enquête en ligne, 263 répondants après exclusion des mineurs. Chiffres calculés par analysis/analyse.py. Les verdicts restent une interprétation à valider."
+    "genere_le": "2026-06-21",
+    "source": "Enquête en ligne, 263 répondants après exclusion des mineurs. Chiffres et tests calculés par analysis/analyse.py. Les verdicts restent une interprétation à valider."
   },
   "echantillon": {
     "resume": "Échantillon de convenance, non représentatif de la population française. Questionnaire diffusé en ligne, donc soumis à un biais d'auto-sélection. Les proportions ci-dessous décrivent les répondants, pas la population générale.",
@@ -55,8 +55,8 @@
   "h1": {
     "code": "H1",
     "titre": "Usage réel ou bulle imaginée ?",
-    "enonce": "L'intensité d'usage (temps passé, exposition aux contenus polémiques) prédit mieux l'hostilité que la perception de se savoir enfermé dans une bulle.",
-    "verdict": "Plutôt confirmée",
+    "enonce": "L'intensité d'usage, mesurée par le temps passé et l'exposition aux contenus polémiques, prédit mieux l'hostilité que la perception de se savoir enfermé dans une bulle.",
+    "verdict": "Confirmée",
     "ecart": {
       "percu": {
         "label": "Perception de bulle",
@@ -66,44 +66,103 @@
       "reel": {
         "label": "Intensité d'usage",
         "valeur": 0.21,
-        "sous": "Corrélation la plus forte (temps passé)"
+        "sous": "Corrélation la plus forte (temps, exposition)"
       },
       "echelle": 0.3
     },
     "correlations": [
       {
-        "label": "Perception de bulle (Q9)",
-        "r": 0.03,
-        "pole": "percu"
-      },
-      {
         "label": "Temps passé (Q7)",
+        "cle": "temps",
         "r": 0.21,
+        "p": 0.0003831341072517702,
         "pole": "reel"
       },
       {
         "label": "Exposition aux contenus (Q11)",
+        "cle": "exposition",
         "r": 0.18,
+        "p": 0.0023568763453631902,
         "pole": "reel"
+      },
+      {
+        "label": "Perception de bulle (Q9)",
+        "cle": "bulle",
+        "r": 0.03,
+        "p": 0.6241678769513703,
+        "pole": "percu"
       }
     ],
-    "lecture": "Se sentir enfermé dans une bulle n'a quasiment aucun lien avec l'hostilité mesurée (corrélation proche de zéro). Ce sont le temps passé et surtout l'exposition aux contenus clivants qui accompagnent une hostilité plus forte."
+    "scatters": [
+      {
+        "cle": "temps",
+        "label": "Temps passé (Q7)",
+        "pente": 0.168,
+        "ordonnee": 2.513,
+        "xmin": 1,
+        "xmax": 5
+      },
+      {
+        "cle": "exposition",
+        "label": "Exposition aux contenus (Q11)",
+        "pente": 0.178,
+        "ordonnee": 2.522,
+        "xmin": 1.0,
+        "xmax": 5.0
+      },
+      {
+        "cle": "bulle",
+        "label": "Perception de bulle (Q9)",
+        "pente": 0.024,
+        "ordonnee": 2.946,
+        "xmin": 1.0,
+        "xmax": 5.0
+      }
+    ],
+    "regression": {
+      "r2": 0.067,
+      "n": 263,
+      "poids": [
+        {
+          "cle": "temps",
+          "label": "Temps passé",
+          "beta": 0.18,
+          "p": 0.004233806161970666,
+          "pole": "reel"
+        },
+        {
+          "cle": "exposition",
+          "label": "Exposition",
+          "beta": 0.14,
+          "p": 0.020954874958514225,
+          "pole": "reel"
+        },
+        {
+          "cle": "bulle",
+          "label": "Perception de bulle",
+          "beta": 0.05,
+          "p": 0.3817352714062041,
+          "pole": "percu"
+        }
+      ]
+    },
+    "lecture": "Dans la régression multiple, le temps passé et l'exposition aux contenus clivants gardent un poids non négligeable, alors que la perception de bulle est proche de zéro et non significative. L'hostilité tient donc davantage à l'usage réel qu'au sentiment d'enfermement."
   },
-  "h2": {
-    "code": "H2",
+  "h2a": {
+    "code": "H2.a",
     "titre": "Qui le public tient-il pour responsable ?",
-    "enonce": "Le public attribue davantage une responsabilité individuelle (producteurs, partageurs) que structurelle (plateformes, État, médias), ce qui fragilise la légitimité perçue d'une régulation systémique.",
+    "enonce": "Face à la polarisation en ligne, le public attribue davantage une responsabilité individuelle (aux individus qui produisent et partagent les contenus), plutôt qu'une responsabilité structurelle (aux plateformes et à l'État).",
     "verdict": "Confirmée",
     "ecart": {
       "percu": {
         "label": "Individus",
         "valeur": 4.42,
-        "sous": "Moyenne producteurs et partageurs"
+        "sous": "Producteurs et partageurs"
       },
       "reel": {
         "label": "Structures",
-        "valeur": 3.8,
-        "sous": "Moyenne plateformes, État, médias"
+        "valeur": 3.71,
+        "sous": "Plateformes et État"
       },
       "echelle": 5
     },
@@ -126,7 +185,7 @@
       {
         "acteur": "Médias traditionnels",
         "note": 3.98,
-        "type": "structure"
+        "type": "autre"
       },
       {
         "acteur": "État et pouvoirs publics",
@@ -134,6 +193,13 @@
         "type": "structure"
       }
     ],
+    "test": {
+      "diff": 0.71,
+      "t": 12.5,
+      "p": 0.0,
+      "pct_individus": 67,
+      "n": 263
+    },
     "contrastes_politiques": [
       {
         "item": "Blâme des médias traditionnels",
@@ -151,13 +217,30 @@
         "droite": 4.41
       }
     ],
-    "lecture": "Les répondants chargent d'abord les individus qui produisent et partagent les contenus, avant les structures qui organisent leur diffusion. Le blâme se déplace nettement selon le bord politique, surtout sur les médias et l'État."
+    "lecture": "Les répondants chargent d'abord les individus qui produisent et partagent les contenus, avant les plateformes et l'État. L'écart individus moins structures est positif et statistiquement significatif. Le blâme se déplace selon le bord politique, surtout sur les médias et l'État."
+  },
+  "h2b": {
+    "code": "H2.b",
+    "titre": "Le décalage mine-t-il la régulation ?",
+    "enonce": "Le décalage entre la responsabilité individuelle et la responsabilité structurelle diminue la légitimité perçue de toute régulation systémique.",
+    "verdict": "Confirmée",
+    "correlation": {
+      "r": -0.21,
+      "p": 0.0007067385423260575,
+      "n": 263,
+      "pente": -0.226,
+      "ordonnee": 4.347,
+      "xmin": -2.0,
+      "xmax": 3.5
+    },
+    "mesure": "Légitimité de la régulation approchée par la demande de transparence imposée par l'État (Q18).",
+    "lecture": "Le décalage entre responsabilité individuelle et structurelle est mis en regard de la demande de régulation (Q18). Le lien observé est négatif (r = -0.21, p = < 0,001). Plus on impute la responsabilité aux individus plutôt qu'aux structures, moins on demande de régulation systémique : l'hypothèse est soutenue."
   },
   "h3": {
     "code": "H3",
     "titre": "Réguler sans connaître ?",
-    "enonce": "La demande de régulation est massive mais déconnectée de la connaissance des dispositifs : une meilleure connaissance du DSA s'accompagne d'une volonté de régulation plus mesurée.",
-    "verdict": "Nuancée",
+    "enonce": "La demande de régulation des algorithmes est massive et largement consensuelle, mais déconnectée de la connaissance des dispositifs existants. Une meilleure connaissance du DSA réduit la volonté de régulation.",
+    "verdict": "Partiellement confirmée",
     "ecart": {
       "percu": {
         "label": "Demande de transparence",
@@ -173,6 +256,38 @@
       },
       "echelle": 100
     },
+    "demande_par_bord": [
+      {
+        "label": "Très à gauche",
+        "note": 4.44,
+        "pct": 88
+      },
+      {
+        "label": "Plutôt à gauche",
+        "note": 4.41,
+        "pct": 92
+      },
+      {
+        "label": "Plutôt au centre",
+        "note": 4.33,
+        "pct": 90
+      },
+      {
+        "label": "Plutôt à droite",
+        "note": 3.88,
+        "pct": 69
+      },
+      {
+        "label": "Très à droite",
+        "note": 3.44,
+        "pct": 56
+      },
+      {
+        "label": "Ne se positionne pas",
+        "note": 3.96,
+        "pct": 72
+      }
+    ],
     "demande_selon_dsa": [
       {
         "label": "Connaît précisément le DSA",
@@ -183,16 +298,22 @@
         "note": 4.21
       }
     ],
-    "lecture": "La transparence est réclamée très largement, alors qu'une petite minorité connaît précisément le dispositif européen censé l'imposer. Ceux qui le connaissent le mieux en demandent un peu moins, signe d'une attente moins inconditionnelle une fois les dispositifs connus."
+    "test_dsa": {
+      "t": -0.7,
+      "p": 0.4985457024217763,
+      "significatif": false,
+      "sens_attendu": true
+    },
+    "lecture": "La transparence est réclamée très largement (82 %) alors qu'une petite minorité (15 %) connaît précisément le DSA : la demande est massive mais déconnectée de la connaissance. Le consensus est toutefois gradué : très fort à gauche et au centre, plus modéré à droite. Surtout, l'effet « mieux connaître le DSA réduit la demande » va dans le sens attendu mais n'est pas statistiquement significatif (p = 0,50) : cette partie de l'hypothèse n'est pas soutenue."
   },
   "verbatims": {
     "q19": [
-      "les reseaux sociaux et twitter",
+      "Différents aspects : le manque d'encadrement, l'utilisation de certains cas polarisés comme outils de divertissement (chasses aux pédophiles), la possibilité d'insulter",
       "Principalement des problématiques qui trainent depuis des générations et des populations qui sont de plus en plus divisées d'un point de vu économique et social",
-      "Inégalités sociales et manipulations",
+      "Je dirais simplement que c’est le manque d’acception des différents dû à l’éducation.",
       "Les gens ne prennent plus le temps de s'écouter et de respecter les opinions des uns et des autres. Chaque personne peut avoir un vécu différent et un avis différent",
-      "En grande partie à cause des inégalités sociales",
-      "Les difficultés économiques du pays La mise en avant des nouvelles négatives La non-action des parties en place qui implique la montée des extrêmes"
+      "Extrême gauche populiste et carriériste, stigmatisant par la violence verbale et physique l’opposition : « Si tu n’est pas avec moi, tu es contre moi »",
+      "Les personnes ne lisent rien de plus de trois lignes. Une idée, une opinion, une argumentation c’est plusieurs pages, des articles d’analyse, des livres."
     ],
     "q20": [
       "Transparence sur le fonctionnement, éducation dès le plus jeune âge aux risques et aux fonctionnements des réseaux sociaux, censure des publications et commentaires insultants / violents",
@@ -200,7 +321,7 @@
       "Pas de solution miracle, les gens croient ce quils veulent croire et ce qui colle a leur vision (totalement construite) du monde, et ce peu importe le parti",
       "Supprimer les contenus qui prônent le racisme, la xénophobie.",
       "Créateur de contenu par de vrai journalistes s'adressant aux jeuenes",
-      "Compliqué, personnellement je suis très choquée quand je vois des contenus d’extrême droite, donc difficile de parler de liberté d’expression…"
+      "éducation, Modération, sanctions, réglementation et limitation"
     ]
   }
 }
