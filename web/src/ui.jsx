@@ -18,6 +18,17 @@ const POLE = {
   neutral: { fill: 'bg-ink-soft', track: 'bg-line', text: 'text-ink' },
 }
 
+// Palette du bord politique, utilisée partout où un graphe distingue gauche
+// et droite (tableau de robustesse H1, contrastes H2.a, demande par bord H3).
+export const BORD_COULEURS = {
+  extreme_gauche: '#c81e3a',
+  gauche: '#e8705f',
+  centre: '#9aa0b4',
+  droite: '#5b8ed6',
+  extreme_droite: '#1f49c4',
+  autre: '#8a8f9e',
+}
+
 export function Eyebrow({ children, className = '' }) {
   return (
     <span
@@ -182,13 +193,14 @@ export function TabBar({ tabs, active, onChange }) {
   )
 }
 
-function Track({ valeur, echelle, pole }) {
+function Track({ valeur, echelle, pole, couleur }) {
   const pct = echelle > 0 ? Math.min(100, Math.max(0, (valeur / echelle) * 100)) : 0
   const c = POLE[pole] ?? POLE.neutral
   return (
-    <div className={`h-2.5 w-full overflow-hidden rounded-full ${c.track}`}>
+    <div className={`h-2.5 w-full overflow-hidden rounded-full ${couleur ? 'bg-line' : c.track}`}>
       <motion.div
-        className={`h-full rounded-full ${c.fill}`}
+        className={`h-full rounded-full ${couleur ? '' : c.fill}`}
+        style={couleur ? { backgroundColor: couleur } : undefined}
         initial={{ width: 0 }}
         whileInView={{ width: `${pct}%` }}
         viewport={{ once: true, amount: 0.4 }}
@@ -254,7 +266,7 @@ export function EcartMetre({ titre, percu, reel, echelle, onClick, cible }) {
   )
 }
 
-export function BarRow({ label, valeur, echelle, pole = 'neutral', sous, affiche, active, onClick }) {
+export function BarRow({ label, valeur, echelle, pole = 'neutral', couleur, sous, affiche, active, onClick }) {
   const c = POLE[pole] ?? POLE.neutral
   const content = (
     <div className="space-y-1.5">
@@ -262,11 +274,14 @@ export function BarRow({ label, valeur, echelle, pole = 'neutral', sous, affiche
         <span className={`font-body text-sm ${active ? 'font-semibold text-ink' : 'text-ink-soft'}`}>
           {label}
         </span>
-        <span className={`font-mono text-sm font-medium ${c.text}`}>
+        <span
+          className={`font-mono text-sm font-medium ${couleur ? '' : c.text}`}
+          style={couleur ? { color: couleur } : undefined}
+        >
           {affiche ?? fmt(valeur)}
         </span>
       </div>
-      <Track valeur={valeur} echelle={echelle} pole={pole} />
+      <Track valeur={valeur} echelle={echelle} pole={pole} couleur={couleur} />
       {sous && <p className="font-body text-xs text-muted">{sous}</p>}
     </div>
   )
@@ -335,7 +350,7 @@ export function SegmentToggle({ options, value, onChange, label }) {
 }
 
 export function VerdictBadge({ children }) {
-  return <Badge tone="succes">Verdict provisoire : {children}</Badge>
+  return <Badge tone="succes">Verdict : {children}</Badge>
 }
 
 export function fmtP(p) {
@@ -373,9 +388,13 @@ export function TableRobustesse({ groupes, predicteurs }) {
           <tr>
             <th className="border-b border-line py-2 pr-3 text-left font-medium text-muted">Prédicteur</th>
             {groupes.map((g) => (
-              <th key={g.cle} className="border-b border-line px-2 py-2 text-right font-medium text-muted">
-                {g.label}
-                <div className="font-normal">n = {g.n}</div>
+              <th
+                key={g.cle}
+                className="border-b border-line px-3 py-2 text-right font-medium"
+                style={BORD_COULEURS[g.cle] ? { color: BORD_COULEURS[g.cle] } : undefined}
+              >
+                <span className={BORD_COULEURS[g.cle] ? '' : 'text-muted'}>{g.label}</span>
+                <div className="font-normal text-muted">n = {g.n}</div>
               </th>
             ))}
           </tr>
@@ -383,14 +402,14 @@ export function TableRobustesse({ groupes, predicteurs }) {
         <tbody>
           {predicteurs.map((p) => (
             <tr key={p.cle}>
-              <td className="border-b border-line py-2 pr-3 text-left font-body text-ink-soft">{p.label}</td>
+              <td className="border-b border-line py-2.5 pr-3 text-left font-body text-ink-soft">{p.label}</td>
               {groupes.map((g) => {
                 const v = p.valeurs[g.cle]
                 const ok = v.p != null && v.p < 0.05
                 return (
                   <td
                     key={g.cle}
-                    className={`border-b border-line px-2 py-2 text-right ${ok ? 'text-reel' : 'text-muted'}`}
+                    className={`border-b border-line px-3 py-2.5 text-right ${ok ? 'text-reel' : 'text-muted'}`}
                   >
                     {String(v.r).replace('.', ',')}
                     {ok && <span aria-hidden="true">*</span>}
@@ -406,7 +425,8 @@ export function TableRobustesse({ groupes, predicteurs }) {
   )
 }
 
-// Nuage de points 2D avec droite de régression. points: [{x, y}].
+// Diagramme à points avec droite de tendance. points: [{x, y}]. Axes
+// systématiquement légendés (lisible sans ouvrir la méthodologie).
 export function Nuage({ points, xLabel, yLabel, xDomain = [1, 5], yDomain = [1, 5], droite }) {
   const seg =
     droite &&
@@ -415,8 +435,8 @@ export function Nuage({ points, xLabel, yLabel, xDomain = [1, 5], yDomain = [1, 
       { x: droite.xmax, y: droite.pente * droite.xmax + droite.ordonnee },
     ]
   return (
-    <ResponsiveContainer width="100%" height={230}>
-      <ScatterChart margin={{ top: 8, right: 12, bottom: 26, left: 0 }}>
+    <ResponsiveContainer width="100%" height={250}>
+      <ScatterChart margin={{ top: 8, right: 16, bottom: 30, left: 18 }}>
         <CartesianGrid stroke="#D9DBE3" strokeDasharray="3 3" />
         <XAxis
           type="number"
@@ -426,9 +446,16 @@ export function Nuage({ points, xLabel, yLabel, xDomain = [1, 5], yDomain = [1, 
           stroke="#6B6F80"
           allowDecimals={false}
         >
-          <Label value={xLabel} position="insideBottom" offset={-14} style={{ fontSize: 11, fill: '#6B6F80' }} />
+          <Label value={xLabel} position="insideBottom" offset={-16} style={{ fontSize: 11, fill: '#6B6F80' }} />
         </XAxis>
-        <YAxis type="number" dataKey="y" domain={yDomain} tick={{ fontSize: 11 }} stroke="#6B6F80" width={32} />
+        <YAxis type="number" dataKey="y" domain={yDomain} tick={{ fontSize: 11 }} stroke="#6B6F80" width={32}>
+          <Label
+            value={yLabel}
+            angle={-90}
+            position="insideLeft"
+            style={{ fontSize: 11, fill: '#6B6F80', textAnchor: 'middle' }}
+          />
+        </YAxis>
         <Tooltip content={<TooltipNuage xLabel={xLabel} yLabel={yLabel} />} cursor={{ strokeDasharray: '3 3' }} />
         <Scatter data={points} fill="#1F8A86" fillOpacity={0.45} />
         {seg && <ReferenceLine segment={seg} stroke="#E06A3B" strokeWidth={2} ifOverflow="extendDomain" />}
