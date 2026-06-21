@@ -4,7 +4,6 @@ import Overview from './sections/Overview.jsx'
 import Hypothesis1 from './sections/Hypothesis1.jsx'
 import Hypothesis2 from './sections/Hypothesis2.jsx'
 import Hypothesis3 from './sections/Hypothesis3.jsx'
-import Datalake from './sections/Datalake.jsx'
 import Verbatims from './sections/Verbatims.jsx'
 import logoParis1 from './assets/logo-paris1-sorbonne.png'
 import logoIMCDS from './assets/logo-master-imcds.jpeg'
@@ -14,7 +13,6 @@ const TABS = [
   { id: 'h1', label: 'H1' },
   { id: 'h2', label: 'H2' },
   { id: 'h3', label: 'H3' },
-  { id: 'donnees', label: 'Données' },
 ]
 
 const REPO = 'https://github.com/Cocolegeek/memoire-algos-debat-public'
@@ -64,6 +62,9 @@ export default function App() {
             <h1 className="font-display text-2xl font-semibold text-ink sm:text-3xl">
               Algorithmes de recommandation et polarisation du débat public
             </h1>
+            <p className="max-w-2xl font-body text-sm text-ink-soft sm:text-base">
+              Cette enquête met en regard ce que la recherche établit sur les algorithmes de recommandation et ce que le public en perçoit, leur attribue et en attend, à partir des réponses de {data ? data.meta.n : 263} personnes à un questionnaire en ligne.
+            </p>
             <div className="flex flex-wrap items-center gap-2">
               {data && <Badge>n = {data.meta.n}</Badge>}
               {data?.meta.statut !== 'définitif' && (
@@ -103,7 +104,6 @@ export default function App() {
               {active === 'h1' && <Hypothesis1 data={data.h1} respondents={respondents} />}
               {active === 'h2' && <Hypothesis2 a={data.h2a} b={data.h2b} respondents={respondents} />}
               {active === 'h3' && <Hypothesis3 data={data.h3} />}
-              {active === 'donnees' && <Datalake />}
             </>
           )}
         </main>
