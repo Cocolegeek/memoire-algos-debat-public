@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { BarRow, Caption, Card, EcartMetre, Eyebrow, InfoButton, Nuage, SectionTitle, Signif } from '../ui.jsx'
+import { BarRow, Caption, Card, EcartMetre, Eyebrow, InfoButton, Nuage, SectionTitle, Signif, TableRobustesse } from '../ui.jsx'
 import HypoHeader from './HypoHeader.jsx'
 
 function frac(i) {
@@ -29,6 +29,13 @@ const INFO_REGRESSION = {
     "Mêmes variables que l'écart-mètre, restreintes aux répondants ayant une valeur sur les quatre variables (hostilité, temps, exposition, bulle).",
 }
 
+const INFO_ROBUSTESSE = {
+  titre: 'Robustesse par sous-groupe',
+  methodologie:
+    "Mêmes corrélations bivariées que ci-dessus (Pearson, prédicteur contre index d'hostilité), recalculées indépendamment sur quatre sous-échantillons : les deux tranches d'âge les plus représentées et les deux bords politiques. Vérifie que le résultat principal n'est pas un artefact d'un seul profil de répondant. Les sous-échantillons étant plus petits, la puissance statistique est plus faible : une corrélation qui n'atteint pas la significativité dans un sous-groupe peut simplement refléter un n réduit.",
+  donnees: 'Mêmes variables que la régression (Q7, Q11, Q9, index d\'hostilité), croisées avec Q1 (âge) et Q5 (bord politique).',
+}
+
 const INFO_NUAGE = (label) => ({
   titre: `Nuage de points : ${label}`,
   methodologie:
@@ -37,7 +44,7 @@ const INFO_NUAGE = (label) => ({
 })
 
 export default function Hypothesis1({ data, respondents = [] }) {
-  const { correlations, ecart, regression, scatters, lecture } = data
+  const { correlations, ecart, regression, scatters, robustesse, lecture } = data
 
   const nuages = useMemo(
     () =>
@@ -123,6 +130,25 @@ export default function Hypothesis1({ data, respondents = [] }) {
           </Card>
         ))}
       </div>
+
+      <Card>
+        <SectionTitle
+          info={INFO_ROBUSTESSE}
+          sub="Les mêmes corrélations, recalculées séparément par tranche d'âge et par bord politique."
+        >
+          H1 est-elle stable selon le profil ?
+        </SectionTitle>
+        <div className="mt-4">
+          <TableRobustesse groupes={robustesse.groupes} predicteurs={robustesse.predicteurs} />
+        </div>
+        <Caption>
+          La perception de bulle ne devient significative dans aucun sous-groupe, ce qui renforce la
+          conclusion principale. Les corrélations liées à l'usage (temps, exposition) restent
+          positives partout, mais ne sont significatives que dans certains sous-groupes : avec des
+          effectifs plus restreints, c'est attendu, et cela invite à la prudence plutôt qu'à
+          l'infirmation du résultat principal.
+        </Caption>
+      </Card>
 
       <Card>
         <Eyebrow>Lecture</Eyebrow>
