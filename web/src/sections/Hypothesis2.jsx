@@ -8,6 +8,15 @@ const FILTRES = [
   { value: 'droite', label: 'Droite' },
 ]
 
+const LABELS_BORD = {
+  extreme_gauche: 'Très à gauche',
+  gauche: 'Plutôt à gauche',
+  centre: 'Plutôt au centre',
+  droite: 'Plutôt à droite',
+  extreme_droite: 'Très à droite',
+  autre: 'Ne se positionne pas',
+}
+
 const POLE = { individu: 'percu', structure: 'reel', autre: 'neutral' }
 
 function frac(i) {
@@ -39,8 +48,8 @@ const INFO_CONTRASTES = {
 const INFO_NUAGE_2B = {
   titre: 'Le décalage et la demande de régulation',
   methodologie:
-    "Corrélation de Pearson entre le décalage de responsabilité individuelle moins structurelle (calculé par répondant, voir H2.a) et la demande de régulation (Q18). La droite orange résume la régression linéaire simple entre les deux variables. Un léger bruit aléatoire décolle les points superposés sans modifier le calcul.",
-  donnees: 'Décalage dérivé de Q16a, Q16b, Q16c, Q16e ; demande = Q18 (1-5). n = 263.',
+    "Corrélation de Pearson entre le décalage de responsabilité individuelle moins structurelle (calculé par répondant, voir H2.a) et la demande de régulation (Q18). La droite orange résume la régression linéaire simple entre les deux variables, calculée sur l'ensemble des répondants. Un léger bruit aléatoire décolle les points superposés sans modifier le calcul. La couleur de chaque point indique le bord politique déclaré du répondant (Q5), pour vérifier que le lien ne tient pas seulement à l'intérieur d'un seul camp : la même corrélation est recalculée séparément à gauche et à droite (cartouche ci-dessous).",
+  donnees: 'Décalage dérivé de Q16a, Q16b, Q16c, Q16e ; demande = Q18 (1-5) ; couleur et corrélations par camp = Q5 (positionnement politique). n = 263.',
 }
 
 export default function Hypothesis2({ a, b, respondents = [] }) {
@@ -53,6 +62,7 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
         .map((r, i) => ({
           x: r.decalage + (frac(i) * 0.3 - 0.15),
           y: r.demande + (frac(i + 7) * 0.5 - 0.25),
+          couleur: BORD_COULEURS[r.politique] ?? BORD_COULEURS.autre,
         })),
     [respondents]
   )
@@ -185,6 +195,15 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
                 refXLabel="Égalité individus / structures"
                 height={300}
               />
+              <div className="mt-3 flex flex-wrap gap-3">
+                {Object.entries(LABELS_BORD).map(([cle, label]) => (
+                  <span key={cle} className="inline-flex items-center gap-1.5 font-mono text-xs text-muted">
+                    <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: BORD_COULEURS[cle] }} aria-hidden="true" />
+                    {label}
+                  </span>
+                ))}
+              </div>
+              <p className="mt-2 font-mono text-xs text-muted">Couleur = bord politique déclaré (Q5).</p>
             </div>
             <Caption>
               Une pente négative indiquerait que plus un répondant attribue une responsabilité
@@ -196,13 +215,30 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
           </Card>
 
           <Card>
-            <SectionTitle>Le test</SectionTitle>
+            <SectionTitle sub="Le lien tient-il aussi à l'intérieur de chaque camp politique, ou n'est-il qu'un effet du bord politique sur les deux variables ?">
+              Le test
+            </SectionTitle>
             <div className="mt-4 space-y-3">
               <div className="rounded-lg bg-bg p-3 font-mono text-xs text-ink-soft">
-                Corrélation r = {String(b.correlation.r).replace('.', ',')} · <Signif p={b.correlation.p} /> (n = {b.correlation.n})
+                Ensemble des répondants : r = {String(b.correlation.r).replace('.', ',')} · <Signif p={b.correlation.p} /> (n = {b.correlation.n})
+              </div>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {b.correlation_par_bord.map((c) => (
+                  <div key={c.cle} className="rounded-lg bg-bg p-3 font-mono text-xs" style={{ color: BORD_COULEURS[c.cle] }}>
+                    {c.label} : r = {String(c.r).replace('.', ',')} (n = {c.n})
+                    <br />
+                    <Signif p={c.p} />
+                  </div>
+                ))}
               </div>
               <p className="font-body text-xs text-muted">{b.mesure}</p>
               <p className="font-body text-sm text-ink-soft">{b.lecture}</p>
+              <p className="font-body text-sm text-ink-soft">
+                Le lien reste de même sens dans les deux camps, ce qui exclut qu'il ne soit qu'un
+                artefact du bord politique. Il est statistiquement net à droite, mais n'atteint pas le
+                seuil de significativité à gauche : à interpréter avec prudence côté gauche plutôt qu'à
+                écarter.
+              </p>
             </div>
           </Card>
         </div>
