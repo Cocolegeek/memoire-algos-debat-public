@@ -1,4 +1,4 @@
-import { BarRow, BigStat, Caption, Card, Eyebrow, SectionTitle, Signif } from '../ui.jsx'
+import { BarRow, BigStat, BORD_COULEURS, Caption, Card, Eyebrow, SectionTitle, Signif } from '../ui.jsx'
 import HypoHeader from './HypoHeader.jsx'
 
 const INFO_ECART = {
@@ -9,7 +9,7 @@ const INFO_ECART = {
 }
 
 const INFO_DSA = {
-  titre: 'Connaître change-t-il la demande ?',
+  titre: 'Connaître le DSA réduit-il la volonté de régulation ?',
   methodologie:
     "Comparaison de la demande moyenne de régulation (Q18) entre deux groupes indépendants : ceux qui déclarent connaître précisément le DSA, et ceux qui le connaissent mal ou pas du tout. Test t pour échantillons indépendants (variances non supposées égales).",
   donnees: 'Q18 (1-5) croisée avec Q17 recodé en deux groupes (precis / vague + non).',
@@ -26,12 +26,12 @@ export default function Hypothesis3({ data }) {
   const { ecart, demande_par_bord, demande_selon_dsa, test_dsa, lecture } = data
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <HypoHeader code={data.code} titre={data.titre} enonce={data.enonce} verdict={data.verdict} />
 
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
-          <SectionTitle info={INFO_ECART} sub="Une demande quasi unanime face à une connaissance rare du dispositif européen.">
+          <SectionTitle info={INFO_ECART} sub="Une demande de régulation quasi unanime face à une connaissance rare des dispositifs existants.">
             Le grand écart
           </SectionTitle>
           <div className="mt-5 grid grid-cols-2 gap-4">
@@ -47,9 +47,9 @@ export default function Hypothesis3({ data }) {
 
         <Card>
           <SectionTitle info={INFO_DSA} sub="Demande moyenne de régulation (1 à 5) selon la connaissance du DSA.">
-            Connaître change-t-il la demande ?
+            Connaître le DSA réduit-il la volonté de régulation ?
           </SectionTitle>
-          <div className="mt-4 space-y-1">
+          <div className="mt-4 space-y-2">
             {demande_selon_dsa.map((d) => (
               <BarRow
                 key={d.label}
@@ -65,7 +65,8 @@ export default function Hypothesis3({ data }) {
             Différence entre les deux groupes : <Signif p={test_dsa.p} />
             {!test_dsa.significatif && (
               <span className="mt-1 block text-muted">
-                L'effet « mieux connaître réduit la demande » n'est pas établi statistiquement.
+                « Une meilleure connaissance du DSA réduit la volonté de régulation » n'est pas établi
+                statistiquement.
               </span>
             )}
           </div>
@@ -73,7 +74,7 @@ export default function Hypothesis3({ data }) {
             Ce test compare directement les deux groupes affichés ci-dessus. Une différence non
             significative signifie que l'écart observé entre les deux barres pourrait être dû au
             hasard de l'échantillonnage, et ne permet pas de conclure à un effet de la connaissance du
-            DSA sur la demande de régulation.
+            DSA sur la volonté de régulation.
           </Caption>
         </Card>
       </div>
@@ -85,21 +86,22 @@ export default function Hypothesis3({ data }) {
         >
           Une demande consensuelle, mais graduée
         </SectionTitle>
-        <div className="mt-4 space-y-1">
+        <div className="mt-4 space-y-2">
           {demande_par_bord.map((d) => (
             <BarRow
               key={d.label}
               label={d.label}
               valeur={d.note}
               echelle={5}
-              pole="neutral"
+              couleur={BORD_COULEURS[d.cle]}
               affiche={`${d.note.toFixed(1).replace('.', ',')} · ${d.pct}%`}
             />
           ))}
         </div>
         <Caption>
-          La demande reste majoritaire à tous les bords politiques (le critère « consensuelle » de
-          l'hypothèse), mais son intensité décroît à droite, et plus nettement à l'extrême droite.
+          La demande de régulation reste majoritaire à tous les bords politiques (le critère «
+          consensuelle » de l'hypothèse), mais son intensité décroît à droite, et plus nettement à
+          l'extrême droite.
         </Caption>
       </Card>
 

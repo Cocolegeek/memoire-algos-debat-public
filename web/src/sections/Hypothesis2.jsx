@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { BarRow, Caption, Card, EcartMetre, Eyebrow, Nuage, SectionTitle, Signif, SegmentToggle } from '../ui.jsx'
+import { BarRow, BORD_COULEURS, Caption, Card, EcartMetre, Eyebrow, Nuage, SectionTitle, Signif, SegmentToggle } from '../ui.jsx'
 import HypoHeader from './HypoHeader.jsx'
 
 const FILTRES = [
@@ -23,23 +23,23 @@ const INFO_HIERARCHIE = {
 }
 
 const INFO_ECART_2A = {
-  titre: "L'écart individus / structures",
+  titre: 'L’écart de responsabilité',
   methodologie:
     'Pour chaque répondant, écart = moyenne(producteurs, partageurs) − moyenne(plateformes, État). Cet écart est ensuite testé contre zéro par un test t pour échantillon apparié (un score par répondant, pas deux groupes indépendants).',
-  donnees: 'Q16c, Q16e (individus) et Q16a, Q16b (structures), échelle 1-5. n = 263.',
+  donnees: 'Q16c, Q16e (responsabilité individuelle) et Q16a, Q16b (responsabilité structurelle), échelle 1-5. n = 263.',
 }
 
 const INFO_CONTRASTES = {
-  titre: 'Blâme politiquement orienté',
+  titre: 'Un blâme politiquement orienté',
   methodologie:
     "Moyennes calculées séparément sur le sous-échantillon se déclarant à gauche (Q5 = très à gauche ou plutôt à gauche) et à droite (Q5 = très à droite ou plutôt à droite). Présentation descriptive : aucun test formel de différence entre les deux groupes n'est appliqué sur ce graphique.",
   donnees: 'Q16b, Q16d, Q16e (échelle 1-5) croisées avec Q5 (positionnement politique).',
 }
 
 const INFO_NUAGE_2B = {
-  titre: 'Décalage et demande de régulation',
+  titre: 'Le décalage et la demande de régulation',
   methodologie:
-    "Corrélation de Pearson entre le décalage individus moins structures (calculé par répondant, voir H2.a) et la demande de régulation (Q18). La droite corail résume la régression linéaire simple entre les deux variables. Un léger bruit aléatoire décolle les points superposés sans modifier le calcul.",
+    "Corrélation de Pearson entre le décalage de responsabilité individuelle moins structurelle (calculé par répondant, voir H2.a) et la demande de régulation (Q18). La droite corail résume la régression linéaire simple entre les deux variables. Un léger bruit aléatoire décolle les points superposés sans modifier le calcul.",
   donnees: 'Décalage dérivé de Q16a, Q16b, Q16c, Q16e ; demande = Q18 (1-5). n = 263.',
 }
 
@@ -60,7 +60,7 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
   return (
     <div className="space-y-12">
       {/* ---- H2.a ---- */}
-      <section className="space-y-6">
+      <section className="space-y-8">
         <HypoHeader code={a.code} titre={a.titre} enonce={a.enonce} verdict={a.verdict} />
 
         <div className="grid gap-6 lg:grid-cols-2">
@@ -71,7 +71,7 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
             >
               Hiérarchie des responsables
             </SectionTitle>
-            <div className="mt-4 space-y-1">
+            <div className="mt-4 space-y-2">
               {a.hierarchie.map((acteur) => (
                 <BarRow
                   key={acteur.acteur}
@@ -86,17 +86,17 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
             <Caption>
               Les utilisateurs qui produisent et partagent des contenus (corail) arrivent en tête,
               devant les plateformes et l'État (sarcelle). Les médias traditionnels, qui ne relèvent
-              ni de l'un ni de l'autre pôle selon l'énoncé de l'hypothèse, sont indiqués à titre de
-              comparaison.
+              ni de la responsabilité individuelle ni de la responsabilité structurelle au sens de
+              l'hypothèse, sont indiqués à titre de comparaison.
             </Caption>
           </Card>
 
           <Card>
             <SectionTitle
               info={INFO_ECART_2A}
-              sub="Comparaison appariée, par répondant, du blâme adressé aux individus et aux structures."
+              sub="Comparaison appariée, par répondant, entre responsabilité individuelle et responsabilité structurelle."
             >
-              L'écart individus / structures
+              L'écart de responsabilité
             </SectionTitle>
             <div className="mt-5">
               <EcartMetre percu={a.ecart.percu} reel={a.ecart.reel} echelle={a.ecart.echelle} />
@@ -104,12 +104,12 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
             <div className="mt-4 rounded-lg bg-bg p-3 font-mono text-xs text-ink-soft">
               Écart moyen = {String(a.test.diff).replace('.', ',')} point · <Signif p={a.test.p} />
               <br />
-              {a.test.pct_individus}% des répondants blâment davantage les individus (n = {a.test.n}).
+              {a.test.pct_individus}% des répondants attribuent une responsabilité plus forte aux individus (n = {a.test.n}).
             </div>
             <Caption>
-              L'écart-mètre résume l'hypothèse : la note moyenne attribuée aux individus dépasse celle
-              attribuée aux structures. Le test apparié, qui compare cet écart au sein de chaque
-              répondant plutôt qu'entre deux groupes, confirme qu'il n'est pas dû au hasard.
+              L'écart-mètre résume l'hypothèse : la responsabilité individuelle est jugée plus forte
+              que la responsabilité structurelle. Le test apparié, qui compare cet écart au sein de
+              chaque répondant plutôt qu'entre deux groupes, confirme qu'il n'est pas dû au hasard.
             </Caption>
           </Card>
         </div>
@@ -121,9 +121,10 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
             </SectionTitle>
             <SegmentToggle options={FILTRES} value={bord} onChange={setBord} label="Filtre par bord politique" />
           </div>
-          <div className="mt-4 space-y-1">
+          <div className="mt-4 space-y-2">
             {a.contrastes_politiques.map((c) => {
               const val = bord === 'gauche' ? c.gauche : bord === 'droite' ? c.droite : Number(((c.gauche + c.droite) / 2).toFixed(2))
+              const couleur = bord === 'tous' ? undefined : BORD_COULEURS[bord]
               return (
                 <BarRow
                   key={c.item}
@@ -131,8 +132,17 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
                   valeur={val}
                   echelle={5}
                   pole="neutral"
+                  couleur={couleur}
                   affiche={val.toFixed(1).replace('.', ',')}
-                  sous={bord === 'tous' ? `Gauche ${String(c.gauche).replace('.', ',')} · Droite ${String(c.droite).replace('.', ',')}` : undefined}
+                  sous={
+                    bord === 'tous' ? (
+                      <>
+                        <span style={{ color: BORD_COULEURS.gauche }}>Gauche {String(c.gauche).replace('.', ',')}</span>
+                        {' · '}
+                        <span style={{ color: BORD_COULEURS.droite }}>Droite {String(c.droite).replace('.', ',')}</span>
+                      </>
+                    ) : undefined
+                  }
                 />
               )
             })}
@@ -150,30 +160,31 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
       </section>
 
       {/* ---- H2.b ---- */}
-      <section className="space-y-6 border-t border-line pt-10">
+      <section className="space-y-8 border-t border-line pt-10">
         <HypoHeader code={b.code} titre={b.titre} enonce={b.enonce} verdict={b.verdict} />
 
         <div className="grid gap-6 lg:grid-cols-2">
           <Card>
             <SectionTitle
               info={INFO_NUAGE_2B}
-              sub="Chaque point est un répondant. En abscisse, le décalage individus moins structures ; en ordonnée, la demande de régulation (Q18)."
+              sub="Chaque point est un répondant. En abscisse, le décalage de responsabilité (individuelle moins structurelle) ; en ordonnée, la demande de régulation (Q18)."
             >
-              Décalage et demande de régulation
+              Le décalage et la demande de régulation
             </SectionTitle>
             <div className="mt-4">
               <Nuage
                 points={pointsB}
                 droite={b.correlation}
-                xLabel="Décalage individus − structures"
-                yLabel="Demande"
+                xLabel="Décalage de responsabilité"
+                yLabel="Demande de régulation"
                 xDomain={[-4, 4]}
                 yDomain={[1, 5]}
               />
             </div>
             <Caption>
-              Une pente négative indiquerait que plus un répondant blâme les individus plutôt que les
-              structures, moins il demande de régulation systémique : c'est ce que prédit l'hypothèse.
+              Une pente négative indiquerait que plus un répondant attribue une responsabilité
+              individuelle (plutôt que structurelle), moins il demande de régulation systémique : c'est
+              ce que prédit l'hypothèse.
             </Caption>
           </Card>
 

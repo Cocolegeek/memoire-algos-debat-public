@@ -315,7 +315,7 @@ def bloc_echantillon(reps):
             {"label": "Vivent en Île-de-France", "pct": pct(idf, n)},
         ],
         "politique": [
-            {"label": POLITIQUE_LABELS[k], "pct": pct(compte.get(k, 0), n)} for k in POLITIQUE_ORDRE
+            {"cle": k, "label": POLITIQUE_LABELS[k], "pct": pct(compte.get(k, 0), n)} for k in POLITIQUE_ORDRE
         ],
     }
 
@@ -381,6 +381,7 @@ def bloc_h1(reps):
     usage = max(c["r"] for c in correlations if c["cle"] != "bulle")
     usage_signif = any(c["p"] is not None and c["p"] < 0.05 for c in correlations if c["cle"] != "bulle")
     bulle_signif = next(c["p"] for c in correlations if c["cle"] == "bulle")
+    facteur_fort = "le temps passé" if usage == next(c["r"] for c in correlations if c["cle"] == "temps") else "l'exposition aux contenus"
     verdict = "Confirmée" if usage > abs(r_bulle) and usage_signif and (bulle_signif is None or bulle_signif > 0.05) else "Nuancée"
     return {
         "code": "H1",
@@ -391,8 +392,8 @@ def bloc_h1(reps):
         ),
         "verdict": verdict,
         "ecart": {
-            "percu": {"label": "Perception de bulle", "valeur": r_bulle, "sous": "Corrélation avec l'index d'hostilité"},
-            "reel": {"label": "Intensité d'usage", "valeur": r2v(usage), "sous": "Corrélation la plus forte (temps, exposition)"},
+            "percu": {"label": "Perception de bulle", "valeur": r_bulle, "sous": "Lien avec l'hostilité ressentie"},
+            "reel": {"label": "Intensité d'usage", "valeur": r2v(usage), "sous": "Lien le plus fort avec l'hostilité (%s)" % facteur_fort},
             "echelle": 0.3,
         },
         "correlations": correlations,
@@ -400,9 +401,11 @@ def bloc_h1(reps):
         "regression": {"r2": r2v(r2, 3), "n": nreg, "poids": poids},
         "robustesse": bloc_h1_robustesse(reps),
         "lecture": (
-            "Dans la régression multiple, le temps passé et l'exposition aux contenus clivants gardent "
-            "un poids non négligeable, alors que la perception de bulle est proche de zéro et non "
-            "significative. L'hostilité tient donc davantage à l'usage réel qu'au sentiment d'enfermement."
+            "Une fois le temps passé, l'exposition aux contenus polémiques et la perception de bulle "
+            "pris en compte ensemble, l'intensité d'usage garde un poids non négligeable sur "
+            "l'hostilité, alors que la perception de bulle est proche de zéro et non significative. "
+            "L'hostilité tient donc davantage à l'intensité d'usage qu'à la perception de se savoir "
+            "enfermé dans une bulle."
         ),
     }
 
@@ -454,16 +457,17 @@ def bloc_h2a(reps):
         ),
         "verdict": verdict,
         "ecart": {
-            "percu": {"label": "Individus", "valeur": r2v(individus), "sous": "Producteurs et partageurs"},
-            "reel": {"label": "Structures", "valeur": r2v(structures), "sous": "Plateformes et État"},
+            "percu": {"label": "Responsabilité individuelle", "valeur": r2v(individus), "sous": "Individus qui produisent et partagent les contenus"},
+            "reel": {"label": "Responsabilité structurelle", "valeur": r2v(structures), "sous": "Plateformes et État"},
             "echelle": 5,
         },
         "hierarchie": hierarchie,
         "test": {"diff": r2v(md), "t": r2v(t, 1), "p": p, "pct_individus": pct_indiv, "n": nd},
         "contrastes_politiques": contrastes,
         "lecture": (
-            "Les répondants chargent d'abord les individus qui produisent et partagent les contenus, "
-            "avant les plateformes et l'État. L'écart individus moins structures est positif et "
+            "Face à la polarisation en ligne, les répondants attribuent une responsabilité plus forte "
+            "aux individus qui produisent et partagent les contenus qu'aux plateformes et à l'État. "
+            "L'écart entre responsabilité individuelle et responsabilité structurelle est positif et "
             "statistiquement significatif. Le blâme se déplace selon le bord politique, surtout sur "
             "les médias et l'État."
         ),
@@ -487,25 +491,26 @@ def bloc_h2b(reps):
         verdict = "Non confirmée"
     sens = "négatif" if (r is not None and r < 0) else "positif"
     lecture = (
-        "Le décalage entre responsabilité individuelle et structurelle est mis en regard de la demande "
-        "de régulation (Q18). Le lien observé est %s (r = %s, p = %s). " % (sens, r2v(r), _fmt_p(p))
+        "Le décalage entre responsabilité individuelle et responsabilité structurelle est mis en "
+        "regard de la demande de régulation, prise comme indicateur de la légitimité perçue d'une "
+        "régulation systémique. Le lien observé est %s (r = %s, %s). " % (sens, r2v(r), _fmt_p_signe(p))
     )
     if verdict == "Confirmée":
-        lecture += "Plus on impute la responsabilité aux individus plutôt qu'aux structures, moins on demande de régulation systémique : l'hypothèse est soutenue."
+        lecture += "Plus la responsabilité individuelle domine la responsabilité structurelle, moins la régulation systémique est jugée légitime : l'hypothèse est soutenue."
     elif verdict == "Tendance non significative":
         lecture += "Le sens va dans celui de l'hypothèse, mais l'effet n'atteint pas le seuil de significativité : prudence."
     else:
         lecture += "Le lien attendu (négatif) n'apparaît pas dans ces données : l'hypothèse n'est pas soutenue."
     return {
         "code": "H2.b",
-        "titre": "Le décalage mine-t-il la régulation ?",
+        "titre": "Le décalage affaiblit-il la légitimité de la régulation ?",
         "enonce": (
             "Le décalage entre la responsabilité individuelle et la responsabilité structurelle "
             "diminue la légitimité perçue de toute régulation systémique."
         ),
         "verdict": verdict,
         "correlation": {"r": r2v(r), "p": p, "n": n, "pente": r2v(pente, 3), "ordonnee": r2v(ordonnee, 3), "xmin": xmin, "xmax": xmax},
-        "mesure": "Légitimité de la régulation approchée par la demande de transparence imposée par l'État (Q18).",
+        "mesure": "Légitimité perçue de la régulation systémique, approchée par la demande de transparence imposée à l'État (Q18).",
         "lecture": lecture,
     }
 
@@ -514,6 +519,13 @@ def _fmt_p(p):
     if p is None:
         return "n/d"
     return "< 0,001" if p < 0.001 else ("%.3f" % p).replace(".", ",")
+
+
+def _fmt_p_signe(p):
+    """« p < 0,001 » ou « p = 0,500 », pour insertion directe dans une phrase."""
+    if p is None:
+        return "p = n/d"
+    return ("p " + _fmt_p(p)) if p < 0.001 else ("p = " + _fmt_p(p))
 
 
 # --------------------------------------------------------------------------
@@ -540,9 +552,11 @@ def bloc_h3(reps):
     for k in POLITIQUE_ORDRE:
         grp = [r["q18"] for r in reps if r["politique"] == k and r["q18"] is not None]
         if grp:
-            par_bord.append({"label": POLITIQUE_LABELS[k], "note": r2v(moyenne(grp)), "pct": pct(sum(1 for v in grp if v in (4, 5)), len(grp))})
+            par_bord.append({"cle": k, "label": POLITIQUE_LABELS[k], "note": r2v(moyenne(grp)), "pct": pct(sum(1 for v in grp if v in (4, 5)), len(grp))})
     effet = note_precis is not None and note_malpas is not None and note_precis < note_malpas
-    massive_deconnectee = pct(transparence, n) >= 70 and pct(precis, n) <= 30
+    pct_transparence = pct(transparence, n)
+    pct_precis = pct(precis, n)
+    massive_deconnectee = pct_transparence >= 70 and pct_precis <= 30
     effet_signif = p_dsa is not None and p_dsa < 0.05 and effet
     if massive_deconnectee and effet_signif:
         verdict = "Confirmée"
@@ -560,8 +574,8 @@ def bloc_h3(reps):
         ),
         "verdict": verdict,
         "ecart": {
-            "percu": {"label": "Demande de transparence", "valeur": pct(transparence, n), "unite": "%", "sous": "Part jugeant la transparence nécessaire (Q18 ∈ {4,5})"},
-            "reel": {"label": "Connaissance précise du DSA", "valeur": pct(precis, n), "unite": "%", "sous": "Part qui en connaît précisément le contenu (Q17)"},
+            "percu": {"label": "Demande de régulation", "valeur": pct_transparence, "unite": "%", "sous": "Transparence exigée des plateformes, jugée nécessaire (Q18 ∈ {4,5})"},
+            "reel": {"label": "Connaissance des dispositifs existants", "valeur": pct_precis, "unite": "%", "sous": "DSA connu précisément (Q17)"},
             "echelle": 100,
         },
         "demande_par_bord": par_bord,
@@ -571,11 +585,13 @@ def bloc_h3(reps):
         ],
         "test_dsa": {"t": r2v(t_dsa, 1) if t_dsa is not None else None, "p": p_dsa, "significatif": bool(p_dsa is not None and p_dsa < 0.05), "sens_attendu": bool(effet)},
         "lecture": (
-            "La transparence est réclamée très largement (82 %) alors qu'une petite minorité (15 %) "
-            "connaît précisément le DSA : la demande est massive mais déconnectée de la connaissance. "
-            "Le consensus est toutefois gradué : très fort à gauche et au centre, plus modéré à droite. "
-            "Surtout, l'effet « mieux connaître le DSA réduit la demande » va dans le sens attendu mais "
-            "n'est pas statistiquement significatif (p = 0,50) : cette partie de l'hypothèse n'est pas soutenue."
+            "La demande de régulation des algorithmes est massive et consensuelle : la transparence est "
+            "jugée nécessaire par %s%% des répondants, à travers tous les bords politiques, quoique plus "
+            "mesurée à droite. Elle reste déconnectée de la connaissance des dispositifs existants : "
+            "seuls %s%% connaissent précisément le DSA. L'idée qu'une meilleure connaissance du DSA "
+            "réduit la volonté de régulation va dans le sens attendu, mais n'est pas statistiquement "
+            "significative (%s) : cette partie de l'hypothèse n'est pas confirmée par les données."
+            % (pct_transparence, pct_precis, _fmt_p_signe(p_dsa))
         ),
     }
 
