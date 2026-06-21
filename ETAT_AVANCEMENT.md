@@ -81,12 +81,17 @@ La CI exécute désormais analyse.py automatiquement. Déployé (PR #4), vérifi
 - Verdicts = interprétation automatique marquée "à valider", à trancher par Corentin.
 - Contraste politique H2 à interpréter (gauche plus critique des médias/État).
 
+### Nuage 3D fait (2026-06-21)
+
+Premier palier dataviz avancée livré et déployé. `three` + `@react-three/fiber` + `@react-three/drei` installés. Composant `web/src/sections/Nuage3D.jsx`, nouvel onglet "Nuage 3D" (entre H3 et Données), **chargé en lazy** (chunk three.js séparé, ~282 ko gzip, hors bundle initial qui reste à ~104 ko gzip).
+
+Fonctionnel et vérifié : 263 points (un par répondant) depuis `respondents.json`, couleur par bord politique (dégradé rouge vif → rouge → blanc → bleu → bleu vif, gris pour "ne se positionne pas"), **sélecteurs X/Y/Z** parmi 5 variables (hostilité, exposition, temps, perception de bulle, demande), jitter déterministe sur les axes discrets, cadre + graduations + labels d'axes, OrbitControls (rotation/zoom), survol avec infobulle, **légende cliquable** qui filtre (testé : masquer "Très à gauche" → 263 passe à 231, soit les 32 concernés). Build OK, aucune erreur console.
+
 ### Prochaine étape exacte (reprendre ici)
 
-1. **Nuage 3D** (react-three-fiber) : installer `three` + `@react-three/fiber` + `@react-three/drei`. Nouvel onglet ou section dataviz. Axes = hostilité × exposition × (temps ou bulle), un point par répondant depuis `respondents.json`, couleur selon `politique` (dégradé rouge vif → rouge → blanc → bleu → bleu vif, gris pour "ne se positionne pas"). Jitter sur les axes discrets (temps, bulle). Rotation, légende, survol. Charger la lib à la demande (lazy) pour ne pas alourdir le chargement initial.
-2. Ensuite (selon priorités Corentin) : croisements multivariés 2D, analyse de mots-clés des verbatims (fréquences à générer dans analyse.py), gradient géographique urbain↔rural.
-3. Onglet **Mémoire** (HTML façon wiki) : coquille à préparer quand Corentin fournira le contenu converti de son PDF.
-4. Étape 5 : module Datalake (§9). Penser à reporter les deux URL dans le `Etat_d_avancement.md` du mémoire (§2.3.4, voir note en bas).
+1. Selon priorités Corentin : croisements multivariés 2D (âge × variables, politique × blâme, urbain↔rural × demande), analyse de mots-clés des verbatims (fréquences à générer dans analyse.py), gradient géographique urbain↔rural. Tout peut réutiliser `respondents.json` et le même onglet d'exploration ou des onglets dédiés.
+2. Onglet **Mémoire** (HTML façon wiki) : coquille à préparer quand Corentin fournira le contenu converti de son PDF.
+3. Étape 5 : module Datalake (§9). Penser à reporter les deux URL dans le `Etat_d_avancement.md` du mémoire (§2.3.4, voir note en bas).
 
 ### Revue d'architecture (2026-06-20)
 
