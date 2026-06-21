@@ -1,7 +1,7 @@
 {
   "meta": {
     "n": 263,
-    "genere_le": "2026-06-20"
+    "genere_le": "2026-06-21"
   },
   "labels": {
     "politique": {
@@ -30,6 +30,9 @@
       "bulle": 3.0,
       "exposition": 4.25,
       "hostilite": 4.25,
+      "individus": 5.0,
+      "structures": 4.5,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "precis"
     },
@@ -42,6 +45,9 @@
       "bulle": 5.0,
       "exposition": 2.25,
       "hostilite": 3.0,
+      "individus": 5.0,
+      "structures": 2.5,
+      "decalage": 2.5,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -54,6 +60,9 @@
       "bulle": 3.0,
       "exposition": 3.75,
       "hostilite": 1.5,
+      "individus": 4.5,
+      "structures": 3.0,
+      "decalage": 1.5,
       "demande": 4.0,
       "dsa": "precis"
     },
@@ -66,6 +75,9 @@
       "bulle": 3.0,
       "exposition": 3.0,
       "hostilite": 2.25,
+      "individus": 4.0,
+      "structures": 5.0,
+      "decalage": -1.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -78,6 +90,9 @@
       "bulle": 4.0,
       "exposition": 3.5,
       "hostilite": 2.75,
+      "individus": 4.5,
+      "structures": 3.5,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "precis"
     },
@@ -90,6 +105,9 @@
       "bulle": 2.0,
       "exposition": 2.75,
       "hostilite": 3.5,
+      "individus": 2.5,
+      "structures": 4.0,
+      "decalage": -1.5,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -102,6 +120,9 @@
       "bulle": 4.0,
       "exposition": 3.0,
       "hostilite": 2.5,
+      "individus": 4.5,
+      "structures": 4.5,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -114,6 +135,9 @@
       "bulle": 3.0,
       "exposition": 3.0,
       "hostilite": 3.25,
+      "individus": 4.5,
+      "structures": 4.0,
+      "decalage": 0.5,
       "demande": 4.0,
       "dsa": "precis"
     },
@@ -126,6 +150,9 @@
       "bulle": 3.0,
       "exposition": 3.75,
       "hostilite": 3.0,
+      "individus": 4.0,
+      "structures": 4.5,
+      "decalage": -0.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -138,6 +165,9 @@
       "bulle": 4.0,
       "exposition": 4.25,
       "hostilite": 4.0,
+      "individus": 4.5,
+      "structures": 5.0,
+      "decalage": -0.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -150,6 +180,9 @@
       "bulle": 4.0,
       "exposition": 2.25,
       "hostilite": 3.75,
+      "individus": 4.5,
+      "structures": 4.0,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -162,6 +195,9 @@
       "bulle": 4.0,
       "exposition": 2.25,
       "hostilite": 3.5,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "precis"
     },
@@ -174,6 +210,9 @@
       "bulle": 4.0,
       "exposition": 2.25,
       "hostilite": 2.5,
+      "individus": 4.0,
+      "structures": 3.0,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -186,6 +225,9 @@
       "bulle": 3.0,
       "exposition": 4.75,
       "hostilite": 3.0,
+      "individus": 4.0,
+      "structures": 4.5,
+      "decalage": -0.5,
       "demande": 3.0,
       "dsa": "vague"
     },
@@ -198,6 +240,9 @@
       "bulle": 2.0,
       "exposition": 4.5,
       "hostilite": 3.5,
+      "individus": 5.0,
+      "structures": 4.5,
+      "decalage": 0.5,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -210,6 +255,9 @@
       "bulle": 4.0,
       "exposition": 2.5,
       "hostilite": 2.75,
+      "individus": 4.0,
+      "structures": 4.0,
+      "decalage": 0.0,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -222,6 +270,9 @@
       "bulle": 4.0,
       "exposition": 1.5,
       "hostilite": 1.5,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "precis"
     },
@@ -234,6 +285,9 @@
       "bulle": 2.0,
       "exposition": 3.25,
       "hostilite": 3.5,
+      "individus": 5.0,
+      "structures": 5.0,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -246,6 +300,9 @@
       "bulle": 5.0,
       "exposition": 3.25,
       "hostilite": 3.75,
+      "individus": 4.5,
+      "structures": 3.5,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -258,6 +315,9 @@
       "bulle": 4.0,
       "exposition": 2.75,
       "hostilite": 2.0,
+      "individus": 4.5,
+      "structures": 3.5,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -270,6 +330,9 @@
       "bulle": 3.0,
       "exposition": 4.25,
       "hostilite": 3.25,
+      "individus": 4.0,
+      "structures": 4.5,
+      "decalage": -0.5,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -282,6 +345,9 @@
       "bulle": 5.0,
       "exposition": 3.75,
       "hostilite": 2.25,
+      "individus": 4.5,
+      "structures": 3.0,
+      "decalage": 1.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -294,6 +360,9 @@
       "bulle": 3.0,
       "exposition": 3.25,
       "hostilite": 3.5,
+      "individus": 3.5,
+      "structures": 4.0,
+      "decalage": -0.5,
       "demande": 3.0,
       "dsa": "non"
     },
@@ -306,6 +375,9 @@
       "bulle": 4.0,
       "exposition": 1.75,
       "hostilite": 2.0,
+      "individus": 5.0,
+      "structures": 5.0,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -318,6 +390,9 @@
       "bulle": 5.0,
       "exposition": 3.25,
       "hostilite": 2.5,
+      "individus": 3.5,
+      "structures": 4.0,
+      "decalage": -0.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -330,6 +405,9 @@
       "bulle": 4.0,
       "exposition": 3.25,
       "hostilite": 4.25,
+      "individus": 4.5,
+      "structures": 4.5,
+      "decalage": 0.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -342,6 +420,9 @@
       "bulle": 3.0,
       "exposition": 2.25,
       "hostilite": 3.5,
+      "individus": 4.0,
+      "structures": 3.0,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "precis"
     },
@@ -354,6 +435,9 @@
       "bulle": 5.0,
       "exposition": 1.5,
       "hostilite": 4.25,
+      "individus": 4.5,
+      "structures": 2.5,
+      "decalage": 2.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -366,6 +450,9 @@
       "bulle": 3.0,
       "exposition": 3.5,
       "hostilite": 3.75,
+      "individus": 4.0,
+      "structures": 3.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -378,6 +465,9 @@
       "bulle": 2.0,
       "exposition": 4.0,
       "hostilite": 3.75,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -390,6 +480,9 @@
       "bulle": 4.0,
       "exposition": 2.75,
       "hostilite": 3.5,
+      "individus": 4.5,
+      "structures": 4.5,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -402,6 +495,9 @@
       "bulle": 3.0,
       "exposition": 4.0,
       "hostilite": 2.0,
+      "individus": 5.0,
+      "structures": 1.5,
+      "decalage": 3.5,
       "demande": 1.0,
       "dsa": "vague"
     },
@@ -414,6 +510,9 @@
       "bulle": 2.0,
       "exposition": 3.5,
       "hostilite": 2.25,
+      "individus": 4.0,
+      "structures": 2.0,
+      "decalage": 2.0,
       "demande": 2.0,
       "dsa": "vague"
     },
@@ -426,6 +525,9 @@
       "bulle": 3.0,
       "exposition": 1.25,
       "hostilite": 1.5,
+      "individus": 4.5,
+      "structures": 4.5,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -438,6 +540,9 @@
       "bulle": 1.0,
       "exposition": 2.25,
       "hostilite": 3.0,
+      "individus": 3.0,
+      "structures": 3.0,
+      "decalage": 0.0,
       "demande": 1.0,
       "dsa": "precis"
     },
@@ -450,6 +555,9 @@
       "bulle": 3.0,
       "exposition": 4.5,
       "hostilite": 3.0,
+      "individus": 4.0,
+      "structures": 3.0,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -462,6 +570,9 @@
       "bulle": 4.0,
       "exposition": 3.5,
       "hostilite": 2.0,
+      "individus": 5.0,
+      "structures": 5.0,
+      "decalage": 0.0,
       "demande": 1.0,
       "dsa": "vague"
     },
@@ -474,6 +585,9 @@
       "bulle": 4.0,
       "exposition": 2.25,
       "hostilite": 3.75,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -486,6 +600,9 @@
       "bulle": 4.0,
       "exposition": 2.0,
       "hostilite": 3.25,
+      "individus": 5.0,
+      "structures": 4.5,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -498,6 +615,9 @@
       "bulle": 5.0,
       "exposition": 3.5,
       "hostilite": 3.75,
+      "individus": 4.0,
+      "structures": 5.0,
+      "decalage": -1.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -510,6 +630,9 @@
       "bulle": 2.0,
       "exposition": 3.25,
       "hostilite": 4.0,
+      "individus": 4.5,
+      "structures": 3.5,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -522,6 +645,9 @@
       "bulle": 5.0,
       "exposition": 3.75,
       "hostilite": 3.75,
+      "individus": 5.0,
+      "structures": 4.5,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -534,6 +660,9 @@
       "bulle": 4.0,
       "exposition": 2.25,
       "hostilite": 3.0,
+      "individus": 5.0,
+      "structures": 2.5,
+      "decalage": 2.5,
       "demande": 2.0,
       "dsa": "precis"
     },
@@ -546,6 +675,9 @@
       "bulle": 4.0,
       "exposition": 3.5,
       "hostilite": 4.0,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 3.0,
       "dsa": "precis"
     },
@@ -558,6 +690,9 @@
       "bulle": 3.0,
       "exposition": 2.25,
       "hostilite": 3.25,
+      "individus": 5.0,
+      "structures": 5.0,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -570,6 +705,9 @@
       "bulle": 5.0,
       "exposition": 3.25,
       "hostilite": 1.5,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "precis"
     },
@@ -582,6 +720,9 @@
       "bulle": 5.0,
       "exposition": 3.5,
       "hostilite": 3.5,
+      "individus": 5.0,
+      "structures": 4.5,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -594,6 +735,9 @@
       "bulle": 5.0,
       "exposition": 3.5,
       "hostilite": 3.5,
+      "individus": 5.0,
+      "structures": 5.0,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "precis"
     },
@@ -606,6 +750,9 @@
       "bulle": 4.0,
       "exposition": 4.5,
       "hostilite": 2.75,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -618,6 +765,9 @@
       "bulle": 5.0,
       "exposition": 2.75,
       "hostilite": 3.0,
+      "individus": 5.0,
+      "structures": 2.5,
+      "decalage": 2.5,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -630,6 +780,9 @@
       "bulle": 2.0,
       "exposition": 2.75,
       "hostilite": 3.75,
+      "individus": 5.0,
+      "structures": 3.0,
+      "decalage": 2.0,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -642,6 +795,9 @@
       "bulle": 2.0,
       "exposition": 3.25,
       "hostilite": 3.0,
+      "individus": 4.5,
+      "structures": 5.0,
+      "decalage": -0.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -654,6 +810,9 @@
       "bulle": 3.0,
       "exposition": 3.5,
       "hostilite": 3.75,
+      "individus": 4.5,
+      "structures": 4.0,
+      "decalage": 0.5,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -666,6 +825,9 @@
       "bulle": 4.0,
       "exposition": 3.75,
       "hostilite": 3.75,
+      "individus": 4.0,
+      "structures": 4.0,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -678,6 +840,9 @@
       "bulle": 4.0,
       "exposition": 2.25,
       "hostilite": 3.5,
+      "individus": 4.5,
+      "structures": 4.0,
+      "decalage": 0.5,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -690,6 +855,9 @@
       "bulle": 3.0,
       "exposition": 3.0,
       "hostilite": 3.5,
+      "individus": 4.5,
+      "structures": 4.0,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -702,6 +870,9 @@
       "bulle": 4.0,
       "exposition": 1.75,
       "hostilite": 3.75,
+      "individus": 3.0,
+      "structures": 3.0,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -714,6 +885,9 @@
       "bulle": 5.0,
       "exposition": 1.75,
       "hostilite": 2.25,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -726,6 +900,9 @@
       "bulle": 4.0,
       "exposition": 2.75,
       "hostilite": 3.75,
+      "individus": 4.0,
+      "structures": 3.0,
+      "decalage": 1.0,
       "demande": 2.0,
       "dsa": "vague"
     },
@@ -738,6 +915,9 @@
       "bulle": 3.0,
       "exposition": 2.0,
       "hostilite": 4.0,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -750,6 +930,9 @@
       "bulle": 3.0,
       "exposition": 2.25,
       "hostilite": 3.25,
+      "individus": 3.5,
+      "structures": 3.5,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "precis"
     },
@@ -762,6 +945,9 @@
       "bulle": 4.0,
       "exposition": 2.25,
       "hostilite": 4.5,
+      "individus": 4.5,
+      "structures": 3.5,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -774,6 +960,9 @@
       "bulle": 4.0,
       "exposition": 3.0,
       "hostilite": 3.5,
+      "individus": 4.0,
+      "structures": 4.0,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -786,6 +975,9 @@
       "bulle": 4.0,
       "exposition": 3.0,
       "hostilite": 2.75,
+      "individus": 4.0,
+      "structures": 3.0,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -798,6 +990,9 @@
       "bulle": 3.0,
       "exposition": 3.5,
       "hostilite": 2.0,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -810,6 +1005,9 @@
       "bulle": 4.0,
       "exposition": 2.0,
       "hostilite": 3.5,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -822,6 +1020,9 @@
       "bulle": 5.0,
       "exposition": 2.0,
       "hostilite": 1.75,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -834,6 +1035,9 @@
       "bulle": 3.0,
       "exposition": 1.75,
       "hostilite": 3.0,
+      "individus": 3.5,
+      "structures": 3.5,
+      "decalage": 0.0,
       "demande": 4.0,
       "dsa": "precis"
     },
@@ -846,6 +1050,9 @@
       "bulle": 4.0,
       "exposition": 3.0,
       "hostilite": 3.0,
+      "individus": 5.0,
+      "structures": 5.0,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -858,6 +1065,9 @@
       "bulle": 2.0,
       "exposition": 2.5,
       "hostilite": 2.75,
+      "individus": 4.0,
+      "structures": 3.5,
+      "decalage": 0.5,
       "demande": 2.0,
       "dsa": "vague"
     },
@@ -870,6 +1080,9 @@
       "bulle": 2.0,
       "exposition": 2.5,
       "hostilite": 2.5,
+      "individus": 5.0,
+      "structures": 5.0,
+      "decalage": 0.0,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -882,6 +1095,9 @@
       "bulle": 5.0,
       "exposition": 1.5,
       "hostilite": 1.5,
+      "individus": 5.0,
+      "structures": 4.5,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -894,6 +1110,9 @@
       "bulle": 2.0,
       "exposition": 3.5,
       "hostilite": 2.5,
+      "individus": 3.0,
+      "structures": 1.0,
+      "decalage": 2.0,
       "demande": 4.0,
       "dsa": "precis"
     },
@@ -906,6 +1125,9 @@
       "bulle": 5.0,
       "exposition": 4.75,
       "hostilite": 3.5,
+      "individus": 4.5,
+      "structures": 4.0,
+      "decalage": 0.5,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -918,6 +1140,9 @@
       "bulle": 4.0,
       "exposition": 2.5,
       "hostilite": 3.5,
+      "individus": 4.5,
+      "structures": 4.0,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -930,6 +1155,9 @@
       "bulle": 1.0,
       "exposition": 3.0,
       "hostilite": 4.25,
+      "individus": 1.5,
+      "structures": 1.0,
+      "decalage": 0.5,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -942,6 +1170,9 @@
       "bulle": 5.0,
       "exposition": 1.0,
       "hostilite": 2.0,
+      "individus": 1.0,
+      "structures": 1.0,
+      "decalage": 0.0,
       "demande": 1.0,
       "dsa": "non"
     },
@@ -954,6 +1185,9 @@
       "bulle": 5.0,
       "exposition": 2.5,
       "hostilite": 4.25,
+      "individus": 3.0,
+      "structures": 4.0,
+      "decalage": -1.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -966,6 +1200,9 @@
       "bulle": 2.0,
       "exposition": 3.75,
       "hostilite": 4.25,
+      "individus": 5.0,
+      "structures": 4.5,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -978,6 +1215,9 @@
       "bulle": 3.0,
       "exposition": 2.75,
       "hostilite": 3.5,
+      "individus": 2.0,
+      "structures": 4.0,
+      "decalage": -2.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -990,6 +1230,9 @@
       "bulle": 4.0,
       "exposition": 2.5,
       "hostilite": 2.5,
+      "individus": 5.0,
+      "structures": 3.0,
+      "decalage": 2.0,
       "demande": 2.0,
       "dsa": "non"
     },
@@ -1002,6 +1245,9 @@
       "bulle": 2.0,
       "exposition": 4.5,
       "hostilite": 2.0,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 3.0,
       "dsa": "non"
     },
@@ -1014,6 +1260,9 @@
       "bulle": 4.0,
       "exposition": 3.0,
       "hostilite": 2.75,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 3.0,
       "dsa": "non"
     },
@@ -1026,6 +1275,9 @@
       "bulle": 5.0,
       "exposition": 1.25,
       "hostilite": 3.0,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 2.0,
       "dsa": "vague"
     },
@@ -1038,6 +1290,9 @@
       "bulle": 4.0,
       "exposition": 3.25,
       "hostilite": 3.0,
+      "individus": 4.5,
+      "structures": 4.5,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -1050,6 +1305,9 @@
       "bulle": 3.0,
       "exposition": 1.75,
       "hostilite": 2.75,
+      "individus": 5.0,
+      "structures": 4.5,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -1062,6 +1320,9 @@
       "bulle": 2.0,
       "exposition": 3.25,
       "hostilite": 3.0,
+      "individus": 3.5,
+      "structures": 3.5,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -1074,6 +1335,9 @@
       "bulle": 5.0,
       "exposition": 1.5,
       "hostilite": 2.25,
+      "individus": 4.0,
+      "structures": 3.0,
+      "decalage": 1.0,
       "demande": 3.0,
       "dsa": "vague"
     },
@@ -1086,6 +1350,9 @@
       "bulle": 4.0,
       "exposition": 2.75,
       "hostilite": 3.75,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -1098,6 +1365,9 @@
       "bulle": 4.0,
       "exposition": 3.0,
       "hostilite": 1.75,
+      "individus": 5.0,
+      "structures": 3.0,
+      "decalage": 2.0,
       "demande": 4.0,
       "dsa": "precis"
     },
@@ -1110,6 +1380,9 @@
       "bulle": 4.0,
       "exposition": 3.5,
       "hostilite": 3.0,
+      "individus": 4.0,
+      "structures": 3.5,
+      "decalage": 0.5,
       "demande": 3.0,
       "dsa": "vague"
     },
@@ -1122,6 +1395,9 @@
       "bulle": 4.0,
       "exposition": 2.25,
       "hostilite": 3.75,
+      "individus": 4.5,
+      "structures": 3.5,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -1134,6 +1410,9 @@
       "bulle": 3.0,
       "exposition": 3.0,
       "hostilite": 3.75,
+      "individus": 4.5,
+      "structures": 4.5,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -1146,6 +1425,9 @@
       "bulle": 5.0,
       "exposition": 1.75,
       "hostilite": 3.75,
+      "individus": 4.0,
+      "structures": 4.0,
+      "decalage": 0.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -1158,6 +1440,9 @@
       "bulle": 4.0,
       "exposition": 3.5,
       "hostilite": 2.5,
+      "individus": 3.0,
+      "structures": 4.0,
+      "decalage": -1.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -1170,6 +1455,9 @@
       "bulle": 4.0,
       "exposition": 3.25,
       "hostilite": 3.0,
+      "individus": 4.0,
+      "structures": 5.0,
+      "decalage": -1.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -1182,6 +1470,9 @@
       "bulle": 5.0,
       "exposition": 3.5,
       "hostilite": 4.25,
+      "individus": 4.5,
+      "structures": 5.0,
+      "decalage": -0.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -1194,6 +1485,9 @@
       "bulle": 3.0,
       "exposition": 2.0,
       "hostilite": 3.25,
+      "individus": 4.0,
+      "structures": 4.0,
+      "decalage": 0.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -1206,6 +1500,9 @@
       "bulle": 4.0,
       "exposition": 3.25,
       "hostilite": 4.25,
+      "individus": 4.0,
+      "structures": 3.5,
+      "decalage": 0.5,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -1218,6 +1515,9 @@
       "bulle": 4.0,
       "exposition": 3.75,
       "hostilite": 2.5,
+      "individus": 4.0,
+      "structures": 4.0,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -1230,6 +1530,9 @@
       "bulle": 2.0,
       "exposition": 2.0,
       "hostilite": 3.0,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -1242,6 +1545,9 @@
       "bulle": 3.0,
       "exposition": 1.25,
       "hostilite": 1.0,
+      "individus": 5.0,
+      "structures": 3.0,
+      "decalage": 2.0,
       "demande": 3.0,
       "dsa": "non"
     },
@@ -1254,6 +1560,9 @@
       "bulle": 4.0,
       "exposition": 3.25,
       "hostilite": 3.0,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -1266,6 +1575,9 @@
       "bulle": 2.0,
       "exposition": 3.25,
       "hostilite": 2.75,
+      "individus": 4.5,
+      "structures": 4.0,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -1278,6 +1590,9 @@
       "bulle": 2.0,
       "exposition": 1.75,
       "hostilite": 2.0,
+      "individus": 4.0,
+      "structures": 2.5,
+      "decalage": 1.5,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -1290,6 +1605,9 @@
       "bulle": 5.0,
       "exposition": 2.0,
       "hostilite": 2.5,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -1302,6 +1620,9 @@
       "bulle": 3.0,
       "exposition": 2.75,
       "hostilite": 3.25,
+      "individus": 4.5,
+      "structures": 4.0,
+      "decalage": 0.5,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -1314,6 +1635,9 @@
       "bulle": 4.0,
       "exposition": 2.5,
       "hostilite": 2.5,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -1326,6 +1650,9 @@
       "bulle": 5.0,
       "exposition": 1.75,
       "hostilite": 2.5,
+      "individus": 5.0,
+      "structures": 3.0,
+      "decalage": 2.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -1338,6 +1665,9 @@
       "bulle": 5.0,
       "exposition": 4.0,
       "hostilite": 4.25,
+      "individus": 5.0,
+      "structures": 4.5,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -1350,6 +1680,9 @@
       "bulle": 5.0,
       "exposition": 2.0,
       "hostilite": 3.0,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -1362,6 +1695,9 @@
       "bulle": 3.0,
       "exposition": 4.0,
       "hostilite": 2.0,
+      "individus": 4.0,
+      "structures": 3.5,
+      "decalage": 0.5,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -1374,6 +1710,9 @@
       "bulle": 5.0,
       "exposition": 3.0,
       "hostilite": 3.0,
+      "individus": 4.5,
+      "structures": 2.5,
+      "decalage": 2.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -1386,6 +1725,9 @@
       "bulle": 3.0,
       "exposition": 1.75,
       "hostilite": 2.25,
+      "individus": 2.5,
+      "structures": 2.0,
+      "decalage": 0.5,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -1398,6 +1740,9 @@
       "bulle": 3.0,
       "exposition": 4.75,
       "hostilite": 3.75,
+      "individus": 5.0,
+      "structures": 4.5,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -1410,6 +1755,9 @@
       "bulle": 4.0,
       "exposition": 3.25,
       "hostilite": 3.5,
+      "individus": 3.0,
+      "structures": 3.0,
+      "decalage": 0.0,
       "demande": 1.0,
       "dsa": "vague"
     },
@@ -1422,6 +1770,9 @@
       "bulle": 3.0,
       "exposition": 2.5,
       "hostilite": 3.0,
+      "individus": 2.5,
+      "structures": 3.0,
+      "decalage": -0.5,
       "demande": 3.0,
       "dsa": "precis"
     },
@@ -1434,6 +1785,9 @@
       "bulle": 5.0,
       "exposition": 3.0,
       "hostilite": 2.25,
+      "individus": 4.5,
+      "structures": 4.0,
+      "decalage": 0.5,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -1446,6 +1800,9 @@
       "bulle": 5.0,
       "exposition": 2.75,
       "hostilite": 3.0,
+      "individus": 4.0,
+      "structures": 3.0,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -1458,6 +1815,9 @@
       "bulle": 1.0,
       "exposition": 4.5,
       "hostilite": 1.0,
+      "individus": 5.0,
+      "structures": 4.5,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -1470,6 +1830,9 @@
       "bulle": 5.0,
       "exposition": 2.5,
       "hostilite": 2.0,
+      "individus": 4.5,
+      "structures": 3.0,
+      "decalage": 1.5,
       "demande": 5.0,
       "dsa": "precis"
     },
@@ -1482,6 +1845,9 @@
       "bulle": 3.0,
       "exposition": 3.25,
       "hostilite": 3.25,
+      "individus": 3.0,
+      "structures": 3.5,
+      "decalage": -0.5,
       "demande": 3.0,
       "dsa": "precis"
     },
@@ -1494,6 +1860,9 @@
       "bulle": 4.0,
       "exposition": 3.75,
       "hostilite": 5.0,
+      "individus": 4.5,
+      "structures": 4.5,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -1506,6 +1875,9 @@
       "bulle": 3.0,
       "exposition": 1.5,
       "hostilite": 3.5,
+      "individus": 3.0,
+      "structures": 3.0,
+      "decalage": 0.0,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -1518,6 +1890,9 @@
       "bulle": 5.0,
       "exposition": 2.75,
       "hostilite": 2.75,
+      "individus": 5.0,
+      "structures": 3.0,
+      "decalage": 2.0,
       "demande": 1.0,
       "dsa": "vague"
     },
@@ -1530,6 +1905,9 @@
       "bulle": 2.0,
       "exposition": 3.25,
       "hostilite": 1.75,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -1542,6 +1920,9 @@
       "bulle": 4.0,
       "exposition": 3.5,
       "hostilite": 3.5,
+      "individus": 4.0,
+      "structures": 3.0,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "precis"
     },
@@ -1554,6 +1935,9 @@
       "bulle": 4.0,
       "exposition": 2.75,
       "hostilite": 2.75,
+      "individus": 4.0,
+      "structures": 4.5,
+      "decalage": -0.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -1566,6 +1950,9 @@
       "bulle": 5.0,
       "exposition": 2.75,
       "hostilite": 4.0,
+      "individus": 5.0,
+      "structures": 3.0,
+      "decalage": 2.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -1578,6 +1965,9 @@
       "bulle": 5.0,
       "exposition": 2.5,
       "hostilite": 3.25,
+      "individus": 4.0,
+      "structures": 3.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -1590,6 +1980,9 @@
       "bulle": 5.0,
       "exposition": 2.0,
       "hostilite": 1.0,
+      "individus": 3.5,
+      "structures": 3.0,
+      "decalage": 0.5,
       "demande": 4.0,
       "dsa": "precis"
     },
@@ -1602,6 +1995,9 @@
       "bulle": 4.0,
       "exposition": 1.75,
       "hostilite": 3.25,
+      "individus": 4.5,
+      "structures": 4.0,
+      "decalage": 0.5,
       "demande": 4.0,
       "dsa": "precis"
     },
@@ -1614,6 +2010,9 @@
       "bulle": 4.0,
       "exposition": 2.5,
       "hostilite": 3.25,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -1626,6 +2025,9 @@
       "bulle": 2.0,
       "exposition": 3.0,
       "hostilite": 2.75,
+      "individus": 5.0,
+      "structures": 3.0,
+      "decalage": 2.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -1638,6 +2040,9 @@
       "bulle": 5.0,
       "exposition": 3.0,
       "hostilite": 1.75,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -1650,6 +2055,9 @@
       "bulle": 2.0,
       "exposition": 2.0,
       "hostilite": 1.5,
+      "individus": 5.0,
+      "structures": 3.0,
+      "decalage": 2.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -1662,6 +2070,9 @@
       "bulle": 2.0,
       "exposition": 2.25,
       "hostilite": 2.75,
+      "individus": 4.5,
+      "structures": 3.5,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -1674,6 +2085,9 @@
       "bulle": 5.0,
       "exposition": 1.5,
       "hostilite": 2.25,
+      "individus": 4.0,
+      "structures": 4.0,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -1686,6 +2100,9 @@
       "bulle": 1.0,
       "exposition": 1.5,
       "hostilite": 2.0,
+      "individus": 4.5,
+      "structures": 2.5,
+      "decalage": 2.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -1698,6 +2115,9 @@
       "bulle": 5.0,
       "exposition": 3.0,
       "hostilite": 1.0,
+      "individus": 4.5,
+      "structures": 4.0,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -1710,6 +2130,9 @@
       "bulle": 4.0,
       "exposition": 2.5,
       "hostilite": 4.25,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "precis"
     },
@@ -1722,6 +2145,9 @@
       "bulle": 3.0,
       "exposition": 2.25,
       "hostilite": 3.75,
+      "individus": 4.0,
+      "structures": 4.0,
+      "decalage": 0.0,
       "demande": 1.0,
       "dsa": "non"
     },
@@ -1734,6 +2160,9 @@
       "bulle": 4.0,
       "exposition": 2.75,
       "hostilite": 1.25,
+      "individus": 3.0,
+      "structures": 3.5,
+      "decalage": -0.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -1746,6 +2175,9 @@
       "bulle": 4.0,
       "exposition": 2.75,
       "hostilite": 4.0,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -1758,6 +2190,9 @@
       "bulle": 2.0,
       "exposition": 3.5,
       "hostilite": 2.75,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -1770,6 +2205,9 @@
       "bulle": 2.0,
       "exposition": 4.0,
       "hostilite": 4.0,
+      "individus": 5.0,
+      "structures": 2.5,
+      "decalage": 2.5,
       "demande": 1.0,
       "dsa": "non"
     },
@@ -1782,6 +2220,9 @@
       "bulle": 5.0,
       "exposition": 2.5,
       "hostilite": 3.25,
+      "individus": 4.0,
+      "structures": 3.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -1794,6 +2235,9 @@
       "bulle": 3.0,
       "exposition": 4.0,
       "hostilite": 2.0,
+      "individus": 5.0,
+      "structures": 2.0,
+      "decalage": 3.0,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -1806,6 +2250,9 @@
       "bulle": 3.0,
       "exposition": 2.25,
       "hostilite": 2.5,
+      "individus": 5.0,
+      "structures": 5.0,
+      "decalage": 0.0,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -1818,6 +2265,9 @@
       "bulle": 2.0,
       "exposition": 2.5,
       "hostilite": 2.0,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -1830,6 +2280,9 @@
       "bulle": 4.0,
       "exposition": 1.5,
       "hostilite": 2.0,
+      "individus": 5.0,
+      "structures": 5.0,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -1842,6 +2295,9 @@
       "bulle": 2.0,
       "exposition": 1.25,
       "hostilite": 2.75,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -1854,6 +2310,9 @@
       "bulle": 4.0,
       "exposition": 4.25,
       "hostilite": 3.75,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -1866,6 +2325,9 @@
       "bulle": 3.0,
       "exposition": 3.25,
       "hostilite": 3.0,
+      "individus": 3.5,
+      "structures": 3.5,
+      "decalage": 0.0,
       "demande": 3.0,
       "dsa": "non"
     },
@@ -1878,6 +2340,9 @@
       "bulle": 3.0,
       "exposition": 1.75,
       "hostilite": 3.75,
+      "individus": 4.5,
+      "structures": 4.5,
+      "decalage": 0.0,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -1890,6 +2355,9 @@
       "bulle": 5.0,
       "exposition": 1.5,
       "hostilite": 3.5,
+      "individus": 5.0,
+      "structures": 4.5,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -1902,6 +2370,9 @@
       "bulle": 4.0,
       "exposition": 3.0,
       "hostilite": 3.75,
+      "individus": 4.0,
+      "structures": 3.5,
+      "decalage": 0.5,
       "demande": 3.0,
       "dsa": "vague"
     },
@@ -1914,6 +2385,9 @@
       "bulle": 5.0,
       "exposition": 3.75,
       "hostilite": 3.0,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 3.0,
       "dsa": "vague"
     },
@@ -1926,6 +2400,9 @@
       "bulle": 2.0,
       "exposition": 2.25,
       "hostilite": 3.5,
+      "individus": 4.5,
+      "structures": 3.5,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -1938,6 +2415,9 @@
       "bulle": 4.0,
       "exposition": 3.25,
       "hostilite": 3.75,
+      "individus": 5.0,
+      "structures": 5.0,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -1950,6 +2430,9 @@
       "bulle": 3.0,
       "exposition": 3.25,
       "hostilite": 2.25,
+      "individus": 5.0,
+      "structures": 4.5,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -1962,6 +2445,9 @@
       "bulle": 4.0,
       "exposition": 3.0,
       "hostilite": 3.5,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -1974,6 +2460,9 @@
       "bulle": 3.0,
       "exposition": 3.5,
       "hostilite": 2.0,
+      "individus": 4.5,
+      "structures": 3.5,
+      "decalage": 1.0,
       "demande": 3.0,
       "dsa": "non"
     },
@@ -1986,6 +2475,9 @@
       "bulle": 4.0,
       "exposition": 3.5,
       "hostilite": 4.25,
+      "individus": 5.0,
+      "structures": 4.5,
+      "decalage": 0.5,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -1998,6 +2490,9 @@
       "bulle": 3.0,
       "exposition": 1.75,
       "hostilite": 2.25,
+      "individus": 4.0,
+      "structures": 4.5,
+      "decalage": -0.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -2010,6 +2505,9 @@
       "bulle": 4.0,
       "exposition": 3.0,
       "hostilite": 4.0,
+      "individus": 5.0,
+      "structures": 4.5,
+      "decalage": 0.5,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -2022,6 +2520,9 @@
       "bulle": 3.0,
       "exposition": 3.25,
       "hostilite": 2.25,
+      "individus": 4.0,
+      "structures": 4.0,
+      "decalage": 0.0,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -2034,6 +2535,9 @@
       "bulle": 3.0,
       "exposition": 2.0,
       "hostilite": 1.75,
+      "individus": 4.0,
+      "structures": 2.5,
+      "decalage": 1.5,
       "demande": 3.0,
       "dsa": "vague"
     },
@@ -2046,6 +2550,9 @@
       "bulle": 2.0,
       "exposition": 1.25,
       "hostilite": 2.0,
+      "individus": 4.0,
+      "structures": 1.0,
+      "decalage": 3.0,
       "demande": 3.0,
       "dsa": "vague"
     },
@@ -2058,6 +2565,9 @@
       "bulle": 4.0,
       "exposition": 1.75,
       "hostilite": 3.25,
+      "individus": 4.5,
+      "structures": 2.5,
+      "decalage": 2.0,
       "demande": 1.0,
       "dsa": "non"
     },
@@ -2070,6 +2580,9 @@
       "bulle": 3.0,
       "exposition": 3.0,
       "hostilite": 2.25,
+      "individus": 5.0,
+      "structures": 5.0,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -2082,6 +2595,9 @@
       "bulle": 3.0,
       "exposition": 2.5,
       "hostilite": 3.0,
+      "individus": 5.0,
+      "structures": 2.0,
+      "decalage": 3.0,
       "demande": 1.0,
       "dsa": "precis"
     },
@@ -2094,6 +2610,9 @@
       "bulle": 4.0,
       "exposition": 3.5,
       "hostilite": 3.75,
+      "individus": 4.5,
+      "structures": 3.5,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -2106,6 +2625,9 @@
       "bulle": 3.0,
       "exposition": 3.25,
       "hostilite": 2.0,
+      "individus": 5.0,
+      "structures": 3.0,
+      "decalage": 2.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -2118,6 +2640,9 @@
       "bulle": 3.0,
       "exposition": 2.25,
       "hostilite": 3.5,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -2130,6 +2655,9 @@
       "bulle": 4.0,
       "exposition": 2.0,
       "hostilite": 3.0,
+      "individus": 4.5,
+      "structures": 4.0,
+      "decalage": 0.5,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -2142,6 +2670,9 @@
       "bulle": 4.0,
       "exposition": 3.5,
       "hostilite": 4.5,
+      "individus": 5.0,
+      "structures": 3.0,
+      "decalage": 2.0,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -2154,6 +2685,9 @@
       "bulle": 4.0,
       "exposition": 4.25,
       "hostilite": 3.75,
+      "individus": 5.0,
+      "structures": 3.0,
+      "decalage": 2.0,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -2166,6 +2700,9 @@
       "bulle": 5.0,
       "exposition": 2.75,
       "hostilite": 2.25,
+      "individus": 5.0,
+      "structures": 3.0,
+      "decalage": 2.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -2178,6 +2715,9 @@
       "bulle": 5.0,
       "exposition": 2.25,
       "hostilite": 3.0,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -2190,6 +2730,9 @@
       "bulle": 1.0,
       "exposition": 2.0,
       "hostilite": 2.5,
+      "individus": 4.5,
+      "structures": 4.0,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -2202,6 +2745,9 @@
       "bulle": 3.0,
       "exposition": 3.25,
       "hostilite": 3.25,
+      "individus": 5.0,
+      "structures": 4.5,
+      "decalage": 0.5,
       "demande": 3.0,
       "dsa": "vague"
     },
@@ -2214,6 +2760,9 @@
       "bulle": 4.0,
       "exposition": 1.5,
       "hostilite": 3.0,
+      "individus": 4.5,
+      "structures": 3.5,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -2226,6 +2775,9 @@
       "bulle": 3.0,
       "exposition": 3.5,
       "hostilite": 4.25,
+      "individus": 4.0,
+      "structures": 4.0,
+      "decalage": 0.0,
       "demande": 3.0,
       "dsa": "non"
     },
@@ -2238,6 +2790,9 @@
       "bulle": 5.0,
       "exposition": 4.0,
       "hostilite": 3.75,
+      "individus": 4.5,
+      "structures": 4.0,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -2250,6 +2805,9 @@
       "bulle": 3.0,
       "exposition": 2.75,
       "hostilite": 1.75,
+      "individus": 3.5,
+      "structures": 3.5,
+      "decalage": 0.0,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -2262,6 +2820,9 @@
       "bulle": 4.0,
       "exposition": 3.0,
       "hostilite": 3.5,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -2274,6 +2835,9 @@
       "bulle": 5.0,
       "exposition": 2.0,
       "hostilite": 3.0,
+      "individus": 4.5,
+      "structures": 4.5,
+      "decalage": 0.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -2286,6 +2850,9 @@
       "bulle": 3.0,
       "exposition": 4.75,
       "hostilite": 3.25,
+      "individus": 5.0,
+      "structures": 4.5,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -2298,6 +2865,9 @@
       "bulle": 2.0,
       "exposition": 3.5,
       "hostilite": 3.25,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -2310,6 +2880,9 @@
       "bulle": 3.0,
       "exposition": 2.5,
       "hostilite": 4.0,
+      "individus": 3.0,
+      "structures": 3.5,
+      "decalage": -0.5,
       "demande": 3.0,
       "dsa": "non"
     },
@@ -2322,6 +2895,9 @@
       "bulle": 4.0,
       "exposition": 2.5,
       "hostilite": 3.75,
+      "individus": 4.5,
+      "structures": 3.0,
+      "decalage": 1.5,
       "demande": 3.0,
       "dsa": "non"
     },
@@ -2334,6 +2910,9 @@
       "bulle": 4.0,
       "exposition": 5.0,
       "hostilite": 3.75,
+      "individus": 4.0,
+      "structures": 4.0,
+      "decalage": 0.0,
       "demande": 4.0,
       "dsa": "precis"
     },
@@ -2346,6 +2925,9 @@
       "bulle": 4.0,
       "exposition": 1.75,
       "hostilite": 2.75,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -2358,6 +2940,9 @@
       "bulle": 5.0,
       "exposition": 2.0,
       "hostilite": 3.0,
+      "individus": 3.0,
+      "structures": 3.0,
+      "decalage": 0.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -2370,6 +2955,9 @@
       "bulle": 3.0,
       "exposition": 3.0,
       "hostilite": 1.0,
+      "individus": 5.0,
+      "structures": 5.0,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -2382,6 +2970,9 @@
       "bulle": 5.0,
       "exposition": 3.5,
       "hostilite": 4.0,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -2394,6 +2985,9 @@
       "bulle": 2.0,
       "exposition": 3.75,
       "hostilite": 3.0,
+      "individus": 4.0,
+      "structures": 4.0,
+      "decalage": 0.0,
       "demande": 3.0,
       "dsa": "vague"
     },
@@ -2406,6 +3000,9 @@
       "bulle": 4.0,
       "exposition": 2.75,
       "hostilite": 3.5,
+      "individus": 4.5,
+      "structures": 5.0,
+      "decalage": -0.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -2418,6 +3015,9 @@
       "bulle": 5.0,
       "exposition": 1.5,
       "hostilite": 2.5,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -2430,6 +3030,9 @@
       "bulle": 3.0,
       "exposition": 3.5,
       "hostilite": 2.25,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 2.0,
       "dsa": "non"
     },
@@ -2442,6 +3045,9 @@
       "bulle": 4.0,
       "exposition": 2.75,
       "hostilite": 3.25,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -2454,6 +3060,9 @@
       "bulle": 3.0,
       "exposition": 4.25,
       "hostilite": 2.75,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 3.0,
       "dsa": "precis"
     },
@@ -2466,6 +3075,9 @@
       "bulle": 4.0,
       "exposition": 2.5,
       "hostilite": 3.75,
+      "individus": 5.0,
+      "structures": 2.5,
+      "decalage": 2.5,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -2478,6 +3090,9 @@
       "bulle": 2.0,
       "exposition": 1.75,
       "hostilite": 2.0,
+      "individus": 5.0,
+      "structures": 2.5,
+      "decalage": 2.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -2490,6 +3105,9 @@
       "bulle": 1.0,
       "exposition": 5.0,
       "hostilite": 5.0,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "precis"
     },
@@ -2502,6 +3120,9 @@
       "bulle": 4.0,
       "exposition": 1.5,
       "hostilite": 2.5,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -2514,6 +3135,9 @@
       "bulle": 3.0,
       "exposition": 2.0,
       "hostilite": 3.75,
+      "individus": 4.0,
+      "structures": 3.0,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -2526,6 +3150,9 @@
       "bulle": 2.0,
       "exposition": 2.75,
       "hostilite": 5.0,
+      "individus": 3.5,
+      "structures": 3.0,
+      "decalage": 0.5,
       "demande": 4.0,
       "dsa": "precis"
     },
@@ -2538,6 +3165,9 @@
       "bulle": 4.0,
       "exposition": 3.25,
       "hostilite": 3.5,
+      "individus": 5.0,
+      "structures": 3.0,
+      "decalage": 2.0,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -2550,6 +3180,9 @@
       "bulle": 4.0,
       "exposition": 2.75,
       "hostilite": 1.0,
+      "individus": 4.0,
+      "structures": 4.5,
+      "decalage": -0.5,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -2562,6 +3195,9 @@
       "bulle": 3.0,
       "exposition": 2.0,
       "hostilite": 3.5,
+      "individus": 4.5,
+      "structures": 2.5,
+      "decalage": 2.0,
       "demande": 5.0,
       "dsa": "precis"
     },
@@ -2574,6 +3210,9 @@
       "bulle": 3.0,
       "exposition": 2.5,
       "hostilite": 3.0,
+      "individus": 4.0,
+      "structures": 4.0,
+      "decalage": 0.0,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -2586,6 +3225,9 @@
       "bulle": 4.0,
       "exposition": 4.0,
       "hostilite": 2.5,
+      "individus": 4.5,
+      "structures": 3.0,
+      "decalage": 1.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -2598,6 +3240,9 @@
       "bulle": 5.0,
       "exposition": 2.75,
       "hostilite": 4.25,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -2610,6 +3255,9 @@
       "bulle": 5.0,
       "exposition": 2.0,
       "hostilite": 3.25,
+      "individus": 4.0,
+      "structures": 5.0,
+      "decalage": -1.0,
       "demande": 3.0,
       "dsa": "non"
     },
@@ -2622,6 +3270,9 @@
       "bulle": 3.0,
       "exposition": 3.0,
       "hostilite": 2.5,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -2634,6 +3285,9 @@
       "bulle": 3.0,
       "exposition": 4.0,
       "hostilite": 3.25,
+      "individus": 4.5,
+      "structures": 4.5,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -2646,6 +3300,9 @@
       "bulle": 3.0,
       "exposition": 3.5,
       "hostilite": 3.25,
+      "individus": 3.5,
+      "structures": 4.0,
+      "decalage": -0.5,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -2658,6 +3315,9 @@
       "bulle": 3.0,
       "exposition": 2.75,
       "hostilite": 1.25,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -2670,6 +3330,9 @@
       "bulle": 3.0,
       "exposition": 5.0,
       "hostilite": 3.25,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 2.0,
       "dsa": "vague"
     },
@@ -2682,6 +3345,9 @@
       "bulle": 3.0,
       "exposition": 4.0,
       "hostilite": 3.75,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -2694,6 +3360,9 @@
       "bulle": 4.0,
       "exposition": 2.25,
       "hostilite": 4.75,
+      "individus": 2.5,
+      "structures": 3.0,
+      "decalage": -0.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -2706,6 +3375,9 @@
       "bulle": 4.0,
       "exposition": 3.75,
       "hostilite": 4.75,
+      "individus": 4.0,
+      "structures": 3.0,
+      "decalage": 1.0,
       "demande": 3.0,
       "dsa": "non"
     },
@@ -2718,6 +3390,9 @@
       "bulle": 5.0,
       "exposition": 2.25,
       "hostilite": 3.5,
+      "individus": 3.0,
+      "structures": 3.5,
+      "decalage": -0.5,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -2730,6 +3405,9 @@
       "bulle": 3.0,
       "exposition": 3.0,
       "hostilite": 3.0,
+      "individus": 4.0,
+      "structures": 3.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -2742,6 +3420,9 @@
       "bulle": 4.0,
       "exposition": 3.25,
       "hostilite": 3.0,
+      "individus": 4.0,
+      "structures": 2.5,
+      "decalage": 1.5,
       "demande": 3.0,
       "dsa": "vague"
     },
@@ -2754,6 +3435,9 @@
       "bulle": 4.0,
       "exposition": 3.0,
       "hostilite": 2.0,
+      "individus": 4.5,
+      "structures": 4.0,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -2766,6 +3450,9 @@
       "bulle": 4.0,
       "exposition": 1.5,
       "hostilite": 3.0,
+      "individus": 4.0,
+      "structures": 4.5,
+      "decalage": -0.5,
       "demande": 5.0,
       "dsa": "precis"
     },
@@ -2778,6 +3465,9 @@
       "bulle": 4.0,
       "exposition": 2.75,
       "hostilite": 3.5,
+      "individus": 3.5,
+      "structures": 4.5,
+      "decalage": -1.0,
       "demande": 5.0,
       "dsa": "precis"
     },
@@ -2790,6 +3480,9 @@
       "bulle": 4.0,
       "exposition": 1.75,
       "hostilite": 2.25,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 3.0,
       "dsa": "vague"
     },
@@ -2802,6 +3495,9 @@
       "bulle": 5.0,
       "exposition": 3.0,
       "hostilite": 2.5,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -2814,6 +3510,9 @@
       "bulle": 4.0,
       "exposition": 4.0,
       "hostilite": 3.0,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "precis"
     },
@@ -2826,6 +3525,9 @@
       "bulle": 2.0,
       "exposition": 3.5,
       "hostilite": 4.5,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -2838,6 +3540,9 @@
       "bulle": 5.0,
       "exposition": 2.75,
       "hostilite": 2.25,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -2850,6 +3555,9 @@
       "bulle": 4.0,
       "exposition": 1.75,
       "hostilite": 2.75,
+      "individus": 3.0,
+      "structures": 4.0,
+      "decalage": -1.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -2862,6 +3570,9 @@
       "bulle": 4.0,
       "exposition": 3.0,
       "hostilite": 2.0,
+      "individus": 4.5,
+      "structures": 4.5,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -2874,6 +3585,9 @@
       "bulle": 3.0,
       "exposition": 3.0,
       "hostilite": 2.5,
+      "individus": 4.0,
+      "structures": 2.0,
+      "decalage": 2.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -2886,6 +3600,9 @@
       "bulle": 4.0,
       "exposition": 2.0,
       "hostilite": 2.75,
+      "individus": 5.0,
+      "structures": 5.0,
+      "decalage": 0.0,
       "demande": 2.0,
       "dsa": "precis"
     },
@@ -2898,6 +3615,9 @@
       "bulle": 4.0,
       "exposition": 2.5,
       "hostilite": 3.25,
+      "individus": 4.0,
+      "structures": 4.5,
+      "decalage": -0.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -2910,6 +3630,9 @@
       "bulle": 3.0,
       "exposition": 2.5,
       "hostilite": 4.25,
+      "individus": 4.0,
+      "structures": 4.0,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -2922,6 +3645,9 @@
       "bulle": 3.0,
       "exposition": 1.25,
       "hostilite": 2.25,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "precis"
     },
@@ -2934,6 +3660,9 @@
       "bulle": 3.0,
       "exposition": 5.0,
       "hostilite": 2.0,
+      "individus": 5.0,
+      "structures": 2.0,
+      "decalage": 3.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -2946,6 +3675,9 @@
       "bulle": 2.0,
       "exposition": 2.75,
       "hostilite": 2.25,
+      "individus": 5.0,
+      "structures": 3.5,
+      "decalage": 1.5,
       "demande": 5.0,
       "dsa": "precis"
     },
@@ -2958,6 +3690,9 @@
       "bulle": 1.0,
       "exposition": 2.5,
       "hostilite": 4.0,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -2970,6 +3705,9 @@
       "bulle": 3.0,
       "exposition": 2.5,
       "hostilite": 3.5,
+      "individus": 3.0,
+      "structures": 3.0,
+      "decalage": 0.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -2982,6 +3720,9 @@
       "bulle": 1.0,
       "exposition": 1.75,
       "hostilite": 2.75,
+      "individus": 4.0,
+      "structures": 1.0,
+      "decalage": 3.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -2994,6 +3735,9 @@
       "bulle": 4.0,
       "exposition": 3.5,
       "hostilite": 2.5,
+      "individus": 4.5,
+      "structures": 4.0,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "precis"
     },
@@ -3006,6 +3750,9 @@
       "bulle": 5.0,
       "exposition": 3.75,
       "hostilite": 2.75,
+      "individus": 4.5,
+      "structures": 3.5,
+      "decalage": 1.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -3018,6 +3765,9 @@
       "bulle": 3.0,
       "exposition": 4.0,
       "hostilite": 3.25,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "precis"
     },
@@ -3030,6 +3780,9 @@
       "bulle": 1.0,
       "exposition": 3.25,
       "hostilite": 3.5,
+      "individus": 4.0,
+      "structures": 4.0,
+      "decalage": 0.0,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -3042,6 +3795,9 @@
       "bulle": 4.0,
       "exposition": 3.0,
       "hostilite": 4.0,
+      "individus": 5.0,
+      "structures": 4.0,
+      "decalage": 1.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -3054,6 +3810,9 @@
       "bulle": 5.0,
       "exposition": 2.75,
       "hostilite": 4.0,
+      "individus": 4.5,
+      "structures": 3.0,
+      "decalage": 1.5,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -3066,6 +3825,9 @@
       "bulle": 4.0,
       "exposition": 2.75,
       "hostilite": 4.0,
+      "individus": 3.5,
+      "structures": 5.0,
+      "decalage": -1.5,
       "demande": 4.0,
       "dsa": "non"
     },
@@ -3078,6 +3840,9 @@
       "bulle": 3.0,
       "exposition": 2.75,
       "hostilite": 2.75,
+      "individus": 4.5,
+      "structures": 4.5,
+      "decalage": 0.0,
       "demande": 4.0,
       "dsa": "vague"
     },
@@ -3090,6 +3855,9 @@
       "bulle": 4.0,
       "exposition": 4.0,
       "hostilite": 3.25,
+      "individus": 5.0,
+      "structures": 4.5,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -3102,6 +3870,9 @@
       "bulle": 4.0,
       "exposition": 4.0,
       "hostilite": 1.75,
+      "individus": 4.5,
+      "structures": 5.0,
+      "decalage": -0.5,
       "demande": 5.0,
       "dsa": "non"
     },
@@ -3114,6 +3885,9 @@
       "bulle": 4.0,
       "exposition": 1.75,
       "hostilite": 4.0,
+      "individus": 4.5,
+      "structures": 4.5,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -3126,6 +3900,9 @@
       "bulle": 4.0,
       "exposition": 3.25,
       "hostilite": 3.25,
+      "individus": 4.5,
+      "structures": 4.5,
+      "decalage": 0.0,
       "demande": 5.0,
       "dsa": "vague"
     },
@@ -3138,6 +3915,9 @@
       "bulle": 5.0,
       "exposition": 2.0,
       "hostilite": 3.0,
+      "individus": 5.0,
+      "structures": 4.5,
+      "decalage": 0.5,
       "demande": 5.0,
       "dsa": "precis"
     },
@@ -3150,6 +3930,9 @@
       "bulle": 4.0,
       "exposition": 3.5,
       "hostilite": 3.5,
+      "individus": 4.0,
+      "structures": 2.5,
+      "decalage": 1.5,
       "demande": 3.0,
       "dsa": "vague"
     },
@@ -3162,6 +3945,9 @@
       "bulle": 4.0,
       "exposition": 2.5,
       "hostilite": 2.75,
+      "individus": 3.5,
+      "structures": 3.0,
+      "decalage": 0.5,
       "demande": 3.0,
       "dsa": "non"
     },
@@ -3174,6 +3960,9 @@
       "bulle": 4.0,
       "exposition": 3.25,
       "hostilite": 3.25,
+      "individus": 3.5,
+      "structures": 5.0,
+      "decalage": -1.5,
       "demande": 5.0,
       "dsa": "precis"
     }

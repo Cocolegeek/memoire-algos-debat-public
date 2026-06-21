@@ -1,7 +1,7 @@
 import { Card, EcartMetre, Eyebrow, SectionTitle, StatTile } from '../ui.jsx'
 
 export default function Overview({ data, onNavigate }) {
-  const { echantillon, h1, h2, h3 } = data
+  const { echantillon, h1, h2a: h2, h3 } = data
 
   return (
     <div className="space-y-6">
