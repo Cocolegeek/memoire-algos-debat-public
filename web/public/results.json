@@ -343,6 +343,22 @@
       "xmin": -2.0,
       "xmax": 3.5
     },
+    "correlation_par_bord": [
+      {
+        "cle": "gauche",
+        "label": "Bord gauche",
+        "r": -0.14,
+        "p": 0.11034519236618268,
+        "n": 128
+      },
+      {
+        "cle": "droite",
+        "label": "Bord droite",
+        "r": -0.32,
+        "p": 0.0055542599327687014,
+        "n": 70
+      }
+    ],
     "mesure": "Légitimité perçue de la régulation systémique, approchée par la demande de transparence imposée à l'État (Q18).",
     "lecture": "Le décalage entre responsabilité individuelle et responsabilité structurelle est mis en regard de la demande de régulation, prise comme indicateur de la légitimité perçue d'une régulation systémique. Le lien observé est négatif (r = -0.21, p < 0,001). Plus la responsabilité individuelle domine la responsabilité structurelle, moins la régulation systémique est jugée légitime : l'hypothèse est soutenue."
   },
