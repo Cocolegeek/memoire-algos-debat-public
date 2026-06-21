@@ -279,6 +279,12 @@ Chaque graphe a une icône méthodologie cliquable (fenêtre flottante, fond flo
 
 **Règle explicite de Corentin pour toute nouvelle visualisation** : ne pas multiplier les graphes. Chaque ajout doit éprouver une hypothèse précise, pas décorer. Toujours accompagné d'une icône méthodologie et d'un paragraphe explicatif.
 
-Pistes restantes (au service des hypothèses, à valider avant de coder) : mots-clés des verbatims Q19/Q20 ; lecture urbain↔rural (Q4 = type de territoire, pas la région, donc pas de carte régionale). Onglet **Mémoire** (HTML façon wiki depuis le PDF) : coquille à préparer quand Corentin aura terminé son texte.
+**Décisions finales de Corentin (2026-06-21)** : n = 263 confirmé (à reporter dans le texte du mémoire, 258 → 263) ; verdicts conservés tels que calculés, sans chercher une validation à 100 % (« le but d'une hypothèse est d'être testée, pas validée à 100 % ») ; H3 reste « partiellement confirmée », assumé tel quel.
 
-Points en attente côté Corentin : aligner le n du mémoire (258 → 263) ; figer les verdicts ; interpréter les contrastes politiques de H2.a.
+**Conventions de forme verrouillées (2026-06-21)**, à respecter pour tout ajout futur :
+- Le **vocabulaire visible** (labels, titres, paragraphes) reprend les mots exacts des énoncés d'hypothèses ci-dessus, pas des paraphrases.
+- Les **titres de graphiques** sont en langage clair, jamais le nom technique du type de graphique (pas de « nuage de points », « régression multiple » en titre visible : ce vocabulaire reste dans l'icône méthodologie, à sa place).
+- **Couleur du bord politique cohérente partout** : `BORD_COULEURS` dans `web/src/ui.jsx` (rouge vif extrême gauche → rouge gauche → gris centre → bleu droite → bleu vif extrême droite, gris neutre pour « ne se positionne pas »), à réutiliser via `BarRow`/`Track` (prop `couleur`) dès qu'un graphe distingue des bords politiques. Le système percu/reel (corail/sarcelle) reste pour l'axe perception/réalité, sémantique différente, ne pas confondre les deux palettes.
+- **Légendes d'axes obligatoires** sur tout nuage de points (X et Y).
+
+Pistes restantes (au service des hypothèses, à valider avant de coder) : mots-clés des verbatims Q19/Q20 ; lecture urbain↔rural (Q4 = type de territoire, pas la région, donc pas de carte régionale). Onglet **Mémoire** (HTML façon wiki depuis le PDF) : coquille à préparer quand Corentin aura terminé son texte.
