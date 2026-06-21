@@ -1,5 +1,5 @@
-import { useId } from 'react'
-import { motion } from 'framer-motion'
+import { useEffect, useId, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
   CartesianGrid,
   Label,
@@ -53,12 +53,97 @@ export function Card({ children, className = '' }) {
   )
 }
 
-export function SectionTitle({ children, sub }) {
+export function SectionTitle({ children, sub, info }) {
   return (
     <div className="space-y-1">
-      <h2 className="font-display text-lg font-semibold text-ink">{children}</h2>
+      <div className="flex items-center gap-2">
+        <h2 className="font-display text-lg font-semibold text-ink">{children}</h2>
+        {info && <InfoButton {...info} />}
+      </div>
       {sub && <p className="font-body text-sm text-muted">{sub}</p>}
     </div>
+  )
+}
+
+export function Caption({ children }) {
+  return <p className="mt-3 font-body text-sm leading-relaxed text-ink-soft">{children}</p>
+}
+
+// Icône info cliquable : ouvre une fenêtre flottante (méthodologie + données
+// en entrée), fond flouté, fermeture au clic extérieur ou touche Échap.
+export function InfoButton({ titre, methodologie, donnees }) {
+  const [open, setOpen] = useState(false)
+  const titleId = useId()
+
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e) => e.key === 'Escape' && setOpen(false)
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open])
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        aria-label={`Méthodologie : ${titre}`}
+        className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-line font-mono text-[11px] text-muted transition hover:border-ink-soft hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+      >
+        i
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={titleId}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            <div
+              className="absolute inset-0 bg-ink/40 backdrop-blur-sm"
+              onClick={() => setOpen(false)}
+              aria-hidden="true"
+            />
+            <motion.div
+              className="relative z-10 max-w-md rounded-2xl border border-line bg-panel p-6 shadow-[0_24px_48px_-16px_rgba(21,23,43,0.35)]"
+              initial={{ opacity: 0, scale: 0.96, y: 8 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 8 }}
+              transition={{ duration: 0.18 }}
+            >
+              <div className="flex items-start justify-between gap-3">
+                <h3 id={titleId} className="font-display text-base font-semibold text-ink">
+                  {titre}
+                </h3>
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  aria-label="Fermer"
+                  className="shrink-0 rounded-full p-1 text-muted transition hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                >
+                  ✕
+                </button>
+              </div>
+              <div className="mt-4 space-y-4">
+                <div>
+                  <Eyebrow>Méthodologie</Eyebrow>
+                  <p className="mt-1 font-body text-sm leading-relaxed text-ink-soft">{methodologie}</p>
+                </div>
+                <div>
+                  <Eyebrow>Données en entrée</Eyebrow>
+                  <p className="mt-1 font-body text-sm leading-relaxed text-ink-soft">{donnees}</p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 
