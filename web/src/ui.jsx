@@ -54,6 +54,35 @@ export function Badge({ children, tone = 'neutral' }) {
   )
 }
 
+// Espace de copie d'une référence prête à l'emploi (note de bas de page,
+// bibliographie), pour quiconque réutilise les résultats hors de cette page.
+export function CitationAPA({ texte }) {
+  const [copie, setCopie] = useState(false)
+
+  async function copier() {
+    try {
+      await navigator.clipboard.writeText(texte)
+      setCopie(true)
+      setTimeout(() => setCopie(false), 1800)
+    } catch {
+      // Clipboard indisponible (contexte non sécurisé) : pas de repli nécessaire.
+    }
+  }
+
+  return (
+    <div className="flex flex-col gap-2 rounded-lg border border-line bg-panel/60 p-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+      <p className="font-mono text-xs leading-relaxed text-ink-soft">{texte}</p>
+      <button
+        type="button"
+        onClick={copier}
+        className="shrink-0 self-start rounded-full border border-line bg-panel px-3 py-1.5 font-mono text-xs text-ink-soft transition hover:border-ink-soft hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:self-auto"
+      >
+        {copie ? 'Copié ✓' : 'Copier la référence'}
+      </button>
+    </div>
+  )
+}
+
 export function Card({ children, className = '' }) {
   return (
     <div
@@ -163,7 +192,7 @@ export function TabBar({ tabs, active, onChange }) {
     <nav
       role="tablist"
       aria-label="Sections du tableau de bord"
-      className="inline-flex flex-wrap gap-1 rounded-full border border-line bg-panel p-1"
+      className="sticky top-3 z-30 inline-flex flex-wrap gap-1 rounded-full border border-line/60 bg-panel/75 p-1 shadow-[0_12px_32px_-16px_rgba(21,23,43,0.28)] backdrop-blur-md"
     >
       {tabs.map((tab) => {
         const isActive = tab.id === active
