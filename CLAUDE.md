@@ -275,6 +275,10 @@ Décisions verrouillées (2026-06-21) :
 
 État : H1, H2.a, H2.b, H3 refondus et déployés avec leurs tests (voir ETAT_AVANCEMENT.md pour les chiffres). Résultats : H1, H2.a, H2.b confirmées ; H3 partiellement (la 2e partie « connaissance → demande » n'est pas significative, p=0,50).
 
-Pistes restantes (au service des hypothèses, à valider) : mots-clés des verbatims Q19/Q20 ; lecture urbain↔rural (Q4 = type de territoire, pas la région, donc pas de carte régionale). Onglet **Mémoire** (HTML façon wiki depuis le PDF) : coquille à préparer quand Corentin aura terminé son texte.
+Chaque graphe a une icône méthodologie cliquable (fenêtre flottante, fond flouté : méthodologie + données en entrée) et un paragraphe explicatif propre sous le graphe, écrit pour rester clair en relecture future. Contrôle de robustesse de H1 fait (mêmes corrélations recalculées par tranche d'âge et bord politique) : la bulle ne devient significative dans aucun sous-groupe.
+
+**Règle explicite de Corentin pour toute nouvelle visualisation** : ne pas multiplier les graphes. Chaque ajout doit éprouver une hypothèse précise, pas décorer. Toujours accompagné d'une icône méthodologie et d'un paragraphe explicatif.
+
+Pistes restantes (au service des hypothèses, à valider avant de coder) : mots-clés des verbatims Q19/Q20 ; lecture urbain↔rural (Q4 = type de territoire, pas la région, donc pas de carte régionale). Onglet **Mémoire** (HTML façon wiki depuis le PDF) : coquille à préparer quand Corentin aura terminé son texte.
 
 Points en attente côté Corentin : aligner le n du mémoire (258 → 263) ; figer les verdicts ; interpréter les contrastes politiques de H2.a.
