@@ -1,10 +1,8 @@
-import { useState } from 'react'
-import { BarRow, BigStat, Card, Eyebrow, SectionTitle } from '../ui.jsx'
+import { BarRow, BigStat, Card, Eyebrow, SectionTitle, Signif } from '../ui.jsx'
 import HypoHeader from './HypoHeader.jsx'
 
 export default function Hypothesis3({ data }) {
-  const [sel, setSel] = useState(null)
-  const { ecart, demande_selon_dsa, lecture } = data
+  const { ecart, demande_par_bord, demande_selon_dsa, test_dsa, lecture } = data
 
   return (
     <div className="space-y-6">
@@ -12,27 +10,17 @@ export default function Hypothesis3({ data }) {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
-          <SectionTitle>Le grand écart</SectionTitle>
+          <SectionTitle sub="Une demande quasi unanime face à une connaissance rare du dispositif européen.">
+            Le grand écart
+          </SectionTitle>
           <div className="mt-5 grid grid-cols-2 gap-4">
-            <BigStat
-              valeur={ecart.percu.valeur}
-              unite="%"
-              label={ecart.percu.label}
-              sous={ecart.percu.sous}
-              pole="percu"
-            />
-            <BigStat
-              valeur={ecart.reel.valeur}
-              unite="%"
-              label={ecart.reel.label}
-              sous={ecart.reel.sous}
-              pole="reel"
-            />
+            <BigStat valeur={ecart.percu.valeur} unite="%" label={ecart.percu.label} sous={ecart.percu.sous} pole="percu" />
+            <BigStat valeur={ecart.reel.valeur} unite="%" label={ecart.reel.label} sous={ecart.reel.sous} pole="reel" />
           </div>
         </Card>
 
         <Card>
-          <SectionTitle sub="Demande moyenne de régulation (1 à 5) selon la connaissance du DSA. Cliquez une barre.">
+          <SectionTitle sub="Demande moyenne de régulation (1 à 5) selon la connaissance du DSA.">
             Connaître change-t-il la demande ?
           </SectionTitle>
           <div className="mt-4 space-y-1">
@@ -43,21 +31,38 @@ export default function Hypothesis3({ data }) {
                 valeur={d.note}
                 echelle={5}
                 pole={d.label.includes('précisément') ? 'reel' : 'percu'}
-                affiche={d.note.toFixed(1)}
-                active={sel === d.label}
-                onClick={() => setSel(sel === d.label ? null : d.label)}
+                affiche={d.note.toFixed(1).replace('.', ',')}
               />
             ))}
           </div>
-          {sel && (
-            <p className="mt-3 rounded-lg bg-bg p-3 font-body text-xs text-ink-soft">
-              {sel.includes('précisément')
-                ? "Ceux qui connaissent précisément le DSA demandent un peu moins de régulation supplémentaire."
-                : "Ceux qui connaissent mal le dispositif en réclament le plus, sans toujours savoir ce qui existe déjà."}
-            </p>
-          )}
+          <div className="mt-3 rounded-lg bg-bg p-3 font-mono text-xs text-ink-soft">
+            Différence entre les deux groupes : <Signif p={test_dsa.p} />
+            {!test_dsa.significatif && (
+              <span className="mt-1 block text-muted">
+                L'effet « mieux connaître réduit la demande » n'est pas établi statistiquement.
+              </span>
+            )}
+          </div>
         </Card>
       </div>
+
+      <Card>
+        <SectionTitle sub="Part jugeant la transparence nécessaire (Q18 ∈ {4,5}) et note moyenne, par bord politique. La demande est forte partout, mais graduée.">
+          Une demande consensuelle, mais graduée
+        </SectionTitle>
+        <div className="mt-4 space-y-1">
+          {demande_par_bord.map((d) => (
+            <BarRow
+              key={d.label}
+              label={d.label}
+              valeur={d.note}
+              echelle={5}
+              pole="neutral"
+              affiche={`${d.note.toFixed(1).replace('.', ',')} · ${d.pct}%`}
+            />
+          ))}
+        </div>
+      </Card>
 
       <Card>
         <Eyebrow>Lecture</Eyebrow>

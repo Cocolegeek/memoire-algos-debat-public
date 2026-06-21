@@ -81,17 +81,35 @@ La CI exécute désormais analyse.py automatiquement. Déployé (PR #4), vérifi
 - Verdicts = interprétation automatique marquée "à valider", à trancher par Corentin.
 - Contraste politique H2 à interpréter (gauche plus critique des médias/État).
 
-### Nuage 3D fait (2026-06-21)
+### Nuage 3D : fait puis RETIRÉ (2026-06-21)
 
-Premier palier dataviz avancée livré et déployé. `three` + `@react-three/fiber` + `@react-three/drei` installés. Composant `web/src/sections/Nuage3D.jsx`, nouvel onglet "Nuage 3D" (entre H3 et Données), **chargé en lazy** (chunk three.js séparé, ~282 ko gzip, hors bundle initial qui reste à ~104 ko gzip).
+Le nuage 3D (three.js) a été construit, déployé, puis **retiré à la demande de Corentin** : exploration libre séduisante mais qui n'éprouvait aucune hypothèse précise, donc hors cadre académique. `three` / `@react-three/fiber` / `@react-three/drei` désinstallés, `Nuage3D.jsx` supprimé, onglet retiré. (Le code reste dans l'historique git si besoin.)
 
-Fonctionnel et vérifié : 263 points (un par répondant) depuis `respondents.json`, couleur par bord politique (dégradé rouge vif → rouge → blanc → bleu → bleu vif, gris pour "ne se positionne pas"), **sélecteurs X/Y/Z** parmi 5 variables (hostilité, exposition, temps, perception de bulle, demande), jitter déterministe sur les axes discrets, cadre + graduations + labels d'axes, OrbitControls (rotation/zoom), survol avec infobulle, **légende cliquable** qui filtre (testé : masquer "Très à gauche" → 263 passe à 231, soit les 32 concernés). Build OK, aucune erreur console.
+### Recadrage académique : tout au service des hypothèses (2026-06-21)
+
+Refonte pour que chaque écran serve une démonstration testée. Énoncés exacts du mémoire reportés mot pour mot. Décisions de Corentin : retirer le 3D ; mesurer H2.b via Q18 ; afficher l'appareil statistique complet.
+
+**analyse.py refondu (tests + p-values via `math.erf`, stdlib)** :
+- Correction H2.a : structurel = plateformes + État seulement (les médias étaient à tort inclus). Médias traités comme acteur à part.
+- H1 : régression multiple standardisée (β comparables) + corrélations bivariées, toutes avec p.
+- H2.b ajoutée : corrélation entre décalage (individus − structures) et demande de régulation (Q18).
+- H3 : demande par bord politique (consensus gradué) + test de différence selon connaissance DSA.
+- `results.json` : clés `h1`, `h2a`, `h2b`, `h3`. `respondents.json` enrichi (individus, structures, décalage).
+
+**Vrais résultats testés (n = 263)** :
+- H1 **Confirmée** : β temps 0,18 (p=0,004), β exposition 0,14 (p=0,021), β bulle 0,05 (p=0,38, NS). R² = 0,067.
+- H2.a **Confirmée** : individus 4,42 vs structures 3,71 ; écart +0,71 (p<0,001) ; 67 % blâment plus les individus. Hiérarchie : producteurs 4,53 > partageurs 4,31 > plateformes 4,01 > médias 3,98 > État 3,41.
+- H2.b **Confirmée** : r = −0,21 (p<0,001) entre décalage et demande de régulation.
+- H3 **Partiellement confirmée** : transparence 82 %, connaissance précise 15 % (déconnexion nette) ; consensus gradué (gauche/centre ~90 %, droite 69 %, très à droite 56 %) ; effet connaissance DSA → demande NON significatif (p=0,50).
+
+**Front refondu** : H1 (écart-mètre + régression β + 3 nuages Recharts avec droite), H2 (a : hiérarchie + test apparié + contrastes ; b : nuage décalage×demande + r/p), H3 (grands chiffres + demande par bord + significativité DSA). Composants ajoutés à ui.jsx : `Nuage` (scatter Recharts), `Signif`, `fmtP`. Build + tous onglets vérifiés, aucune erreur. Déployé.
 
 ### Prochaine étape exacte (reprendre ici)
 
-1. Selon priorités Corentin : croisements multivariés 2D (âge × variables, politique × blâme, urbain↔rural × demande), analyse de mots-clés des verbatims (fréquences à générer dans analyse.py), gradient géographique urbain↔rural. Tout peut réutiliser `respondents.json` et le même onglet d'exploration ou des onglets dédiés.
-2. Onglet **Mémoire** (HTML façon wiki) : coquille à préparer quand Corentin fournira le contenu converti de son PDF.
-3. Étape 5 : module Datalake (§9). Penser à reporter les deux URL dans le `Etat_d_avancement.md` du mémoire (§2.3.4, voir note en bas).
+1. Décisions de mémoire en attente côté Corentin : aligner n (258 → 263) ; figer les verdicts ; noter que la 2e partie de H3 (connaissance → demande) n'est pas soutenue statistiquement (p=0,50) ; interpréter les contrastes politiques de H2.a.
+2. Pistes dataviz restantes, toujours au service des hypothèses (à valider) : analyse de mots-clés des verbatims Q19/Q20 (fréquences à générer dans analyse.py, filtrables par bord) ; lecture géographique urbain↔rural si pertinente pour une hypothèse.
+3. Onglet **Mémoire** (HTML façon wiki) : coquille à préparer quand Corentin fournira le contenu converti de son PDF.
+4. Étape 5 : module Datalake (§9). Penser à reporter les deux URL dans le `Etat_d_avancement.md` du mémoire (§2.3.4, voir note en bas).
 
 ### Revue d'architecture (2026-06-20)
 
