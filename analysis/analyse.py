@@ -330,6 +330,30 @@ PREDICTEURS = [
 ]
 
 
+GROUPES_ROBUSTESSE = [
+    ("age_18_34", "18-34 ans", lambda r: r["age"] in ("18-24", "25-34")),
+    ("age_35plus", "35 ans et plus", lambda r: r["age"] not in ("18-24", "25-34")),
+    ("gauche", "Bord gauche", lambda r: bord(r["politique"]) == "gauche"),
+    ("droite", "Bord droite", lambda r: bord(r["politique"]) == "droite"),
+]
+
+
+def bloc_h1_robustesse(reps):
+    """H1 tient-elle dans chaque sous-groupe ? Mêmes corrélations bivariées,
+    recalculées sur des sous-échantillons, pour vérifier que le résultat
+    principal n'est pas un artefact d'un profil de répondant particulier."""
+    groupes = []
+    lignes = {cle: {"cle": cle, "label": label, "valeurs": {}} for cle, label in PREDICTEURS}
+    for gcle, glabel, filtre in GROUPES_ROBUSTESSE:
+        sous = [r for r in reps if filtre(r)]
+        groupes.append({"cle": gcle, "label": glabel, "n": len(sous)})
+        host = [r["hostilite"] for r in sous]
+        for cle, _ in PREDICTEURS:
+            r, p, n = pearson([r[cle] for r in sous], host)
+            lignes[cle]["valeurs"][gcle] = {"r": r2v(r), "p": p, "n": n}
+    return {"groupes": groupes, "predicteurs": [lignes[cle] for cle, _ in PREDICTEURS]}
+
+
 def bloc_h1(reps):
     host = [r["hostilite"] for r in reps]
     correlations = []
@@ -374,6 +398,7 @@ def bloc_h1(reps):
         "correlations": correlations,
         "scatters": scatters,
         "regression": {"r2": r2v(r2, 3), "n": nreg, "poids": poids},
+        "robustesse": bloc_h1_robustesse(reps),
         "lecture": (
             "Dans la régression multiple, le temps passé et l'exposition aux contenus clivants gardent "
             "un poids non négligeable, alors que la perception de bulle est proche de zéro et non "
