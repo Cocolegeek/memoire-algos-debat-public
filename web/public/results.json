@@ -27,26 +27,32 @@
     ],
     "politique": [
       {
+        "cle": "extreme_gauche",
         "label": "Très à gauche",
         "pct": 12
       },
       {
+        "cle": "gauche",
         "label": "Plutôt à gauche",
         "pct": 37
       },
       {
+        "cle": "centre",
         "label": "Plutôt au centre",
         "pct": 15
       },
       {
+        "cle": "droite",
         "label": "Plutôt à droite",
         "pct": 20
       },
       {
+        "cle": "extreme_droite",
         "label": "Très à droite",
         "pct": 7
       },
       {
+        "cle": "autre",
         "label": "Ne se positionne pas",
         "pct": 10
       }
@@ -61,12 +67,12 @@
       "percu": {
         "label": "Perception de bulle",
         "valeur": 0.03,
-        "sous": "Corrélation avec l'index d'hostilité"
+        "sous": "Lien avec l'hostilité ressentie"
       },
       "reel": {
         "label": "Intensité d'usage",
         "valeur": 0.21,
-        "sous": "Corrélation la plus forte (temps, exposition)"
+        "sous": "Lien le plus fort avec l'hostilité (le temps passé)"
       },
       "echelle": 0.3
     },
@@ -250,7 +256,7 @@
         }
       ]
     },
-    "lecture": "Dans la régression multiple, le temps passé et l'exposition aux contenus clivants gardent un poids non négligeable, alors que la perception de bulle est proche de zéro et non significative. L'hostilité tient donc davantage à l'usage réel qu'au sentiment d'enfermement."
+    "lecture": "Une fois le temps passé, l'exposition aux contenus polémiques et la perception de bulle pris en compte ensemble, l'intensité d'usage garde un poids non négligeable sur l'hostilité, alors que la perception de bulle est proche de zéro et non significative. L'hostilité tient donc davantage à l'intensité d'usage qu'à la perception de se savoir enfermé dans une bulle."
   },
   "h2a": {
     "code": "H2.a",
@@ -259,12 +265,12 @@
     "verdict": "Confirmée",
     "ecart": {
       "percu": {
-        "label": "Individus",
+        "label": "Responsabilité individuelle",
         "valeur": 4.42,
-        "sous": "Producteurs et partageurs"
+        "sous": "Individus qui produisent et partagent les contenus"
       },
       "reel": {
-        "label": "Structures",
+        "label": "Responsabilité structurelle",
         "valeur": 3.71,
         "sous": "Plateformes et État"
       },
@@ -321,11 +327,11 @@
         "droite": 4.41
       }
     ],
-    "lecture": "Les répondants chargent d'abord les individus qui produisent et partagent les contenus, avant les plateformes et l'État. L'écart individus moins structures est positif et statistiquement significatif. Le blâme se déplace selon le bord politique, surtout sur les médias et l'État."
+    "lecture": "Face à la polarisation en ligne, les répondants attribuent une responsabilité plus forte aux individus qui produisent et partagent les contenus qu'aux plateformes et à l'État. L'écart entre responsabilité individuelle et responsabilité structurelle est positif et statistiquement significatif. Le blâme se déplace selon le bord politique, surtout sur les médias et l'État."
   },
   "h2b": {
     "code": "H2.b",
-    "titre": "Le décalage mine-t-il la régulation ?",
+    "titre": "Le décalage affaiblit-il la légitimité de la régulation ?",
     "enonce": "Le décalage entre la responsabilité individuelle et la responsabilité structurelle diminue la légitimité perçue de toute régulation systémique.",
     "verdict": "Confirmée",
     "correlation": {
@@ -337,8 +343,8 @@
       "xmin": -2.0,
       "xmax": 3.5
     },
-    "mesure": "Légitimité de la régulation approchée par la demande de transparence imposée par l'État (Q18).",
-    "lecture": "Le décalage entre responsabilité individuelle et structurelle est mis en regard de la demande de régulation (Q18). Le lien observé est négatif (r = -0.21, p = < 0,001). Plus on impute la responsabilité aux individus plutôt qu'aux structures, moins on demande de régulation systémique : l'hypothèse est soutenue."
+    "mesure": "Légitimité perçue de la régulation systémique, approchée par la demande de transparence imposée à l'État (Q18).",
+    "lecture": "Le décalage entre responsabilité individuelle et responsabilité structurelle est mis en regard de la demande de régulation, prise comme indicateur de la légitimité perçue d'une régulation systémique. Le lien observé est négatif (r = -0.21, p < 0,001). Plus la responsabilité individuelle domine la responsabilité structurelle, moins la régulation systémique est jugée légitime : l'hypothèse est soutenue."
   },
   "h3": {
     "code": "H3",
@@ -347,46 +353,52 @@
     "verdict": "Partiellement confirmée",
     "ecart": {
       "percu": {
-        "label": "Demande de transparence",
+        "label": "Demande de régulation",
         "valeur": 82,
         "unite": "%",
-        "sous": "Part jugeant la transparence nécessaire (Q18 ∈ {4,5})"
+        "sous": "Transparence exigée des plateformes, jugée nécessaire (Q18 ∈ {4,5})"
       },
       "reel": {
-        "label": "Connaissance précise du DSA",
+        "label": "Connaissance des dispositifs existants",
         "valeur": 15,
         "unite": "%",
-        "sous": "Part qui en connaît précisément le contenu (Q17)"
+        "sous": "DSA connu précisément (Q17)"
       },
       "echelle": 100
     },
     "demande_par_bord": [
       {
+        "cle": "extreme_gauche",
         "label": "Très à gauche",
         "note": 4.44,
         "pct": 88
       },
       {
+        "cle": "gauche",
         "label": "Plutôt à gauche",
         "note": 4.41,
         "pct": 92
       },
       {
+        "cle": "centre",
         "label": "Plutôt au centre",
         "note": 4.33,
         "pct": 90
       },
       {
+        "cle": "droite",
         "label": "Plutôt à droite",
         "note": 3.88,
         "pct": 69
       },
       {
+        "cle": "extreme_droite",
         "label": "Très à droite",
         "note": 3.44,
         "pct": 56
       },
       {
+        "cle": "autre",
         "label": "Ne se positionne pas",
         "note": 3.96,
         "pct": 72
@@ -408,7 +420,7 @@
       "significatif": false,
       "sens_attendu": true
     },
-    "lecture": "La transparence est réclamée très largement (82 %) alors qu'une petite minorité (15 %) connaît précisément le DSA : la demande est massive mais déconnectée de la connaissance. Le consensus est toutefois gradué : très fort à gauche et au centre, plus modéré à droite. Surtout, l'effet « mieux connaître le DSA réduit la demande » va dans le sens attendu mais n'est pas statistiquement significatif (p = 0,50) : cette partie de l'hypothèse n'est pas soutenue."
+    "lecture": "La demande de régulation des algorithmes est massive et consensuelle : la transparence est jugée nécessaire par 82% des répondants, à travers tous les bords politiques, quoique plus mesurée à droite. Elle reste déconnectée de la connaissance des dispositifs existants : seuls 15% connaissent précisément le DSA. L'idée qu'une meilleure connaissance du DSA réduit la volonté de régulation va dans le sens attendu, mais n'est pas statistiquement significative (p = 0,499) : cette partie de l'hypothèse n'est pas confirmée par les données."
   },
   "verbatims": {
     "q19": [

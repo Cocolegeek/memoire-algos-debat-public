@@ -22,22 +22,22 @@ const INFO_ECART = {
 }
 
 const INFO_REGRESSION = {
-  titre: 'Régression multiple',
+  titre: 'Ce qui pèse vraiment',
   methodologie:
-    "Régression linéaire multiple (moindres carrés ordinaires) sur variables centrées-réduites : l'hostilité est expliquée simultanément par le temps, l'exposition et la perception de bulle. Les coefficients (β) sont donc directement comparables entre eux. La significativité de chaque β est testée par un test t sur ses propres degrés de liberté.",
+    "Régression linéaire multiple (moindres carrés ordinaires) sur variables centrées-réduites : l'hostilité est expliquée simultanément par le temps passé, l'exposition aux contenus polémiques et la perception de bulle. Les coefficients (β) sont donc directement comparables entre eux. La significativité de chaque β est testée par un test t sur ses propres degrés de liberté.",
   donnees:
     "Mêmes variables que l'écart-mètre, restreintes aux répondants ayant une valeur sur les quatre variables (hostilité, temps, exposition, bulle).",
 }
 
 const INFO_ROBUSTESSE = {
-  titre: 'Robustesse par sous-groupe',
+  titre: 'H1 est-elle stable selon le profil ?',
   methodologie:
     "Mêmes corrélations bivariées que ci-dessus (Pearson, prédicteur contre index d'hostilité), recalculées indépendamment sur quatre sous-échantillons : les deux tranches d'âge les plus représentées et les deux bords politiques. Vérifie que le résultat principal n'est pas un artefact d'un seul profil de répondant. Les sous-échantillons étant plus petits, la puissance statistique est plus faible : une corrélation qui n'atteint pas la significativité dans un sous-groupe peut simplement refléter un n réduit.",
   donnees: 'Mêmes variables que la régression (Q7, Q11, Q9, index d\'hostilité), croisées avec Q1 (âge) et Q5 (bord politique).',
 }
 
 const INFO_NUAGE = (label) => ({
-  titre: `Nuage de points : ${label}`,
+  titre: `${label} et l'hostilité`,
   methodologie:
     'Régression linéaire simple (moindres carrés) entre la variable et l’index d’hostilité, calculée indépendamment des deux autres facteurs. La droite corail résume la tendance. Un léger bruit aléatoire (« jitter ») est ajouté sur les variables à valeurs entières pour rendre visibles les points superposés ; il ne modifie pas le calcul.',
   donnees: 'Un point par répondant (n = 263), valeurs brutes recodées sur l’échelle 1 à 5.',
@@ -58,7 +58,7 @@ export default function Hypothesis1({ data, respondents = [] }) {
   )
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <HypoHeader code={data.code} titre={data.titre} enonce={data.enonce} verdict={data.verdict} />
 
       <div className="grid gap-6 lg:grid-cols-2">
@@ -86,7 +86,7 @@ export default function Hypothesis1({ data, respondents = [] }) {
           >
             Ce qui pèse vraiment
           </SectionTitle>
-          <div className="mt-4 space-y-1">
+          <div className="mt-4 space-y-2">
             {regression.poids.map((w) => (
               <div key={w.cle}>
                 <BarRow label={w.label} valeur={Math.abs(w.beta)} echelle={0.3} pole={w.pole} affiche={`β = ${String(w.beta).replace('.', ',')}`} />
@@ -112,19 +112,19 @@ export default function Hypothesis1({ data, respondents = [] }) {
               <Eyebrow>{s.label}</Eyebrow>
               <InfoButton {...INFO_NUAGE(s.label)} />
             </div>
-            <p className="mt-1 mb-2 font-mono text-xs text-ink-soft">
+            <p className="mt-1 mb-3 font-mono text-xs text-ink-soft">
               r = {String(s.r).replace('.', ',')} · <Signif p={s.p} />
             </p>
             <Nuage
               points={s.points}
               droite={s}
               xLabel={s.label.replace(/ \(.*\)/, '')}
-              yLabel="Hostilité"
+              yLabel="Hostilité ressentie"
               xDomain={s.cle === 'exposition' ? [1, 5] : [0.5, 5.5]}
             />
             <Caption>
               {s.cle === 'bulle'
-                ? 'Le nuage est dispersé sans pente nette : se sentir enfermé dans une bulle ne va pas de pair avec une hostilité plus ou moins forte.'
+                ? 'Les points sont dispersés sans tendance nette : se sentir enfermé dans une bulle ne va pas de pair avec une hostilité plus ou moins forte.'
                 : 'La droite, bien que peu inclinée, traduit une tendance positive : plus ce facteur est élevé, plus l\'hostilité moyenne tend à l\'être.'}
             </Caption>
           </Card>

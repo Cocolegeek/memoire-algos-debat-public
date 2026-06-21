@@ -1,10 +1,10 @@
-import { Card, EcartMetre, Eyebrow, SectionTitle, StatTile } from '../ui.jsx'
+import { BORD_COULEURS, Card, EcartMetre, Eyebrow, SectionTitle, StatTile } from '../ui.jsx'
 
 export default function Overview({ data, onNavigate }) {
   const { echantillon, h1, h2a: h2, h3 } = data
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <Card>
         <SectionTitle sub={echantillon.resume}>Profil de l'échantillon</SectionTitle>
         <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -14,12 +14,15 @@ export default function Overview({ data, onNavigate }) {
         </div>
         <div className="mt-6 space-y-3">
           <Eyebrow>Positionnement politique déclaré</Eyebrow>
-          <div className="space-y-2">
+          <div className="space-y-2.5">
             {echantillon.politique.map((p) => (
               <div key={p.label} className="flex items-center gap-3">
                 <span className="w-44 shrink-0 font-body text-sm text-ink-soft">{p.label}</span>
                 <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-bg">
-                  <div className="h-full rounded-full bg-ink-soft" style={{ width: `${p.pct}%` }} />
+                  <div
+                    className="h-full rounded-full"
+                    style={{ width: `${p.pct}%`, backgroundColor: BORD_COULEURS[p.cle] ?? BORD_COULEURS.autre }}
+                  />
                 </div>
                 <span className="w-10 shrink-0 text-right font-mono text-xs text-muted">{p.pct}%</span>
               </div>
@@ -30,7 +33,7 @@ export default function Overview({ data, onNavigate }) {
 
       <div className="space-y-3">
         <Eyebrow>L'écart en un coup d'œil, cliquez pour explorer</Eyebrow>
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-3">
           <EcartMetre
             titre={h1.titre}
             percu={h1.ecart.percu}
