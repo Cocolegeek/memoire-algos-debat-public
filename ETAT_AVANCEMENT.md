@@ -2,10 +2,30 @@
 
 Journal de session. Mis à jour à la fin de chaque session de travail. Sert de point de reprise : lis ce fichier avant de demander « où on en est ».
 
-## Dernière session : 2026-06-20
+## Dernière session : 2026-06-21
 
-> **Clôture de session.** Étapes 1 à 4 faites et en ligne. Tout est commité et poussé sur `main` (rien en attente, sauf `.claude/settings.local.json` volontairement non versionné). Dépôt nettoyé (scaffold Vite retiré, favicon du projet, dossier assets vide supprimé). Tous les `.md` à jour.
-> **À la reprise, quand Corentin dira « on continue » :** attaquer le **nuage 3D** (react-three-fiber, voir « Prochaine étape exacte » plus bas et CLAUDE.md §13). Trois points restent côté Corentin : aligner le n du mémoire (258 -> 263), figer les verdicts, interpréter le contraste politique de H2.
+> **Clôture de session.** Nuage 3D construit puis retiré (hors cadre académique). Recadrage complet : `analyse.py` refondu avec tests statistiques (régression H1, H2.b ajoutée, H2.a corrigé), front refait pour afficher l'appareil statistique, icônes méthodologie cliquables sur chaque graphe, paragraphes explicatifs par graphe, contrôle de robustesse de H1 par sous-groupe. Tout est commité, poussé et déployé sur `main` (PR #8, #9, #10 fusionnés). Site en ligne à jour : https://cocolegeek.github.io/memoire-algos-debat-public/
+> **À la reprise :** voir « Prochaine étape exacte » plus bas. Rien de bloquant côté code ; trois points restent côté Corentin (n du mémoire, verdicts, interprétation des contrastes politiques de H2.a), plus la question H3 (sa seconde moitié n'est pas significative, p=0,50) à assumer dans le texte.
+
+### Session du 2026-06-21 : recadrage académique complet
+
+Le nuage 3D livré en fin de session précédente a été jugé non pertinent par Corentin : joli mais n'éprouvant aucune hypothèse précise. Toute la suite de la session a porté sur le recentrage strict autour de H1, H2.a, H2.b, H3, avec les énoncés exacts du mémoire.
+
+**1. Retrait du 3D** : `three`/`@react-three/fiber`/`@react-three/drei` désinstallés, `Nuage3D.jsx` et son onglet supprimés.
+
+**2. `analyse.py` refondu** (voir détail dans la section précédente du journal, plus bas) : H2.a corrigé (structurel = plateformes + État, sans les médias) ; H1 passé en régression multiple standardisée (β) ; H2.b ajoutée (corrélation décalage individus/structures × demande Q18) ; H3 enrichie (demande par bord politique, test de différence selon connaissance DSA). Toutes les p-values calculées via `math.erf` (stdlib).
+
+**3. Front refait** pour H1/H2/H3, avec l'appareil statistique visible (β, r, p, n) : composants `Nuage` (scatter Recharts + droite de régression) et `Signif`/`fmtP` ajoutés à `ui.jsx`.
+
+**4. Icônes méthodologie + paragraphes explicatifs** (demande explicite de Corentin) : `InfoButton` dans `ui.jsx`, icône "i" cliquable à côté de chaque titre de graphe (13 au total : 6 sur H1, 4 sur H2, 3 sur H3), ouvre une fenêtre flottante (fond flouté, fermeture Échap/clic extérieur, animée Framer Motion) avec deux blocs : Méthodologie (test exact utilisé) et Données en entrée (colonnes Q*, recodages, n). Chaque graphe reçoit aussi un `Caption`, paragraphe explicatif court sous le graphe, écrit pour rester clair en relecture future, distinct du paragraphe de synthèse global "Lecture" en fin de section. Vérifié à la main (ouverture, contenu, fermeture, aucune erreur console).
+
+**5. Contrôle de robustesse de H1** (piste choisie par Corentin pour explorer les données restantes, plutôt que mots-clés ou rien) : les corrélations bivariées de H1 (temps, exposition, bulle vs hostilité) recalculées sur 4 sous-échantillons (18-34 ans, 35 ans et plus, gauche, droite). Nouveau composant `TableRobustesse` (tableau prédicteur × sous-groupe, astérisque de significativité). Résultat intéressant : **la bulle ne devient significative dans aucun sous-groupe** (renforce la conclusion principale), alors que temps/exposition ne sont significatifs que dans certains sous-groupes (effectifs réduits, donc prudence plutôt qu'infirmation).
+
+**Verdicts finaux (n=263, testés)** : H1 Confirmée · H2.a Confirmée · H2.b Confirmée · H3 Partiellement confirmée (déconnexion confirmée, mais l'effet « connaissance DSA → moins de demande » n'est pas significatif, p=0,50).
+
+Décision explicite de Corentin à respecter pour la suite : **ne pas multiplier les visualisations**. Chaque ajout doit éprouver une hypothèse, pas décorer. Pistes écartées pour l'instant car jugées moins prioritaires : mots-clés des verbatims, lecture urbain/rural.
+
+## Session du 2026-06-20
 
 ### Fait
 
@@ -107,7 +127,7 @@ Refonte pour que chaque écran serve une démonstration testée. Énoncés exact
 ### Prochaine étape exacte (reprendre ici)
 
 1. Décisions de mémoire en attente côté Corentin : aligner n (258 → 263) ; figer les verdicts ; noter que la 2e partie de H3 (connaissance → demande) n'est pas soutenue statistiquement (p=0,50) ; interpréter les contrastes politiques de H2.a.
-2. Pistes dataviz restantes, toujours au service des hypothèses (à valider) : analyse de mots-clés des verbatims Q19/Q20 (fréquences à générer dans analyse.py, filtrables par bord) ; lecture géographique urbain↔rural si pertinente pour une hypothèse.
+2. ✅ Fait (2026-06-21) : robustesse de H1 par sous-groupe (âge, bord politique). Pistes dataviz restantes, **uniquement si elles éprouvent une hypothèse** (consigne explicite de Corentin, pas de décoration) : mots-clés des verbatims Q19/Q20 ; lecture géographique urbain↔rural si pertinente pour une hypothèse précise.
 3. Onglet **Mémoire** (HTML façon wiki) : coquille à préparer quand Corentin fournira le contenu converti de son PDF.
 4. Étape 5 : module Datalake (§9). Penser à reporter les deux URL dans le `Etat_d_avancement.md` du mémoire (§2.3.4, voir note en bas).
 
