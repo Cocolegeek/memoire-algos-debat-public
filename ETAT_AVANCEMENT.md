@@ -2,7 +2,14 @@
 
 Journal de session. Mis à jour à la fin de chaque session de travail. Sert de point de reprise : lis ce fichier avant de demander « où on en est ».
 
-## Dernière session : 2026-06-21 (retrait du module Datalake + phrase de présentation)
+## Dernière session : 2026-06-21 (en-tête : logos à gauche, nouveau logo IMCDS)
+
+> **Clôture de session.** Demande de Corentin : retirer l'eyebrow « Mémoire de Master IMCDS · Paris 1 Panthéon-Sorbonne » de l'en-tête (`App.jsx`), regrouper les deux logos (Paris 1 et IMCDS) à gauche au lieu de les répartir aux deux extrémités, et remplacer le logo IMCDS par une déclinaison fournie directement par Corentin (PNG transparent, sans lettrage « IDS », plus simple que la version fond bleu marine utilisée jusqu'ici). Fichier `logo-master-imcds.jpeg` supprimé, remplacé par `logo-master-imcds.png` (rognage automatique au plus près du contenu, transparence native du fichier source conservée). Classe Tailwind du logo IMCDS simplifiée (plus de fond/ombre/coins arrondis, devenus inutiles sur un logo déjà transparent et circulaire).
+> **Vérifications faites** : `npm run build` sans erreur, `npm run lint` toujours à 2 erreurs préexistantes (`ui.jsx`, hors périmètre, aucune régression). Pas de vérification visuelle dans un vrai navigateur cette session (aucun navigateur headless disponible dans cet environnement distant) : à valider par Corentin.
+> **PR #18 ouverte en brouillon**, pas encore fusionnée.
+> **À la reprise** : suivre la PR #18 (validation visuelle de Corentin, puis fusion sur instruction explicite). Seul point bloquant restant identifié : l'onglet Mémoire, qui attend le contenu converti du PDF de Corentin.
+
+## Session précédente : 2026-06-21 (retrait du module Datalake + phrase de présentation)
 
 > **Clôture de session.** Corentin a jugé le module Datalake livré dans la session précédente sans intérêt (« c'est nul »). Retrait complet : onglet « Données » supprimé de `App.jsx`, `web/src/sections/Datalake.jsx` supprimé, dépendance `papaparse` désinstallée. À la place : une simple icône de téléchargement sur la page Vue d'ensemble (`Overview.jsx`), qui pointe directement vers `reponses.csv` (toujours servi depuis `web/public/`, toujours synchronisé en CI). `CLAUDE.md` §9 et l'arborescence cible (§5) mis à jour pour documenter ce retrait, sur le même principe que le nuage 3D retiré en juin.
 > **Deuxième correction demandée dans la même session** : le bloc de citations « Ce qu'en disent les répondants » sur la page Vue d'ensemble affichait aussi un mini graphique en barres des thèmes détectés (répartition des causes citées). Corentin a jugé ce graphique sans lien avec la page (pas d'hypothèse précise associée sur l'onglet Vue d'ensemble). Retiré uniquement pour cet onglet dans `Verbatims.jsx` (`tab !== 'overview'` autour du bloc de barres) : les citations textuelles restent, le graphique de répartition reste affiché sur H1/H2/H3 où il est rattaché à une hypothèse précise via le texte de lecture.

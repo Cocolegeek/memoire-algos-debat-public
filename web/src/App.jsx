@@ -6,7 +6,7 @@ import Hypothesis2 from './sections/Hypothesis2.jsx'
 import Hypothesis3 from './sections/Hypothesis3.jsx'
 import Verbatims from './sections/Verbatims.jsx'
 import logoParis1 from './assets/logo-paris1-sorbonne.png'
-import logoIMCDS from './assets/logo-master-imcds.jpeg'
+import logoIMCDS from './assets/logo-master-imcds.png'
 
 const TABS = [
   { id: 'overview', label: 'Vue d’ensemble' },
@@ -44,7 +44,7 @@ export default function App() {
     <div className="min-h-screen bg-bg">
       <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
         <header className="space-y-6 border-b border-line pb-8">
-          <div className="flex flex-wrap items-center justify-between gap-6">
+          <div className="flex flex-wrap items-center gap-6">
             <img
               src={logoParis1}
               alt="Université Paris 1 Panthéon-Sorbonne"
@@ -53,12 +53,11 @@ export default function App() {
             <img
               src={logoIMCDS}
               alt="Master IMCDS, Université Paris 1 Panthéon-Sorbonne"
-              className="h-14 w-14 rounded-xl shadow-[0_6px_16px_-6px_rgba(21,23,43,0.35)] sm:h-16 sm:w-16"
+              className="h-14 w-14 sm:h-16 sm:w-16"
             />
           </div>
 
           <div className="space-y-4">
-            <Eyebrow>Mémoire de Master IMCDS · Paris 1 Panthéon-Sorbonne</Eyebrow>
             <h1 className="font-display text-2xl font-semibold text-ink sm:text-3xl">
               Algorithmes de recommandation et polarisation du débat public
             </h1>
