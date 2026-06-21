@@ -4,7 +4,6 @@ import Overview from './sections/Overview.jsx'
 import Hypothesis1 from './sections/Hypothesis1.jsx'
 import Hypothesis2 from './sections/Hypothesis2.jsx'
 import Hypothesis3 from './sections/Hypothesis3.jsx'
-import Datalake from './sections/Datalake.jsx'
 import Verbatims from './sections/Verbatims.jsx'
 import logoParis1 from './assets/logo-paris1-sorbonne.png'
 import logoIMCDS from './assets/logo-master-imcds.jpeg'
@@ -14,7 +13,6 @@ const TABS = [
   { id: 'h1', label: 'H1' },
   { id: 'h2', label: 'H2' },
   { id: 'h3', label: 'H3' },
-  { id: 'donnees', label: 'Données' },
 ]
 
 const REPO = 'https://github.com/Cocolegeek/memoire-algos-debat-public'
@@ -103,7 +101,6 @@ export default function App() {
               {active === 'h1' && <Hypothesis1 data={data.h1} respondents={respondents} />}
               {active === 'h2' && <Hypothesis2 a={data.h2a} b={data.h2b} respondents={respondents} />}
               {active === 'h3' && <Hypothesis3 data={data.h3} />}
-              {active === 'donnees' && <Datalake />}
             </>
           )}
         </main>

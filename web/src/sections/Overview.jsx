@@ -6,7 +6,20 @@ export default function Overview({ data, onNavigate }) {
   return (
     <div className="space-y-8">
       <Card>
-        <SectionTitle sub={echantillon.resume}>Profil de l'échantillon</SectionTitle>
+        <div className="flex items-start justify-between gap-4">
+          <SectionTitle sub={echantillon.resume}>Profil de l'échantillon</SectionTitle>
+          <a
+            href={import.meta.env.BASE_URL + 'reponses.csv'}
+            download
+            title="Télécharger les données brutes anonymisées (CSV)"
+            aria-label="Télécharger les données brutes anonymisées (CSV)"
+            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line text-muted transition hover:border-ink-soft hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-4 w-4" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v12m0 0-4-4m4 4 4-4M5 19h14" />
+            </svg>
+          </a>
+        </div>
         <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {echantillon.indicateurs.map((ind) => (
             <StatTile key={ind.label} valeur={ind.pct} label={ind.label} />
