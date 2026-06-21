@@ -1,5 +1,19 @@
+import { CartesianGrid, Label, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts'
 import { BarRow, BigStat, BORD_COULEURS, Caption, Card, Eyebrow, SectionTitle, Signif } from '../ui.jsx'
 import HypoHeader from './HypoHeader.jsx'
+
+const ORDRE_BORD = ['extreme_gauche', 'gauche', 'centre', 'droite', 'extreme_droite', 'autre']
+const ABBR_BORD = { extreme_gauche: 'TG', gauche: 'G', centre: 'C', droite: 'D', extreme_droite: 'TD', autre: 'NS' }
+
+function TooltipBord({ active, payload }) {
+  if (!active || !payload?.length) return null
+  const d = payload[0].payload
+  return (
+    <div className="rounded-lg border border-line bg-panel px-2 py-1 font-mono text-xs text-ink-soft shadow">
+      {d.label} : {String(d.y).replace('.', ',')}/5 · {d.pct}% en accord fort
+    </div>
+  )
+}
 
 const INFO_ECART = {
   titre: 'Le grand écart',
@@ -18,12 +32,21 @@ const INFO_DSA = {
 const INFO_BORD = {
   titre: 'Une demande consensuelle, mais graduée',
   methodologie:
-    "Note moyenne et part de répondants en accord fort (Q18 ∈ {4,5}), calculées séparément pour chacune des six catégories de positionnement politique (Q5). Présentation descriptive : aucun test global (de type ANOVA) n'est appliqué entre les six groupes.",
+    "Note moyenne et part de répondants en accord fort (note 4 ou 5 sur 5 à la question Q18), calculées séparément pour chacune des six catégories de positionnement politique (Q5). Présentation descriptive : aucun test global (de type ANOVA) n'est appliqué entre les six groupes.",
   donnees: 'Q18 (1-5) croisée avec Q5 (positionnement politique, 6 modalités).',
 }
 
 export default function Hypothesis3({ data }) {
   const { ecart, demande_par_bord, demande_selon_dsa, test_dsa, lecture } = data
+
+  const pointsBord = demande_par_bord.map((d) => ({
+    x: ORDRE_BORD.indexOf(d.cle) + 1,
+    y: d.note,
+    couleur: BORD_COULEURS[d.cle],
+    r: 5 + (d.pct - 50) / 5,
+    label: d.label,
+    pct: d.pct,
+  }))
 
   return (
     <div className="space-y-8">
@@ -82,21 +105,57 @@ export default function Hypothesis3({ data }) {
       <Card>
         <SectionTitle
           info={INFO_BORD}
-          sub="Part jugeant la transparence nécessaire (Q18 ∈ {4,5}) et note moyenne, par bord politique. La demande est forte partout, mais graduée."
+          sub="Part jugeant la transparence nécessaire (note 4 ou 5 sur 5 à la question Q18) et note moyenne, par bord politique. La demande est forte partout, mais graduée."
         >
           Une demande consensuelle, mais graduée
         </SectionTitle>
-        <div className="mt-4 space-y-2">
-          {demande_par_bord.map((d) => (
-            <BarRow
-              key={d.label}
-              label={d.label}
-              valeur={d.note}
-              echelle={5}
-              couleur={BORD_COULEURS[d.cle]}
-              affiche={`${d.note.toFixed(1).replace('.', ',')} · ${d.pct}%`}
-            />
-          ))}
+        <div className="mt-4">
+          <ResponsiveContainer width="100%" height={300}>
+            <ScatterChart margin={{ top: 8, right: 16, bottom: 36, left: 18 }}>
+              <CartesianGrid stroke="#D9DBE3" strokeDasharray="3 3" />
+              <XAxis
+                type="number"
+                dataKey="x"
+                domain={[0.5, 6.5]}
+                ticks={[1, 2, 3, 4, 5, 6]}
+                tickFormatter={(v) => ABBR_BORD[ORDRE_BORD[v - 1]]}
+                tick={{ fontSize: 11 }}
+                stroke="#6B6F80"
+              >
+                <Label value="Positionnement politique déclaré" position="insideBottom" offset={-20} style={{ fontSize: 11, fill: '#6B6F80' }} />
+              </XAxis>
+              <YAxis type="number" dataKey="y" domain={[1, 5]} ticks={[1, 2, 3, 4, 5]} tick={{ fontSize: 11 }} stroke="#6B6F80" width={32}>
+                <Label
+                  value="Demande de régulation (note moyenne)"
+                  angle={-90}
+                  position="insideLeft"
+                  style={{ fontSize: 11, fill: '#6B6F80', textAnchor: 'middle' }}
+                />
+              </YAxis>
+              <Tooltip content={<TooltipBord />} cursor={{ strokeDasharray: '3 3' }} />
+              <Scatter
+                data={pointsBord}
+                shape={(props) => {
+                  const { cx, cy, payload } = props
+                  return (
+                    <circle cx={cx} cy={cy} r={payload.r} fill={payload.couleur} fillOpacity={0.85} stroke="#FFFFFF" strokeWidth={1.5} />
+                  )
+                }}
+              />
+            </ScatterChart>
+          </ResponsiveContainer>
+          <div className="mt-3 flex flex-wrap gap-3">
+            {demande_par_bord.map((d) => (
+              <span key={d.cle} className="inline-flex items-center gap-1.5 font-mono text-xs text-muted">
+                <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: BORD_COULEURS[d.cle] }} aria-hidden="true" />
+                {d.label}
+              </span>
+            ))}
+          </div>
+          <p className="mt-2 font-mono text-xs text-muted">
+            Couleur = bord politique déclaré. Taille du point = part des répondants en accord fort
+            (note 4 ou 5 sur 5).
+          </p>
         </div>
         <Caption>
           La demande de régulation reste majoritaire à tous les bords politiques (le critère «

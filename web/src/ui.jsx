@@ -425,9 +425,24 @@ export function TableRobustesse({ groupes, predicteurs }) {
   )
 }
 
-// Diagramme à points avec droite de tendance. points: [{x, y}]. Axes
-// systématiquement légendés (lisible sans ouvrir la méthodologie).
-export function Nuage({ points, xLabel, yLabel, xDomain = [1, 5], yDomain = [1, 5], droite }) {
+// Diagramme à points avec droite de tendance. points: [{x, y, couleur?, r?}].
+// Axes systématiquement légendés et segmentés par des graduations explicites
+// (lisible sans ouvrir la méthodologie). couleur/r par point permettent de
+// réutiliser ce composant pour un nuage catégoriel (ex. bord politique).
+export function Nuage({
+  points,
+  xLabel,
+  yLabel,
+  xDomain = [1, 5],
+  yDomain = [1, 5],
+  xTicks,
+  yTicks,
+  xTickFormatter,
+  droite,
+  refX,
+  refXLabel,
+  height = 250,
+}) {
   const seg =
     droite &&
     [
@@ -435,20 +450,22 @@ export function Nuage({ points, xLabel, yLabel, xDomain = [1, 5], yDomain = [1, 
       { x: droite.xmax, y: droite.pente * droite.xmax + droite.ordonnee },
     ]
   return (
-    <ResponsiveContainer width="100%" height={250}>
+    <ResponsiveContainer width="100%" height={height}>
       <ScatterChart margin={{ top: 8, right: 16, bottom: 30, left: 18 }}>
         <CartesianGrid stroke="#D9DBE3" strokeDasharray="3 3" />
         <XAxis
           type="number"
           dataKey="x"
           domain={xDomain}
+          ticks={xTicks}
+          tickFormatter={xTickFormatter}
           tick={{ fontSize: 11 }}
           stroke="#6B6F80"
-          allowDecimals={false}
+          allowDecimals={xTicks ? undefined : false}
         >
           <Label value={xLabel} position="insideBottom" offset={-16} style={{ fontSize: 11, fill: '#6B6F80' }} />
         </XAxis>
-        <YAxis type="number" dataKey="y" domain={yDomain} tick={{ fontSize: 11 }} stroke="#6B6F80" width={32}>
+        <YAxis type="number" dataKey="y" domain={yDomain} ticks={yTicks} tick={{ fontSize: 11 }} stroke="#6B6F80" width={32}>
           <Label
             value={yLabel}
             angle={-90}
@@ -457,8 +474,30 @@ export function Nuage({ points, xLabel, yLabel, xDomain = [1, 5], yDomain = [1, 
           />
         </YAxis>
         <Tooltip content={<TooltipNuage xLabel={xLabel} yLabel={yLabel} />} cursor={{ strokeDasharray: '3 3' }} />
-        <Scatter data={points} fill="#1F8A86" fillOpacity={0.45} />
+        <Scatter
+          data={points}
+          shape={(props) => {
+            const { cx, cy, payload } = props
+            const couleur = payload.couleur
+            return (
+              <circle
+                cx={cx}
+                cy={cy}
+                r={payload.r ?? 5}
+                fill={couleur ?? '#1F8A86'}
+                fillOpacity={couleur ? 0.85 : 0.45}
+                stroke={couleur ? '#FFFFFF' : 'none'}
+                strokeWidth={couleur ? 1.5 : 0}
+              />
+            )
+          }}
+        />
         {seg && <ReferenceLine segment={seg} stroke="#E06A3B" strokeWidth={2} ifOverflow="extendDomain" />}
+        {refX != null && (
+          <ReferenceLine x={refX} stroke="#6B6F80" strokeDasharray="4 4">
+            {refXLabel && <Label value={refXLabel} position="insideTopRight" style={{ fontSize: 10, fill: '#6B6F80' }} />}
+          </ReferenceLine>
+        )}
       </ScatterChart>
     </ResponsiveContainer>
   )
