@@ -4,8 +4,9 @@ Journal de session. Mis à jour à la fin de chaque session de travail. Sert de 
 
 ## Dernière session : 2026-06-21
 
-> **Clôture de session.** Nuage 3D construit puis retiré (hors cadre académique). Recadrage complet : `analyse.py` refondu avec tests statistiques (régression H1, H2.b ajoutée, H2.a corrigé), front refait pour afficher l'appareil statistique, icônes méthodologie cliquables sur chaque graphe, paragraphes explicatifs par graphe, contrôle de robustesse de H1 par sous-groupe. Tout est commité, poussé et déployé sur `main` (PR #8, #9, #10 fusionnés). Site en ligne à jour : https://cocolegeek.github.io/memoire-algos-debat-public/
-> **À la reprise :** voir « Prochaine étape exacte » plus bas. Rien de bloquant côté code ; trois points restent côté Corentin (n du mémoire, verdicts, interprétation des contrastes politiques de H2.a), plus la question H3 (sa seconde moitié n'est pas significative, p=0,50) à assumer dans le texte.
+> **Clôture de session.** Nuage 3D construit puis retiré (hors cadre académique). Recadrage complet : `analyse.py` refondu avec tests statistiques (régression H1, H2.b ajoutée, H2.a corrigé), front refait pour afficher l'appareil statistique, icônes méthodologie cliquables sur chaque graphe, paragraphes explicatifs par graphe, contrôle de robustesse de H1 par sous-groupe. Puis passe de finition : vocabulaire aligné sur les énoncés exacts des hypothèses, palette politique cohérente partout, titres de graphiques moins techniques, légendes d'axe Y, aération. Tout est commité, poussé et déployé sur `main` (PR #8 à #12 fusionnés). Site en ligne à jour : https://cocolegeek.github.io/memoire-algos-debat-public/
+> **Décisions de Corentin actées cette session :** n = 263 confirmé ; verdicts conservés tels que testés (pas de validation à 100 %, c'est le principe même d'une hypothèse testée) ; H3 reste « partiellement confirmée », assumé tel quel dans le texte.
+> **À la reprise :** rien de bloquant côté code. Voir « Prochaine étape exacte » plus bas pour les pistes dataviz restantes (toujours filtrées par la règle « éprouve une hypothèse, ne décore pas »).
 
 ### Session du 2026-06-21 : recadrage académique complet
 
@@ -24,6 +25,16 @@ Le nuage 3D livré en fin de session précédente a été jugé non pertinent pa
 **Verdicts finaux (n=263, testés)** : H1 Confirmée · H2.a Confirmée · H2.b Confirmée · H3 Partiellement confirmée (déconnexion confirmée, mais l'effet « connaissance DSA → moins de demande » n'est pas significatif, p=0,50).
 
 Décision explicite de Corentin à respecter pour la suite : **ne pas multiplier les visualisations**. Chaque ajout doit éprouver une hypothèse, pas décorer. Pistes écartées pour l'instant car jugées moins prioritaires : mots-clés des verbatims, lecture urbain/rural.
+
+### Passe de finition (même session, 2026-06-21)
+
+Décisions de Corentin : n = 263 confirmé ; verdicts conservés tels que testés ; H3 reste « partiellement confirmée » (assumé, conforme au principe qu'une hypothèse se teste, ne se valide pas à 100 %). Puis trois demandes concrètes traitées :
+
+1. **Vocabulaire** : tous les textes visibles (labels, sous-titres, paragraphes de lecture) reprennent désormais les mots exacts des énoncés d'hypothèses : « intensité d'usage », « responsabilité individuelle / structurelle », « légitimité perçue de la régulation systémique », « demande de régulation des algorithmes », « consensuelle », « connaissance des dispositifs existants », « volonté de régulation ». H3 cite la phrase exacte de l'hypothèse pour annoncer que le test DSA n'est pas significatif. Au passage, des chiffres qui étaient écrits en dur dans le texte de lecture H3 (82 %, 15 %, p=0,50) ont été corrigés pour être interpolés depuis les valeurs calculées (l'ancien texte violait CLAUDE.md §3 sans qu'on s'en rende compte).
+2. **Noms de graphiques moins techniques** : les titres visibles ne disent plus « Nuage de points : X » ni « Régression multiple », remplacés par des titres en langage clair (« X et l'hostilité », « Ce qui pèse vraiment »). Le détail méthodologique technique reste accessible via l'icône info, c'est sa place.
+3. **Couleurs et légendes cohérentes** : nouvelle palette politique exportée (`BORD_COULEURS` dans `ui.jsx`, rouge vif à gauche → bleu vif à droite, gris neutre), appliquée partout où un graphe distingue les bords politiques : répartition politique de Vue d'ensemble, colonnes gauche/droite du tableau de robustesse H1, barres et sous-texte des contrastes H2.a (colorées selon le filtre actif), demande par bord politique de H3 (6 catégories). `BarRow`/`Track` acceptent une couleur explicite en plus du système percu/reel existant (qui reste la palette corail/sarcelle, sémantique différente : perception vs réalité, non remplacée). Légende d'axe Y ajoutée sur tous les nuages de points (l'axe X l'avait déjà). Badge « Verdict provisoire » devenu « Verdict » (les chiffres sont définitifs). Aération générale (espacements augmentés sur les conteneurs de section et les listes de barres).
+
+Déployé et vérifié à la main (build, couleurs par onglet, icônes, axes, aucune erreur console). PR #12 fusionné.
 
 ## Session du 2026-06-20
 
