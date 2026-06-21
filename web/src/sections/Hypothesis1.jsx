@@ -39,7 +39,7 @@ const INFO_ROBUSTESSE = {
 const INFO_NUAGE = (label) => ({
   titre: `${label} et l'hostilité`,
   methodologie:
-    'Régression linéaire simple (moindres carrés) entre la variable et l’index d’hostilité, calculée indépendamment des deux autres facteurs. La droite corail résume la tendance. Un léger bruit aléatoire (« jitter ») est ajouté sur les variables à valeurs entières pour rendre visibles les points superposés ; il ne modifie pas le calcul.',
+    'Régression linéaire simple (moindres carrés) entre la variable et l’index d’hostilité, calculée indépendamment des deux autres facteurs. La droite orange résume la tendance. Un léger bruit aléatoire (« jitter ») est ajouté sur les variables à valeurs entières pour rendre visibles les points superposés ; il ne modifie pas le calcul.',
   donnees: 'Un point par répondant (n = 263), valeurs brutes recodées sur l’échelle 1 à 5.',
 })
 
@@ -73,7 +73,7 @@ export default function Hypothesis1({ data, respondents = [] }) {
             <EcartMetre percu={ecart.percu} reel={ecart.reel} echelle={ecart.echelle} />
           </div>
           <Caption>
-            Le pôle corail (perception de bulle) et le pôle sarcelle (intensité d'usage) représentent
+            Le pôle orange (perception de bulle) et le pôle vert (intensité d'usage) représentent
             chacun la corrélation de ce facteur avec l'hostilité mesurée. Plus une barre est longue,
             plus le facteur correspondant est lié à une hostilité plus forte.
           </Caption>
@@ -82,7 +82,7 @@ export default function Hypothesis1({ data, respondents = [] }) {
         <Card>
           <SectionTitle
             info={INFO_REGRESSION}
-            sub={`Hostilité expliquée par les trois facteurs ensemble. Poids standardisés (β), n = ${regression.n}, R² = ${String(regression.r2).replace('.', ',')}.`}
+            sub={`Quel facteur pèse le plus sur l'hostilité une fois les deux autres neutralisés ? n = ${regression.n} ; le modèle explique environ ${Math.round(regression.r2 * 100)} % de l'hostilité observée.`}
           >
             Ce qui pèse vraiment
           </SectionTitle>
@@ -97,39 +97,54 @@ export default function Hypothesis1({ data, respondents = [] }) {
             ))}
           </div>
           <Caption>
-            Contrairement aux corrélations simples, ces poids tiennent compte des trois facteurs à la
-            fois : ils répondent directement à la question « qui prédit le mieux l'hostilité, une fois
-            les autres facteurs neutralisés ? ». Un β non significatif (p ≥ 0,05) ne permet pas de
-            conclure à un effet réel de ce facteur.
+            Le poids (β) de chaque facteur est calculé en tenant compte des deux autres en même temps,
+            ce qui permet de les comparer directement : plus β est élevé, plus ce facteur pèse sur
+            l'hostilité, indépendamment des deux autres. Le « p » qui l'accompagne indique si ce poids
+            est fiable ou pourrait être dû au hasard : en dessous de 0,05, l'effet est dit significatif,
+            donc probablement réel ; au-dessus, on ne peut pas conclure à un effet réel de ce facteur.
           </Caption>
         </Card>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-3">
-        {nuages.map((s) => (
-          <Card key={s.cle}>
-            <div className="flex items-center gap-2">
-              <Eyebrow>{s.label}</Eyebrow>
-              <InfoButton {...INFO_NUAGE(s.label)} />
+      <Card>
+        <SectionTitle sub="Chaque facteur pris isolément, sans tenir compte des deux autres.">
+          Chaque facteur face à l'hostilité
+        </SectionTitle>
+        <p className="mt-2 font-body text-sm text-ink-soft">
+          <strong>r</strong> mesure la force du lien entre ce facteur et l'hostilité (de -1 à 1 ; plus sa
+          valeur absolue est grande, plus le lien est fort). <strong>p</strong> indique si ce lien peut
+          raisonnablement être dû au hasard : en dessous de 0,05, on le considère significatif, donc
+          probablement réel.
+        </p>
+        <div className="mt-6 space-y-8 divide-y divide-line">
+          {nuages.map((s) => (
+            <div key={s.cle} className="pt-8 first:pt-0">
+              <div className="flex items-center gap-2">
+                <Eyebrow>{s.label}</Eyebrow>
+                <InfoButton {...INFO_NUAGE(s.label)} />
+              </div>
+              <p className="mt-1 mb-3 font-mono text-xs text-ink-soft">
+                r = {String(s.r).replace('.', ',')} · <Signif p={s.p} />
+              </p>
+              <Nuage
+                points={s.points}
+                droite={s}
+                xLabel={s.label.replace(/ \(.*\)/, '')}
+                yLabel="Hostilité ressentie"
+                xDomain={s.cle === 'exposition' ? [1, 5] : [0.5, 5.5]}
+                xTicks={[1, 2, 3, 4, 5]}
+                yTicks={[1, 2, 3, 4, 5]}
+                height={300}
+              />
+              <Caption>
+                {s.cle === 'bulle'
+                  ? 'Les points sont dispersés sans tendance nette : se sentir enfermé dans une bulle ne va pas de pair avec une hostilité plus ou moins forte.'
+                  : 'La droite, bien que peu inclinée, traduit une tendance positive : plus ce facteur est élevé, plus l\'hostilité moyenne tend à l\'être.'}
+              </Caption>
             </div>
-            <p className="mt-1 mb-3 font-mono text-xs text-ink-soft">
-              r = {String(s.r).replace('.', ',')} · <Signif p={s.p} />
-            </p>
-            <Nuage
-              points={s.points}
-              droite={s}
-              xLabel={s.label.replace(/ \(.*\)/, '')}
-              yLabel="Hostilité ressentie"
-              xDomain={s.cle === 'exposition' ? [1, 5] : [0.5, 5.5]}
-            />
-            <Caption>
-              {s.cle === 'bulle'
-                ? 'Les points sont dispersés sans tendance nette : se sentir enfermé dans une bulle ne va pas de pair avec une hostilité plus ou moins forte.'
-                : 'La droite, bien que peu inclinée, traduit une tendance positive : plus ce facteur est élevé, plus l\'hostilité moyenne tend à l\'être.'}
-            </Caption>
-          </Card>
-        ))}
-      </div>
+          ))}
+        </div>
+      </Card>
 
       <Card>
         <SectionTitle

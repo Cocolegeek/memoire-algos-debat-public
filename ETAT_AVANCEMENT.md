@@ -2,7 +2,14 @@
 
 Journal de session. Mis à jour à la fin de chaque session de travail. Sert de point de reprise : lis ce fichier avant de demander « où on en est ».
 
-## Dernière session : 2026-06-21
+## Dernière session : 2026-06-21 (suite, passe de clarté)
+
+> **Clôture de session.** Nouvelle passe de clarté demandée par Corentin sur l'app déjà déployée : vocabulaire courant dans les textes (« orange/vert » au lieu de « corail/sarcelle »), jargon statistique réduit dans le paragraphe de régression H1, nuages de points H1/H2.b passés en pleine largeur avec légendes d'axes et segmentation (ligne de référence à l'égalité individus/structures sur H2.b), notations type « Q18 ∈ {4,5} » réécrites en toutes lettres, demande de régulation par bord politique (H3) remplacée par un nuage de points coloré par bord avec légende écrite, verbatims rendus différents par onglet (au lieu des mêmes citations partout) avec une classification thématique légère (analyse sémantique illustrative, pas statistique) ajoutée à `analyse.py`. Travail poussé sur la branche `claude/mobile-build-push-spns32`, **PR #14 ouverte en brouillon**, pas encore fusionnée.
+> **Vérifications faites :** `analyse.py` ré-exécuté, chiffres H1/H2/H3 inchangés (seule la structure des verbatims a changé) ; build `web` passé (`npm ci && npm run build`) ; lint pré-existant (2 erreurs dans `ui.jsx` sur `react-refresh/only-export-components`) confirmé antérieur à cette session, non traité (hors périmètre).
+> **Limite connue :** pas de vérification visuelle dans un vrai navigateur cette session (téléchargement du navigateur Playwright bloqué par la politique réseau du bac à sable) ; à faire par Corentin ou lors d'une prochaine session avec affichage.
+> **À la reprise :** suivre la PR #14 (statut CI/relecture). Au moment de la clôture de session précédente : aucun check CI configuré sur les PR (le déploiement ne se déclenche que sur push vers `main`), aucun commentaire de revue. Rien de bloquant côté code.
+
+## Session précédente : 2026-06-21 (recadrage académique)
 
 > **Clôture de session.** Nuage 3D construit puis retiré (hors cadre académique). Recadrage complet : `analyse.py` refondu avec tests statistiques (régression H1, H2.b ajoutée, H2.a corrigé), front refait pour afficher l'appareil statistique, icônes méthodologie cliquables sur chaque graphe, paragraphes explicatifs par graphe, contrôle de robustesse de H1 par sous-groupe. Puis passe de finition : vocabulaire aligné sur les énoncés exacts des hypothèses, palette politique cohérente partout, titres de graphiques moins techniques, légendes d'axe Y, aération. Tout est commité, poussé et déployé sur `main` (PR #8 à #12 fusionnés). Site en ligne à jour : https://cocolegeek.github.io/memoire-algos-debat-public/
 > **Décisions de Corentin actées cette session :** n = 263 confirmé ; verdicts conservés tels que testés (pas de validation à 100 %, c'est le principe même d'une hypothèse testée) ; H3 reste « partiellement confirmée », assumé tel quel dans le texte.
@@ -35,6 +42,23 @@ Décisions de Corentin : n = 263 confirmé ; verdicts conservés tels que testé
 3. **Couleurs et légendes cohérentes** : nouvelle palette politique exportée (`BORD_COULEURS` dans `ui.jsx`, rouge vif à gauche → bleu vif à droite, gris neutre), appliquée partout où un graphe distingue les bords politiques : répartition politique de Vue d'ensemble, colonnes gauche/droite du tableau de robustesse H1, barres et sous-texte des contrastes H2.a (colorées selon le filtre actif), demande par bord politique de H3 (6 catégories). `BarRow`/`Track` acceptent une couleur explicite en plus du système percu/reel existant (qui reste la palette corail/sarcelle, sémantique différente : perception vs réalité, non remplacée). Légende d'axe Y ajoutée sur tous les nuages de points (l'axe X l'avait déjà). Badge « Verdict provisoire » devenu « Verdict » (les chiffres sont définitifs). Aération générale (espacements augmentés sur les conteneurs de section et les listes de barres).
 
 Déployé et vérifié à la main (build, couleurs par onglet, icônes, axes, aucune erreur console). PR #12 fusionné.
+
+### Passe de clarté (même journée, 2026-06-21, PR #14)
+
+Demande de Corentin : huit retouches ciblées sur l'app déjà en ligne, pour la rendre lisible par un public diplômé non spécialiste des statistiques, sans toucher au fond des chiffres ni aux passages cités tels quels.
+
+1. **Vocabulaire courant** : « corail »/« sarcelle » remplacés par « orange »/« vert » dans les paragraphes explicatifs (H1, H2.a, H2.b). Les tokens techniques `percu`/`reel` dans le code ne changent pas, seul le texte visible change.
+2. **Jargon réduit** : le paragraphe expliquant la régression H1 (poids β, p) reformulé pour rester compréhensible sans bagage statistique, sans perdre l'information.
+3. **Nuages de points propres** : H1 (3 nuages) et H2.b (1 nuage) passés d'une grille en plusieurs colonnes à un empilement en pleine largeur, avec graduations d'axe harmonisées (échelle 1-5) et légendes d'axes X/Y systématiques.
+4. **r et p définis précisément** : les paragraphes accompagnant chaque nuage explicitent ce que mesurent r et p, sans raccourci.
+5. **Segmentation propre sur les nuages** : ligne de référence verticale ajoutée sur le nuage H2.b (décalage de responsabilité × demande de régulation), marquant le point d'égalité entre responsabilité individuelle et structurelle.
+6. **Verbatims différenciés par onglet** : nouveau composant `Verbatims.jsx`, qui sélectionne un sous-ensemble de citations pertinent pour l'onglet actif (Vue d'ensemble : thèmes Q19 généraux ; H1 : thème « usage des réseaux/algorithmes » de Q19 ; H2 : thèmes « responsabilité individuelle » vs « responsabilité politique/médias » de Q19 ; H3 : thème « régulation » de Q20), au lieu des 4 mêmes citations partout. `analyse.py` enrichi d'une classification thématique légère par mots-clés (`THEMES_Q19`, `THEMES_Q20`, fonction `classer`), explicitement présentée comme une lecture illustrative et non un test statistique. Schéma `results.json.verbatims.q19/q20` changé : `{question, themes:[{cle,label,pct}], citations:[{texte,theme}]}` au lieu d'un simple tableau de chaînes.
+7. **Notations en toutes lettres** : suppression des raccourcis type « Q18 ∈ {4,5} » dans les textes visibles (icônes méthodologie et sous-titres), remplacés par des formulations en français complet.
+8. **Demande par bord politique (H3) en nuage de points** : le bloc « Une demande consensuelle, mais graduée » passe d'une liste de barres à un nuage de points (un point par bord politique, couleur = `BORD_COULEURS`, taille = ampleur de l'accord), avec légende écrite. Le paragraphe cité par Corentin mot pour mot n'a pas été modifié, conformément à sa consigne explicite.
+
+Vérifications faites : `analyse.py` ré-exécuté (chiffres H1/H2/H3 inchangés, seule la structure des verbatims a changé) ; `npm run build` passé sans erreur. Vérification visuelle dans un vrai navigateur **non faite** cette session (téléchargement du navigateur Playwright bloqué par la politique réseau du bac à sable) : à faire par Corentin ou lors d'une prochaine session avec affichage.
+
+Poussé sur la branche `claude/mobile-build-push-spns32`, **PR #14 ouverte en brouillon** (pas encore fusionnée dans `main`, donc pas encore sur le site en ligne). Au moment de la clôture de cette session : aucun check CI sur la PR (le workflow de déploiement ne se déclenche que sur push vers `main`, pas sur les PR), aucun commentaire de revue en attente.
 
 ## Session du 2026-06-20
 
