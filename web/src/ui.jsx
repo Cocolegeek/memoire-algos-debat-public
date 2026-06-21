@@ -372,11 +372,20 @@ function TooltipNuage({ active, payload, xLabel, yLabel }) {
   if (!active || !payload?.length) return null
   const d = payload[0].payload
   return (
-    <div className="rounded-lg border border-line bg-panel px-2 py-1 font-mono text-xs text-ink-soft shadow">
-      {xLabel} : {d.x} · {yLabel} : {d.y}
+    <div className="rounded-xl border border-line bg-panel px-3 py-2 font-mono text-xs shadow-[0_12px_24px_-8px_rgba(21,23,43,0.25)]">
+      <div className="flex items-center justify-between gap-3">
+        <span className="text-muted">{xLabel}</span>
+        <span className="font-medium text-ink">{d.x}</span>
+      </div>
+      <div className="mt-0.5 flex items-center justify-between gap-3">
+        <span className="text-muted">{yLabel}</span>
+        <span className="font-medium text-ink">{d.y}</span>
+      </div>
     </div>
   )
 }
+
+const TICK_STYLE = { fontSize: 11, fontFamily: '"IBM Plex Mono", monospace', fill: '#6B6F80' }
 
 // Table de robustesse : une corrélation par ligne (prédicteur), recalculée
 // dans chaque sous-groupe (colonne). predicteurs: [{label, valeurs: {cle: {r,p,n}}}]
@@ -449,56 +458,102 @@ export function Nuage({
       { x: droite.xmin, y: droite.pente * droite.xmin + droite.ordonnee },
       { x: droite.xmax, y: droite.pente * droite.xmax + droite.ordonnee },
     ]
+  const gradientId = useId()
   return (
-    <ResponsiveContainer width="100%" height={height}>
-      <ScatterChart margin={{ top: 8, right: 16, bottom: 30, left: 18 }}>
-        <CartesianGrid stroke="#D9DBE3" strokeDasharray="3 3" />
-        <XAxis
-          type="number"
-          dataKey="x"
-          domain={xDomain}
-          ticks={xTicks}
-          tickFormatter={xTickFormatter}
-          tick={{ fontSize: 11 }}
-          stroke="#6B6F80"
-          allowDecimals={xTicks ? undefined : false}
-        >
-          <Label value={xLabel} position="insideBottom" offset={-16} style={{ fontSize: 11, fill: '#6B6F80' }} />
-        </XAxis>
-        <YAxis type="number" dataKey="y" domain={yDomain} ticks={yTicks} tick={{ fontSize: 11 }} stroke="#6B6F80" width={32}>
-          <Label
-            value={yLabel}
-            angle={-90}
-            position="insideLeft"
-            style={{ fontSize: 11, fill: '#6B6F80', textAnchor: 'middle' }}
+    // Hauteur fluide entre mobile et desktop : évite un graphe écrasé en
+    // portrait et un graphe disproportionné en paysage, sans JS de resize.
+    <div className="w-full" style={{ height: `clamp(240px, 62vw, ${height}px)` }}>
+      <ResponsiveContainer width="100%" height="100%">
+        <ScatterChart margin={{ top: 12, right: 20, bottom: 32, left: 20 }}>
+          <defs>
+            <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#E06A3B" stopOpacity={0.5} />
+              <stop offset="50%" stopColor="#E06A3B" stopOpacity={1} />
+              <stop offset="100%" stopColor="#E06A3B" stopOpacity={0.5} />
+            </linearGradient>
+          </defs>
+          <CartesianGrid stroke="#D9DBE3" strokeDasharray="3 6" vertical={false} />
+          <XAxis
+            type="number"
+            dataKey="x"
+            domain={xDomain}
+            ticks={xTicks}
+            tickFormatter={xTickFormatter}
+            tick={TICK_STYLE}
+            tickLine={false}
+            axisLine={{ stroke: '#D9DBE3' }}
+            allowDecimals={xTicks ? undefined : false}
+          >
+            <Label value={xLabel} position="insideBottom" offset={-22} style={{ fontSize: 11, fontFamily: '"IBM Plex Mono", monospace', fill: '#6B6F80' }} />
+          </XAxis>
+          <YAxis
+            type="number"
+            dataKey="y"
+            domain={yDomain}
+            ticks={yTicks}
+            tick={TICK_STYLE}
+            tickLine={false}
+            axisLine={{ stroke: '#D9DBE3' }}
+            width={36}
+          >
+            <Label
+              value={yLabel}
+              angle={-90}
+              position="insideLeft"
+              style={{ fontSize: 11, fontFamily: '"IBM Plex Mono", monospace', fill: '#6B6F80', textAnchor: 'middle' }}
+            />
+          </YAxis>
+          <Tooltip content={<TooltipNuage xLabel={xLabel} yLabel={yLabel} />} cursor={{ stroke: '#6B6F80', strokeDasharray: '3 3' }} />
+          <Scatter
+            data={points}
+            isAnimationActive
+            animationDuration={500}
+            shape={(props) => {
+              const { cx, cy, payload } = props
+              const couleur = payload.couleur
+              const r = payload.r ?? 5.5
+              return (
+                <circle
+                  cx={cx}
+                  cy={cy}
+                  r={r}
+                  fill={couleur ?? '#1F8A86'}
+                  fillOpacity={couleur ? 0.88 : 0.5}
+                  stroke={couleur ?? '#1F8A86'}
+                  strokeOpacity={0.9}
+                  strokeWidth={1}
+                />
+              )
+            }}
+            activeShape={(props) => {
+              const { cx, cy, payload } = props
+              const couleur = payload.couleur ?? '#1F8A86'
+              const r = (payload.r ?? 5.5) + 2.5
+              return <circle cx={cx} cy={cy} r={r} fill={couleur} fillOpacity={0.95} stroke="#FFFFFF" strokeWidth={2} />
+            }}
           />
-        </YAxis>
-        <Tooltip content={<TooltipNuage xLabel={xLabel} yLabel={yLabel} />} cursor={{ strokeDasharray: '3 3' }} />
-        <Scatter
-          data={points}
-          shape={(props) => {
-            const { cx, cy, payload } = props
-            const couleur = payload.couleur
-            return (
-              <circle
-                cx={cx}
-                cy={cy}
-                r={payload.r ?? 5}
-                fill={couleur ?? '#1F8A86'}
-                fillOpacity={couleur ? 0.85 : 0.45}
-                stroke={couleur ? '#FFFFFF' : 'none'}
-                strokeWidth={couleur ? 1.5 : 0}
-              />
-            )
-          }}
-        />
-        {seg && <ReferenceLine segment={seg} stroke="#E06A3B" strokeWidth={2} ifOverflow="extendDomain" />}
-        {refX != null && (
-          <ReferenceLine x={refX} stroke="#6B6F80" strokeDasharray="4 4">
-            {refXLabel && <Label value={refXLabel} position="insideTopRight" style={{ fontSize: 10, fill: '#6B6F80' }} />}
-          </ReferenceLine>
-        )}
-      </ScatterChart>
-    </ResponsiveContainer>
+          {seg && (
+            <ReferenceLine
+              segment={seg}
+              stroke={`url(#${gradientId})`}
+              strokeWidth={2.5}
+              strokeLinecap="round"
+              ifOverflow="extendDomain"
+            />
+          )}
+          {refX != null && (
+            <ReferenceLine x={refX} stroke="#6B6F80" strokeDasharray="4 4">
+              {refXLabel && (
+                <Label
+                  value={refXLabel}
+                  position="insideTopRight"
+                  style={{ fontSize: 10, fontFamily: '"IBM Plex Mono", monospace', fill: '#6B6F80' }}
+                />
+              )}
+            </ReferenceLine>
+          )}
+        </ScatterChart>
+      </ResponsiveContainer>
+    </div>
   )
 }
