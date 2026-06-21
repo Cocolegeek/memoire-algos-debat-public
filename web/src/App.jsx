@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { Badge, Eyebrow, TabBar } from './ui.jsx'
 import Overview from './sections/Overview.jsx'
 import Hypothesis1 from './sections/Hypothesis1.jsx'
@@ -6,11 +6,15 @@ import Hypothesis2 from './sections/Hypothesis2.jsx'
 import Hypothesis3 from './sections/Hypothesis3.jsx'
 import Datalake from './sections/Datalake.jsx'
 
+// Chargé à la demande : three.js ne pèse pas sur le chargement initial du site.
+const Nuage3D = lazy(() => import('./sections/Nuage3D.jsx'))
+
 const TABS = [
   { id: 'overview', label: 'Vue d’ensemble' },
   { id: 'h1', label: 'H1' },
   { id: 'h2', label: 'H2' },
   { id: 'h3', label: 'H3' },
+  { id: 'nuage', label: 'Nuage 3D' },
   { id: 'donnees', label: 'Données' },
 ]
 
@@ -72,6 +76,11 @@ export default function App() {
               {active === 'h1' && <Hypothesis1 data={data.h1} />}
               {active === 'h2' && <Hypothesis2 data={data.h2} />}
               {active === 'h3' && <Hypothesis3 data={data.h3} />}
+              {active === 'nuage' && (
+                <Suspense fallback={<p className="font-body text-sm text-muted">Chargement de la vue 3D…</p>}>
+                  <Nuage3D />
+                </Suspense>
+              )}
               {active === 'donnees' && <Datalake />}
             </>
           )}
