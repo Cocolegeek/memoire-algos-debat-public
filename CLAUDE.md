@@ -144,6 +144,8 @@ L'onglet « Données » (bac à sable d'exploration libre du CSV, PapaParse, cho
 
 À la place : une simple icône de téléchargement sur la page Vue d'ensemble, qui pointe directement vers `reponses.csv` (servi tel quel depuis `web/public/`, toujours synchronisé en CI). Quiconque veut explorer les données récupère le fichier brut et utilise son propre outil, pas de bac à sable maison à maintenir.
 
+**Retour partiel (2026-06-22)** : un onglet « Données » a été réintroduit (`web/src/sections/Donnees.jsx`), mais d'une nature différente de celui retiré ci-dessus : pas de bac à sable de visualisation, un tableau réutilisable (une ligne par répondant, source `respondents.json`) avec sélecteur de colonnes, filtres par colonne, tri, regroupement façon Power BI (catégorie choisie, effectif et moyennes par groupe) et export CSV qui respecte la vue courante. Librairie : `@tanstack/react-table` (headless, gratuite), habillage Tailwind avec les tokens existants. Demande explicite de Corentin, proposition validée avant codage.
+
 ## 10. Déploiement (GitHub Pages)
 
 `vite.config.js` :
