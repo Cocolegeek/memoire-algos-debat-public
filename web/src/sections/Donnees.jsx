@@ -130,16 +130,16 @@ function PanneauFiltres({ ouvert, onToggle, cols, visibles, setVisibles, filtres
           <div className="mt-4 space-y-5">
             <div>
               <Eyebrow>Colonnes affichées</Eyebrow>
-              <div className="mt-2 max-h-56 space-y-1 overflow-y-auto pr-1">
+              <div className="mt-2 max-h-56 space-y-2 overflow-y-auto pr-1">
                 {cols.map((c) => (
-                  <label key={c.id} className="flex items-center gap-2 font-mono text-xs text-ink-soft" title={c.titre}>
+                  <label key={c.id} className="flex items-start gap-2 font-mono text-xs leading-snug text-ink-soft">
                     <input
                       type="checkbox"
                       checked={!!visibles[c.id]}
                       onChange={() => setVisibles((v) => ({ ...v, [c.id]: !v[c.id] }))}
-                      className="accent-ink"
+                      className="mt-0.5 accent-ink"
                     />
-                    {c.code}
+                    <span>{c.titre}</span>
                   </label>
                 ))}
               </div>
@@ -151,8 +151,8 @@ function PanneauFiltres({ ouvert, onToggle, cols, visibles, setVisibles, filtres
                 {cols
                   .filter((c) => visibles[c.id])
                   .map((c) => (
-                    <label key={c.id} className="flex flex-col gap-1" title={c.titre}>
-                      <span className="font-mono text-[11px] text-muted">{c.code}</span>
+                    <label key={c.id} className="flex flex-col gap-1">
+                      <span className="font-mono text-[11px] leading-snug text-muted">{c.titre}</span>
                       <FiltreColonne col={c} valeur={filtres[c.id]} onChange={(v) => setFiltres((f) => ({ ...f, [c.id]: v }))} />
                     </label>
                   ))}
@@ -167,7 +167,7 @@ function PanneauFiltres({ ouvert, onToggle, cols, visibles, setVisibles, filtres
                   .filter((c) => c.type === 'cat')
                   .map((c) => (
                     <option key={c.id} value={c.id}>
-                      {c.code}
+                      {c.titre}
                     </option>
                   ))}
               </select>
@@ -215,7 +215,7 @@ export default function Donnees() {
     () =>
       colsVisibles.map((c) => ({
         accessorKey: c.id,
-        header: c.code,
+        header: c.titre,
         sortingFn: c.type === 'num' ? (a, b) => Number(a.getValue(c.id) || 0) - Number(b.getValue(c.id) || 0) : undefined,
         cell: (info) => info.getValue() || '—',
       })),
@@ -264,11 +264,12 @@ export default function Donnees() {
 
   function exporter() {
     if (groupes) {
-      const header = [groupBy.split(' -')[0].trim(), 'Effectif', ...colsNumVisibles.map((c) => c.code)]
+      const colGroupe = cols.find((c) => c.id === groupBy)
+      const header = [colGroupe?.titre ?? groupBy, 'Effectif', ...colsNumVisibles.map((c) => c.titre)]
       const lignes = groupes.map((g) => [g.cle, g.n, ...colsNumVisibles.map((c) => g.moyennes[c.id].toFixed(2))])
       telecharger('donnees_groupees.csv', [header, ...lignes].map((l) => l.map(csvEscape).join(',')).join('\n'))
     } else {
-      const header = colsVisibles.map((c) => c.code)
+      const header = colsVisibles.map((c) => c.titre)
       const lignes = filtrees.map((r) => colsVisibles.map((c) => r[c.id]))
       telecharger('donnees_filtrees.csv', [header, ...lignes].map((l) => l.map(csvEscape).join(',')).join('\n'))
     }
@@ -326,12 +327,12 @@ export default function Donnees() {
               <thead>
                 <tr>
                   <th className="whitespace-nowrap border-b border-line py-2 pr-3 text-left font-medium text-muted">
-                    {groupBy.split(' -')[0].trim()}
+                    {cols.find((c) => c.id === groupBy)?.titre ?? groupBy}
                   </th>
                   <th className="whitespace-nowrap border-b border-line px-3 py-2 text-right font-medium text-muted">Effectif</th>
                   {colsNumVisibles.map((c) => (
-                    <th key={c.id} className="whitespace-nowrap border-b border-line px-3 py-2 text-right font-medium text-muted" title={c.titre}>
-                      {c.code}
+                    <th key={c.id} className="whitespace-nowrap border-b border-line px-3 py-2 text-right font-medium text-muted">
+                      {c.titre}
                     </th>
                   ))}
                 </tr>
@@ -381,7 +382,6 @@ export default function Donnees() {
                       <th
                         key={h.id}
                         onClick={h.column.getToggleSortingHandler()}
-                        title={cols.find((c) => c.id === h.column.id)?.titre}
                         className="cursor-pointer select-none whitespace-nowrap border-b border-line px-3 py-2 text-left font-medium text-muted hover:text-ink"
                       >
                         {h.column.columnDef.header}

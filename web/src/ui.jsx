@@ -266,11 +266,21 @@ export function ThemeToggle() {
       onClick={toggle}
       aria-label={dark ? 'Passer en mode clair' : 'Passer en mode sombre'}
       aria-pressed={dark}
-      className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-ink-soft transition hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+      className="relative inline-flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full text-ink-soft transition hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
     >
-      <span aria-hidden="true" className="text-base">
-        {dark ? '☾' : '☀'}
-      </span>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={dark ? 'dark' : 'light'}
+          aria-hidden="true"
+          className="block text-base"
+          initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
+          animate={{ rotate: 0, opacity: 1, scale: 1 }}
+          exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
+          transition={{ duration: 0.25, ease: 'easeOut' }}
+        >
+          {dark ? '☾' : '☀'}
+        </motion.span>
+      </AnimatePresence>
     </button>
   )
 }

@@ -55,8 +55,9 @@ analysis/     analyse.py + requirements.txt   -> écrit web/public/results.json
 web/          app Vite/React
   public/results.json   (généré par analyse.py ; un provisoire est versionné)
   src/
-    main.jsx, App.jsx, index.css, ui.jsx
-    sections/ Overview, Hypothesis1, Hypothesis2, Hypothesis3, HypoHeader, Verbatims
+    main.jsx, App.jsx, index.css, ui.jsx, theme.jsx, theme-context.js
+    data/ questionnaire.js
+    sections/ Overview, Hypothesis1, Hypothesis2, Hypothesis3, HypoHeader, Donnees, Questionnaire, Memoire, Verbatims
 .github/workflows/deploy.yml
 ```
 
