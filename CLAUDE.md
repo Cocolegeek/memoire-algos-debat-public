@@ -4,6 +4,8 @@ Tu es dans le dépôt `memoire-algos-debat-public` (compte GitHub `Cocolegeek`).
 
 Règle de travail imposée par Corentin : avance par étapes, montre le résultat de chaque étape, ne lance pas de longue tâche complexe sans validation. Ne fais rien qui ne soit pas demandé ici.
 
+**Règle de fusion (2026-06-22) : push et fusionne directement dans `main` à la fin de chaque tâche, sans attendre une confirmation explicite.** Corentin veut voir les changements en temps réel côté cloud (déploiement GitHub Pages) plutôt que d'avoir à valider des previews. Ouvrir la PR, la fusionner (squash) tout de suite après vérification (build + lint), sauf si Corentin dit explicitement d'attendre.
+
 **En début de session, lis aussi `ETAT_AVANCEMENT.md` à la racine du dépôt : c'est le journal daté qui dit exactement où on s'est arrêté et quelle est la prochaine action.**
 
 ## 1. Objet
