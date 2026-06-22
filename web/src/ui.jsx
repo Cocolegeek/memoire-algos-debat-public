@@ -207,7 +207,7 @@ export function FloatingNav({ children }) {
   return (
     <div className="pointer-events-none fixed inset-x-0 top-0 z-40 flex justify-center px-4 pt-3 sm:pt-4">
       <motion.div
-        className="pointer-events-auto flex w-full max-w-3xl flex-wrap items-center justify-center gap-2 rounded-full border bg-panel/80 p-1.5 backdrop-blur-md sm:flex-nowrap sm:justify-between sm:gap-4"
+        className="pointer-events-auto flex w-full max-w-3xl flex-wrap items-center justify-center gap-2 rounded-full border-2 bg-panel/95 p-1.5 backdrop-blur-md sm:flex-nowrap sm:justify-between sm:gap-4"
         animate={{
           boxShadow: scrolled
             ? '0 14px 32px -14px rgba(21,23,43,0.4)'
