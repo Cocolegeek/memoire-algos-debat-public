@@ -1,5 +1,7 @@
 import { CartesianGrid, Label, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts'
 import { BarRow, BigStat, BORD_COULEURS, Caption, Card, Eyebrow, SectionTitle, Signif } from '../ui.jsx'
+import { useTheme } from '../theme-context.js'
+import { CHART } from '../chart-colors.js'
 import HypoHeader from './HypoHeader.jsx'
 
 const ORDRE_BORD = ['extreme_gauche', 'gauche', 'centre', 'droite', 'extreme_droite', 'autre']
@@ -38,6 +40,8 @@ const INFO_BORD = {
 
 export default function Hypothesis3({ data }) {
   const { ecart, demande_par_bord, demande_selon_dsa, test_dsa, lecture } = data
+  const { dark } = useTheme()
+  const couleurs = CHART[dark ? 'dark' : 'light']
 
   const pointsBord = demande_par_bord.map((d) => ({
     x: ORDRE_BORD.indexOf(d.cle) + 1,
@@ -112,7 +116,7 @@ export default function Hypothesis3({ data }) {
         <div className="mt-4">
           <ResponsiveContainer width="100%" height={300}>
             <ScatterChart margin={{ top: 8, right: 16, bottom: 36, left: 18 }}>
-              <CartesianGrid stroke="#D9DBE3" strokeDasharray="3 3" />
+              <CartesianGrid stroke={couleurs.line} strokeDasharray="3 3" />
               <XAxis
                 type="number"
                 dataKey="x"
@@ -120,16 +124,16 @@ export default function Hypothesis3({ data }) {
                 ticks={[1, 2, 3, 4, 5, 6]}
                 tickFormatter={(v) => ABBR_BORD[ORDRE_BORD[v - 1]]}
                 tick={{ fontSize: 11 }}
-                stroke="#6B6F80"
+                stroke={couleurs.muted}
               >
-                <Label value="Positionnement politique déclaré" position="insideBottom" offset={-20} style={{ fontSize: 11, fill: '#6B6F80' }} />
+                <Label value="Positionnement politique déclaré" position="insideBottom" offset={-20} style={{ fontSize: 11, fill: couleurs.muted }} />
               </XAxis>
-              <YAxis type="number" dataKey="y" domain={[1, 5]} ticks={[1, 2, 3, 4, 5]} tick={{ fontSize: 11 }} stroke="#6B6F80" width={32}>
+              <YAxis type="number" dataKey="y" domain={[1, 5]} ticks={[1, 2, 3, 4, 5]} tick={{ fontSize: 11 }} stroke={couleurs.muted} width={32}>
                 <Label
                   value="Demande de régulation (note moyenne)"
                   angle={-90}
                   position="insideLeft"
-                  style={{ fontSize: 11, fill: '#6B6F80', textAnchor: 'middle' }}
+                  style={{ fontSize: 11, fill: couleurs.muted, textAnchor: 'middle' }}
                 />
               </YAxis>
               <Tooltip content={<TooltipBord />} cursor={{ strokeDasharray: '3 3' }} />
@@ -138,7 +142,7 @@ export default function Hypothesis3({ data }) {
                 shape={(props) => {
                   const { cx, cy, payload } = props
                   return (
-                    <circle cx={cx} cy={cy} r={payload.r} fill={payload.couleur} fillOpacity={0.85} stroke="#FFFFFF" strokeWidth={1.5} />
+                    <circle cx={cx} cy={cy} r={payload.r} fill={payload.couleur} fillOpacity={0.85} stroke={couleurs.panel} strokeWidth={1.5} />
                   )
                 }}
               />

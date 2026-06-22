@@ -584,8 +584,8 @@ def bloc_h3(reps):
         ),
         "verdict": verdict,
         "ecart": {
-            "percu": {"label": "Demande de régulation", "valeur": pct_transparence, "unite": "%", "sous": "Transparence exigée des plateformes, jugée nécessaire (Q18 ∈ {4,5})"},
-            "reel": {"label": "Connaissance des dispositifs existants", "valeur": pct_precis, "unite": "%", "sous": "DSA connu précisément (Q17)"},
+            "percu": {"label": "Demande de régulation", "valeur": pct_transparence, "unite": "%", "sous": "Transparence exigée des plateformes, jugée nécessaire (note de 4 ou 5 sur 5)"},
+            "reel": {"label": "Connaissance des dispositifs existants", "valeur": pct_precis, "unite": "%", "sous": "Connaissance précise du DSA déclarée"},
             "echelle": 100,
         },
         "demande_par_bord": par_bord,

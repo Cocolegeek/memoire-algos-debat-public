@@ -12,13 +12,7 @@ import {
   YAxis,
 } from 'recharts'
 import { useTheme } from './theme-context.js'
-
-// Couleurs des graphes Recharts, non gérées par les classes Tailwind (props
-// SVG brutes) : doivent suivre le mode sombre explicitement.
-const CHART = {
-  light: { muted: '#6B6F80', line: '#D9DBE3', percu: '#E06A3B', reel: '#1F8A86' },
-  dark: { muted: '#8A8EA3', line: '#32354A', percu: '#F08B5B', reel: '#3FB5AE' },
-}
+import { CHART } from './chart-colors.js'
 
 const POLE = {
   percu: { fill: 'bg-percu', track: 'bg-percu-soft', text: 'text-percu' },
