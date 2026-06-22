@@ -99,9 +99,8 @@ export default function Hypothesis1({ data, respondents = [] }) {
           <Caption>
             Le poids (β) de chaque facteur est calculé en tenant compte des deux autres en même temps,
             ce qui permet de les comparer directement : plus β est élevé, plus ce facteur pèse sur
-            l'hostilité, indépendamment des deux autres. Le « p » qui l'accompagne indique si ce poids
-            est fiable ou pourrait être dû au hasard : en dessous de 0,05, l'effet est dit significatif,
-            donc probablement réel ; au-dessus, on ne peut pas conclure à un effet réel de ce facteur.
+            l'hostilité, indépendamment des deux autres (la significativité de chacun est détaillée
+            plus bas, pour chaque facteur pris isolément).
           </Caption>
         </Card>
       </div>
