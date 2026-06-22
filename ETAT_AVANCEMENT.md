@@ -2,7 +2,21 @@
 
 Journal de session. Mis à jour à la fin de chaque session de travail. Sert de point de reprise : lis ce fichier avant de demander « où on en est ».
 
-## Dernière session : 2026-06-22 (refonte header/navigation, mode sombre, Données sur CSV brut)
+## Dernière session : 2026-06-22 (logos dans le menu, page Accueil, onglets Questionnaire et Mémoire)
+
+> **Demande de Corentin, traitée en autonomie complète** (PDF du questionnaire fourni en pièce jointe pour transcription) :
+> 1. **Logos déplacés du header vers la barre flottante** (`App.jsx`) : les deux logos (Paris 1, IMCDS) ne sont plus dans l'en-tête, ils vivent désormais dans `FloatingNav`, dans un bouton cliquable (`aria-label="Aller à l'accueil"`) qui ramène sur l'onglet Accueil.
+> 2. **Onglet « Vue d'ensemble » renommé « Accueil »** (`TABS` dans `App.jsx`), plus clair selon Corentin.
+> 3. **En-tête (titre, paragraphe de présentation, badges, citation APA) conditionné à l'onglet Accueil** (`active === 'overview'`) : ne s'affiche plus sur les autres onglets, qui gagnent l'espace vertical correspondant.
+> 4. **Bouton de bascule clair/sombre animé** (`ThemeToggle` dans `ui.jsx`) : l'icône soleil/lune anime désormais une rotation/fondu (`framer-motion`, `AnimatePresence mode="wait"`) au changement de mode, au lieu d'un remplacement instantané.
+> 5. **Effet de dégradé ancré en haut et en bas du viewport** (`App.jsx`) : deux bandeaux `fixed`, `pointer-events-none`, hauteur modeste (`h-16 sm:h-20`, conformément à la consigne « pas trop gros » de Corentin), `z-30` (sous la barre flottante en `z-40`), pour un effet de focus discret sur le contenu qui défile dessous.
+> 6. **Libellés complets dans l'onglet Données** (`Donnees.jsx`) : le sélecteur de colonnes, les filtres, le sélecteur de regroupement et les en-têtes de tableau (vue groupée et vue plate) affichent désormais le texte intégral de la question (`c.titre`, l'en-tête CSV brut) au lieu du seul code compact (`Q1`, `Q2`...). L'export CSV utilise aussi les en-têtes complets, par cohérence avec le CSV source.
+> 7. **Onglet « Questionnaire » recréé** (`web/src/data/questionnaire.js` + `web/src/sections/Questionnaire.jsx`) : reproduction fidèle du questionnaire diffusé (7 sections, 20 questions, libellés et options mot pour mot, transcrits depuis le PDF d'export Google Forms fourni par Corentin), rendu en lecture seule avec les composants du design system existant (`Card`, `SectionTitle`, `Eyebrow`, `InfoButton`).
+> 8. **Onglet « Mémoire » créé en coquille** (`web/src/sections/Memoire.jsx`) : vérifie par `HEAD` si `memoire.pdf` existe dans `public/` et l'embarque dans un `<iframe>` le cas échéant, sinon affiche un message « en préparation ». Prêt à recevoir le PDF du mémoire de Corentin dès qu'il sera déposé dans `web/public/memoire.pdf`.
+> **Vérifications faites** : `npm run build` sans erreur, `npm run lint` revenu exactement aux 2 erreurs préexistantes de `ui.jsx` (hors périmètre) plus l'avertissement React Compiler déjà connu sur `useReactTable` (pas une erreur, pas de régression). Serveur `vite` lancé localement, page principale et les nouveaux fichiers (`questionnaire.js`, `Questionnaire.jsx`, `Memoire.jsx`) confirmés servis (HTTP 200) au bon chemin de base. Pas de vérification visuelle dans un vrai navigateur (aucun navigateur headless disponible dans cet environnement distant) : à valider par Corentin, en particulier le placement des logos dans la barre flottante, l'effet de dégradé au défilement et l'animation du bouton de thème.
+> **À la reprise** : validation visuelle par Corentin. Seul point bloquant restant : déposer le PDF du mémoire dans `web/public/memoire.pdf` pour que l'onglet Mémoire affiche le contenu réel au lieu du message « en préparation ».
+
+## Session précédente : 2026-06-22 (refonte header/navigation, mode sombre, Données sur CSV brut)
 
 > **Quatre demandes traitées dans la même session, sans retour intermédiaire (consigne explicite de Corentin) :**
 > 1. **Navigation détachée et flottante** : `TabBar` n'est plus `sticky` dans le flux, elle vit désormais dans `FloatingNav` (`ui.jsx`), une barre `fixed` ancrée en haut du viewport, toujours visible dès le chargement. Effet de défilement discret (`framer-motion`, `useScroll`/`useMotionValueEvent`) : légère contraction et accentuation de l'ombre après un petit scroll, pas d'animation brutale.
