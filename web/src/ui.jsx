@@ -1,5 +1,5 @@
 import { useEffect, useId, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValueEvent, useScroll } from 'framer-motion'
 import {
   CartesianGrid,
   Label,
@@ -11,6 +11,14 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
+import { useTheme } from './theme-context.js'
+
+// Couleurs des graphes Recharts, non gérées par les classes Tailwind (props
+// SVG brutes) : doivent suivre le mode sombre explicitement.
+const CHART = {
+  light: { muted: '#6B6F80', line: '#D9DBE3', percu: '#E06A3B', reel: '#1F8A86' },
+  dark: { muted: '#8A8EA3', line: '#32354A', percu: '#F08B5B', reel: '#3FB5AE' },
+}
 
 const POLE = {
   percu: { fill: 'bg-percu', track: 'bg-percu-soft', text: 'text-percu' },
@@ -187,12 +195,40 @@ export function InfoButton({ titre, methodologie, donnees }) {
   )
 }
 
+// Barre flottante ancrée en haut du viewport (position fixed, hors du flux),
+// avec un effet de défilement discret : la pilule se resserre et s'opacifie
+// une fois qu'on a quitté le tout haut de la page, pour rester lisible sans
+// jamais bouger brutalement.
+export function FloatingNav({ children }) {
+  const { scrollY } = useScroll()
+  const [scrolled, setScrolled] = useState(false)
+  useMotionValueEvent(scrollY, 'change', (y) => setScrolled(y > 16))
+
+  return (
+    <div className="pointer-events-none fixed inset-x-0 top-0 z-40 flex justify-center px-4 pt-3 sm:pt-4">
+      <motion.div
+        className="pointer-events-auto flex w-full max-w-3xl flex-wrap items-center justify-center gap-2 rounded-full border bg-panel/80 p-1.5 backdrop-blur-md sm:flex-nowrap sm:justify-between sm:gap-4"
+        animate={{
+          boxShadow: scrolled
+            ? '0 14px 32px -14px rgba(21,23,43,0.4)'
+            : '0 8px 20px -14px rgba(21,23,43,0.22)',
+          scale: scrolled ? 0.98 : 1,
+        }}
+        transition={{ duration: 0.25, ease: 'easeOut' }}
+        style={{ borderColor: 'var(--color-line)' }}
+      >
+        {children}
+      </motion.div>
+    </div>
+  )
+}
+
 export function TabBar({ tabs, active, onChange }) {
   return (
     <nav
       role="tablist"
       aria-label="Sections du tableau de bord"
-      className="sticky top-3 z-30 inline-flex flex-wrap gap-1 rounded-full border border-line/60 bg-panel/75 p-1 shadow-[0_12px_32px_-16px_rgba(21,23,43,0.28)] backdrop-blur-md"
+      className="inline-flex flex-wrap gap-1"
     >
       {tabs.map((tab) => {
         const isActive = tab.id === active
@@ -203,7 +239,7 @@ export function TabBar({ tabs, active, onChange }) {
             role="tab"
             aria-selected={isActive}
             onClick={() => onChange(tab.id)}
-            className={`relative rounded-full px-4 py-2 font-display text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink ${
+            className={`relative rounded-full px-3 py-1.5 font-display text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:px-4 sm:py-2 ${
               isActive ? 'text-bg' : 'text-ink-soft hover:text-ink'
             }`}
           >
@@ -219,6 +255,23 @@ export function TabBar({ tabs, active, onChange }) {
         )
       })}
     </nav>
+  )
+}
+
+export function ThemeToggle() {
+  const { dark, toggle } = useTheme()
+  return (
+    <button
+      type="button"
+      onClick={toggle}
+      aria-label={dark ? 'Passer en mode clair' : 'Passer en mode sombre'}
+      aria-pressed={dark}
+      className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-ink-soft transition hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+    >
+      <span aria-hidden="true" className="text-base">
+        {dark ? '☾' : '☀'}
+      </span>
+    </button>
   )
 }
 
@@ -414,7 +467,7 @@ function TooltipNuage({ active, payload, xLabel, yLabel }) {
   )
 }
 
-const TICK_STYLE = { fontSize: 11, fontFamily: '"IBM Plex Mono", monospace', fill: '#6B6F80' }
+const TICK_FONT = { fontSize: 11, fontFamily: '"IBM Plex Mono", monospace' }
 
 // Table de robustesse : une corrélation par ligne (prédicteur), recalculée
 // dans chaque sous-groupe (colonne). predicteurs: [{label, valeurs: {cle: {r,p,n}}}]
@@ -488,6 +541,9 @@ export function Nuage({
       { x: droite.xmax, y: droite.pente * droite.xmax + droite.ordonnee },
     ]
   const gradientId = useId()
+  const { dark } = useTheme()
+  const c = dark ? CHART.dark : CHART.light
+  const tick = { ...TICK_FONT, fill: c.muted }
   return (
     // Hauteur fluide entre mobile et desktop : évite un graphe écrasé en
     // portrait et un graphe disproportionné en paysage, sans JS de resize.
@@ -496,43 +552,43 @@ export function Nuage({
         <ScatterChart margin={{ top: 12, right: 20, bottom: 32, left: 20 }}>
           <defs>
             <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="#E06A3B" stopOpacity={0.5} />
-              <stop offset="50%" stopColor="#E06A3B" stopOpacity={1} />
-              <stop offset="100%" stopColor="#E06A3B" stopOpacity={0.5} />
+              <stop offset="0%" stopColor={c.percu} stopOpacity={0.5} />
+              <stop offset="50%" stopColor={c.percu} stopOpacity={1} />
+              <stop offset="100%" stopColor={c.percu} stopOpacity={0.5} />
             </linearGradient>
           </defs>
-          <CartesianGrid stroke="#D9DBE3" strokeDasharray="3 6" vertical={false} />
+          <CartesianGrid stroke={c.line} strokeDasharray="3 6" vertical={false} />
           <XAxis
             type="number"
             dataKey="x"
             domain={xDomain}
             ticks={xTicks}
             tickFormatter={xTickFormatter}
-            tick={TICK_STYLE}
+            tick={tick}
             tickLine={false}
-            axisLine={{ stroke: '#D9DBE3' }}
+            axisLine={{ stroke: c.line }}
             allowDecimals={xTicks ? undefined : false}
           >
-            <Label value={xLabel} position="insideBottom" offset={-22} style={{ fontSize: 11, fontFamily: '"IBM Plex Mono", monospace', fill: '#6B6F80' }} />
+            <Label value={xLabel} position="insideBottom" offset={-22} style={{ ...TICK_FONT, fill: c.muted }} />
           </XAxis>
           <YAxis
             type="number"
             dataKey="y"
             domain={yDomain}
             ticks={yTicks}
-            tick={TICK_STYLE}
+            tick={tick}
             tickLine={false}
-            axisLine={{ stroke: '#D9DBE3' }}
+            axisLine={{ stroke: c.line }}
             width={36}
           >
             <Label
               value={yLabel}
               angle={-90}
               position="insideLeft"
-              style={{ fontSize: 11, fontFamily: '"IBM Plex Mono", monospace', fill: '#6B6F80', textAnchor: 'middle' }}
+              style={{ ...TICK_FONT, fill: c.muted, textAnchor: 'middle' }}
             />
           </YAxis>
-          <Tooltip content={<TooltipNuage xLabel={xLabel} yLabel={yLabel} />} cursor={{ stroke: '#6B6F80', strokeDasharray: '3 3' }} />
+          <Tooltip content={<TooltipNuage xLabel={xLabel} yLabel={yLabel} />} cursor={{ stroke: c.muted, strokeDasharray: '3 3' }} />
           <Scatter
             data={points}
             isAnimationActive
@@ -546,9 +602,9 @@ export function Nuage({
                   cx={cx}
                   cy={cy}
                   r={r}
-                  fill={couleur ?? '#1F8A86'}
+                  fill={couleur ?? c.reel}
                   fillOpacity={couleur ? 0.88 : 0.5}
-                  stroke={couleur ?? '#1F8A86'}
+                  stroke={couleur ?? c.reel}
                   strokeOpacity={0.9}
                   strokeWidth={1}
                 />
@@ -556,9 +612,9 @@ export function Nuage({
             }}
             activeShape={(props) => {
               const { cx, cy, payload } = props
-              const couleur = payload.couleur ?? '#1F8A86'
+              const couleur = payload.couleur ?? c.reel
               const r = (payload.r ?? 5.5) + 2.5
-              return <circle cx={cx} cy={cy} r={r} fill={couleur} fillOpacity={0.95} stroke="#FFFFFF" strokeWidth={2} />
+              return <circle cx={cx} cy={cy} r={r} fill={couleur} fillOpacity={0.95} stroke="var(--color-panel)" strokeWidth={2} />
             }}
           />
           {seg && (
@@ -571,12 +627,12 @@ export function Nuage({
             />
           )}
           {refX != null && (
-            <ReferenceLine x={refX} stroke="#6B6F80" strokeDasharray="4 4">
+            <ReferenceLine x={refX} stroke={c.muted} strokeDasharray="4 4">
               {refXLabel && (
                 <Label
                   value={refXLabel}
                   position="insideTopRight"
-                  style={{ fontSize: 10, fontFamily: '"IBM Plex Mono", monospace', fill: '#6B6F80' }}
+                  style={{ fontSize: 10, fontFamily: '"IBM Plex Mono", monospace', fill: c.muted }}
                 />
               )}
             </ReferenceLine>

@@ -1,53 +1,30 @@
-import { Fragment, useMemo, useState } from 'react'
+import { Fragment, useEffect, useMemo, useState } from 'react'
+import Papa from 'papaparse'
 import {
   getCoreRowModel,
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { BORD_COULEURS, Card, Eyebrow, InfoButton, SectionTitle } from '../ui.jsx'
+import { Card, Eyebrow, InfoButton, SectionTitle } from '../ui.jsx'
 
-const DSA_LABELS = {
-  precis: 'Connaît précisément',
-  vague: 'Connaît vaguement',
-  non: "Découvre à l'instant",
-}
-
-const BORD_LABELS = { gauche: 'Gauche', droite: 'Droite' }
+const SEUIL_CATEGORIEL = 20
 
 const INFO = {
-  titre: 'Tableau des données par répondant',
+  titre: 'Tableau des données brutes',
   methodologie:
-    "Une ligne par répondant (n = 263), recodages déjà appliqués (cf. analyse.py) : échelles 1-5 inchangées, bord politique et connaissance du DSA regroupés, indice d'hostilité et décalage individus/structures calculés. Le regroupement calcule la moyenne des colonnes numériques visibles par catégorie, comme un tableau croisé.",
-  donnees: 'respondents.json, jeu anonymisé par répondant généré par analyse.py (même source que les graphes H1/H2/H3).',
+    "Une ligne par réponse au questionnaire (export Google Forms brut, reponses.csv, sans exclusion ni recodage). Chaque colonne du CSV est analysée automatiquement : numérique (filtre min/max), catégorielle si elle a peu de valeurs distinctes (filtre par liste, éligible au regroupement), sinon texte libre (filtre par contenu). Le regroupement calcule la moyenne des colonnes numériques visibles par catégorie.",
+  donnees: "reponses.csv, export brut du questionnaire (toutes les colonnes Q1 à Q20, y compris les réponses libres Q19/Q20).",
 }
 
-function colonnes(labels) {
-  return [
-    { id: 'politique', label: 'Position politique', type: 'cat', texte: (v) => labels?.politique?.[v] ?? v },
-    {
-      id: 'bord',
-      label: 'Bord (regroupé)',
-      type: 'cat',
-      texte: (v) => BORD_LABELS[v] ?? '—',
-      couleur: (v) => BORD_COULEURS[v],
-    },
-    { id: 'age', label: 'Âge', type: 'cat', texte: (v) => v },
-    { id: 'geo', label: 'Territoire', type: 'cat', texte: (v) => labels?.geo?.[v] ?? v },
-    { id: 'dsa', label: 'Connaissance du DSA', type: 'cat', texte: (v) => DSA_LABELS[v] ?? v },
-    { id: 'temps', label: 'Temps passé (1-5)', type: 'num' },
-    { id: 'bulle', label: 'Perception de bulle (1-5)', type: 'num' },
-    { id: 'exposition', label: 'Exposition aux contenus polémiques (1-5)', type: 'num' },
-    { id: 'hostilite', label: "Indice d'hostilité (1-5)", type: 'num' },
-    { id: 'individus', label: 'Responsabilité individuelle (1-5)', type: 'num' },
-    { id: 'structures', label: 'Responsabilité structurelle (1-5)', type: 'num' },
-    { id: 'decalage', label: 'Décalage individus - structures', type: 'num' },
-    { id: 'demande', label: 'Demande de régulation (1-5)', type: 'num' },
-  ]
-}
-
-function fmtNum(v) {
-  if (v == null) return '—'
-  return Number(v).toFixed(2).replace(/\.?0+$/, '')
+function detecterColonnes(rows, fields) {
+  return fields.map((header) => {
+    const code = header.split(' -')[0].trim()
+    const valeurs = rows.map((r) => (r[header] ?? '').trim()).filter((v) => v !== '')
+    const uniques = [...new Set(valeurs)]
+    const numerique = valeurs.length > 0 && valeurs.every((v) => Number.isFinite(Number(v.replace(',', '.'))))
+    const type = numerique ? 'num' : uniques.length > 0 && uniques.length <= SEUIL_CATEGORIEL ? 'cat' : 'texte'
+    return { id: header, code, titre: header, type, valeursPossibles: type === 'cat' ? uniques.sort() : null }
+  })
 }
 
 function csvEscape(v) {
@@ -72,8 +49,10 @@ function appliquerFiltres(rows, filtres, cols) {
     cols.every((c) => {
       const f = filtres[c.id]
       if (!f) return true
-      if (c.type === 'cat') return !f.valeur || f.valeur === 'tous' || String(r[c.id]) === f.valeur
-      const v = r[c.id]
+      const brut = r[c.id]
+      if (c.type === 'cat') return !f.valeur || f.valeur === 'tous' || brut === f.valeur
+      if (c.type === 'texte') return !f.texte || (brut ?? '').toLowerCase().includes(f.texte.toLowerCase())
+      const v = brut === '' || brut == null ? null : Number(String(brut).replace(',', '.'))
       if (v == null) return f.min === '' && f.max === ''
       if (f.min !== '' && v < parseFloat(f.min)) return false
       if (f.max !== '' && v > parseFloat(f.max)) return false
@@ -83,19 +62,30 @@ function appliquerFiltres(rows, filtres, cols) {
 }
 
 const inputCls =
-  'rounded-lg border border-line bg-bg px-2 py-1 font-mono text-xs text-ink-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink'
+  'w-full rounded-lg border border-line bg-bg px-2 py-1 font-mono text-xs text-ink-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink'
 
-function FiltreColonne({ col, valeur, onChange, valeursPossibles }) {
+function FiltreColonne({ col, valeur, onChange }) {
   if (col.type === 'cat') {
     return (
       <select className={inputCls} value={valeur?.valeur ?? 'tous'} onChange={(e) => onChange({ valeur: e.target.value })}>
         <option value="tous">Tous</option>
-        {valeursPossibles.map((v) => (
+        {col.valeursPossibles.map((v) => (
           <option key={v} value={v}>
-            {col.texte ? col.texte(v) : v}
+            {v}
           </option>
         ))}
       </select>
+    )
+  }
+  if (col.type === 'texte') {
+    return (
+      <input
+        type="text"
+        placeholder="contient…"
+        className={inputCls}
+        value={valeur?.texte ?? ''}
+        onChange={(e) => onChange({ texte: e.target.value })}
+      />
     )
   }
   return (
@@ -119,40 +109,115 @@ function FiltreColonne({ col, valeur, onChange, valeursPossibles }) {
   )
 }
 
-export default function Donnees({ respondents, labels }) {
-  const cols = useMemo(() => colonnes(labels), [labels])
-  const [visibles, setVisibles] = useState(() => Object.fromEntries(cols.map((c) => [c.id, true])))
+function PanneauFiltres({ ouvert, onToggle, cols, visibles, setVisibles, filtres, setFiltres, groupBy, setGroupBy }) {
+  return (
+    <aside className={`shrink-0 transition-all duration-300 ${ouvert ? 'w-full sm:w-72' : 'w-full sm:w-12'}`}>
+      <Card className="sm:sticky sm:top-24">
+        <div className="flex items-center justify-between gap-2">
+          {ouvert && <SectionTitle>Paramètres</SectionTitle>}
+          <button
+            type="button"
+            onClick={onToggle}
+            aria-expanded={ouvert}
+            aria-label={ouvert ? 'Replier les paramètres' : 'Déplier les paramètres'}
+            className="ml-auto inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-line text-ink-soft transition hover:border-ink-soft hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+          >
+            <span aria-hidden="true">{ouvert ? '‹' : '›'}</span>
+          </button>
+        </div>
+
+        {ouvert && (
+          <div className="mt-4 space-y-5">
+            <div>
+              <Eyebrow>Colonnes affichées</Eyebrow>
+              <div className="mt-2 max-h-56 space-y-1 overflow-y-auto pr-1">
+                {cols.map((c) => (
+                  <label key={c.id} className="flex items-center gap-2 font-mono text-xs text-ink-soft" title={c.titre}>
+                    <input
+                      type="checkbox"
+                      checked={!!visibles[c.id]}
+                      onChange={() => setVisibles((v) => ({ ...v, [c.id]: !v[c.id] }))}
+                      className="accent-ink"
+                    />
+                    {c.code}
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <Eyebrow>Filtres</Eyebrow>
+              <div className="mt-2 space-y-3">
+                {cols
+                  .filter((c) => visibles[c.id])
+                  .map((c) => (
+                    <label key={c.id} className="flex flex-col gap-1" title={c.titre}>
+                      <span className="font-mono text-[11px] text-muted">{c.code}</span>
+                      <FiltreColonne col={c} valeur={filtres[c.id]} onChange={(v) => setFiltres((f) => ({ ...f, [c.id]: v }))} />
+                    </label>
+                  ))}
+              </div>
+            </div>
+
+            <label className="flex flex-col gap-1">
+              <Eyebrow>Regrouper par</Eyebrow>
+              <select className={`${inputCls} mt-2`} value={groupBy} onChange={(e) => setGroupBy(e.target.value)}>
+                <option value="">Aucun regroupement</option>
+                {cols
+                  .filter((c) => c.type === 'cat')
+                  .map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.code}
+                    </option>
+                  ))}
+              </select>
+            </label>
+          </div>
+        )}
+      </Card>
+    </aside>
+  )
+}
+
+export default function Donnees() {
+  const [rows, setRows] = useState(null)
+  const [fields, setFields] = useState([])
+  const [erreur, setErreur] = useState(null)
+  const [sidebarOuvert, setSidebarOuvert] = useState(true)
+  const [visibles, setVisibles] = useState({})
   const [filtres, setFiltres] = useState({})
   const [groupBy, setGroupBy] = useState('')
   const [expanded, setExpanded] = useState(() => new Set())
   const [sorting, setSorting] = useState([])
 
+  useEffect(() => {
+    fetch(import.meta.env.BASE_URL + 'reponses.csv')
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
+        return r.text()
+      })
+      .then((texte) => {
+        const { data, meta } = Papa.parse(texte, { header: true, skipEmptyLines: true })
+        setRows(data)
+        setFields(meta.fields ?? [])
+        setVisibles(Object.fromEntries((meta.fields ?? []).map((f) => [f, true])))
+      })
+      .catch((e) => setErreur(e.message))
+  }, [])
+
+  const cols = useMemo(() => (rows ? detecterColonnes(rows, fields) : []), [rows, fields])
   const colsVisibles = cols.filter((c) => visibles[c.id])
   const colsNumVisibles = colsVisibles.filter((c) => c.type === 'num')
 
-  const valeursParColonne = useMemo(() => {
-    const m = {}
-    for (const c of cols) {
-      if (c.type === 'cat') m[c.id] = [...new Set(respondents.map((r) => r[c.id]).filter((v) => v != null))].sort()
-    }
-    return m
-  }, [respondents, cols])
-
-  const filtrees = useMemo(() => appliquerFiltres(respondents, filtres, cols), [respondents, filtres, cols])
+  const filtrees = useMemo(() => appliquerFiltres(rows ?? [], filtres, cols), [rows, filtres, cols])
 
   const tableCols = useMemo(
     () =>
       colsVisibles.map((c) => ({
         accessorKey: c.id,
-        header: c.label,
-        cell: (info) => {
-          const v = info.getValue()
-          if (c.type === 'cat') {
-            const couleur = c.couleur?.(v)
-            return <span style={couleur ? { color: couleur } : undefined}>{c.texte ? c.texte(v) : v ?? '—'}</span>
-          }
-          return fmtNum(v)
-        },
+        header: c.code,
+        sortingFn: c.type === 'num' ? (a, b) => Number(a.getValue(c.id) || 0) - Number(b.getValue(c.id) || 0) : undefined,
+        cell: (info) => info.getValue() || '—',
       })),
     [colsVisibles],
   )
@@ -168,26 +233,26 @@ export default function Donnees({ respondents, labels }) {
 
   const groupes = useMemo(() => {
     if (!groupBy) return null
-    const col = cols.find((c) => c.id === groupBy)
     const map = new Map()
     for (const r of filtrees) {
-      const cle = r[groupBy]
+      const cle = r[groupBy] || '—'
       if (!map.has(cle)) map.set(cle, [])
       map.get(cle).push(r)
     }
     return [...map.entries()]
       .map(([cle, membres]) => ({
         cle,
-        label: col.texte ? col.texte(cle) : cle ?? '—',
-        couleur: col.couleur?.(cle),
         n: membres.length,
         membres,
         moyennes: Object.fromEntries(
-          colsNumVisibles.map((c) => [c.id, membres.reduce((s, r) => s + (r[c.id] ?? 0), 0) / membres.length]),
+          colsNumVisibles.map((c) => [
+            c.id,
+            membres.reduce((s, r) => s + (Number(String(r[c.id]).replace(',', '.')) || 0), 0) / membres.length,
+          ]),
         ),
       }))
       .sort((a, b) => b.n - a.n)
-  }, [groupBy, filtrees, cols, colsNumVisibles])
+  }, [groupBy, filtrees, colsNumVisibles])
 
   function toggleExpand(cle) {
     setExpanded((prev) => {
@@ -199,184 +264,152 @@ export default function Donnees({ respondents, labels }) {
 
   function exporter() {
     if (groupes) {
-      const colGroupe = cols.find((c) => c.id === groupBy)
-      const header = [colGroupe.label, 'Effectif', ...colsNumVisibles.map((c) => c.label)]
-      const lignes = groupes.map((g) => [g.label, g.n, ...colsNumVisibles.map((c) => fmtNum(g.moyennes[c.id]))])
+      const header = [groupBy.split(' -')[0].trim(), 'Effectif', ...colsNumVisibles.map((c) => c.code)]
+      const lignes = groupes.map((g) => [g.cle, g.n, ...colsNumVisibles.map((c) => g.moyennes[c.id].toFixed(2))])
       telecharger('donnees_groupees.csv', [header, ...lignes].map((l) => l.map(csvEscape).join(',')).join('\n'))
     } else {
-      const header = colsVisibles.map((c) => c.label)
-      const lignes = filtrees.map((r) => colsVisibles.map((c) => (c.type === 'cat' ? (c.texte ? c.texte(r[c.id]) : r[c.id]) : r[c.id])))
+      const header = colsVisibles.map((c) => c.code)
+      const lignes = filtrees.map((r) => colsVisibles.map((c) => r[c.id]))
       telecharger('donnees_filtrees.csv', [header, ...lignes].map((l) => l.map(csvEscape).join(',')).join('\n'))
     }
   }
 
-  if (!respondents?.length) return null
+  if (erreur) {
+    return (
+      <p className="rounded-xl border border-percu-soft bg-percu-soft p-4 font-body text-sm text-percu">
+        Impossible de charger les données brutes ({erreur}).
+      </p>
+    )
+  }
+  if (!rows) return <p className="font-body text-sm text-muted">Chargement des données…</p>
 
   return (
-    <div className="space-y-6">
-      <Card>
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <SectionTitle sub="Une ligne par répondant, filtrable et regroupable, à réutiliser librement.">
-            Données par répondant
-          </SectionTitle>
-          <div className="flex items-center gap-2">
-            <InfoButton {...INFO} />
-            <button
-              type="button"
-              onClick={exporter}
-              className="rounded-full border border-line bg-panel px-3 py-1.5 font-mono text-xs text-ink-soft transition hover:border-ink-soft hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-            >
-              Exporter en CSV
-            </button>
-          </div>
-        </div>
+    <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+      <PanneauFiltres
+        ouvert={sidebarOuvert}
+        onToggle={() => setSidebarOuvert((v) => !v)}
+        cols={cols}
+        visibles={visibles}
+        setVisibles={setVisibles}
+        filtres={filtres}
+        setFiltres={setFiltres}
+        groupBy={groupBy}
+        setGroupBy={setGroupBy}
+      />
 
-        <div className="mt-5 space-y-4">
-          <div>
-            <Eyebrow>Colonnes affichées</Eyebrow>
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              {cols.map((c) => (
-                <button
-                  key={c.id}
-                  type="button"
-                  aria-pressed={visibles[c.id]}
-                  onClick={() => setVisibles((v) => ({ ...v, [c.id]: !v[c.id] }))}
-                  className={`rounded-full border px-3 py-1 font-mono text-xs transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink ${
-                    visibles[c.id] ? 'border-ink-soft bg-ink text-bg' : 'border-line text-muted hover:text-ink'
-                  }`}
-                >
-                  {c.label}
-                </button>
-              ))}
+      <div className="min-w-0 flex-1 space-y-4">
+        <Card>
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <SectionTitle sub="Toutes les colonnes du CSV brut, sans recodage. Défilement horizontal pour les colonnes hors champ.">
+              Données brutes
+            </SectionTitle>
+            <div className="flex items-center gap-2">
+              <InfoButton {...INFO} />
+              <button
+                type="button"
+                onClick={exporter}
+                className="rounded-full border border-line bg-panel px-3 py-1.5 font-mono text-xs text-ink-soft transition hover:border-ink-soft hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+              >
+                Exporter en CSV
+              </button>
             </div>
           </div>
-
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <Eyebrow>Filtres</Eyebrow>
-              <div className="mt-2 flex flex-wrap gap-3">
-                {colsVisibles.map((c) => (
-                  <label key={c.id} className="flex flex-col gap-1">
-                    <span className="font-mono text-[11px] text-muted">{c.label}</span>
-                    <FiltreColonne
-                      col={c}
-                      valeur={filtres[c.id]}
-                      valeursPossibles={valeursParColonne[c.id]}
-                      onChange={(v) => setFiltres((f) => ({ ...f, [c.id]: v }))}
-                    />
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            <label className="flex flex-col gap-1">
-              <span className="font-mono text-[11px] text-muted">Regrouper par</span>
-              <select className={inputCls} value={groupBy} onChange={(e) => setGroupBy(e.target.value)}>
-                <option value="">Aucun regroupement</option>
-                {cols
-                  .filter((c) => c.type === 'cat')
-                  .map((c) => (
-                    <option key={c.id} value={c.id}>
-                      {c.label}
-                    </option>
-                  ))}
-              </select>
-            </label>
-          </div>
-
-          <p className="font-mono text-xs text-muted">
-            {filtrees.length} répondant{filtrees.length > 1 ? 's' : ''} sur {respondents.length}
-            {groupes ? `, regroupés en ${groupes.length} catégories` : ''}
+          <p className="mt-3 font-mono text-xs text-muted">
+            {filtrees.length} réponse{filtrees.length > 1 ? 's' : ''} sur {rows.length}
+            {groupes ? `, regroupées en ${groupes.length} catégories` : ''}
           </p>
-        </div>
-      </Card>
+        </Card>
 
-      <Card className="overflow-x-auto">
-        {groupes ? (
-          <table className="w-full border-collapse font-mono text-xs">
-            <thead>
-              <tr>
-                <th className="border-b border-line py-2 pr-3 text-left font-medium text-muted">
-                  {cols.find((c) => c.id === groupBy).label}
-                </th>
-                <th className="border-b border-line px-3 py-2 text-right font-medium text-muted">Effectif</th>
-                {colsNumVisibles.map((c) => (
-                  <th key={c.id} className="border-b border-line px-3 py-2 text-right font-medium text-muted">
-                    {c.label}
+        <Card className="overflow-x-auto">
+          {groupes ? (
+            <table className="border-collapse font-mono text-xs">
+              <thead>
+                <tr>
+                  <th className="whitespace-nowrap border-b border-line py-2 pr-3 text-left font-medium text-muted">
+                    {groupBy.split(' -')[0].trim()}
                   </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {groupes.map((g) => (
-                <Fragment key={String(g.cle)}>
-                  <tr
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => toggleExpand(g.cle)}
-                    onKeyDown={(e) => e.key === 'Enter' && toggleExpand(g.cle)}
-                    className="cursor-pointer hover:bg-bg"
-                  >
-                    <td className="border-b border-line py-2.5 pr-3 text-left font-body text-ink-soft" style={g.couleur ? { color: g.couleur } : undefined}>
-                      <span aria-hidden="true">{expanded.has(g.cle) ? '▾' : '▸'}</span> {g.label}
-                    </td>
-                    <td className="border-b border-line px-3 py-2.5 text-right text-ink">{g.n}</td>
-                    {colsNumVisibles.map((c) => (
-                      <td key={c.id} className="border-b border-line px-3 py-2.5 text-right text-ink-soft">
-                        {fmtNum(g.moyennes[c.id])}
-                      </td>
-                    ))}
-                  </tr>
-                  {expanded.has(g.cle) &&
-                    g.membres.map((r, i) => (
-                      <tr key={i} className="bg-bg/60">
-                        <td className="border-b border-line py-1.5 pr-3 pl-6 text-left text-muted" colSpan={1}>
-                          Répondant {i + 1}
-                        </td>
-                        <td className="border-b border-line px-3 py-1.5 text-right text-muted">—</td>
-                        {colsNumVisibles.map((c) => (
-                          <td key={c.id} className="border-b border-line px-3 py-1.5 text-right text-muted">
-                            {fmtNum(r[c.id])}
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
-                </Fragment>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <table className="w-full border-collapse font-mono text-xs">
-            <thead>
-              {table.getHeaderGroups().map((hg) => (
-                <tr key={hg.id}>
-                  {hg.headers.map((h) => (
-                    <th
-                      key={h.id}
-                      onClick={h.column.getToggleSortingHandler()}
-                      className="cursor-pointer select-none border-b border-line py-2 px-3 text-left font-medium text-muted hover:text-ink"
-                    >
-                      {h.column.columnDef.header}
-                      {{ asc: ' ↑', desc: ' ↓' }[h.column.getIsSorted()] ?? ''}
+                  <th className="whitespace-nowrap border-b border-line px-3 py-2 text-right font-medium text-muted">Effectif</th>
+                  {colsNumVisibles.map((c) => (
+                    <th key={c.id} className="whitespace-nowrap border-b border-line px-3 py-2 text-right font-medium text-muted" title={c.titre}>
+                      {c.code}
                     </th>
                   ))}
                 </tr>
-              ))}
-            </thead>
-            <tbody>
-              {table.getRowModel().rows.map((row) => (
-                <tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className="border-b border-line py-2 px-3 text-left text-ink-soft">
-                      {cell.column.columnDef.cell(cell.getContext())}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-      </Card>
+              </thead>
+              <tbody>
+                {groupes.map((g) => (
+                  <Fragment key={String(g.cle)}>
+                    <tr
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => toggleExpand(g.cle)}
+                      onKeyDown={(e) => e.key === 'Enter' && toggleExpand(g.cle)}
+                      className="cursor-pointer hover:bg-bg"
+                    >
+                      <td className="whitespace-nowrap border-b border-line py-2.5 pr-3 text-left font-body text-ink-soft">
+                        <span aria-hidden="true">{expanded.has(g.cle) ? '▾' : '▸'}</span> {g.cle}
+                      </td>
+                      <td className="whitespace-nowrap border-b border-line px-3 py-2.5 text-right text-ink">{g.n}</td>
+                      {colsNumVisibles.map((c) => (
+                        <td key={c.id} className="whitespace-nowrap border-b border-line px-3 py-2.5 text-right text-ink-soft">
+                          {g.moyennes[c.id].toFixed(2)}
+                        </td>
+                      ))}
+                    </tr>
+                    {expanded.has(g.cle) &&
+                      g.membres.map((r, i) => (
+                        <tr key={i} className="bg-bg/60">
+                          <td className="whitespace-nowrap border-b border-line py-1.5 pr-3 pl-6 text-left text-muted">Réponse {i + 1}</td>
+                          <td className="whitespace-nowrap border-b border-line px-3 py-1.5 text-right text-muted">—</td>
+                          {colsNumVisibles.map((c) => (
+                            <td key={c.id} className="whitespace-nowrap border-b border-line px-3 py-1.5 text-right text-muted">
+                              {r[c.id] || '—'}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                  </Fragment>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <table className="border-collapse font-mono text-xs">
+              <thead>
+                {table.getHeaderGroups().map((hg) => (
+                  <tr key={hg.id}>
+                    {hg.headers.map((h) => (
+                      <th
+                        key={h.id}
+                        onClick={h.column.getToggleSortingHandler()}
+                        title={cols.find((c) => c.id === h.column.id)?.titre}
+                        className="cursor-pointer select-none whitespace-nowrap border-b border-line px-3 py-2 text-left font-medium text-muted hover:text-ink"
+                      >
+                        {h.column.columnDef.header}
+                        {{ asc: ' ↑', desc: ' ↓' }[h.column.getIsSorted()] ?? ''}
+                      </th>
+                    ))}
+                  </tr>
+                ))}
+              </thead>
+              <tbody>
+                {table.getRowModel().rows.map((row) => (
+                  <tr key={row.id}>
+                    {row.getVisibleCells().map((cell) => (
+                      <td
+                        key={cell.id}
+                        title={cell.getValue() || undefined}
+                        className="max-w-xs truncate whitespace-nowrap border-b border-line px-3 py-2 text-left text-ink-soft"
+                      >
+                        {cell.column.columnDef.cell(cell.getContext())}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </Card>
+      </div>
     </div>
   )
 }

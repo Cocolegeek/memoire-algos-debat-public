@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Badge, CitationAPA, Eyebrow, TabBar } from './ui.jsx'
+import { Badge, CitationAPA, Eyebrow, FloatingNav, TabBar, ThemeToggle } from './ui.jsx'
 import Overview from './sections/Overview.jsx'
 import Hypothesis1 from './sections/Hypothesis1.jsx'
 import Hypothesis2 from './sections/Hypothesis2.jsx'
@@ -25,8 +25,8 @@ export default function App() {
   const [active, setActive] = useState('overview')
   const [data, setData] = useState(null)
   const [respondents, setRespondents] = useState([])
-  const [labels, setLabels] = useState({})
   const [erreur, setErreur] = useState(null)
+  const [citationOuverte, setCitationOuverte] = useState(false)
 
   useEffect(() => {
     fetch(import.meta.env.BASE_URL + 'results.json')
@@ -36,39 +36,40 @@ export default function App() {
       })
       .then(setData)
       .catch((e) => setErreur(e.message))
-    // Jeu par répondant pour les nuages de points et l'onglet Données (non bloquant).
+    // Jeu par répondant pour les nuages de points H1/H2 (non bloquant).
     fetch(import.meta.env.BASE_URL + 'respondents.json')
       .then((r) => (r.ok ? r.json() : null))
-      .then((d) => {
-        if (!d) return
-        setRespondents(d.repondants ?? [])
-        setLabels(d.labels ?? {})
-      })
+      .then((d) => d && setRespondents(d.repondants ?? []))
       .catch(() => {})
   }, [])
 
   return (
     <div className="min-h-screen bg-bg">
-      <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
-        <header className="space-y-6 border-b border-line pb-8">
-          <div className="flex flex-wrap items-center gap-6">
+      <FloatingNav>
+        <TabBar tabs={TABS} active={active} onChange={setActive} />
+        <ThemeToggle />
+      </FloatingNav>
+
+      <div className="mx-auto max-w-5xl px-4 pb-10 pt-20 sm:px-6 sm:pt-24">
+        <header className="space-y-4 border-b border-line pb-5">
+          <div className="flex flex-wrap items-center gap-4">
             <img
               src={logoParis1}
               alt="Université Paris 1 Panthéon-Sorbonne"
-              className="h-9 w-auto sm:h-11"
+              className="h-7 w-auto sm:h-9"
             />
             <img
               src={logoIMCDS}
               alt="Master IMCDS, Université Paris 1 Panthéon-Sorbonne"
-              className="h-14 w-14 sm:h-16 sm:w-16"
+              className="h-10 w-10 sm:h-12 sm:w-12"
             />
           </div>
 
-          <div className="space-y-4">
-            <h1 className="font-display text-2xl font-semibold text-ink sm:text-3xl">
+          <div className="space-y-2.5">
+            <h1 className="font-display text-xl font-semibold text-ink sm:text-2xl">
               Algorithmes de recommandation et polarisation du débat public
             </h1>
-            <p className="max-w-2xl font-body text-sm text-ink-soft sm:text-base">
+            <p className="max-w-2xl font-body text-sm text-ink-soft">
               Cette enquête met en regard ce que la recherche établit sur les algorithmes de recommandation et ce que le public en perçoit, leur attribue et en attend, à partir des réponses de {data ? data.meta.n : 263} personnes à un questionnaire en ligne.
             </p>
             <div className="flex flex-wrap items-center gap-2">
@@ -84,20 +85,26 @@ export default function App() {
               >
                 Code source
               </a>
+              <button
+                type="button"
+                onClick={() => setCitationOuverte((v) => !v)}
+                aria-expanded={citationOuverte}
+                className="font-mono text-xs text-ink-soft underline decoration-line decoration-1 underline-offset-4 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+              >
+                Citer cette page
+              </button>
             </div>
           </div>
 
-          <div className="space-y-1.5">
-            <Eyebrow>Citer cette page (norme APA)</Eyebrow>
-            <CitationAPA texte={CITATION_APA} />
-          </div>
+          {citationOuverte && (
+            <div className="space-y-1.5">
+              <Eyebrow>Norme APA</Eyebrow>
+              <CitationAPA texte={CITATION_APA} />
+            </div>
+          )}
         </header>
 
-        <div className="py-8">
-          <TabBar tabs={TABS} active={active} onChange={setActive} />
-        </div>
-
-        <main>
+        <main className="pt-6">
           {erreur && (
             <p className="rounded-xl border border-percu-soft bg-percu-soft p-4 font-body text-sm text-percu">
               Impossible de charger les données ({erreur}).
@@ -110,7 +117,7 @@ export default function App() {
               {active === 'h1' && <Hypothesis1 data={data.h1} respondents={respondents} />}
               {active === 'h2' && <Hypothesis2 a={data.h2a} b={data.h2b} respondents={respondents} />}
               {active === 'h3' && <Hypothesis3 data={data.h3} />}
-              {active === 'donnees' && <Donnees respondents={respondents} labels={labels} />}
+              {active === 'donnees' && <Donnees />}
             </>
           )}
         </main>
