@@ -60,7 +60,6 @@ export default function App() {
           className="flex shrink-0 items-center gap-1.5 rounded-full bg-white px-2 py-1 shadow-[0_1px_4px_rgba(21,23,43,0.15)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
         >
           <img src={logoParis1} alt="" className="h-5 w-auto sm:h-6" />
-          <img src={logoIMCDS} alt="" className="h-6 w-6 sm:h-7 sm:w-7" />
         </button>
         <TabBar tabs={TABS} active={active} onChange={setActive} />
         <ThemeToggle />
@@ -69,12 +68,22 @@ export default function App() {
       <div className="mx-auto max-w-5xl px-4 pb-10 pt-20 sm:px-6 sm:pt-24">
         {active === 'overview' && (
           <header className="space-y-4 border-b border-line pb-5">
+            <div className="flex items-center gap-3">
+              <img src={logoIMCDS} alt="" className="h-10 w-10 shrink-0 sm:h-12 sm:w-12" />
+              <p className="font-mono text-xs text-muted">
+                Mémoire de master Management de l'innovation, spécialité Innovation Communication et Data Science, Université Paris 1 Panthéon-Sorbonne.
+              </p>
+            </div>
             <div className="space-y-2.5">
               <h1 className="font-display text-xl font-semibold text-ink sm:text-2xl">
                 Algorithmes de recommandation et polarisation du débat public
               </h1>
               <p className="max-w-2xl font-body text-sm text-ink-soft">
-                Cette enquête met en regard ce que la recherche établit sur les algorithmes de recommandation et ce que le public en perçoit, leur attribue et en attend, à partir des réponses de {data ? data.meta.n : 263} personnes à un questionnaire en ligne.
+                On reproche souvent aux algorithmes des réseaux sociaux d'enfermer chacun dans ses
+                certitudes et de nourrir l'indignation, une idée répandue mais mal démontrée. Cette
+                enquête étudie plutôt les représentations : ce que le public perçoit, attribue et
+                attend en matière de régulation, à partir des réponses de {data ? data.meta.n : 263}{' '}
+                personnes à un questionnaire en ligne.
               </p>
               <div className="flex flex-wrap items-center gap-2">
                 {data && <Badge>n = {data.meta.n}</Badge>}
