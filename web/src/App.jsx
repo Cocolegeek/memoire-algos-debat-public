@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import { Badge, CitationAPA, Eyebrow, FloatingNav, TabBar, ThemeToggle } from './ui.jsx'
 import NetworkBackground from './NetworkBackground.jsx'
 import Overview from './sections/Overview.jsx'
@@ -55,14 +56,16 @@ export default function App() {
       <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 h-16 bg-gradient-to-t from-bg via-bg/60 to-transparent sm:h-20" />
 
       <FloatingNav>
-        <button
+        <motion.button
           type="button"
           onClick={() => setActive('overview')}
           aria-label="Aller à l'accueil"
+          whileHover={{ scale: 1.06, transition: { duration: 0.15 } }}
+          whileTap={{ scale: 0.94, transition: { duration: 0.1 } }}
           className="flex shrink-0 items-center gap-1.5 rounded-full bg-white px-2 py-1 shadow-[0_1px_4px_rgba(21,23,43,0.15)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
         >
           <img src={logoParis1} alt="" className="h-5 w-auto sm:h-6" />
-        </button>
+        </motion.button>
         <TabBar tabs={TABS} active={active} onChange={setActive} />
         <ThemeToggle />
       </FloatingNav>

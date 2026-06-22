@@ -3,6 +3,8 @@
 // graine fixe), donc aucun fichier image, aucune question de licence. Calculé
 // une seule fois au chargement du module : c'est un décor statique, pas une
 // donnée qui change.
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
+
 const LARGEUR = 1600
 const HAUTEUR = 900
 const N_POINTS = 70
@@ -43,12 +45,17 @@ function genererReseau() {
 const RESEAU = genererReseau()
 
 export default function NetworkBackground() {
+  const reduitMouvement = useReducedMotion()
+  const { scrollY } = useScroll()
+  const y = useTransform(scrollY, [0, 1000], reduitMouvement ? [0, 0] : [0, -60])
+
   return (
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden text-ink" aria-hidden="true">
-      <svg
+      <motion.svg
         viewBox={`0 0 ${LARGEUR} ${HAUTEUR}`}
         preserveAspectRatio="xMidYMid slice"
         className="h-full w-full opacity-[0.08] dark:opacity-[0.16]"
+        style={{ y }}
       >
         {RESEAU.aretes.map((a) => (
           <line key={a.cle} x1={a.x1} y1={a.y1} x2={a.x2} y2={a.y2} stroke="currentColor" strokeWidth="1.2" />
@@ -56,7 +63,7 @@ export default function NetworkBackground() {
         {RESEAU.points.map((p, i) => (
           <circle key={i} cx={p.x} cy={p.y} r="4.5" fill="currentColor" />
         ))}
-      </svg>
+      </motion.svg>
     </div>
   )
 }
