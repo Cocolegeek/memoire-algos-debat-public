@@ -4,6 +4,7 @@ import Overview from './sections/Overview.jsx'
 import Hypothesis1 from './sections/Hypothesis1.jsx'
 import Hypothesis2 from './sections/Hypothesis2.jsx'
 import Hypothesis3 from './sections/Hypothesis3.jsx'
+import Donnees from './sections/Donnees.jsx'
 import Verbatims from './sections/Verbatims.jsx'
 import logoParis1 from './assets/logo-paris1-sorbonne.png'
 import logoIMCDS from './assets/logo-master-imcds.png'
@@ -13,6 +14,7 @@ const TABS = [
   { id: 'h1', label: 'H1' },
   { id: 'h2', label: 'H2' },
   { id: 'h3', label: 'H3' },
+  { id: 'donnees', label: 'Données' },
 ]
 
 const REPO = 'https://github.com/Cocolegeek/memoire-algos-debat-public'
@@ -23,6 +25,7 @@ export default function App() {
   const [active, setActive] = useState('overview')
   const [data, setData] = useState(null)
   const [respondents, setRespondents] = useState([])
+  const [labels, setLabels] = useState({})
   const [erreur, setErreur] = useState(null)
 
   useEffect(() => {
@@ -33,10 +36,14 @@ export default function App() {
       })
       .then(setData)
       .catch((e) => setErreur(e.message))
-    // Jeu par répondant pour les nuages de points (non bloquant).
+    // Jeu par répondant pour les nuages de points et l'onglet Données (non bloquant).
     fetch(import.meta.env.BASE_URL + 'respondents.json')
       .then((r) => (r.ok ? r.json() : null))
-      .then((d) => d && setRespondents(d.repondants ?? []))
+      .then((d) => {
+        if (!d) return
+        setRespondents(d.repondants ?? [])
+        setLabels(d.labels ?? {})
+      })
       .catch(() => {})
   }, [])
 
@@ -103,6 +110,7 @@ export default function App() {
               {active === 'h1' && <Hypothesis1 data={data.h1} respondents={respondents} />}
               {active === 'h2' && <Hypothesis2 a={data.h2a} b={data.h2b} respondents={respondents} />}
               {active === 'h3' && <Hypothesis3 data={data.h3} />}
+              {active === 'donnees' && <Donnees respondents={respondents} labels={labels} />}
             </>
           )}
         </main>
