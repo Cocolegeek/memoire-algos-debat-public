@@ -6,6 +6,8 @@ Règle de travail imposée par Corentin : avance par étapes, montre le résulta
 
 **Règle de fusion (2026-06-22) : push et fusionne directement dans `main` à la fin de chaque tâche, sans attendre une confirmation explicite.** Corentin veut voir les changements en temps réel côté cloud (déploiement GitHub Pages) plutôt que d'avoir à valider des previews. Ouvrir la PR, la fusionner (squash) tout de suite après vérification (build + lint), sauf si Corentin dit explicitement d'attendre.
 
+**Règle de discrétion sur les commits (2026-06-22) : ne plus ajouter de mention « Co-Authored-By: Claude » ni de lien de session aux messages de commit, à partir de maintenant.** L'historique déjà poussé n'est pas réécrit (décision explicite de Corentin : pas de rebase/force-push sur l'historique existant, ça casserait les clones/forks). Voir aussi section 14.
+
 **En début de session, lis aussi `ETAT_AVANCEMENT.md` à la racine du dépôt : c'est le journal daté qui dit exactement où on s'est arrêté et quelle est la prochaine action.**
 
 ## 1. Objet
@@ -289,3 +291,12 @@ Chaque graphe a une icône méthodologie cliquable (fenêtre flottante, fond flo
 ✅ Fait (PR #14, en cours de revue) : passe de clarté demandée par Corentin : vocabulaire « orange/vert » dans les textes au lieu de « corail/sarcelle » (les tokens techniques `percu`/`reel` ne changent pas) ; jargon statistique réduit dans les paragraphes visibles (régression H1) ; nuages de points empilés en pleine largeur avec légendes d'axes et segmentation (ligne de référence H2.b) ; notations type « Q18 ∈ {4,5} » réécrites en toutes lettres ; demande de régulation par bord politique en nuage de points coloré (H3) ; verbatims différenciés par onglet avec analyse sémantique par thèmes (Q19/Q20), au lieu des mêmes citations partout.
 
 Pistes restantes (au service des hypothèses, à valider avant de coder) : lecture urbain↔rural (Q4 = type de territoire, pas la région, donc pas de carte régionale). Onglet **Mémoire** (HTML façon wiki depuis le PDF) : coquille à préparer quand Corentin aura terminé son texte.
+
+## 14. Nettoyage final avant publication (décision de Corentin, 2026-06-22)
+
+**Ne pas faire maintenant.** Tant que le projet n'est pas terminé à 100 % (notamment : PDF du mémoire pas encore déposé), `CLAUDE.md` et `ETAT_AVANCEMENT.md` restent dans le dépôt, suivis par git, comme aujourd'hui.
+
+**À faire seulement quand Corentin le demande explicitement, une fois tout terminé** :
+1. Supprimer `CLAUDE.md` et `ETAT_AVANCEMENT.md` du dépôt (`git rm`).
+2. Ne pas réécrire l'historique git existant (pas de rebase/force-push sur les commits déjà poussés : ça casserait les clones/forks existants). Les mentions Claude déjà présentes dans l'historique des commits passés et les descriptions de PR déjà fusionnées y restent.
+3. Les futurs commits (déjà en vigueur depuis le 2026-06-22, voir en tête de fichier) n'ajoutent plus de mention Claude.
