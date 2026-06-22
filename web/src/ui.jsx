@@ -203,9 +203,9 @@ export function FloatingNav({ children }) {
   useMotionValueEvent(scrollY, 'change', (y) => setScrolled(y > 16))
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 top-0 z-40 flex justify-center px-4 pt-3 sm:pt-4">
+    <div className="pointer-events-none fixed inset-x-0 top-0 z-40 flex justify-center px-3 pt-3 sm:px-4 sm:pt-4">
       <motion.div
-        className="pointer-events-auto flex w-full max-w-3xl flex-wrap items-center justify-center gap-2 rounded-full border-2 bg-panel/90 p-1.5 backdrop-blur-lg sm:flex-nowrap sm:justify-between sm:gap-4"
+        className="pointer-events-auto flex w-full max-w-3xl items-center gap-2 rounded-full border-2 bg-panel/90 p-1.5 backdrop-blur-lg sm:gap-4"
         animate={{
           boxShadow: scrolled
             ? '0 14px 32px -14px rgba(21,23,43,0.4)'
@@ -226,7 +226,7 @@ export function TabBar({ tabs, active, onChange }) {
     <nav
       role="tablist"
       aria-label="Sections du tableau de bord"
-      className="inline-flex flex-wrap gap-1"
+      className="no-scrollbar flex min-w-0 flex-1 gap-1 overflow-x-auto"
     >
       {tabs.map((tab) => {
         const isActive = tab.id === active
@@ -239,7 +239,7 @@ export function TabBar({ tabs, active, onChange }) {
             onClick={() => onChange(tab.id)}
             whileHover={{ scale: 1.04, transition: { duration: 0.15 } }}
             whileTap={{ scale: 0.96, transition: { duration: 0.1 } }}
-            className={`relative rounded-full px-3 py-1.5 font-display text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:px-4 sm:py-2 ${
+            className={`relative shrink-0 rounded-full px-3 py-1.5 font-display text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:px-4 sm:py-2 ${
               isActive ? 'text-bg' : 'text-ink-soft hover:text-ink'
             }`}
           >
