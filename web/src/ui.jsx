@@ -87,11 +87,15 @@ export function CitationAPA({ texte }) {
 
 export function Card({ children, className = '' }) {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
       className={`rounded-[1.25rem] border border-line bg-panel/75 p-6 shadow-[0_8px_24px_-12px_rgba(21,23,43,0.18)] backdrop-blur-xl ${className}`}
     >
       {children}
-    </div>
+    </motion.div>
   )
 }
 
@@ -227,12 +231,14 @@ export function TabBar({ tabs, active, onChange }) {
       {tabs.map((tab) => {
         const isActive = tab.id === active
         return (
-          <button
+          <motion.button
             key={tab.id}
             type="button"
             role="tab"
             aria-selected={isActive}
             onClick={() => onChange(tab.id)}
+            whileHover={{ scale: 1.04, transition: { duration: 0.15 } }}
+            whileTap={{ scale: 0.96, transition: { duration: 0.1 } }}
             className={`relative rounded-full px-3 py-1.5 font-display text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:px-4 sm:py-2 ${
               isActive ? 'text-bg' : 'text-ink-soft hover:text-ink'
             }`}
@@ -245,7 +251,7 @@ export function TabBar({ tabs, active, onChange }) {
               />
             )}
             <span className="relative z-10">{tab.label}</span>
-          </button>
+          </motion.button>
         )
       })}
     </nav>
@@ -255,12 +261,14 @@ export function TabBar({ tabs, active, onChange }) {
 export function ThemeToggle() {
   const { dark, toggle } = useTheme()
   return (
-    <button
+    <motion.button
       type="button"
       onClick={toggle}
       aria-label={dark ? 'Passer en mode clair' : 'Passer en mode sombre'}
       aria-pressed={dark}
-      className="relative inline-flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full text-ink-soft transition hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+      whileHover={{ scale: 1.08, transition: { duration: 0.15 } }}
+      whileTap={{ scale: 0.92, transition: { duration: 0.1 } }}
+      className="relative inline-flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full text-ink-soft transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
@@ -275,7 +283,7 @@ export function ThemeToggle() {
           {dark ? '☾' : '☀'}
         </motion.span>
       </AnimatePresence>
-    </button>
+    </motion.button>
   )
 }
 
@@ -335,14 +343,20 @@ export function EcartMetre({ titre, percu, reel, echelle, onClick, cible }) {
 
   if (onClick) {
     return (
-      <button
+      <motion.button
         type="button"
         onClick={onClick}
         aria-labelledby={titre ? titleId : undefined}
-        className="block w-full rounded-[1.25rem] border border-line bg-panel/75 p-6 text-left shadow-[0_8px_24px_-12px_rgba(21,23,43,0.18)] backdrop-blur-xl transition hover:border-ink-soft hover:shadow-[0_12px_28px_-12px_rgba(21,23,43,0.28)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-80px' }}
+        whileHover={{ scale: 1.015, y: -2, transition: { duration: 0.2, ease: 'easeOut' } }}
+        whileTap={{ scale: 0.99, transition: { duration: 0.1 } }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+        className="block w-full rounded-[1.25rem] border border-line bg-panel/75 p-6 text-left shadow-[0_8px_24px_-12px_rgba(21,23,43,0.18)] backdrop-blur-xl transition-colors hover:border-ink-soft hover:shadow-[0_12px_28px_-12px_rgba(21,23,43,0.28)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
       >
         {body}
-      </button>
+      </motion.button>
     )
   }
   return (
@@ -373,16 +387,18 @@ export function BarRow({ label, valeur, echelle, pole = 'neutral', couleur, sous
   )
   if (onClick) {
     return (
-      <button
+      <motion.button
         type="button"
         onClick={onClick}
         aria-pressed={active}
-        className={`block w-full rounded-xl border p-3 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink ${
+        whileHover={{ scale: 1.01, transition: { duration: 0.15 } }}
+        whileTap={{ scale: 0.98, transition: { duration: 0.1 } }}
+        className={`block w-full rounded-xl border p-3 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink ${
           active ? 'border-ink-soft bg-bg' : 'border-transparent hover:bg-bg'
         }`}
       >
         {content}
-      </button>
+      </motion.button>
     )
   }
   return <div className="p-3">{content}</div>
