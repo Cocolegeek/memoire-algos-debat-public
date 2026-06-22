@@ -57,7 +57,7 @@ export default function App() {
           type="button"
           onClick={() => setActive('overview')}
           aria-label="Aller à l'accueil"
-          className="flex shrink-0 items-center gap-1.5 rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+          className="flex shrink-0 items-center gap-1.5 rounded-full bg-white px-2 py-1 shadow-[0_1px_4px_rgba(21,23,43,0.15)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
         >
           <img src={logoParis1} alt="" className="h-5 w-auto sm:h-6" />
           <img src={logoIMCDS} alt="" className="h-6 w-6 sm:h-7 sm:w-7" />
