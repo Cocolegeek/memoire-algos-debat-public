@@ -49,7 +49,7 @@ export default function App() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-bg">
+    <div className="min-h-screen">
       <NetworkBackground />
       <div className="pointer-events-none fixed inset-x-0 top-0 z-30 h-16 bg-gradient-to-b from-bg via-bg/60 to-transparent sm:h-20" />
       <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 h-16 bg-gradient-to-t from-bg via-bg/60 to-transparent sm:h-20" />

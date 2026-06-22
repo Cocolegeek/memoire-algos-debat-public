@@ -48,7 +48,7 @@ export default function NetworkBackground() {
       <svg
         viewBox={`0 0 ${LARGEUR} ${HAUTEUR}`}
         preserveAspectRatio="xMidYMid slice"
-        className="h-full w-full opacity-[0.06] dark:opacity-[0.13]"
+        className="h-full w-full opacity-[0.08] dark:opacity-[0.16]"
       >
         {RESEAU.aretes.map((a) => (
           <line key={a.cle} x1={a.x1} y1={a.y1} x2={a.x2} y2={a.y2} stroke="currentColor" strokeWidth="1.2" />

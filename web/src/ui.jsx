@@ -152,7 +152,7 @@ export function InfoButton({ titre, methodologie, donnees }) {
               aria-hidden="true"
             />
             <motion.div
-              className="relative z-10 max-w-md rounded-2xl border border-line bg-panel/95 p-6 shadow-[0_24px_48px_-16px_rgba(21,23,43,0.35)] backdrop-blur-2xl"
+              className="relative z-10 max-w-md rounded-2xl border border-line bg-panel p-6 shadow-[0_24px_48px_-16px_rgba(21,23,43,0.35)]"
               initial={{ opacity: 0, scale: 0.96, y: 8 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 8 }}
