@@ -61,7 +61,7 @@ export default function Hypothesis3({ data }) {
           <SectionTitle info={INFO_ECART} sub="Une demande de régulation quasi unanime face à une connaissance rare des dispositifs existants.">
             Le grand écart
           </SectionTitle>
-          <div className="mt-5 grid grid-cols-2 gap-4">
+          <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
             <BigStat valeur={ecart.percu.valeur} unite="%" label={ecart.percu.label} sous={ecart.percu.sous} pole="percu" />
             <BigStat valeur={ecart.reel.valeur} unite="%" label={ecart.reel.label} sous={ecart.reel.sous} pole="reel" />
           </div>
