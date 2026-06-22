@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Badge, CitationAPA, Eyebrow, FloatingNav, TabBar, ThemeToggle } from './ui.jsx'
+import NetworkBackground from './NetworkBackground.jsx'
 import Overview from './sections/Overview.jsx'
 import Hypothesis1 from './sections/Hypothesis1.jsx'
 import Hypothesis2 from './sections/Hypothesis2.jsx'
@@ -49,6 +50,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-bg">
+      <NetworkBackground />
       <div className="pointer-events-none fixed inset-x-0 top-0 z-30 h-16 bg-gradient-to-b from-bg via-bg/60 to-transparent sm:h-20" />
       <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 h-16 bg-gradient-to-t from-bg via-bg/60 to-transparent sm:h-20" />
 

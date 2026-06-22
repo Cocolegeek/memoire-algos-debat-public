@@ -88,7 +88,7 @@ export function CitationAPA({ texte }) {
 export function Card({ children, className = '' }) {
   return (
     <div
-      className={`rounded-[1.25rem] border border-line bg-panel p-6 shadow-[0_8px_24px_-12px_rgba(21,23,43,0.18)] ${className}`}
+      className={`rounded-[1.25rem] border border-line bg-panel/75 p-6 shadow-[0_8px_24px_-12px_rgba(21,23,43,0.18)] backdrop-blur-xl ${className}`}
     >
       {children}
     </div>
@@ -152,7 +152,7 @@ export function InfoButton({ titre, methodologie, donnees }) {
               aria-hidden="true"
             />
             <motion.div
-              className="relative z-10 max-w-md rounded-2xl border border-line bg-panel p-6 shadow-[0_24px_48px_-16px_rgba(21,23,43,0.35)]"
+              className="relative z-10 max-w-md rounded-2xl border border-line bg-panel/95 p-6 shadow-[0_24px_48px_-16px_rgba(21,23,43,0.35)] backdrop-blur-2xl"
               initial={{ opacity: 0, scale: 0.96, y: 8 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 8 }}
@@ -201,7 +201,7 @@ export function FloatingNav({ children }) {
   return (
     <div className="pointer-events-none fixed inset-x-0 top-0 z-40 flex justify-center px-4 pt-3 sm:pt-4">
       <motion.div
-        className="pointer-events-auto flex w-full max-w-3xl flex-wrap items-center justify-center gap-2 rounded-full border-2 bg-panel/95 p-1.5 backdrop-blur-md sm:flex-nowrap sm:justify-between sm:gap-4"
+        className="pointer-events-auto flex w-full max-w-3xl flex-wrap items-center justify-center gap-2 rounded-full border-2 bg-panel/90 p-1.5 backdrop-blur-lg sm:flex-nowrap sm:justify-between sm:gap-4"
         animate={{
           boxShadow: scrolled
             ? '0 14px 32px -14px rgba(21,23,43,0.4)'
@@ -339,7 +339,7 @@ export function EcartMetre({ titre, percu, reel, echelle, onClick, cible }) {
         type="button"
         onClick={onClick}
         aria-labelledby={titre ? titleId : undefined}
-        className="block w-full rounded-[1.25rem] border border-line bg-panel p-6 text-left shadow-[0_8px_24px_-12px_rgba(21,23,43,0.18)] transition hover:border-ink-soft hover:shadow-[0_12px_28px_-12px_rgba(21,23,43,0.28)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+        className="block w-full rounded-[1.25rem] border border-line bg-panel/75 p-6 text-left shadow-[0_8px_24px_-12px_rgba(21,23,43,0.18)] backdrop-blur-xl transition hover:border-ink-soft hover:shadow-[0_12px_28px_-12px_rgba(21,23,43,0.28)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
       >
         {body}
       </button>
