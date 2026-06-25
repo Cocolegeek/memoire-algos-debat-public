@@ -7,10 +7,10 @@
 :root {
   --color-ink: #15172b;
   --color-ink-soft: #2c2e4a;
-  --color-bg: #ecedf1;
+  --color-bg: #ffffff;
   --color-panel: #ffffff;
-  --color-line: #d9dbe3;
-  --color-muted: #6b6f80;
+  --color-line: #d4d7e0;
+  --color-muted: #5b5f72;
   --color-reel: #1f8a86;
   --color-reel-soft: #d5eae9;
   --color-percu: #e06a3b;
