@@ -2,7 +2,14 @@
 
 Journal de session. Mis à jour à la fin de chaque session de travail. Sert de point de reprise : lis ce fichier avant de demander « où on en est ».
 
-## Dernière session : 2026-06-22 (écran de chargement plein écran, corrections responsive)
+## Dernière session : 2026-06-25 (thème clair en vrai blanc)
+
+> **Demande directe de Corentin** : « fais un thème clair plus lisible avec un vrai blanc, push et déploie ». Fond du thème clair (`--color-bg` dans `web/src/index.css`) passé de `#ECEDF1` (gris légèrement teinté bleu/violet) à `#FFFFFF` (vrai blanc), ce qui augmente directement le contraste avec le texte sombre (`--color-ink`). Bordures (`--color-line`, de `#D9DBE3` à `#D4D7E0`) et texte secondaire (`--color-muted`, de `#6B6F80` à `#5B5F72`) légèrement assombris en compensation, pour que les cartes et le texte discret restent bien définis sur un fond de page désormais identique à celui des panneaux (qui était déjà blanc). Mode sombre non touché.
+> **Vérifications faites** : `npm run build` sans erreur, `npm run lint` à la baseline connue (2 erreurs préexistantes de `ui.jsx`, hors périmètre, plus l'avertissement React Compiler connu sur `useReactTable`). **Vérification visuelle faite cette fois** (chromium headless disponible dans cet environnement, contrairement aux sessions précédentes) : captures d'écran prises sur Accueil, H1 et l'onglet Données en thème clair (fond blanc net, cartes bien délimitées par bordure + ombre, sidebar de filtres lisible) et sur Accueil en thème sombre (inchangé, comme attendu).
+> Poussé directement sur `claude/mobile-build-push-spns32`, PR #32 ouverte puis fusionnée (squash) dans `main` immédiatement après vérification, conformément à la règle de fusion directe. Déploiement GitHub Actions du commit fusionné confirmé `success`.
+> **À la reprise** : aucune tâche bloquante de code identifiée. Seul point en attente côté contenu : dépôt du PDF du mémoire dans `web/public/memoire.pdf`.
+
+## Session précédente : 2026-06-22 (écran de chargement plein écran, corrections responsive)
 
 > **Demande de Corentin, traitée en autonomie complète** : ajouter un écran de chargement plein écran (visuel de référence fourni : anneaux concentriques en onde) pour éviter l'aperçu d'un contenu vide ou partiel pendant le chargement, et « fignoler proprement le responsive ».
 > 1. **Écran de chargement plein écran** (nouveau fichier `web/src/LoadingScreen.jsx`) : anneaux concentriques animés façon onde/sonar (`framer-motion`), couleur unique `text-ink` (suit le mode clair/sombre automatiquement, sans logique séparée par thème, même principe que `NetworkBackground`), fond opaque `bg-bg` en `fixed inset-0 z-50`. Affiché tant que `results.json` n'est pas chargé (`!data && !erreur` dans `App.jsx`), masque l'aperçu moche d'un contenu vide ou partiel pendant le fetch. Anneau statique si `prefers-reduced-motion` est actif. Le message de chargement textuel précédent (`<p>Chargement des données…</p>`), désormais entièrement caché derrière cet écran opaque, a été retiré (conservé pour les lecteurs d'écran via un texte `sr-only` dans le nouvel écran).
