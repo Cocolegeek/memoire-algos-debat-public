@@ -153,7 +153,7 @@ export function InfoButton({ titre, methodologie, donnees }) {
               transition={{ duration: 0.15 }}
             >
               <div
-                className="fixed inset-0 bg-ink/50 backdrop-blur-2xl"
+                className="fixed inset-0 bg-ink/50 backdrop-blur-sm"
                 onClick={() => setOpen(false)}
                 aria-hidden="true"
               />
