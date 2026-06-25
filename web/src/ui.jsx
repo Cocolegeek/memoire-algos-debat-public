@@ -1,4 +1,5 @@
 import { useEffect, useId, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence, useMotionValueEvent, useScroll } from 'framer-motion'
 import {
   CartesianGrid,
@@ -138,57 +139,60 @@ export function InfoButton({ titre, methodologie, donnees }) {
       >
         i
       </button>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby={titleId}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-          >
-            <div
-              className="absolute inset-0 bg-ink/50 backdrop-blur-2xl"
-              onClick={() => setOpen(false)}
-              aria-hidden="true"
-            />
+      {createPortal(
+        <AnimatePresence>
+          {open && (
             <motion.div
-              className="relative z-10 max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-line bg-panel p-8 shadow-[0_24px_48px_-16px_rgba(21,23,43,0.35)]"
-              initial={{ opacity: 0, scale: 0.96, y: 8 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96, y: 8 }}
-              transition={{ duration: 0.18 }}
+              className="fixed inset-0 z-50 flex items-center justify-center p-4"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby={titleId}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15 }}
             >
-              <div className="flex items-start justify-between gap-4">
-                <h3 id={titleId} className="font-display text-2xl font-semibold text-ink">
-                  {titre}
-                </h3>
-                <button
-                  type="button"
-                  onClick={() => setOpen(false)}
-                  aria-label="Fermer"
-                  className="shrink-0 rounded-full p-1 text-lg text-muted transition hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-                >
-                  ✕
-                </button>
-              </div>
-              <div className="mt-6 space-y-6">
-                <div>
-                  <Eyebrow>Méthodologie</Eyebrow>
-                  <p className="mt-2 font-body text-base leading-relaxed text-ink-soft">{methodologie}</p>
+              <div
+                className="fixed inset-0 bg-ink/50 backdrop-blur-2xl"
+                onClick={() => setOpen(false)}
+                aria-hidden="true"
+              />
+              <motion.div
+                className="relative z-10 max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-line bg-panel p-8 shadow-[0_24px_48px_-16px_rgba(21,23,43,0.35)]"
+                initial={{ opacity: 0, scale: 0.96, y: 8 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.96, y: 8 }}
+                transition={{ duration: 0.18 }}
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <h3 id={titleId} className="font-display text-2xl font-semibold text-ink">
+                    {titre}
+                  </h3>
+                  <button
+                    type="button"
+                    onClick={() => setOpen(false)}
+                    aria-label="Fermer"
+                    className="shrink-0 rounded-full p-1 text-lg text-muted transition hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                  >
+                    ✕
+                  </button>
                 </div>
-                <div>
-                  <Eyebrow>Données en entrée</Eyebrow>
-                  <p className="mt-2 font-body text-base leading-relaxed text-ink-soft">{donnees}</p>
+                <div className="mt-6 space-y-6">
+                  <div>
+                    <Eyebrow>Méthodologie</Eyebrow>
+                    <p className="mt-2 font-body text-base leading-relaxed text-ink-soft">{methodologie}</p>
+                  </div>
+                  <div>
+                    <Eyebrow>Données en entrée</Eyebrow>
+                    <p className="mt-2 font-body text-base leading-relaxed text-ink-soft">{donnees}</p>
+                  </div>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body,
+      )}
     </>
   )
 }
