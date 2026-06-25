@@ -20,10 +20,10 @@
 .dark {
   --color-ink: #ecedf1;
   --color-ink-soft: #c7cad9;
-  --color-bg: #11121f;
-  --color-panel: #1b1d30;
-  --color-line: #32354a;
-  --color-muted: #8a8ea3;
+  --color-bg: #08080f;
+  --color-panel: #12131e;
+  --color-line: #262837;
+  --color-muted: #9296aa;
   --color-reel: #3fb5ae;
   --color-reel-soft: #1e3a38;
   --color-percu: #f08b5b;
