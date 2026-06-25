@@ -151,38 +151,38 @@ export function InfoButton({ titre, methodologie, donnees }) {
             transition={{ duration: 0.15 }}
           >
             <div
-              className="absolute inset-0 bg-ink/40 backdrop-blur-sm"
+              className="absolute inset-0 bg-ink/50 backdrop-blur-2xl"
               onClick={() => setOpen(false)}
               aria-hidden="true"
             />
             <motion.div
-              className="relative z-10 max-w-md rounded-2xl border border-line bg-panel p-6 shadow-[0_24px_48px_-16px_rgba(21,23,43,0.35)]"
+              className="relative z-10 max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-line bg-panel p-8 shadow-[0_24px_48px_-16px_rgba(21,23,43,0.35)]"
               initial={{ opacity: 0, scale: 0.96, y: 8 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 8 }}
               transition={{ duration: 0.18 }}
             >
-              <div className="flex items-start justify-between gap-3">
-                <h3 id={titleId} className="font-display text-base font-semibold text-ink">
+              <div className="flex items-start justify-between gap-4">
+                <h3 id={titleId} className="font-display text-2xl font-semibold text-ink">
                   {titre}
                 </h3>
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
                   aria-label="Fermer"
-                  className="shrink-0 rounded-full p-1 text-muted transition hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                  className="shrink-0 rounded-full p-1 text-lg text-muted transition hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
                 >
                   ✕
                 </button>
               </div>
-              <div className="mt-4 space-y-4">
+              <div className="mt-6 space-y-6">
                 <div>
                   <Eyebrow>Méthodologie</Eyebrow>
-                  <p className="mt-1 font-body text-sm leading-relaxed text-ink-soft">{methodologie}</p>
+                  <p className="mt-2 font-body text-base leading-relaxed text-ink-soft">{methodologie}</p>
                 </div>
                 <div>
                   <Eyebrow>Données en entrée</Eyebrow>
-                  <p className="mt-1 font-body text-sm leading-relaxed text-ink-soft">{donnees}</p>
+                  <p className="mt-2 font-body text-base leading-relaxed text-ink-soft">{donnees}</p>
                 </div>
               </div>
             </motion.div>
