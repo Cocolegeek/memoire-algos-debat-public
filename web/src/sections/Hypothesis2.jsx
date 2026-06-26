@@ -27,29 +27,29 @@ function frac(i) {
 const INFO_HIERARCHIE = {
   titre: 'Hiérarchie des responsables',
   methodologie:
-    "Note moyenne de responsabilité attribuée à chaque acteur, calculée sur l'ensemble des répondants ayant répondu à la question correspondante. C'est un classement descriptif : aucun test statistique n'est appliqué entre les acteurs.",
-  donnees: 'Note de responsabilité (1 à 5) attribuée séparément aux plateformes, à l\'État, aux producteurs de contenus, aux médias traditionnels et aux partageurs. n = 263.',
+    "Note moyenne de responsabilité attribuée à chaque acteur (Q16a-e), calculée sur l'ensemble des répondants ayant répondu à la question correspondante. Classement descriptif : aucun test statistique n'est appliqué entre les acteurs.",
+  donnees: "Note de responsabilité (1 à 5) attribuée séparément aux plateformes (Q16a), à l'État (Q16b), aux producteurs de contenus (Q16c), aux médias traditionnels (Q16d) et aux partageurs (Q16e). n = 263.",
 }
 
 const INFO_ECART_2A = {
-  titre: 'L’écart de responsabilité',
+  titre: "L'écart de responsabilité",
   methodologie:
-    'Pour chaque répondant, on calcule un écart : sa note moyenne donnée aux individus (producteurs, partageurs) moins sa note moyenne donnée aux structures (plateformes, État). Cet écart est ensuite comparé à zéro par un test statistique adapté à des paires de mesures prises sur les mêmes personnes.',
-  donnees: 'Notes de responsabilité (1 à 5) données aux individus et aux structures par chaque répondant. n = 263.',
+    "Pour chaque répondant, écart = moyenne(Q16c, Q16e) − moyenne(Q16a, Q16b), c'est-à-dire responsabilité individuelle moins responsabilité structurelle. Cet écart est ensuite comparé à zéro par un test t pour échantillons appariés.",
+  donnees: "Notes de responsabilité (1 à 5) données aux individus (Q16c, Q16e) et aux structures (Q16a, Q16b) par chaque répondant. n = 263.",
 }
 
 const INFO_CONTRASTES = {
   titre: 'Un blâme politiquement orienté',
   methodologie:
-    "Notes moyennes calculées séparément chez les répondants se déclarant à gauche et ceux se déclarant à droite. Présentation descriptive : aucun test de différence formel n'est appliqué entre les deux groupes sur ce graphique.",
-  donnees: 'Notes de responsabilité (1 à 5) données à l\'État, aux médias traditionnels et aux partageurs, croisées avec le positionnement politique déclaré.',
+    "Notes moyennes calculées séparément chez les répondants se déclarant à gauche et ceux se déclarant à droite (Q5). Présentation descriptive : aucun test de différence formel n'est appliqué entre les deux groupes sur ce graphique.",
+  donnees: "Notes de responsabilité (1 à 5) données à l'État (Q16b), aux médias traditionnels (Q16d) et aux partageurs (Q16e), croisées avec le positionnement politique déclaré (Q5).",
 }
 
 const INFO_NUAGE_2B = {
   titre: 'Le décalage et la demande de régulation',
   methodologie:
-    "On met en regard, pour chaque répondant, son décalage entre responsabilité individuelle et structurelle (calculé en H2.a) et sa demande de régulation. La droite orange résume la tendance générale entre les deux variables, sur l'ensemble des répondants. Un léger décalage aléatoire écarte les points superposés sans changer le calcul. La couleur de chaque point indique le bord politique déclaré, pour vérifier que le lien ne tient pas seulement à l'intérieur d'un seul camp : la même tendance est recalculée séparément à gauche et à droite (cartouche ci-dessous).",
-  donnees: 'Décalage de responsabilité (voir H2.a), demande de régulation (1 à 5), couleur et tendances par camp selon le positionnement politique déclaré. n = 263.',
+    "Corrélation de Pearson entre le décalage de responsabilité (individuelle moins structurelle, calculé en H2.a) et la demande de régulation (Q18), sur l'ensemble des répondants puis séparément à gauche et à droite (Q5). La droite orange résume la tendance générale. Un léger bruit aléatoire (« jitter ») écarte les points superposés sans modifier le calcul.",
+  donnees: "Décalage de responsabilité (voir H2.a), demande de régulation (Q18, 1 à 5), couleur et corrélations par camp selon le positionnement politique déclaré (Q5). n = 263.",
 }
 
 export default function Hypothesis2({ a, b, respondents = [] }) {
@@ -95,9 +95,9 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
             </div>
             <Caption>
               Les personnes qui produisent et partagent des contenus (en orange) arrivent en tête,
-              devant les plateformes et l'État (en vert). Les médias traditionnels ne comptent ni comme
-              responsabilité individuelle ni comme responsabilité structurelle au sens de l'hypothèse :
-              ils sont indiqués juste à titre de comparaison.
+              devant les plateformes et l'État (en vert). Les médias traditionnels ne relèvent ni de la
+              responsabilité individuelle ni de la responsabilité structurelle au sens de l'hypothèse :
+              ils figurent ici à titre de comparaison.
             </Caption>
           </Card>
 
@@ -158,8 +158,8 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
             })}
           </div>
           <Caption>
-            Lecture descriptive, sans test statistique associé : l'objectif est de voir l'ampleur des
-            différences entre bords politiques, pas de les valider formellement.
+            Lecture descriptive, sans test statistique associé : l'objectif est d'observer l'ampleur
+            des différences entre bords politiques, non de les valider formellement.
           </Caption>
         </Card>
 

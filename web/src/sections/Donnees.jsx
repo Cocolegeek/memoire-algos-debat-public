@@ -12,8 +12,8 @@ const SEUIL_CATEGORIEL = 20
 const INFO = {
   titre: 'Tableau des données brutes',
   methodologie:
-    "Une ligne par réponse au questionnaire, telle qu'exportée brute, sans aucune exclusion ni recodage. Chaque colonne est analysée automatiquement pour déterminer son type : numérique (filtre min/max), catégorielle si elle n'a que peu de valeurs différentes (filtre par liste, peut servir à regrouper), sinon texte libre (filtre par contenu). Le regroupement calcule la moyenne des colonnes numériques visibles, par catégorie.",
-  donnees: "Export brut du questionnaire, toutes les questions (y compris les deux réponses libres).",
+    "Une ligne par réponse au questionnaire (export Google Forms brut, reponses.csv, sans exclusion ni recodage). Chaque colonne du CSV est analysée automatiquement : numérique (filtre min/max), catégorielle si elle a peu de valeurs distinctes (filtre par liste, éligible au regroupement), sinon texte libre (filtre par contenu). Le regroupement calcule la moyenne des colonnes numériques visibles par catégorie.",
+  donnees: "reponses.csv, export brut du questionnaire (toutes les colonnes Q1 à Q20, y compris les réponses libres Q19/Q20).",
 }
 
 function detecterColonnes(rows, fields) {
