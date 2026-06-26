@@ -72,7 +72,7 @@ export default function App() {
         <ThemeToggle />
       </FloatingNav>
 
-      <div className="mx-auto max-w-5xl px-4 pb-10 pt-20 sm:px-6 sm:pt-24">
+      <div className="mx-auto w-full max-w-[1600px] px-4 pb-10 pt-20 sm:px-6 sm:pt-24 lg:px-10">
         {active === 'overview' && (
           <header className="space-y-4 border-b border-line pb-5">
             <div className="flex items-center gap-3">
