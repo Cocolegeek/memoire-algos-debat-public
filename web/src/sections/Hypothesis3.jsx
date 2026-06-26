@@ -20,22 +20,22 @@ function TooltipBord({ active, payload }) {
 const INFO_ECART = {
   titre: 'Le grand écart',
   methodologie:
-    "Deux pourcentages calculés indépendamment l'un de l'autre : la part des répondants jugeant la transparence nécessaire (note 4 ou 5 sur 5 à Q18), et la part déclarant connaître précisément le DSA (Q17). Aucun test statistique n'est nécessaire ici, ce sont des proportions descriptives.",
-  donnees: 'Q18 (degré d\'accord, 1-5) et Q17 (connaissance du DSA, 3 modalités recodées). n = 263.',
+    "Deux pourcentages calculés indépendamment l'un de l'autre : la part des répondants qui jugent la transparence nécessaire (note de 4 ou 5 sur 5), et la part qui déclare connaître précisément le DSA. Ce sont de simples proportions descriptives, sans test statistique nécessaire.",
+  donnees: 'Degré d\'accord avec la nécessité de transparence (1 à 5) et niveau de connaissance déclaré du DSA (en trois catégories). n = 263.',
 }
 
 const INFO_DSA = {
   titre: 'Connaître le DSA réduit-il la volonté de régulation ?',
   methodologie:
-    "Comparaison de la demande moyenne de régulation (Q18) entre deux groupes indépendants : ceux qui déclarent connaître précisément le DSA, et ceux qui le connaissent mal ou pas du tout. Test t pour échantillons indépendants (variances non supposées égales).",
-  donnees: 'Q18 (1-5) croisée avec Q17 recodé en deux groupes (precis / vague + non).',
+    "On compare la demande moyenne de régulation entre deux groupes de répondants qui ne se recoupent pas : ceux qui déclarent connaître précisément le DSA, et ceux qui le connaissent mal ou pas du tout. Test statistique adapté à la comparaison de deux groupes indépendants.",
+  donnees: 'Degré d\'accord avec la nécessité de transparence (1 à 5) croisé avec la connaissance du DSA, regroupée en deux catégories (connaît précisément / connaît mal ou pas).',
 }
 
 const INFO_BORD = {
   titre: 'Une demande consensuelle, mais graduée',
   methodologie:
-    "Note moyenne et part de répondants en accord fort (note 4 ou 5 sur 5 à la question Q18), calculées séparément pour chacune des six catégories de positionnement politique (Q5). Présentation descriptive : aucun test global (de type ANOVA) n'est appliqué entre les six groupes.",
-  donnees: 'Q18 (1-5) croisée avec Q5 (positionnement politique, 6 modalités).',
+    "Note moyenne et part de répondants en accord fort (note de 4 ou 5 sur 5), calculées séparément pour chacune des six catégories de positionnement politique. Présentation descriptive : aucun test global n'est appliqué entre les six groupes.",
+  donnees: 'Degré d\'accord avec la nécessité de transparence (1 à 5) croisé avec le positionnement politique déclaré (6 catégories).',
 }
 
 export default function Hypothesis3({ data }) {
@@ -66,9 +66,9 @@ export default function Hypothesis3({ data }) {
             <BigStat valeur={ecart.reel.valeur} unite="%" label={ecart.reel.label} sous={ecart.reel.sous} pole="reel" />
           </div>
           <Caption>
-            Les deux chiffres ne portent pas sur la même question : l'un mesure une attente, l'autre
-            une connaissance. Leur écart illustre la déconnexion évoquée par l'hypothèse, sans qu'il
-            s'agisse d'un lien statistique entre les deux.
+            Les deux chiffres ne répondent pas à la même question : l'un mesure une attente, l'autre
+            une connaissance. Leur écart illustre la déconnexion pointée par l'hypothèse, sans qu'il
+            s'agisse d'un lien statistique calculé entre les deux.
           </Caption>
         </Card>
 
@@ -99,9 +99,9 @@ export default function Hypothesis3({ data }) {
           </div>
           <Caption>
             Ce test compare directement les deux groupes affichés ci-dessus. Une différence non
-            significative signifie que l'écart observé entre les deux barres pourrait être dû au
-            hasard de l'échantillonnage, et ne permet pas de conclure à un effet de la connaissance du
-            DSA sur la volonté de régulation.
+            significative veut dire que l'écart vu entre les deux barres pourrait simplement être dû
+            au hasard de l'échantillonnage : on ne peut pas en conclure que connaître le DSA change
+            la volonté de régulation.
           </Caption>
         </Card>
       </div>
@@ -162,8 +162,8 @@ export default function Hypothesis3({ data }) {
           </p>
         </div>
         <Caption>
-          La demande de régulation reste majoritaire à tous les bords politiques (le critère «
-          consensuelle » de l'hypothèse), mais son intensité décroît à droite, et plus nettement à
+          La demande de régulation reste majoritaire à tous les bords politiques (c'est ce que
+          l'hypothèse appelle « consensuelle »), mais elle baisse à droite, et plus nettement encore à
           l'extrême droite.
         </Caption>
       </Card>

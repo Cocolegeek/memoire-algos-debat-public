@@ -304,9 +304,9 @@ def bloc_echantillon(reps):
     compte = collections.Counter(r["politique"] for r in reps)
     return {
         "resume": (
-            "Échantillon de convenance, non représentatif de la population française. "
-            "Questionnaire diffusé en ligne, donc soumis à un biais d'auto-sélection. "
-            "Les proportions ci-dessous décrivent les répondants, pas la population générale."
+            "Cet échantillon n'est pas représentatif de la population française : ce sont les "
+            "personnes qui ont choisi de répondre à un questionnaire diffusé en ligne, pas un tirage "
+            "au hasard. Les chiffres ci-dessous décrivent ces répondants, pas la population générale."
         ),
         "indicateurs": [
             {"label": "18-34 ans", "pct": pct(jeunes, n)},
@@ -401,10 +401,10 @@ def bloc_h1(reps):
         "regression": {"r2": r2v(r2, 3), "n": nreg, "poids": poids},
         "robustesse": bloc_h1_robustesse(reps),
         "lecture": (
-            "Une fois le temps passé, l'exposition aux contenus polémiques et la perception de bulle "
-            "pris en compte ensemble, l'intensité d'usage garde un poids non négligeable sur "
-            "l'hostilité, alors que la perception de bulle est proche de zéro et non significative. "
-            "L'hostilité tient donc davantage à l'intensité d'usage qu'à la perception de se savoir "
+            "En regardant les trois facteurs en même temps (temps passé, exposition aux contenus "
+            "polémiques et perception de bulle), c'est l'intensité d'usage qui garde un effet réel sur "
+            "l'hostilité. La perception de bulle, elle, n'en a quasiment aucun. En clair : ce qui rend "
+            "plus hostile, c'est surtout le temps passé et les contenus vus, pas le sentiment d'être "
             "enfermé dans une bulle."
         ),
     }
@@ -465,11 +465,10 @@ def bloc_h2a(reps):
         "test": {"diff": r2v(md), "t": r2v(t, 1), "p": p, "pct_individus": pct_indiv, "n": nd},
         "contrastes_politiques": contrastes,
         "lecture": (
-            "Face à la polarisation en ligne, les répondants attribuent une responsabilité plus forte "
-            "aux individus qui produisent et partagent les contenus qu'aux plateformes et à l'État. "
-            "L'écart entre responsabilité individuelle et responsabilité structurelle est positif et "
-            "statistiquement significatif. Le blâme se déplace selon le bord politique, surtout sur "
-            "les médias et l'État."
+            "Face à la polarisation en ligne, les répondants jugent les individus qui produisent et "
+            "partagent les contenus plus responsables que les plateformes et l'État. Cet écart est "
+            "net et ne doit rien au hasard. Le bord politique fait bouger ce jugement, surtout sur les "
+            "médias et l'État."
         ),
     }
 
@@ -491,16 +490,16 @@ def bloc_h2b(reps):
         verdict = "Non confirmée"
     sens = "négatif" if (r is not None and r < 0) else "positif"
     lecture = (
-        "Le décalage entre responsabilité individuelle et responsabilité structurelle est mis en "
-        "regard de la demande de régulation, prise comme indicateur de la légitimité perçue d'une "
-        "régulation systémique. Le lien observé est %s (r = %s, %s). " % (sens, r2v(r), _fmt_p_signe(p))
+        "On compare ce décalage (les individus jugés plus ou moins responsables que les plateformes "
+        "et l'État) à la demande de régulation, qui sert ici de baromètre de la légitimité perçue d'une "
+        "régulation à grande échelle. Le lien observé est %s (r = %s, %s). " % (sens, r2v(r), _fmt_p_signe(p))
     )
     if verdict == "Confirmée":
-        lecture += "Plus la responsabilité individuelle domine la responsabilité structurelle, moins la régulation systémique est jugée légitime : l'hypothèse est soutenue."
+        lecture += "Plus quelqu'un fait porter la responsabilité sur les individus plutôt que sur les plateformes et l'État, moins il juge légitime une régulation à grande échelle : l'hypothèse est confirmée."
     elif verdict == "Tendance non significative":
-        lecture += "Le sens va dans celui de l'hypothèse, mais l'effet n'atteint pas le seuil de significativité : prudence."
+        lecture += "La tendance va dans le sens attendu, mais elle est trop faible pour être considérée comme un résultat fiable : à prendre avec prudence."
     else:
-        lecture += "Le lien attendu (négatif) n'apparaît pas dans ces données : l'hypothèse n'est pas soutenue."
+        lecture += "Le lien attendu n'apparaît pas dans ces données : cette partie de l'hypothèse n'est pas confirmée."
     # Contrôle de robustesse : le lien tient-il aussi à l'intérieur de chaque
     # camp politique, et pas seulement parce que bord politique, décalage et
     # demande varient ensemble (même logique que la robustesse de H1).
@@ -520,7 +519,7 @@ def bloc_h2b(reps):
         "verdict": verdict,
         "correlation": {"r": r2v(r), "p": p, "n": n, "pente": r2v(pente, 3), "ordonnee": r2v(ordonnee, 3), "xmin": xmin, "xmax": xmax},
         "correlation_par_bord": correlation_par_bord,
-        "mesure": "Légitimité perçue de la régulation systémique, approchée par la demande de transparence imposée à l'État (Q18).",
+        "mesure": "Légitimité d'une régulation à grande échelle, mesurée ici par l'envie de transparence imposée aux plateformes par l'État.",
         "lecture": lecture,
     }
 
@@ -595,12 +594,13 @@ def bloc_h3(reps):
         ],
         "test_dsa": {"t": r2v(t_dsa, 1) if t_dsa is not None else None, "p": p_dsa, "significatif": bool(p_dsa is not None and p_dsa < 0.05), "sens_attendu": bool(effet)},
         "lecture": (
-            "La demande de régulation des algorithmes est massive et consensuelle : la transparence est "
-            "jugée nécessaire par %s%% des répondants, à travers tous les bords politiques, quoique plus "
-            "mesurée à droite. Elle reste déconnectée de la connaissance des dispositifs existants : "
-            "seuls %s%% connaissent précisément le DSA. L'idée qu'une meilleure connaissance du DSA "
-            "réduit la volonté de régulation va dans le sens attendu, mais n'est pas statistiquement "
-            "significative (%s) : cette partie de l'hypothèse n'est pas confirmée par les données."
+            "La demande de régulation est massive et largement partagée : %s%% des répondants jugent "
+            "la transparence nécessaire, quel que soit leur bord politique (un peu moins à droite). "
+            "Mais cette demande est déconnectée de la réalité : seuls %s%% des répondants connaissent "
+            "précisément le DSA, le texte européen qui encadre justement ces algorithmes. L'idée qu'en "
+            "savoir plus sur le DSA réduirait l'envie de régulation va dans le sens attendu, mais "
+            "l'écart mesuré est trop faible pour être fiable (%s) : cette partie de l'hypothèse n'est "
+            "pas confirmée par les données."
             % (pct_transparence, pct_precis, _fmt_p_signe(p_dsa))
         ),
     }
@@ -718,8 +718,9 @@ def main():
             "statut": "définitif",
             "genere_le": date.today().isoformat(),
             "source": (
-                "Enquête en ligne, %d répondants après exclusion des mineurs. Chiffres et tests "
-                "calculés par analysis/analyse.py. Les verdicts restent une interprétation à valider." % n
+                "Enquête en ligne auprès de %d répondants majeurs. Tous les chiffres et tests de ce "
+                "site sont calculés automatiquement à partir des réponses brutes par un script "
+                "(analysis/analyse.py). Les verdicts proposés restent une lecture à débattre." % n
             ),
         },
         "echantillon": bloc_echantillon(reps),
