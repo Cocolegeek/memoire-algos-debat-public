@@ -304,9 +304,9 @@ def bloc_echantillon(reps):
     compte = collections.Counter(r["politique"] for r in reps)
     return {
         "resume": (
-            "Cet échantillon n'est pas représentatif de la population française : ce sont les "
-            "personnes qui ont choisi de répondre à un questionnaire diffusé en ligne, pas un tirage "
-            "au hasard. Les chiffres ci-dessous décrivent ces répondants, pas la population générale."
+            "Cet échantillon n'est pas représentatif de la population française : il rassemble les "
+            "personnes ayant choisi de répondre à un questionnaire diffusé en ligne, et non un tirage "
+            "aléatoire. Les chiffres ci-dessous décrivent ces répondants, non la population générale."
         ),
         "indicateurs": [
             {"label": "18-34 ans", "pct": pct(jeunes, n)},
@@ -401,11 +401,11 @@ def bloc_h1(reps):
         "regression": {"r2": r2v(r2, 3), "n": nreg, "poids": poids},
         "robustesse": bloc_h1_robustesse(reps),
         "lecture": (
-            "En regardant les trois facteurs en même temps (temps passé, exposition aux contenus "
-            "polémiques et perception de bulle), c'est l'intensité d'usage qui garde un effet réel sur "
-            "l'hostilité. La perception de bulle, elle, n'en a quasiment aucun. En clair : ce qui rend "
-            "plus hostile, c'est surtout le temps passé et les contenus vus, pas le sentiment d'être "
-            "enfermé dans une bulle."
+            "En considérant les trois facteurs simultanément (temps passé, exposition aux contenus "
+            "polémiques et perception de bulle), c'est l'intensité d'usage qui conserve un effet réel "
+            "sur l'hostilité, tandis que la perception de bulle n'en a quasiment aucun. Ce qui rend "
+            "plus hostile tient donc surtout au temps passé et aux contenus vus, et non au sentiment "
+            "d'être enfermé dans une bulle."
         ),
     }
 
@@ -467,8 +467,8 @@ def bloc_h2a(reps):
         "lecture": (
             "Face à la polarisation en ligne, les répondants jugent les individus qui produisent et "
             "partagent les contenus plus responsables que les plateformes et l'État. Cet écart est "
-            "net et ne doit rien au hasard. Le bord politique fait bouger ce jugement, surtout sur les "
-            "médias et l'État."
+            "net et ne doit rien au hasard. Le bord politique déclaré fait varier ce jugement, surtout "
+            "à l'égard des médias et de l'État."
         ),
     }
 
@@ -490,14 +490,14 @@ def bloc_h2b(reps):
         verdict = "Non confirmée"
     sens = "négatif" if (r is not None and r < 0) else "positif"
     lecture = (
-        "On compare ce décalage (les individus jugés plus ou moins responsables que les plateformes "
-        "et l'État) à la demande de régulation, qui sert ici de baromètre de la légitimité perçue d'une "
-        "régulation à grande échelle. Le lien observé est %s (r = %s, %s). " % (sens, r2v(r), _fmt_p_signe(p))
+        "Ce décalage (les individus jugés plus ou moins responsables que les plateformes et l'État) "
+        "est mis en regard de la demande de régulation, qui sert ici de baromètre de la légitimité "
+        "perçue d'une régulation à grande échelle. Le lien observé est %s (r = %s, %s). " % (sens, r2v(r), _fmt_p_signe(p))
     )
     if verdict == "Confirmée":
-        lecture += "Plus quelqu'un fait porter la responsabilité sur les individus plutôt que sur les plateformes et l'État, moins il juge légitime une régulation à grande échelle : l'hypothèse est confirmée."
+        lecture += "Plus la responsabilité est portée sur les individus plutôt que sur les plateformes et l'État, moins la régulation à grande échelle est jugée légitime : l'hypothèse est confirmée."
     elif verdict == "Tendance non significative":
-        lecture += "La tendance va dans le sens attendu, mais elle est trop faible pour être considérée comme un résultat fiable : à prendre avec prudence."
+        lecture += "La tendance va dans le sens attendu, mais elle est trop faible pour être considérée comme un résultat fiable : à interpréter avec prudence."
     else:
         lecture += "Le lien attendu n'apparaît pas dans ces données : cette partie de l'hypothèse n'est pas confirmée."
     # Contrôle de robustesse : le lien tient-il aussi à l'intérieur de chaque
@@ -596,11 +596,11 @@ def bloc_h3(reps):
         "lecture": (
             "La demande de régulation est massive et largement partagée : %s%% des répondants jugent "
             "la transparence nécessaire, quel que soit leur bord politique (un peu moins à droite). "
-            "Mais cette demande est déconnectée de la réalité : seuls %s%% des répondants connaissent "
-            "précisément le DSA, le texte européen qui encadre justement ces algorithmes. L'idée qu'en "
-            "savoir plus sur le DSA réduirait l'envie de régulation va dans le sens attendu, mais "
-            "l'écart mesuré est trop faible pour être fiable (%s) : cette partie de l'hypothèse n'est "
-            "pas confirmée par les données."
+            "Cette demande reste toutefois déconnectée de la connaissance des dispositifs existants : "
+            "seuls %s%% des répondants connaissent précisément le DSA, le texte européen qui encadre "
+            "justement ces algorithmes. L'idée qu'une meilleure connaissance du DSA réduirait l'envie "
+            "de régulation va dans le sens attendu, mais l'écart mesuré est trop faible pour être "
+            "fiable (%s) : cette partie de l'hypothèse n'est pas confirmée par les données."
             % (pct_transparence, pct_precis, _fmt_p_signe(p_dsa))
         ),
     }
@@ -718,9 +718,10 @@ def main():
             "statut": "définitif",
             "genere_le": date.today().isoformat(),
             "source": (
-                "Enquête en ligne auprès de %d répondants majeurs. Tous les chiffres et tests de ce "
-                "site sont calculés automatiquement à partir des réponses brutes par un script "
-                "(analysis/analyse.py). Les verdicts proposés restent une lecture à débattre." % n
+                "Enquête en ligne auprès de %d répondants majeurs. Tous les chiffres et tests présentés "
+                "sur ce site sont calculés automatiquement à partir des réponses brutes par un script "
+                "(analysis/analyse.py). Les verdicts proposés constituent une lecture à débattre, non "
+                "une conclusion définitive." % n
             ),
         },
         "echantillon": bloc_echantillon(reps),

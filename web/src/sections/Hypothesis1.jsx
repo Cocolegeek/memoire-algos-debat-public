@@ -16,31 +16,31 @@ function pointsPour(respondents, cle, jitter) {
 const INFO_ECART = {
   titre: "L'écart-mètre H1",
   methodologie:
-    "On mesure la force du lien entre l'hostilité et, d'un côté, le fait de se sentir enfermé dans une bulle (Q9), de l'autre la plus forte des deux mesures d'usage (temps passé, exposition aux contenus). Plus ce lien est fort, plus la barre est longue, sur une échelle commune de 0 à 0,3.",
+    "Corrélation de Pearson (r) entre l'index d'hostilité et, d'une part, la perception de bulle (Q9), d'autre part la plus forte des deux mesures d'usage (temps, exposition). L'écart-mètre affiche la valeur absolue de chaque r sur une échelle commune de 0 à 0,3.",
   donnees:
-    "Index d'hostilité calculé à partir de 4 questions sur le ressenti envers les personnes en désaccord (Q14a-d). Bulle (Q9), temps passé (Q7), exposition aux contenus polémiques (Q11a-d), tous ramenés sur une échelle de 1 à 5. n = 263.",
+    "Index d'hostilité = moyenne(Q14a, Q14b, Q14c, 6 − Q14d), Q14d étant inversé. Q9 (perception de bulle, 1-5), Q7 (temps recodé 1-5), Q11a-d (exposition, moyenne recodée 1-5). n = 263.",
 }
 
 const INFO_REGRESSION = {
   titre: 'Ce qui pèse vraiment',
   methodologie:
-    "On regarde les trois facteurs en même temps (régression linéaire multiple) pour savoir lequel pèse le plus sur l'hostilité une fois les deux autres neutralisés. Les poids (β) sont calculés sur des variables ramenées à la même échelle, donc directement comparables entre eux. Chacun est aussi testé séparément pour savoir s'il est probablement réel ou dû au hasard.",
+    "Régression linéaire multiple (moindres carrés ordinaires) sur variables centrées-réduites : l'hostilité est expliquée simultanément par le temps passé, l'exposition aux contenus polémiques et la perception de bulle. Les coefficients (β) sont donc directement comparables entre eux. La significativité de chaque β est testée par un test t sur ses propres degrés de liberté.",
   donnees:
-    "Mêmes variables que l'écart-mètre, restreintes aux répondants ayant répondu aux quatre questions concernées (hostilité, temps, exposition, bulle).",
+    "Mêmes variables que l'écart-mètre, restreintes aux répondants ayant une valeur sur les quatre variables (hostilité, temps, exposition, bulle).",
 }
 
 const INFO_ROBUSTESSE = {
   titre: 'H1 est-elle stable selon le profil ?',
   methodologie:
-    "Les mêmes liens que ci-dessus sont recalculés séparément sur quatre groupes de répondants : les deux tranches d'âge les plus représentées et les deux bords politiques. Cela permet de vérifier que le résultat principal ne tient pas à un seul profil de répondant. Ces groupes étant plus petits, un lien qui n'apparaît pas clairement significatif dans l'un d'eux peut simplement refléter un échantillon plus réduit, pas l'absence de lien.",
-  donnees: 'Mêmes variables que la régression (temps, exposition, bulle, index d\'hostilité), croisées avec l\'âge et le bord politique déclaré.',
+    "Mêmes corrélations bivariées que ci-dessus (Pearson, prédicteur contre index d'hostilité), recalculées indépendamment sur quatre sous-échantillons : les deux tranches d'âge les plus représentées et les deux bords politiques. Vérifie que le résultat principal n'est pas un artefact d'un seul profil de répondant. Les sous-échantillons étant plus petits, la puissance statistique est plus faible : une corrélation qui n'atteint pas la significativité dans un sous-groupe peut simplement refléter un n réduit.",
+  donnees: 'Mêmes variables que la régression (Q7, Q11, Q9, index d\'hostilité), croisées avec Q1 (âge) et Q5 (bord politique).',
 }
 
 const INFO_NUAGE = (label) => ({
   titre: `${label} et l'hostilité`,
   methodologie:
-    'On trace le lien le plus simple entre cette seule variable et l\'index d\'hostilité, sans tenir compte des deux autres facteurs. La droite orange résume la tendance générale. Un léger décalage aléatoire est ajouté aux points pour rendre visibles ceux qui se superposent ; il ne change rien au calcul.',
-  donnees: 'Un point par répondant (n = 263), valeurs ramenées sur une échelle de 1 à 5.',
+    "Régression linéaire simple (moindres carrés) entre la variable et l'index d'hostilité, calculée indépendamment des deux autres facteurs. La droite orange résume la tendance. Un léger bruit aléatoire (« jitter ») est ajouté sur les variables à valeurs entières pour rendre visibles les points superposés ; il ne modifie pas le calcul.",
+  donnees: "Un point par répondant (n = 263), valeurs brutes recodées sur l'échelle 1 à 5.",
 })
 
 export default function Hypothesis1({ data, respondents = [] }) {
@@ -109,10 +109,10 @@ export default function Hypothesis1({ data, respondents = [] }) {
           Chaque facteur face à l'hostilité
         </SectionTitle>
         <p className="mt-2 font-body text-sm text-ink-soft">
-          <strong>r</strong> indique à quel point ce facteur et l'hostilité évoluent ensemble (de -1 à
-          1 ; plus le chiffre est éloigné de zéro, plus le lien est fort). <strong>p</strong> indique si
-          ce lien a des chances d'être réel plutôt que dû au hasard : en dessous de 0,05, on le
-          considère probablement réel.
+          <strong>r</strong> mesure l'intensité du lien entre ce facteur et l'hostilité (de -1 à 1 ;
+          plus la valeur s'éloigne de zéro, plus le lien est marqué). <strong>p</strong> indique la
+          fiabilité de ce lien : en dessous de 0,05, il est considéré comme probablement réel plutôt
+          que dû au hasard.
         </p>
         <div className="mt-6 space-y-8 divide-y divide-line">
           {nuages.map((s) => (
@@ -136,8 +136,8 @@ export default function Hypothesis1({ data, respondents = [] }) {
               />
               <Caption>
                 {s.cle === 'bulle'
-                  ? 'Les points sont dispersés sans tendance nette : se sentir enfermé dans une bulle ne va pas de pair avec une hostilité plus ou moins forte.'
-                  : 'La droite, bien que peu inclinée, traduit une tendance positive : plus ce facteur est élevé, plus l\'hostilité moyenne tend à l\'être.'}
+                  ? 'Les points sont dispersés sans tendance nette : se sentir enfermé dans une bulle ne va pas de pair avec une hostilité plus ou moins marquée.'
+                  : "La droite, bien que peu inclinée, traduit une tendance positive : plus ce facteur est élevé, plus l'hostilité moyenne tend à l'être également."}
               </Caption>
             </div>
           ))}
@@ -157,9 +157,8 @@ export default function Hypothesis1({ data, respondents = [] }) {
         <Caption>
           La perception de bulle ne ressort jamais comme significative dans aucun de ces groupes, ce
           qui renforce la conclusion principale. Le lien avec l'usage (temps, exposition) reste positif
-          partout, mais n'est net que dans certains groupes : avec moins de répondants par groupe,
-          c'est attendu, et ça appelle à la prudence plutôt qu'à remettre en cause le résultat
-          principal.
+          partout, mais n'est net que dans certains groupes : avec moins de répondants par groupe, cela
+          reste attendu et appelle à la prudence plutôt qu'à une remise en cause du résultat principal.
         </Caption>
       </Card>
 

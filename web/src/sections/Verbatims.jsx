@@ -1,10 +1,10 @@
 import { BarRow, Caption, Eyebrow, InfoButton } from '../ui.jsx'
 
 const INFO = {
-  titre: 'Analyse des réponses libres',
+  titre: 'Analyse sémantique des réponses libres',
   methodologie:
-    "Chaque réponse écrite librement est classée dans un thème par détection de mots-clés (pour la cause perçue de la polarisation : algorithmes/réseaux sociaux, médias, acteurs politiques, individus ; pour la mesure proposée : régulation, transparence des sources, éducation). Les pourcentages portent sur l'ensemble des réponses remplies ; les citations affichées en sont un échantillon pour donner une idée, pas un résultat statistique en soi.",
-  donnees: 'Cause perçue de la polarisation et mesure concrète proposée, deux questions facultatives en texte libre.',
+    "Chaque réponse ouverte est classée dans un thème par détection de mots-clés (pour Q19 : algorithmes/réseaux sociaux, médias, acteurs politiques, individus ; pour Q20 : régulation, transparence des sources, éducation). Les pourcentages portent sur l'ensemble des réponses non vides ; les citations affichées en sont un échantillon illustratif, pas un résultat statistique.",
+  donnees: 'Q19 (cause perçue de la polarisation) et Q20 (mesure concrète proposée), réponses facultatives en texte libre.',
 }
 
 // Quel bloc (q19/q20) et quel(s) thème(s) servent chaque onglet : la sélection
