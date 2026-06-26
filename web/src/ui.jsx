@@ -88,15 +88,11 @@ export function CitationAPA({ texte }) {
 
 export function Card({ children, className = '' }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
+    <div
       className={`rounded-[1.25rem] border border-line bg-panel/75 p-6 shadow-[0_8px_24px_-12px_rgba(21,23,43,0.18)] backdrop-blur-xl ${className}`}
     >
       {children}
-    </motion.div>
+    </div>
   )
 }
 
@@ -351,12 +347,8 @@ export function EcartMetre({ titre, percu, reel, echelle, onClick, cible }) {
         type="button"
         onClick={onClick}
         aria-labelledby={titre ? titleId : undefined}
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-80px' }}
         whileHover={{ scale: 1.015, y: -2, transition: { duration: 0.2, ease: 'easeOut' } }}
         whileTap={{ scale: 0.99, transition: { duration: 0.1 } }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
         className="block w-full rounded-[1.25rem] border border-line bg-panel/75 p-6 text-left shadow-[0_8px_24px_-12px_rgba(21,23,43,0.18)] backdrop-blur-xl transition-colors hover:border-ink-soft hover:shadow-[0_12px_28px_-12px_rgba(21,23,43,0.28)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
       >
         {body}
