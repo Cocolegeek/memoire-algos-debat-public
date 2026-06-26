@@ -233,3 +233,11 @@ export const QUESTIONNAIRE = [
     ],
   },
 ]
+
+// Intitulé exact par code de question, dérivé de QUESTIONNAIRE : permet aux
+// fenêtres méthodologie des graphiques de citer mot pour mot les questions
+// mobilisées, sans dupliquer les textes.
+export const TEXTE_QUESTIONS = QUESTIONNAIRE.flatMap((s) => s.questions).reduce((acc, q) => {
+  acc[q.code] = q.texte
+  return acc
+}, {})

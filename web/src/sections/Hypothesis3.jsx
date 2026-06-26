@@ -22,6 +22,7 @@ const INFO_ECART = {
   methodologie:
     "Deux pourcentages calculés indépendamment l'un de l'autre : part de Q18 ∈ {4,5} (transparence jugée nécessaire), et part de Q17 = « précisément » (connaissance du DSA). Ce sont de simples proportions descriptives, sans test statistique associé.",
   donnees: 'Degré d\'accord avec la nécessité de transparence (Q18, 1 à 5) et niveau de connaissance déclaré du DSA (Q17, trois catégories). n = 263.',
+  questions: ['Q18', 'Q17'],
 }
 
 const INFO_DSA = {
@@ -29,6 +30,7 @@ const INFO_DSA = {
   methodologie:
     "Test t pour échantillons indépendants comparant la demande moyenne de régulation (Q18) entre deux groupes disjoints définis par Q17 : connaît précisément le DSA, versus connaît mal ou pas (vague + non).",
   donnees: 'Degré d\'accord avec la nécessité de transparence (Q18, 1 à 5) croisé avec la connaissance du DSA (Q17), regroupée en deux catégories (connaît précisément / connaît mal ou pas).',
+  questions: ['Q18', 'Q17'],
 }
 
 const INFO_BORD = {
@@ -36,6 +38,7 @@ const INFO_BORD = {
   methodologie:
     "Note moyenne (Q18) et part de répondants en accord fort (Q18 ∈ {4,5}), calculées séparément pour chacune des six catégories de positionnement politique (Q5). Présentation descriptive : aucun test global n'est appliqué entre les six groupes.",
   donnees: 'Degré d\'accord avec la nécessité de transparence (Q18, 1 à 5) croisé avec le positionnement politique déclaré (Q5, 6 catégories).',
+  questions: ['Q18', 'Q5'],
 }
 
 export default function Hypothesis3({ data }) {

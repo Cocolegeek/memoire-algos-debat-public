@@ -19,6 +19,7 @@ const INFO_ECART = {
     "Corrélation de Pearson (r) entre l'index d'hostilité et, d'une part, la perception de bulle (Q9), d'autre part la plus forte des deux mesures d'usage (temps, exposition). L'écart-mètre affiche la valeur absolue de chaque r sur une échelle commune de 0 à 0,3.",
   donnees:
     "Index d'hostilité = moyenne(Q14a, Q14b, Q14c, 6 − Q14d), Q14d étant inversé. Q9 (perception de bulle, 1-5), Q7 (temps recodé 1-5), Q11a-d (exposition, moyenne recodée 1-5). n = 263.",
+  questions: ['Q9', 'Q7', 'Q11a', 'Q11b', 'Q11c', 'Q11d', 'Q14a', 'Q14b', 'Q14c', 'Q14d'],
 }
 
 const INFO_REGRESSION = {
@@ -27,6 +28,7 @@ const INFO_REGRESSION = {
     "Régression linéaire multiple (moindres carrés ordinaires) sur variables centrées-réduites : l'hostilité est expliquée simultanément par le temps passé, l'exposition aux contenus polémiques et la perception de bulle. Les coefficients (β) sont donc directement comparables entre eux. La significativité de chaque β est testée par un test t sur ses propres degrés de liberté.",
   donnees:
     "Mêmes variables que l'écart-mètre, restreintes aux répondants ayant une valeur sur les quatre variables (hostilité, temps, exposition, bulle).",
+  questions: ['Q9', 'Q7', 'Q11a', 'Q11b', 'Q11c', 'Q11d', 'Q14a', 'Q14b', 'Q14c', 'Q14d'],
 }
 
 const INFO_ROBUSTESSE = {
@@ -34,13 +36,21 @@ const INFO_ROBUSTESSE = {
   methodologie:
     "Mêmes corrélations bivariées que ci-dessus (Pearson, prédicteur contre index d'hostilité), recalculées indépendamment sur quatre sous-échantillons : les deux tranches d'âge les plus représentées et les deux bords politiques. Vérifie que le résultat principal n'est pas un artefact d'un seul profil de répondant. Les sous-échantillons étant plus petits, la puissance statistique est plus faible : une corrélation qui n'atteint pas la significativité dans un sous-groupe peut simplement refléter un n réduit.",
   donnees: 'Mêmes variables que la régression (Q7, Q11, Q9, index d\'hostilité), croisées avec Q1 (âge) et Q5 (bord politique).',
+  questions: ['Q7', 'Q11a', 'Q11b', 'Q11c', 'Q11d', 'Q9', 'Q14a', 'Q14b', 'Q14c', 'Q14d', 'Q1', 'Q5'],
 }
 
-const INFO_NUAGE = (label) => ({
+const CODES_NUAGE = {
+  bulle: ['Q9'],
+  temps: ['Q7'],
+  exposition: ['Q11a', 'Q11b', 'Q11c', 'Q11d'],
+}
+
+const INFO_NUAGE = (label, cle) => ({
   titre: `${label} et l'hostilité`,
   methodologie:
     "Régression linéaire simple (moindres carrés) entre la variable et l'index d'hostilité, calculée indépendamment des deux autres facteurs. La droite orange résume la tendance. Un léger bruit aléatoire (« jitter ») est ajouté sur les variables à valeurs entières pour rendre visibles les points superposés ; il ne modifie pas le calcul.",
   donnees: "Un point par répondant (n = 263), valeurs brutes recodées sur l'échelle 1 à 5.",
+  questions: [...(CODES_NUAGE[cle] ?? []), 'Q14a', 'Q14b', 'Q14c', 'Q14d'],
 })
 
 export default function Hypothesis1({ data, respondents = [] }) {
@@ -119,7 +129,7 @@ export default function Hypothesis1({ data, respondents = [] }) {
             <div key={s.cle} className="pt-8 first:pt-0">
               <div className="flex items-center gap-2">
                 <Eyebrow>{s.label}</Eyebrow>
-                <InfoButton {...INFO_NUAGE(s.label)} />
+                <InfoButton {...INFO_NUAGE(s.label, s.cle)} />
               </div>
               <p className="mt-1 mb-3 font-mono text-xs text-ink-soft">
                 r = {String(s.r).replace('.', ',')} · <Signif p={s.p} />
