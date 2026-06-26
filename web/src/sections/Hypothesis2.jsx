@@ -1,12 +1,6 @@
-import { useMemo, useState } from 'react'
-import { BarRow, BORD_COULEURS, Caption, Card, EcartMetre, Eyebrow, Nuage, SectionTitle, Signif, SegmentToggle } from '../ui.jsx'
+import { useMemo } from 'react'
+import { BarRow, BORD_COULEURS, Caption, Card, EcartMetre, Eyebrow, Nuage, SectionTitle, Signif } from '../ui.jsx'
 import HypoHeader from './HypoHeader.jsx'
-
-const FILTRES = [
-  { value: 'tous', label: 'Tous' },
-  { value: 'gauche', label: 'Gauche' },
-  { value: 'droite', label: 'Droite' },
-]
 
 const LABELS_BORD = {
   extreme_gauche: 'Très à gauche',
@@ -18,6 +12,21 @@ const LABELS_BORD = {
 }
 
 const POLE = { individu: 'percu', structure: 'reel', autre: 'neutral' }
+
+function BarreContraste({ label, valeur, couleur }) {
+  const pct = Math.min(100, Math.max(0, (valeur / 5) * 100))
+  return (
+    <div className="flex items-center gap-2">
+      <span className="w-14 shrink-0 font-mono text-[11px] text-muted">{label}</span>
+      <div className="h-2 flex-1 overflow-hidden rounded-full bg-line">
+        <div className="h-full rounded-full" style={{ width: `${pct}%`, backgroundColor: couleur }} />
+      </div>
+      <span className="w-8 shrink-0 text-right font-mono text-[11px]" style={{ color: couleur }}>
+        {String(valeur).replace('.', ',')}
+      </span>
+    </div>
+  )
+}
 
 function frac(i) {
   const x = Math.sin(i * 12.9898) * 43758.5453
@@ -43,7 +52,7 @@ const INFO_ECART_2A = {
 const INFO_CONTRASTES = {
   titre: 'Un blâme politiquement orienté',
   methodologie:
-    "Notes moyennes calculées séparément chez les répondants se déclarant à gauche et ceux se déclarant à droite (Q5). Présentation descriptive : aucun test de différence formel n'est appliqué entre les deux groupes sur ce graphique.",
+    "Notes moyennes calculées sur l'ensemble des répondants, puis séparément chez ceux se déclarant à gauche et ceux se déclarant à droite (Q5). Présentation descriptive : aucun test de différence formel n'est appliqué entre les groupes sur ce graphique.",
   donnees: "Notes de responsabilité (1 à 5) données à l'État (Q16b), aux médias traditionnels (Q16d) et aux partageurs (Q16e), croisées avec le positionnement politique déclaré (Q5).",
   questions: ['Q16b', 'Q16d', 'Q16e', 'Q5'],
 }
@@ -57,8 +66,6 @@ const INFO_NUAGE_2B = {
 }
 
 export default function Hypothesis2({ a, b, respondents = [] }) {
-  const [bord, setBord] = useState('tous')
-
   const pointsB = useMemo(
     () =>
       respondents
@@ -129,37 +136,34 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
         </div>
 
         <Card>
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <SectionTitle info={INFO_CONTRASTES} sub="Le blâme se déplace selon le bord politique déclaré.">
-              Un blâme politiquement orienté
-            </SectionTitle>
-            <SegmentToggle options={FILTRES} value={bord} onChange={setBord} label="Filtre par bord politique" />
+          <SectionTitle info={INFO_CONTRASTES} sub="Le blâme se déplace selon le bord politique déclaré.">
+            Un blâme politiquement orienté
+          </SectionTitle>
+          <div className="mt-4 flex flex-wrap gap-3 font-mono text-xs text-muted">
+            <span className="inline-flex items-center gap-1.5">
+              <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: BORD_COULEURS.centre }} aria-hidden="true" />
+              Tous
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: BORD_COULEURS.gauche }} aria-hidden="true" />
+              Gauche
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: BORD_COULEURS.droite }} aria-hidden="true" />
+              Droite
+            </span>
           </div>
-          <div className="mt-4 space-y-2">
-            {a.contrastes_politiques.map((c) => {
-              const val = bord === 'gauche' ? c.gauche : bord === 'droite' ? c.droite : Number(((c.gauche + c.droite) / 2).toFixed(2))
-              const couleur = bord === 'tous' ? undefined : BORD_COULEURS[bord]
-              return (
-                <BarRow
-                  key={c.item}
-                  label={c.item}
-                  valeur={val}
-                  echelle={5}
-                  pole="neutral"
-                  couleur={couleur}
-                  affiche={val.toFixed(1).replace('.', ',')}
-                  sous={
-                    bord === 'tous' ? (
-                      <>
-                        <span style={{ color: BORD_COULEURS.gauche }}>Gauche {String(c.gauche).replace('.', ',')}</span>
-                        {' · '}
-                        <span style={{ color: BORD_COULEURS.droite }}>Droite {String(c.droite).replace('.', ',')}</span>
-                      </>
-                    ) : undefined
-                  }
-                />
-              )
-            })}
+          <div className="mt-4 space-y-5">
+            {a.contrastes_politiques.map((c) => (
+              <div key={c.item}>
+                <p className="font-body text-sm text-ink-soft">{c.item}</p>
+                <div className="mt-2 space-y-1.5">
+                  <BarreContraste label="Tous" valeur={c.tous} couleur={BORD_COULEURS.centre} />
+                  <BarreContraste label="Gauche" valeur={c.gauche} couleur={BORD_COULEURS.gauche} />
+                  <BarreContraste label="Droite" valeur={c.droite} couleur={BORD_COULEURS.droite} />
+                </div>
+              </div>
+            ))}
           </div>
           <Caption>
             Lecture descriptive, sans test statistique associé : l'objectif est d'observer l'ampleur

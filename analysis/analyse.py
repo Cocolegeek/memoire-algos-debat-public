@@ -442,9 +442,9 @@ def bloc_h2a(reps):
         return moyenne([r["q16"][code] for r in reps if bord(r["politique"]) == b])
 
     contrastes = [
-        {"item": "Blâme des médias traditionnels", "gauche": r2v(moy_bord("d", "gauche")), "droite": r2v(moy_bord("d", "droite"))},
-        {"item": "Responsabilité de l'État", "gauche": r2v(moy_bord("b", "gauche")), "droite": r2v(moy_bord("b", "droite"))},
-        {"item": "Blâme des partageurs", "gauche": r2v(moy_bord("e", "gauche")), "droite": r2v(moy_bord("e", "droite"))},
+        {"item": "Blâme des médias traditionnels", "tous": r2v(moy["d"]), "gauche": r2v(moy_bord("d", "gauche")), "droite": r2v(moy_bord("d", "droite"))},
+        {"item": "Responsabilité de l'État", "tous": r2v(moy["b"]), "gauche": r2v(moy_bord("b", "gauche")), "droite": r2v(moy_bord("b", "droite"))},
+        {"item": "Blâme des partageurs", "tous": r2v(moy["e"]), "gauche": r2v(moy_bord("e", "gauche")), "droite": r2v(moy_bord("e", "droite"))},
     ]
     verdict = "Confirmée" if individus > structures and p < 0.05 else "Nuancée"
     return {
