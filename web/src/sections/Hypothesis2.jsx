@@ -29,6 +29,7 @@ const INFO_HIERARCHIE = {
   methodologie:
     "Note moyenne de responsabilité attribuée à chaque acteur (Q16a-e), calculée sur l'ensemble des répondants ayant répondu à la question correspondante. Classement descriptif : aucun test statistique n'est appliqué entre les acteurs.",
   donnees: "Note de responsabilité (1 à 5) attribuée séparément aux plateformes (Q16a), à l'État (Q16b), aux producteurs de contenus (Q16c), aux médias traditionnels (Q16d) et aux partageurs (Q16e). n = 263.",
+  questions: ['Q16a', 'Q16b', 'Q16c', 'Q16d', 'Q16e'],
 }
 
 const INFO_ECART_2A = {
@@ -36,6 +37,7 @@ const INFO_ECART_2A = {
   methodologie:
     "Pour chaque répondant, écart = moyenne(Q16c, Q16e) − moyenne(Q16a, Q16b), c'est-à-dire responsabilité individuelle moins responsabilité structurelle. Cet écart est ensuite comparé à zéro par un test t pour échantillons appariés.",
   donnees: "Notes de responsabilité (1 à 5) données aux individus (Q16c, Q16e) et aux structures (Q16a, Q16b) par chaque répondant. n = 263.",
+  questions: ['Q16c', 'Q16e', 'Q16a', 'Q16b'],
 }
 
 const INFO_CONTRASTES = {
@@ -43,6 +45,7 @@ const INFO_CONTRASTES = {
   methodologie:
     "Notes moyennes calculées séparément chez les répondants se déclarant à gauche et ceux se déclarant à droite (Q5). Présentation descriptive : aucun test de différence formel n'est appliqué entre les deux groupes sur ce graphique.",
   donnees: "Notes de responsabilité (1 à 5) données à l'État (Q16b), aux médias traditionnels (Q16d) et aux partageurs (Q16e), croisées avec le positionnement politique déclaré (Q5).",
+  questions: ['Q16b', 'Q16d', 'Q16e', 'Q5'],
 }
 
 const INFO_NUAGE_2B = {
@@ -50,6 +53,7 @@ const INFO_NUAGE_2B = {
   methodologie:
     "Corrélation de Pearson entre le décalage de responsabilité (individuelle moins structurelle, calculé en H2.a) et la demande de régulation (Q18), sur l'ensemble des répondants puis séparément à gauche et à droite (Q5). La droite orange résume la tendance générale. Un léger bruit aléatoire (« jitter ») écarte les points superposés sans modifier le calcul.",
   donnees: "Décalage de responsabilité (voir H2.a), demande de régulation (Q18, 1 à 5), couleur et corrélations par camp selon le positionnement politique déclaré (Q5). n = 263.",
+  questions: ['Q16c', 'Q16e', 'Q16a', 'Q16b', 'Q18', 'Q5'],
 }
 
 export default function Hypothesis2({ a, b, respondents = [] }) {

@@ -5,6 +5,7 @@ const INFO = {
   methodologie:
     "Chaque réponse ouverte est classée dans un thème par détection de mots-clés (pour Q19 : algorithmes/réseaux sociaux, médias, acteurs politiques, individus ; pour Q20 : régulation, transparence des sources, éducation). Les pourcentages portent sur l'ensemble des réponses non vides ; les citations affichées en sont un échantillon illustratif, pas un résultat statistique.",
   donnees: 'Q19 (cause perçue de la polarisation) et Q20 (mesure concrète proposée), réponses facultatives en texte libre.',
+  questions: ['Q19', 'Q20'],
 }
 
 // Quel bloc (q19/q20) et quel(s) thème(s) servent chaque onglet : la sélection

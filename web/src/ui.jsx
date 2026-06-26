@@ -14,6 +14,7 @@ import {
 } from 'recharts'
 import { useTheme } from './theme-context.js'
 import { CHART } from './chart-colors.js'
+import { TEXTE_QUESTIONS } from './data/questionnaire.js'
 
 const POLE = {
   percu: { fill: 'bg-percu', track: 'bg-percu-soft', text: 'text-percu' },
@@ -114,7 +115,7 @@ export function Caption({ children }) {
 
 // Icône info cliquable : ouvre une fenêtre flottante (méthodologie + données
 // en entrée), fond flouté, fermeture au clic extérieur ou touche Échap.
-export function InfoButton({ titre, methodologie, donnees }) {
+export function InfoButton({ titre, methodologie, donnees, questions }) {
   const [open, setOpen] = useState(false)
   const titleId = useId()
 
@@ -182,6 +183,18 @@ export function InfoButton({ titre, methodologie, donnees }) {
                     <Eyebrow>Données en entrée</Eyebrow>
                     <p className="mt-2 font-body text-base leading-relaxed text-ink-soft">{donnees}</p>
                   </div>
+                  {questions?.length > 0 && (
+                    <div>
+                      <Eyebrow>Intitulés exacts</Eyebrow>
+                      <ul className="mt-2 space-y-2">
+                        {questions.map((code) => (
+                          <li key={code} className="font-body text-base leading-relaxed text-ink-soft">
+                            <span className="font-mono text-xs text-muted">{code}</span> · « {TEXTE_QUESTIONS[code]} »
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             </motion.div>

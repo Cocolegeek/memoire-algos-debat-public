@@ -38,14 +38,6 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Met à profit la largeur disponible sur grand écran : agrandit
-   proportionnellement tous les textes (en rem) sans toucher chaque
-   composant un par un. */
-@media (min-width: 1280px) {
-  html {
-    font-size: 18px;
-  }
-}
 
 .no-scrollbar {
   scrollbar-width: none;
