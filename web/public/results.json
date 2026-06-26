@@ -313,16 +313,19 @@
     "contrastes_politiques": [
       {
         "item": "Blâme des médias traditionnels",
+        "tous": 3.98,
         "gauche": 4.18,
         "droite": 3.67
       },
       {
         "item": "Responsabilité de l'État",
+        "tous": 3.41,
         "gauche": 3.59,
         "droite": 3.16
       },
       {
         "item": "Blâme des partageurs",
+        "tous": 4.31,
         "gauche": 4.26,
         "droite": 4.41
       }
