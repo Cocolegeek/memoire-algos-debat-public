@@ -3,10 +3,10 @@
     "n": 263,
     "statut": "définitif",
     "genere_le": "2026-06-26",
-    "source": "Enquête en ligne auprès de 263 répondants majeurs. Tous les chiffres et tests de ce site sont calculés automatiquement à partir des réponses brutes par un script (analysis/analyse.py). Les verdicts proposés restent une lecture à débattre."
+    "source": "Enquête en ligne auprès de 263 répondants majeurs. Tous les chiffres et tests présentés sur ce site sont calculés automatiquement à partir des réponses brutes par un script (analysis/analyse.py). Les verdicts proposés constituent une lecture à débattre, non une conclusion définitive."
   },
   "echantillon": {
-    "resume": "Cet échantillon n'est pas représentatif de la population française : ce sont les personnes qui ont choisi de répondre à un questionnaire diffusé en ligne, pas un tirage au hasard. Les chiffres ci-dessous décrivent ces répondants, pas la population générale.",
+    "resume": "Cet échantillon n'est pas représentatif de la population française : il rassemble les personnes ayant choisi de répondre à un questionnaire diffusé en ligne, et non un tirage aléatoire. Les chiffres ci-dessous décrivent ces répondants, non la population générale.",
     "indicateurs": [
       {
         "label": "18-34 ans",
@@ -256,7 +256,7 @@
         }
       ]
     },
-    "lecture": "En regardant les trois facteurs en même temps (temps passé, exposition aux contenus polémiques et perception de bulle), c'est l'intensité d'usage qui garde un effet réel sur l'hostilité. La perception de bulle, elle, n'en a quasiment aucun. En clair : ce qui rend plus hostile, c'est surtout le temps passé et les contenus vus, pas le sentiment d'être enfermé dans une bulle."
+    "lecture": "En considérant les trois facteurs simultanément (temps passé, exposition aux contenus polémiques et perception de bulle), c'est l'intensité d'usage qui conserve un effet réel sur l'hostilité, tandis que la perception de bulle n'en a quasiment aucun. Ce qui rend plus hostile tient donc surtout au temps passé et aux contenus vus, et non au sentiment d'être enfermé dans une bulle."
   },
   "h2a": {
     "code": "H2.a",
@@ -327,7 +327,7 @@
         "droite": 4.41
       }
     ],
-    "lecture": "Face à la polarisation en ligne, les répondants jugent les individus qui produisent et partagent les contenus plus responsables que les plateformes et l'État. Cet écart est net et ne doit rien au hasard. Le bord politique fait bouger ce jugement, surtout sur les médias et l'État."
+    "lecture": "Face à la polarisation en ligne, les répondants jugent les individus qui produisent et partagent les contenus plus responsables que les plateformes et l'État. Cet écart est net et ne doit rien au hasard. Le bord politique déclaré fait varier ce jugement, surtout à l'égard des médias et de l'État."
   },
   "h2b": {
     "code": "H2.b",
@@ -360,7 +360,7 @@
       }
     ],
     "mesure": "Légitimité d'une régulation à grande échelle, mesurée ici par l'envie de transparence imposée aux plateformes par l'État.",
-    "lecture": "On compare ce décalage (les individus jugés plus ou moins responsables que les plateformes et l'État) à la demande de régulation, qui sert ici de baromètre de la légitimité perçue d'une régulation à grande échelle. Le lien observé est négatif (r = -0.21, p < 0,001). Plus quelqu'un fait porter la responsabilité sur les individus plutôt que sur les plateformes et l'État, moins il juge légitime une régulation à grande échelle : l'hypothèse est confirmée."
+    "lecture": "Ce décalage (les individus jugés plus ou moins responsables que les plateformes et l'État) est mis en regard de la demande de régulation, qui sert ici de baromètre de la légitimité perçue d'une régulation à grande échelle. Le lien observé est négatif (r = -0.21, p < 0,001). Plus la responsabilité est portée sur les individus plutôt que sur les plateformes et l'État, moins la régulation à grande échelle est jugée légitime : l'hypothèse est confirmée."
   },
   "h3": {
     "code": "H3",
@@ -436,7 +436,7 @@
       "significatif": false,
       "sens_attendu": true
     },
-    "lecture": "La demande de régulation est massive et largement partagée : 82% des répondants jugent la transparence nécessaire, quel que soit leur bord politique (un peu moins à droite). Mais cette demande est déconnectée de la réalité : seuls 15% des répondants connaissent précisément le DSA, le texte européen qui encadre justement ces algorithmes. L'idée qu'en savoir plus sur le DSA réduirait l'envie de régulation va dans le sens attendu, mais l'écart mesuré est trop faible pour être fiable (p = 0,499) : cette partie de l'hypothèse n'est pas confirmée par les données."
+    "lecture": "La demande de régulation est massive et largement partagée : 82% des répondants jugent la transparence nécessaire, quel que soit leur bord politique (un peu moins à droite). Cette demande reste toutefois déconnectée de la connaissance des dispositifs existants : seuls 15% des répondants connaissent précisément le DSA, le texte européen qui encadre justement ces algorithmes. L'idée qu'une meilleure connaissance du DSA réduirait l'envie de régulation va dans le sens attendu, mais l'écart mesuré est trop faible pour être fiable (p = 0,499) : cette partie de l'hypothèse n'est pas confirmée par les données."
   },
   "verbatims": {
     "q19": {
