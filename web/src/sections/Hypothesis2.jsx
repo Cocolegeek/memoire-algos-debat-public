@@ -27,29 +27,29 @@ function frac(i) {
 const INFO_HIERARCHIE = {
   titre: 'Hiérarchie des responsables',
   methodologie:
-    "Moyenne simple de la note de responsabilité attribuée à chaque acteur, calculée sur l'ensemble des répondants ayant répondu à l'item correspondant. Aucun test de significativité n'est appliqué ici : il s'agit d'un classement descriptif.",
-  donnees: 'Q16a (plateformes), Q16b (État), Q16c (producteurs), Q16d (médias traditionnels), Q16e (partageurs), échelle 1-5. n = 263.',
+    "Note moyenne de responsabilité attribuée à chaque acteur, calculée sur l'ensemble des répondants ayant répondu à la question correspondante. C'est un classement descriptif : aucun test statistique n'est appliqué entre les acteurs.",
+  donnees: 'Note de responsabilité (1 à 5) attribuée séparément aux plateformes, à l\'État, aux producteurs de contenus, aux médias traditionnels et aux partageurs. n = 263.',
 }
 
 const INFO_ECART_2A = {
   titre: 'L’écart de responsabilité',
   methodologie:
-    'Pour chaque répondant, écart = moyenne(producteurs, partageurs) − moyenne(plateformes, État). Cet écart est ensuite testé contre zéro par un test t pour échantillon apparié (un score par répondant, pas deux groupes indépendants).',
-  donnees: 'Q16c, Q16e (responsabilité individuelle) et Q16a, Q16b (responsabilité structurelle), échelle 1-5. n = 263.',
+    'Pour chaque répondant, on calcule un écart : sa note moyenne donnée aux individus (producteurs, partageurs) moins sa note moyenne donnée aux structures (plateformes, État). Cet écart est ensuite comparé à zéro par un test statistique adapté à des paires de mesures prises sur les mêmes personnes.',
+  donnees: 'Notes de responsabilité (1 à 5) données aux individus et aux structures par chaque répondant. n = 263.',
 }
 
 const INFO_CONTRASTES = {
   titre: 'Un blâme politiquement orienté',
   methodologie:
-    "Moyennes calculées séparément sur le sous-échantillon se déclarant à gauche (Q5 = très à gauche ou plutôt à gauche) et à droite (Q5 = très à droite ou plutôt à droite). Présentation descriptive : aucun test formel de différence entre les deux groupes n'est appliqué sur ce graphique.",
-  donnees: 'Q16b, Q16d, Q16e (échelle 1-5) croisées avec Q5 (positionnement politique).',
+    "Notes moyennes calculées séparément chez les répondants se déclarant à gauche et ceux se déclarant à droite. Présentation descriptive : aucun test de différence formel n'est appliqué entre les deux groupes sur ce graphique.",
+  donnees: 'Notes de responsabilité (1 à 5) données à l\'État, aux médias traditionnels et aux partageurs, croisées avec le positionnement politique déclaré.',
 }
 
 const INFO_NUAGE_2B = {
   titre: 'Le décalage et la demande de régulation',
   methodologie:
-    "Corrélation de Pearson entre le décalage de responsabilité individuelle moins structurelle (calculé par répondant, voir H2.a) et la demande de régulation (Q18). La droite orange résume la régression linéaire simple entre les deux variables, calculée sur l'ensemble des répondants. Un léger bruit aléatoire décolle les points superposés sans modifier le calcul. La couleur de chaque point indique le bord politique déclaré du répondant (Q5), pour vérifier que le lien ne tient pas seulement à l'intérieur d'un seul camp : la même corrélation est recalculée séparément à gauche et à droite (cartouche ci-dessous).",
-  donnees: 'Décalage dérivé de Q16a, Q16b, Q16c, Q16e ; demande = Q18 (1-5) ; couleur et corrélations par camp = Q5 (positionnement politique). n = 263.',
+    "On met en regard, pour chaque répondant, son décalage entre responsabilité individuelle et structurelle (calculé en H2.a) et sa demande de régulation. La droite orange résume la tendance générale entre les deux variables, sur l'ensemble des répondants. Un léger décalage aléatoire écarte les points superposés sans changer le calcul. La couleur de chaque point indique le bord politique déclaré, pour vérifier que le lien ne tient pas seulement à l'intérieur d'un seul camp : la même tendance est recalculée séparément à gauche et à droite (cartouche ci-dessous).",
+  donnees: 'Décalage de responsabilité (voir H2.a), demande de régulation (1 à 5), couleur et tendances par camp selon le positionnement politique déclaré. n = 263.',
 }
 
 export default function Hypothesis2({ a, b, respondents = [] }) {
@@ -94,10 +94,10 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
               ))}
             </div>
             <Caption>
-              Les utilisateurs qui produisent et partagent des contenus (en orange) arrivent en tête,
-              devant les plateformes et l'État (en vert). Les médias traditionnels, qui ne relèvent ni
-              de la responsabilité individuelle ni de la responsabilité structurelle au sens de
-              l'hypothèse, sont indiqués à titre de comparaison.
+              Les personnes qui produisent et partagent des contenus (en orange) arrivent en tête,
+              devant les plateformes et l'État (en vert). Les médias traditionnels ne comptent ni comme
+              responsabilité individuelle ni comme responsabilité structurelle au sens de l'hypothèse :
+              ils sont indiqués juste à titre de comparaison.
             </Caption>
           </Card>
 
@@ -118,8 +118,8 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
             </div>
             <Caption>
               L'écart-mètre résume l'hypothèse : la responsabilité individuelle est jugée plus forte
-              que la responsabilité structurelle. Le test apparié, qui compare cet écart au sein de
-              chaque répondant plutôt qu'entre deux groupes, confirme qu'il n'est pas dû au hasard.
+              que la responsabilité structurelle. Le test statistique, qui compare cet écart chez chaque
+              répondant plutôt qu'entre deux groupes différents, confirme qu'il n'est pas dû au hasard.
             </Caption>
           </Card>
         </div>
@@ -158,8 +158,8 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
             })}
           </div>
           <Caption>
-            Lecture descriptive, sans test de significativité associé : l'objectif est de visualiser
-            l'ampleur des différences entre bords politiques, pas de les valider statistiquement.
+            Lecture descriptive, sans test statistique associé : l'objectif est de voir l'ampleur des
+            différences entre bords politiques, pas de les valider formellement.
           </Caption>
         </Card>
 
@@ -206,11 +206,11 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
               <p className="mt-2 font-mono text-xs text-muted">Couleur = bord politique déclaré (Q5).</p>
             </div>
             <Caption>
-              Une pente négative indiquerait que plus un répondant attribue une responsabilité
-              individuelle (plutôt que structurelle), moins il demande de régulation systémique : c'est
-              ce que prédit l'hypothèse. La ligne pointillée verticale marque le point d'équilibre où les
-              deux responsabilités sont jugées égales : à droite, l'individuelle domine ; à gauche, la
-              structurelle domine.
+              Une pente qui descend voudrait dire que plus un répondant fait porter la responsabilité
+              sur les individus (plutôt que sur les structures), moins il demande de régulation à
+              grande échelle : c'est ce que prédit l'hypothèse. La ligne pointillée verticale marque le
+              point d'équilibre où les deux types de responsabilité sont jugés égaux : à droite,
+              l'individuelle domine ; à gauche, la structurelle domine.
             </Caption>
           </Card>
 
@@ -234,10 +234,9 @@ export default function Hypothesis2({ a, b, respondents = [] }) {
               <p className="font-body text-xs text-muted">{b.mesure}</p>
               <p className="font-body text-sm text-ink-soft">{b.lecture}</p>
               <p className="font-body text-sm text-ink-soft">
-                Le lien reste de même sens dans les deux camps, ce qui exclut qu'il ne soit qu'un
-                artefact du bord politique. Il est statistiquement net à droite, mais n'atteint pas le
-                seuil de significativité à gauche : à interpréter avec prudence côté gauche plutôt qu'à
-                écarter.
+                Le lien va dans le même sens des deux côtés de l'échiquier politique, ce qui exclut
+                qu'il ne soit qu'un effet du bord politique. Il est net à droite, mais trop faible pour
+                être fiable à gauche : à prendre avec prudence côté gauche, plutôt qu'à écarter.
               </p>
             </div>
           </Card>

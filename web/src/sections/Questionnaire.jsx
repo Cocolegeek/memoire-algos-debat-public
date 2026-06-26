@@ -4,8 +4,8 @@ import { Card, Eyebrow, InfoButton, SectionTitle } from '../ui.jsx'
 const INFO = {
   titre: 'Questionnaire diffusé',
   methodologie:
-    "Reproduction fidèle du questionnaire administré en ligne via Google Forms, pour consultation indépendamment des données collectées et de leur analyse.",
-  donnees: "Export PDF du formulaire Google Forms : énoncés et options exacts, 20 questions réparties en 7 sections.",
+    "Reproduction fidèle du questionnaire diffusé en ligne, pour le consulter indépendamment des réponses collectées et de leur analyse.",
+  donnees: "Énoncés et options exacts du formulaire diffusé : 20 questions réparties en 7 sections.",
 }
 
 function Options({ q }) {

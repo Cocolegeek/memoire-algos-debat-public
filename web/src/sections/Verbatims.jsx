@@ -1,10 +1,10 @@
 import { BarRow, Caption, Eyebrow, InfoButton } from '../ui.jsx'
 
 const INFO = {
-  titre: 'Analyse sémantique des réponses libres',
+  titre: 'Analyse des réponses libres',
   methodologie:
-    "Chaque réponse ouverte est classée dans un thème par détection de mots-clés (pour Q19 : algorithmes/réseaux sociaux, médias, acteurs politiques, individus ; pour Q20 : régulation, transparence des sources, éducation). Les pourcentages portent sur l'ensemble des réponses non vides ; les citations affichées en sont un échantillon illustratif, pas un résultat statistique.",
-  donnees: 'Q19 (cause perçue de la polarisation) et Q20 (mesure concrète proposée), réponses facultatives en texte libre.',
+    "Chaque réponse écrite librement est classée dans un thème par détection de mots-clés (pour la cause perçue de la polarisation : algorithmes/réseaux sociaux, médias, acteurs politiques, individus ; pour la mesure proposée : régulation, transparence des sources, éducation). Les pourcentages portent sur l'ensemble des réponses remplies ; les citations affichées en sont un échantillon pour donner une idée, pas un résultat statistique en soi.",
+  donnees: 'Cause perçue de la polarisation et mesure concrète proposée, deux questions facultatives en texte libre.',
 }
 
 // Quel bloc (q19/q20) et quel(s) thème(s) servent chaque onglet : la sélection
@@ -14,13 +14,13 @@ const CONFIG = {
     cle: 'q19',
     themes: null,
     titre: "Ce qu'en disent les répondants",
-    lecture: "Aperçu des causes spontanément citées par les répondants, toutes catégories confondues.",
+    lecture: "Aperçu des causes citées spontanément par les répondants, toutes catégories confondues.",
   },
   h1: {
     cle: 'q19',
     themes: ['algorithmes_reseaux'],
     titre: 'Quand les répondants citent eux-mêmes les algorithmes et réseaux sociaux',
-    lecture: "Échantillon des réponses classées dans le thème « algorithmes et réseaux sociaux », en écho à l'intensité d'usage de H1.",
+    lecture: "Échantillon des réponses qui parlent d'algorithmes et de réseaux sociaux, en écho à l'intensité d'usage de H1.",
   },
   h2: {
     cle: 'q19',
@@ -32,7 +32,7 @@ const CONFIG = {
     cle: 'q20',
     themes: ['regulation'],
     titre: 'Les mesures de régulation proposées, dans les mots des répondants',
-    lecture: "Échantillon des réponses classées dans le thème « régulation, contrôle ou sanctions », en écho à la demande de régulation de H3.",
+    lecture: "Échantillon des réponses qui parlent de régulation, de contrôle ou de sanctions, en écho à la demande de régulation de H3.",
   },
 }
 
