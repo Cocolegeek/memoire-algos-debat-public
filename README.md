@@ -15,8 +15,8 @@ Auteur : Corentin Nicolas.
 ## Idée directrice
 
 Le travail étudie un écart : ce que la recherche établit sur les algorithmes
-de recommandation d'un côté, ce que le public en perçoit, en attribue et en
-attend de l'autre. Trois hypothèses sont testées sur les données d'une
+de recommandation d'un côté, ce que le public en perçoit, à qui il en attribue
+la responsabilité et ce qu'il en attend de l'autre. Trois hypothèses sont testées sur les données d'une
 enquête en ligne (n = 263 répondants adultes) :
 
 - **H1** : l'intensité d'usage (temps passé, exposition aux contenus
@@ -50,7 +50,7 @@ indépendamment :
     data/         données anonymisées de l'enquête (reponses.csv) + méthodologie de collecte
     analysis/     analyse.py, seule source de vérité des chiffres (bibliothèque standard, sans pandas)
     web/          application de restitution (Vite + React + Tailwind CSS + Recharts + Framer Motion)
-      public/       reponses.csv, results.json, respondents.json (générés ou servis tels quels), memoire.pdf
+      public/       reponses.csv, results.json, respondents.json (générés ou servis tels quels), memoire.pdf (une fois déposé)
       src/
         sections/   un composant par onglet (Accueil, H1, H2, H3, Données, Questionnaire, Mémoire)
         data/       questionnaire.js, reproduction du formulaire diffusé
