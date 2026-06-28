@@ -51,7 +51,7 @@ indépendamment :
     data/         données anonymisées de l'enquête (reponses.csv) + méthodologie de collecte
     analysis/     analyse.py, seule source de vérité des chiffres (bibliothèque standard, sans pandas)
     web/          application de restitution (Vite + React + Tailwind CSS + Recharts + Framer Motion)
-      public/       reponses.csv, results.json, respondents.json (générés ou servis tels quels)
+      public/       reponses.csv, results.json, respondents.json (générés ou servis tels quels), memoire.pdf
       src/
         sections/   un composant par onglet (Accueil, H1, H2, H3, Données, Questionnaire, Mémoire)
         data/       questionnaire.js, reproduction du formulaire diffusé
@@ -73,12 +73,6 @@ données, build de `web/`, publication sur GitHub Pages). Voir
     Nicolas, C. (2026). Algorithmes de recommandation et polarisation du débat
     public [Mémoire de master, Université Paris 1 Panthéon-Sorbonne].
     https://cocolegeek.github.io/memoire-algos-debat-public/
-
-## Suivi du projet
-
-`ETAT_AVANCEMENT.md` (journal daté, point de reprise) et `CLAUDE.md` (brief de
-construction, décisions verrouillées) documentent l'historique complet des
-choix techniques et méthodologiques.
 
 ## Contribuer / signaler un problème
 

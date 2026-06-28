@@ -4,6 +4,4 @@ __pycache__/
 *.pyc
 .DS_Store
 .venv/
-# Réglages locaux de l'éditeur (permissions propres à la machine), à ne pas versionner.
-# .claude/launch.json est versionné (config de lancement du preview, utile à tous).
-.claude/settings.local.json
+.claude/
