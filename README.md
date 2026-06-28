@@ -40,8 +40,7 @@ licence libre, pour que les résultats puissent être vérifiés et reproduits
 indépendamment :
 
 - aucun chiffre n'est saisi à la main dans l'application : tout provient d'un
-  unique script d'analyse (`analysis/analyse.py`), exécuté automatiquement à
-  chaque déploiement ;
+  unique script d'analyse (`analysis/analyse.py`) ;
 - les données brutes anonymisées (`data/reponses.csv`) sont publiques et
   téléchargeables depuis le site ;
 - le code de l'application de restitution est public et documenté.
@@ -55,18 +54,11 @@ indépendamment :
       src/
         sections/   un composant par onglet (Accueil, H1, H2, H3, Données, Questionnaire, Mémoire)
         data/       questionnaire.js, reproduction du formulaire diffusé
-    .github/workflows/deploy.yml   déploiement continu sur GitHub Pages
 
-## Lancer en local
+## Reproduire l'analyse en local
 
     python analysis/analyse.py        # régénère web/public/results.json et respondents.json
     cd web && npm install && npm run dev
-
-## Déploiement
-
-Automatique via GitHub Actions à chaque push sur `main` (régénération des
-données, build de `web/`, publication sur GitHub Pages). Voir
-`.github/workflows/deploy.yml`.
 
 ## Citer ce travail
 
