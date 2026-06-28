@@ -1,7 +1,7 @@
 # web
 
 Application front (Vite + React + Tailwind + Recharts + Framer Motion) de restitution de
-l'enquête. Voir le `CLAUDE.md` à la racine du dépôt pour le brief complet.
+l'enquête. Voir le `README.md` à la racine du dépôt pour la présentation complète.
 
 ```bash
 npm install
